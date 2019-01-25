@@ -1,0 +1,268 @@
+<template>
+    <div class="Detection_Wrap">
+        <div class="Detection_Box">
+            <h2 class="title">
+                知千秋--大数据+知识产权智能化服务平台
+                <div class="bdsharebuttonbox bdshare-button-style0-16" data-bd-bind="1539081748590">
+                    <a href="javascript:return false;" class="bds_more fenxiang" data-cmd="more"></a>
+                </div>
+            </h2>
+            <div class="index_Top">
+                <div class="index_l_icon">
+                    <img src="../../assets/images/sbzc/index_l_icon.png" alt="商标注册成功率logo">
+                </div>
+                <div class="index_r">
+                    <h1>商标注册成功率测算</h1>
+                    <div class="search_Wrap">
+                        <!-- <form> -->
+                        <img src="../../assets/images/sbzc/search_icon.png">
+                        <input type="text" placeholder="输入商标名称，不超过5个汉字" v-model="keyword">
+                        <span class="xzhy" :class="{act:isShow}" @click=" isShow= !isShow">选择行业</span>
+                        <button class="btn" @click="gogo">测一下</button>
+                        <transition name="fadeIn">
+                            <ul class="wrap" v-show="isShow" @click.stop="isShow = 1">
+                                <li title="加工·烟草·军火">加工·烟草·军火</li>
+                                <input value="40 34 13;35 42" class="category" type="hidden">
+                                <input value="020" class="id" type="hidden">
+
+                                <li title="照明·冷热·净化">照明·冷热·净化</li>
+                                <input value="09 11 ;07 16 37 42 " class="category" type="hidden">
+                                <input value="004" class="id" type="hidden">
+
+                                <li title="运动健身·玩具">运动健身·玩具</li>
+                                <input value="25 28 41;16 35 42 " class="category" type="hidden">
+                                <input value="007" class="id" type="hidden">
+
+                                <li title="家具·家居·建材">家具·家居·建材</li>
+                                <input value="02 06 17 19 20 21 24 27;07 09 16 22 37 39 40 42 " class="category" type="hidden">
+                                <input value="008" class="id" type="hidden">
+
+                                <li title="教育·书籍·乐器">教育·书籍·乐器</li>
+                                <input value="41 16 15;09 35 42 45" class="category" type="hidden">
+                                <input value="010" class="id" type="hidden">
+
+                                <li title="珠宝·工艺礼品">珠宝·工艺礼品</li>
+                                <input value="06 14 19 20 21 ;09 16 25 37 40 42 " class="category" type="hidden">
+                                <input value="018" class="id" type="hidden">
+
+                                <li title="化工·能源·颜料">化工·能源·颜料</li>
+                                <input value="01 02 04 05 17 ;16 39 37 40 42 " class="category" type="hidden">
+                                <input value="019" class="id" type="hidden">
+
+                                <li title="金融·电商">金融·电商</li>
+                                <input value="36 42;09 16 38 41" class="category" type="hidden">
+                                <input value="011" class="id" type="hidden">
+
+                                <li title="纺织·布艺">纺织·布艺</li>
+                                <input value="22 24 23 26 27;02 07 37 40 42 " class="category" type="hidden">
+                                <input value="013" class="id" type="hidden">
+
+                                <li title="五金·机械">五金·机械</li>
+                                <input value="06 07 08 12;09 37 40  " class="category" type="hidden">
+                                <input value="014" class="id" type="hidden">
+
+                                <li title="交通·物流">交通·物流</li>
+                                <input value="39 12;09 37 42 " class="category" type="hidden">
+                                <input value="015" class="id" type="hidden">
+
+                                <li title="房地产·租赁">房地产·租赁</li>
+                                <input value="36 37 42 ;09 39 40 45 " class="category" type="hidden">
+                                <input value="017" class="id" type="hidden">
+
+                                <li title="日化·洗护·美容">日化·洗护·美容</li>
+                                <input value="03 05 44;21 25 35" class="category" type="hidden">
+                                <input value="001" class="id" type="hidden">
+
+                                <li title="服务·咨询">服务·咨询</li>
+                                <input value="45 42 41 35;09 16 36 38 39 43 44 45" class="category" type="hidden">
+                                <input value="012" class="id" type="hidden">
+
+                                <li title="餐饮·酒店·旅游">餐饮·酒店·旅游</li>
+                                <input value="43 39 20 21;09 16 29 30 31 32 33" class="category" type="hidden">
+                                <input value="005" class="id" type="hidden">
+
+                                <li title="医疗·医药·营养品">医疗·医药·营养品</li>
+                                <input value="05 10 30 44 ;03 07 09 16 42 " class="category" type="hidden">
+                                <input value="016" class="id" type="hidden">
+
+                                <li title="3C电子·家电">3C电子·家电</li>
+                                <input value="07 09 11 ;35 37 42" class="category" type="hidden">
+                                <input value="003" class="id" type="hidden">
+
+                                <li title="食品·酒水饮料">食品·酒水饮料</li>
+                                <input value="29 30 31 32 33;07 16 35 39 40 43" class="category" type="hidden">
+                                <input value="006" class="id" type="hidden">
+
+                                <li title="IT互联网">IT互联网</li>
+                                <input value="42 38 35 36;09 16 41 45" class="category" type="hidden">
+                                <input value="009" class="id" type="hidden">
+
+                                <li title="服装·鞋·帽·箱包">服装·鞋·帽·箱包</li>
+                                <input value="25 18 ;26 35 37 40 42 45 " class="category" type="hidden">
+                                <input value="002" class="id" type="hidden">
+                            </ul>
+                        </transition>
+                        <span class="ts"></span>
+                        <!-- </form>	 -->
+                    </div>
+                    <div class="data_Wrap">
+                        <p class="tit">最新查询动态：</p>
+                        <div id="design" style="position:relative">
+                            <div class="clear2">
+                                <ul id="design_1" class="scrollOver">
+                                    <li>
+                                        用户
+                                        <span>130****8887</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">80%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">26%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>173****3078</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+                                    <li>
+                                        用户
+                                        <span>130****8887</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">80%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">26%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>173****3078</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+                                    <li>
+                                        用户
+                                        <span>130****8887</span>的商标注册率为
+                                        <span class="n">20%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                    <li>
+                                        用户
+                                        <span>158****9326</span>的商标注册率为
+                                        <span class="n">80%</span>，赶快测算一下你的商标吧！
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index_Foot">
+                <ul>
+                    <li class="li01">
+                        <a href="http://ws.chatm.com" target="_blank"></a>
+                        品牌卫士
+                    </li>
+                    <li class="li02">
+                        <a href="http://www.chatm.com/" target="_blank"></a>
+                        商标查询
+                    </li>
+                    <li class="li03">
+                        <a href="http://qm.chatm.com/" target="_blank"></a>
+                        商标起名
+                    </li>
+                    <li class="li04">
+                        <a href="http://app.chatm.com/" target="_blank"></a>
+                        APP下载
+                    </li>
+                </ul>
+                <div>
+                    <img src="../../assets/images/main/code_wx.png" alt="微信" width="88px">
+                    <p>关注知千秋</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    head() {
+        return {
+            title: "商标注册成功率测算"
+        };
+    },
+    data() {
+        return {
+            isShow: 0
+        };
+    },
+    watch: {
+        isShow() {
+            if (this.isShow) {
+                document.addEventListener("click", this.hidePartBox, false);
+            } else {
+                document.removeEventListener("click", this.hidePartBox, false);
+            }
+        }
+    },
+    methods: {
+        hidePartBox() {
+            this.isShow = 0;
+        },
+        gogo() {
+            this.$router.push("/sbzc/result");
+        }
+    },
+    destroyed() {
+        document.removeEventListener("click", this.hidePartBox, false);
+    }
+};
+</script>
+
+<style scoped>
+@import url("../../assets/css/sbzc");
+.scrollOver {
+    position: absolute;
+    top: 0;
+    animation: gun 15s linear infinite;
+}
+@keyframes gun {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -260px;
+    }
+}
+</style>
+

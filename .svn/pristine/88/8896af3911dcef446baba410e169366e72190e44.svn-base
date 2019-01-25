@@ -1,0 +1,452 @@
+<template>
+    <div class="content" v-if="priceData">
+        <div class="banner">
+            <a href="/show/navigation_trademark_register_01&S7741101919677030400.html"><img width="1920" src="../../assets/images/brand/bannerTop.jpg" alt=""></a>
+        </div>
+        <div class="tab-catalog-00">
+            <div class="w1200">
+                <a class="atthis" href="#handle">办理商标注册</a>
+                <a href="#search">查询是否可以注册</a>
+                <a href="#defuse">商标障碍化解</a>
+                <a href="#objection">异议他人商标</a>
+                <a href="#change">商标信息变更</a>
+                <a href="#international">国际商标业务</a>
+            </div>
+        </div>
+        <div id="handle" class="w1200 handle">
+            <div class="title-catalog-00">办理商标注册</div>
+            <ul>
+                <li v-for="item in [0, 1, 2]" :key="priceData[item].serviceItem.id">
+                    <div class="line-animate">
+                        <a target="_blank" class="none" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)"><img v-if="item == 0" src="../../assets/images/brand/img_gn.png" height="89" alt="">
+                            <img v-if="item == 1" src="../../assets/images/brand/img_bm.png" height="89" alt="">
+                            <img v-if="item == 2" src="../../assets/images/brand/img_zn.png" height="89" alt="">
+                            <h3>{{priceData[item].serviceItem.name}}</h3>
+                            <b>￥{{$priceCount(priceData[item])}}
+                                <span>/件</span>
+                            </b>
+                            <p>{{priceData[item].serviceItem.describle}}</p>
+                        </a>
+                        <a target="_blank" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)">立即办理</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="search" class="search">
+            <div class="w1200">
+                <div class="title-catalog-00">查询是否可以注册</div>
+                <div class="search-content">
+                    <div class="right">
+                        <b>￥{{$priceCount(priceData[3])}}
+                            <span>/件</span>
+                        </b>
+                        <a target="_blank" :href="getUrl(priceData[3].serviceItem.typeLevel3Code, priceData[3].serviceItem.number)">立即办理</a>
+                    </div>
+                    <div class="hidden">
+                        <img src="../../assets/images/brand/img_search_sb.png" width="73" alt="">
+                        <div class="hidden">
+                            <h4>{{priceData[3].serviceItem.name}}</h4>
+                            <p>{{priceData[3].serviceItem.describle}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="defuse" class="defuse w1200">
+            <div class="title-catalog-00">遇到障碍如何化解</div>
+            <ul>
+                <li v-for="item in [4, 5, 6]" :key="priceData[item].serviceItem.id" class="line-animate" v-if="priceData[item].serviceItem">
+                    <a target="_blank" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)">
+                        <h4>
+                            <b>￥{{$priceCount(priceData[item])}}
+                                <span> /件</span>
+                            </b>{{priceData[item].serviceItem.name}}</h4>
+                        <p>{{priceData[item].serviceItem.describle}}</p>
+                        <span></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="objection" class="objection defuse">
+            <div class="w1200">
+                <div class="title-catalog-00">异议他人商标</div>
+                <ul>
+                    <li v-for="item in [7, 8, 9]" :key="priceData[item].serviceItem.id" class="line-animate" v-if="priceData[item].serviceItem">
+                        <a target="_blank" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)">
+                            <h4>
+                                <b>￥{{$priceCount(priceData[item])}}
+                                    <span> /件</span>
+                                </b>{{priceData[item].serviceItem.name}}</h4>
+                            <p>{{priceData[item].serviceItem.describle}}</p>
+                            <span></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="change" class="defuse w1200">
+            <div class="title-catalog-00">商标信息变更</div>
+            <ul>
+                <li v-for="item in [10, 11, 12, 13, 14, 15, 16, 17]" :key="priceData[item].serviceItem.id" class="line-animate" v-if="priceData[item].serviceItem">
+                    <a target="_blank" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)">
+                        <h4>
+                            <b>￥{{$priceCount(priceData[item])}}
+                                <span> /件</span>
+                            </b>{{priceData[item].serviceItem.name}}</h4>
+                        <p>{{priceData[item].serviceItem.describle}}</p>
+                        <span></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="international" class="objection defuse">
+            <div class="w1200">
+                <div class="title-catalog-00">国际商标业务</div>
+                <ul>
+                    <li v-for="item in [18, 19]" :key="priceData[item].serviceItem.id" class="line-animate" v-if="priceData && priceData[item].serviceItem">
+                        <a target="_blank" :href="getUrl(priceData[item].serviceItem.typeLevel3Code, priceData[item].serviceItem.number)">
+                            <h4>
+                                <b>￥{{$priceCount(priceData[item])}}
+                                    <span> /件</span>
+                                </b>{{priceData[item].serviceItem.name}}</h4>
+                            <p>{{priceData[item].serviceItem.describle}}</p>
+                            <span></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <floor :floorAttr="[{name: '办理商标', type: '#handle'},{name: '查询商标', type: '#search'},{name: '障碍商标', type: '#defuse'},{name: '异议商标', type: '#objection'},{name: '商标变更', type: '#change'},{name: '国际商标', type: '#international'}]" />
+        <to-top />
+    </div>
+</template>
+
+<script>
+import floor from "@/components/floor/floor";
+import toTop from "@/components/toTop";
+import axios from "axios";
+export default {
+    head() {
+        return {
+            title:
+                "商标业务_商标查询_商标注册_专利查询_专利申请_版权登记_知千秋官网",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "商标注册，商标免费查询，商标注册查询，商标注册流程及费用，中国商标网，专利申请，专利检索，发明专利"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "知千秋致力于知千秋致力于运营大数据技术、人工智能等技术重新定义知识产权生态链。提供商标查询,商标注册,专利申请,专利查询,版权登记全流程服务。提供免费商标查询Saas工具,智能商标注册0服务费省钱到底,商标查询,商标注册监控,专利申请等服务获得客户的高度认可"
+                }
+            ],
+            link:[
+                {
+                    rel: "canonical",
+                    content: this.baseUrl
+                }
+            ]
+        };
+    },
+    async asyncData({ params, redirect, error, env, route}) {
+        return Promise.all([
+            axios.get(`${env.baseUrl}serviceItem/findServiceItemByNumber`, {
+                params: {
+                    numbers: `S7741101919677030400,S7741102108546539521,S7741102214293331969,S7742588669033742336,S7741102510755127297,S7741103061622431745,S7741102770822946817,S7745508708399087616,S7741102891203665921,S7741113092604534784,S7741134790099836929,S7741134886166175745,S7741135000645509121,S7741135103628255233,S7741135255319453697,S7741135368016207873,S7741135498580697089,S7741135599600508929,S7743984847540617217,S7741136128074424321`
+                }
+            })
+        ]).then(res => {
+            let { data } = res[0];
+            if (data.code == 0) {
+                return {
+                    priceData: data.data,
+                    baseUrl: env.webSite + route.fullPath
+                };
+            } else {
+                error({ statusCode: 500, message: data.msg });
+            }
+        });
+    },
+    components: {
+        floor,
+        toTop
+    },
+
+    methods: {
+        getUrl(code, id) {
+            if (id) {
+                return `/show/${code}&${id}.html`;
+            }
+            return `/show/${code}.html`;
+        }
+    }
+};
+</script>
+
+<style scoped lang="stylus">
+.content {
+    overflow: hidden;
+}
+
+.banner {
+    width: 1920px;
+    position: relative;
+    left: 50%;
+    margin-left: -960px;
+}
+
+.tab-catalog-00 {
+    border-bottom: 1px solid #d8d8d8;
+    line-height: 58px;
+    font-size: 14px;
+    height: 58px;
+    margin-top: 30px;
+
+    a {
+        margin: 0 51px;
+        padding: 0 3px;
+        float: left;
+        line-height: 55px;
+
+        &.atthis {
+            border-bottom: 4px solid #fd7d22;
+        }
+    }
+}
+
+.title-catalog-00 {
+    font-size: 20px;
+    line-height: 48px;
+    color: #333;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-top: 30px;
+}
+
+.handle {
+    ul {
+        overflow: hidden;
+        padding-top: 40px;
+        padding-bottom: 45px;
+
+        li {
+            float: left;
+            width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+
+            >div {
+                width: 255px;
+                padding-top: 35px;
+                margin: 0 auto;
+                border: 1px solid #fff;
+            }
+
+            h3 {
+                font: normal 18px / 40px 'microsoft yahei';
+                color: #333;
+                margin-top: 10px;
+            }
+
+            b {
+                font: bold 24px / 30px 'microsoft yahei';
+                color: #ff6000;
+
+                span {
+                    font-size: 14px;
+                    font-weight: normal;
+                }
+            }
+
+            p {
+                font-size: 14px;
+                color: #999;
+                margin-top: 10px;
+            }
+
+            a {
+                padding: 0 15px;
+                display: inline-block;
+                border: 1px solid #ff6000;
+                border-radius: 30px;
+                color: #ff6000;
+                font-size: 14px;
+                line-height: 26px;
+                height: 28px;
+                vertical-align: middle;
+                margin: 25px 0 30px;
+                position: relative;
+                z-index: 9;
+
+                &:hover {
+                    background: #ff6000;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.search {
+    background: #f9f9f9;
+    overflow: hidden;
+
+    .search-content {
+        background: #fff;
+        overflow: hidden;
+        margin: 30px 0 35px;
+
+        .right {
+            float: right;
+            padding-right: 45px;
+            padding-top: 50px;
+
+            b {
+                font-size: 24px;
+                color: #ff6000;
+
+                span {
+                    font-size: 14px;
+                    color: #999;
+                    font-weight: normal;
+                }
+
+                margin-right: 25px;
+            }
+
+            a {
+                display: inline-block;
+                height: 28px;
+                line-height: 26px;
+                border: 1px solid #ff6000;
+                color: #ff6000;
+                border-radius: 30px;
+                padding: 0 15px;
+
+                &:hover {
+                    background: #ff6000;
+                    color: #fff;
+                }
+            }
+        }
+
+        >div {
+            img {
+                float: left;
+                margin: 27px 15px 35px 47px;
+            }
+
+            >div {
+                padding-top: 37px;
+
+                h4 {
+                    font-size: 18px;
+                    line-height: 30px;
+                    color: #333;
+                    font-weight: normal;
+                }
+
+                p {
+                    font-size: 14px;
+                    line-height: 28px;
+                    color: #666;
+                }
+            }
+        }
+    }
+}
+
+.defuse {
+    ul {
+        overflow: hidden;
+        padding-top: 25px;
+        padding-bottom: 50px;
+
+        li {
+            width: 380px;
+            height: 140px;
+            box-sizing: border-box;
+            float: left;
+            margin: 0 10px 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            position: relative;
+
+            h4 {
+                font-size: 18px;
+                color: #333;
+                padding: 20px 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: norwap;
+                font-weight: normal;
+
+                b {
+                    float: right;
+                    font-size: 24px;
+                    color: #ff6000;
+
+                    span {
+                        font-size: 14px;
+                        color: #999;
+                        font-weight: normal;
+                    }
+                }
+            }
+
+            p {
+                font-size: 14px;
+                color: #666;
+            }
+
+            a {
+                display: block;
+                height: 100%;
+                position: relative;
+                z-index: 9;
+
+                >span {
+                    display: block;
+                    position: absolute;
+                    width: 23px;
+                    height: 16px;
+                    left: 300px;
+                    top: 100px;
+                    opacity: 0;
+                    background: transparent url('../../assets/images/brand/icon_right.png') no-repeat left top;
+                    transition: all 0.5s;
+                    z-index: 9;
+                }
+            }
+
+            &:hover {
+                a>span {
+                    opacity: 1;
+                    left: 330px;
+                }
+            }
+        }
+    }
+}
+
+.objection {
+    background: #f9f9f9;
+
+    ul {
+        li {
+            background: #fff;
+            border: 1px solid transparent;
+        }
+    }
+}
+</style>
+

@@ -1,0 +1,430 @@
+<template>
+    <div class="content">
+        <div class="banner">
+            <a href="/show/navigation_trademark_register_01&S7741101919677030400.html"><img width="1920" src="../../assets/images/brand/bannerTop.jpg" alt=""></a>
+        </div>
+        <div class="pageContent">
+            <div class="w1200 pageBox">
+                <!-- 三个图 -->
+                <div class="three_box clear marB30">
+                    <div class="light">
+                        <a class="imgBox light" href="javascript:;" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', 'self')">
+                            <img src="../../assets/images/brand/img_01.png" alt="">
+                        </a>
+                        <h1 class="title">顾问代办注册</h1>
+                        <small>专业顾问1对1服务，所有流程代办，省钱省时更省心</small>
+                        <p class="iconP">
+                            <img src="../../assets/images/brand/icon1.png" alt=""> 专业商标评估意见
+                            <span></span>
+                            <img src="../../assets/images/brand/icon2.png" alt=""> 全程托管式服务
+                        </p>
+                        <p class="price">
+                            ￥
+                            <span>{{priceData[0].serviceItem.servicePrice + priceData[0].serviceItem.officialPrice}}</span>/件
+                        </p>
+                        <span class="ps">[含顾问费用{{priceData[0].serviceItem.servicePrice}}元]</span>
+                        <div class="btnBox">
+                            <a href="javascript:;" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', 'self')">了解详情</a>
+                            <a class="colBtn" href="javascript:;" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', 'self')">联系顾问</a>
+                        </div>
+                        <div class="flag">
+                            <img src="../../assets/images/brand/img_r.png" alt="">
+                        </div>
+                    </div>
+                    <div class="light">
+                        <a class="imgBox light" href="/show/navigation_trademark_register_01&S7741101919677030400.html" target="_blank">
+                            <img src="../../assets/images/brand/img_02.png" alt="">
+                        </a>
+                        <h1 class="title">智能注册</h1>
+                        <small>快速提交订单，顾问评估，建立平拍保护</small>
+                        <p class="iconP">
+                            <img src="../../assets/images/brand/icon3.png" alt=""> 顾问评估注册风险
+                            <span></span>
+                            <img src="../../assets/images/brand/icon4.png" alt=""> 确认风险再付款
+                        </p>
+                        <p class="price">
+                            ￥
+                            <span>{{priceData[1].serviceItem.servicePrice + priceData[1].serviceItem.officialPrice}}</span>/件
+                        </p>
+                        <span class="ps">[{{priceData[1].serviceItem.servicePrice}}元手续费]</span>
+                        <div class="btnBox">
+                            <a @click="goOrder('S7741102214293331969')">马上注册</a>
+                        </div>
+                    </div>
+                    <div class="light">
+                        <a class="imgBox light" href="/show/navigation_trademark_register_02&S7741102108546539521.html" target="_blank">
+                            <img src="../../assets/images/brand/img_03.png" alt="">
+                        </a>
+                        <h1 class="title">担保注册</h1>
+                        <small>规避盲查、主观判断等注册风险，注册失败全额退款</small>
+                        <p class="iconP">
+                            <img src="../../assets/images/brand/icon1.png" alt=""> 顾问评估担保条件
+                            <span></span>
+                            <img src="../../assets/images/brand/icon2.png" alt=""> 不满足条件可转快速注册
+                        </p>
+                        <p class="price">
+                            ￥
+                            <span>{{priceData[2].serviceItem.servicePrice + priceData[2].serviceItem.officialPrice}}</span>/件
+                        </p>
+                        <span class="ps">[低费用，高保障]</span>
+                        <div class="btnBox">
+                            <a href="javascript:;" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', 'self')">了解详情</a>
+                            <a class="colBtn" @click="goOrder('S7741102108546539521')">马上注册</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 三个图  end-->
+                <!-- 商标是什么 有什么好处 -->
+                <div class="desc marB30 clear">
+                    <div class="isWhat">
+                        <h1>商标
+                            <span class="col">是什么</span>
+                        </h1>
+                        <p>商标（trademark）就是商品的品牌，是商品的生产者和经营者为了区别于其他生产者和经营者服务或经营的商品而使用的一种标记。<br> 这种标记通常由文字、图形英文、数字的组合构成。
+                        </p>
+                    </div>
+                    <div class="isUse">
+                        <h1>商标对企业
+                            <span class="col">有什么好处</span>
+                        </h1>
+                        <ul>
+                            <li>
+                                便于消费者识别商品。
+                            </li>
+                            <li>
+                                商标注册人拥有商标专用权,受法律保护。
+                            </li>
+                            <li>
+                                创立品牌，抢先占领市场。
+                            </li>
+                            <li>
+                                商标是一种无形资产，可对其价值进行评估
+                            </li>
+                            <li>
+                                商标可以通过转让，许可给其他人使用，或质押来转换实现
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 商标是什么 有什么好处  end-->
+                <div class="imgBox marB30">
+                    <img src="../../assets/images/brand/content.png" alt="知千秋">
+                </div>
+                <div class="imgBox marB30">
+                    <img src="../../assets/images/brand/content2.png" alt="知千秋">
+                </div>
+                <!-- info  start -->
+                <div class="info">
+                    <h2>
+                        <img src="../../assets/images/brand/QIAN.png" alt="注册费用说明">注册费用说明
+                    </h2>
+                    <p>
+                        按照商标类别进行收费，一类一标，300元可注册同一类别下的10个商品/服务项目，10个以上，每增加一个商品/服务项目，多加30元。
+                    </p>
+                    <h2>
+                        <img src="../../assets/images/brand/JINGGAO.png" alt="注册须知">注册须知
+                    </h2>
+                    <p>
+                        1、商标注册是指企业或个体工商户以本企业名义或个体工商户名义注册的国内商标。 <br> 2、本系统目前暂不支持集体商标、证明商标、三维标志、颜色组合和声音商标的注册，不支持共同商标和优先权声明。
+                    </p>
+                </div>
+                <!-- info  end -->
+            </div>
+        </div>
+        <toTop/>
+    </div>
+</template>
+
+<script>
+import toTop from "@/components/toTop";
+import axios from "axios";
+import Cookies from "js-cookie";
+export default {
+    head() {
+        return {
+            title:
+                "商标业务_商标查询_商标注册_专利查询_专利申请_版权登记_知千秋官网",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "商标注册，商标免费查询，商标注册查询，商标注册流程及费用，中国商标网，专利申请，专利检索，发明专利"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "知千秋致力于知千秋致力于运营大数据技术、人工智能等技术重新定义知识产权生态链。提供商标查询,商标注册,专利申请,专利查询,版权登记全流程服务。提供免费商标查询Saas工具,智能商标注册0服务费省钱到底,商标查询,商标注册监控,专利申请等服务获得客户的高度认可"
+                }
+            ]
+        };
+    },
+    async asyncData({ params, redirect, error, env }) {
+        return Promise.all([
+            axios.get(`${env.baseUrl}serviceItem/findServiceItemByNumber`, {
+                params: {
+                    numbers: `S7741101919677030400,S7741102214293331969,S7741102108546539521`
+                }
+            })
+        ]).then(res => {
+            let { data } = res[0];
+            if (data.code == 0) {
+                return {
+                    priceData: data.data
+                };
+            } else {
+                error({ statusCode: 500, message: data.msg });
+            }
+        });
+    },
+    components: {
+        toTop
+    },
+    data() {
+        return {
+            showInfo: ""
+        };
+    },
+    mounted() {
+    },
+    methods: {
+        loadZn(numbers) {
+            return this.$Http(`serviceItem/findServiceItemByNumber`, {
+                numbers
+            }).then(res => {
+                this.showInfo = res.data.data[0];
+            });
+        },
+        goOrder(numbers) {
+            this.loadZn(numbers).then(() => {
+                Cookies.set("product", {
+                    name: this.showInfo.serviceItem.name,
+                    serviceId: this.showInfo.serviceItem.id,
+                    serviceAttrId: "",
+                    num: 1,
+                    officialPrice: this.showInfo.serviceItem.officialPrice,
+                    servicePrice: this.showInfo.serviceItem.servicePrice,
+                    total:
+                        this.showInfo.serviceItem.officialPrice +
+                        this.showInfo.serviceItem.servicePrice
+                });
+                window.open("/order/auto");
+            }).catch(() => {
+                window.open(
+                    "/show/navigation_trademark_register_04&S7741102214293331969.html"
+                );
+            })
+        }
+    }
+};
+</script>
+
+<style scoped lang="stylus">
+* {
+    box-sizing: border-box;
+}
+
+.content {
+    overflow: hidden;
+}
+
+.banner {
+    width: 1920px;
+    position: relative;
+    left: 50%;
+    margin-left: -960px;
+}
+
+.pageContent {
+    width: 100%;
+    background: #f9f9f9;
+}
+
+.imgBox > img {
+    width: 100%;
+}
+
+.light {
+    // box-shadow: 0 0 16px 1px #fd7d22;
+    transition: all 0.2s;
+}
+
+.light:hover {
+    -webkit-transform: translate3d(0, -4px, 0);
+    -moz-transform: translate3d(0, -4px, 0);
+    transform: translate3d(0, -4px, 0);
+    box-shadow: 1px 1px 30px 5px #F4C6A6;
+}
+
+.marB30 {
+    margin-bottom: 30px;
+}
+
+.pageBox {
+    position: relative;
+    top: -60px;
+    box-sizing: border-box;
+
+    .three_box {
+        padding: 12px;
+        padding-left: 0;
+        background: #fff;
+
+        > div {
+            float: left;
+            width: 384px;
+            border: 1px solid #eaeaea;
+            margin-left: 12px;
+            text-align: center;
+            padding: 38px 14px 20px;
+            box-sizing: border-box;
+            position: relative;
+
+            .imgBox {
+                display: inline-block;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+            }
+
+            .title {
+                font-size: 24px;
+                font-weight: 100;
+                margin-top: 24px;
+                margin-bottom: 20px;
+            }
+
+            small {
+                color: #565656;
+                font-size: 14px;
+            }
+
+            .iconP {
+                background: #FFFBFA;
+                color: #FF4800;
+                border-top: 1px solid #FFDDCF;
+                border-bottom: 1px solid #FFDDCF;
+                padding: 10px 0;
+                margin-top: 22px;
+                margin-bottom: 28px;
+                font-size: 12px;
+
+                span {
+                    display: inline-block;
+                    width: 16px;
+                    height: 100%;
+                }
+            }
+
+            .price {
+                font-size: 12px;
+
+                span {
+                    font-size: 40px;
+                    color: #ff0000;
+                }
+            }
+
+            .ps {
+                color: #FF3145;
+                font-size: 12px;
+            }
+
+            .btnBox {
+                margin-top: 16px;
+
+                a {
+                    display: inline-block;
+                    border-radius: 2px;
+                    font-size: 16px;
+                    background: #5d65ec;
+                    color: #fff;
+                    width: 104px;
+                    height: 32px;
+                    line-height: 32px;
+                    text-align: center;
+                }
+
+                .colBtn {
+                    background: #fd7d22;
+                    margin-left: 12px;
+                }
+            }
+
+            .flag {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+}
+
+.desc {
+    border-top: 4px solid #FF4800;
+    padding-bottom: 56px;
+    background: #fff;
+
+    > div {
+        float: left;
+        margin: 0 60px;
+
+        h1 {
+            font-size: 26px;
+            text-align: center;
+            border-bottom: 1px solid #eaeaea;
+            height: 76px;
+            line-height: 76px;
+            font-weight: 100;
+            margin-bottom: 30px;
+        }
+    }
+
+    .isWhat {
+        width: 370px;
+
+        p {
+            line-height: 38px;
+            color: #565656;
+            font-size: 15px;
+        }
+    }
+
+    .isUse {
+        width: 590px;
+
+        li {
+            line-height: 38px;
+            color: #565656;
+            font-size: 15px;
+            padding-left: 20px;
+            background: url('../../assets/images/brand/squ.png') 2px center no-repeat;
+        }
+    }
+}
+
+.info {
+    border: 1px solid #FF4800;
+    padding: 26px 30px;
+    background: #fff;
+
+    h2 {
+        font-size: 15px;
+        color: #fd7d22;
+        font-weight: 100;
+
+        img {
+            margin-right: 8px;
+        }
+    }
+
+    p {
+        margin: 6px 0;
+        line-height: 28px;
+        color: #565656;
+        padding-left: 30px;
+    }
+}
+</style>
+

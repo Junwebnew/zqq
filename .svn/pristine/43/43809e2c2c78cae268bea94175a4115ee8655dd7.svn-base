@@ -1,0 +1,79 @@
+input::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+
+input::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+input::-webkit-textfield-decoration {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
+.backImg {
+  height: 100%;
+  width: 25px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  line-height: 40px;
+  font-family: element-icons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+.userTel {
+  background: url("../images/login/tel2.png") center center no-repeat;
+  background-size: 92% auto;
+}
+
+.userHead {
+  background: url("../images/login/userHead.png") center center no-repeat;
+  background-size: 92% auto;
+}
+
+.userLock {
+  background: url("../images/login/password.png") center center no-repeat;
+  background-size: 92% auto;
+}
+
+.userCode {
+  background: url("../images/login/code.png") center center no-repeat;
+  background-size: 92% auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}

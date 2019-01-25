@@ -1,0 +1,23 @@
+<template>
+    <div>
+        <nuxt/>
+        <toolBox/>
+        <toTop/>
+    </div>
+</template>
+<script>
+import toolBox from "~/components/toolBox";
+import toTop from "~/components/toTop.vue";
+
+export default {
+    head() {
+        return {
+            title: "知千秋|商标查询|商标注册|专利查询|专利申请|版权登记"
+        };
+    },
+    components: { toolBox, toTop }
+};
+</script>
+<style>
+</style>
+

@@ -1,0 +1,497 @@
+<template>
+  <div class="smartRegister-page smartRegister3-page">
+    <!-- start  进度条 -->
+    <div class="progressBar clearfix">
+      <ul>
+        <li class="step step-2 finish">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">填写商标信息</dt>
+          </dl>
+        </li>
+        <li class="line"></li>
+        <li class="step step-3">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">填写申请人信息</dt>
+          </dl>
+        </li>
+        <li class="line"></li>
+        <li class="step step-4">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">申请信息确认</dt>
+          </dl>
+        </li>
+        <li class="line"></li>
+        <li class="step step-5">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">支付交官费用</dt>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <!-- end 进度条 -->
+    <!-- start 代理人列表 -->
+    <div class="agent">
+      <h6 class="agent-header"><i class="iconfont icon-consult"></i>商标顾问与帮助</h6>
+      <ul class="agent-bodyer">
+        <li class="list">
+          <dl class="clearfix">
+            <dt><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/avatar/2018/05/21/f47fe7f9-2c10-42ce-a356-ea86c099c2a1.png?x-oss-process=image/resize,m_lfit,w_85" alt="代理人刘朝"></dt>
+            <dd>
+              <span class="r-1">刘朝<i class="icon icon-renzheng-1"></i></span>
+              <span class="r-2">好评率：100%</span>
+              <!--<a class="r-3" target="_blank" href=""><i class="iconfont icon-xiaoxi"></i>咨询一下</a>-->
+              <a class="r-3" href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')"><i class="iconfont icon-xiaoxi"></i>咨询一下</a>
+            </dd>
+          </dl>
+        </li>
+        <li class="list">
+          <dl class="clearfix">
+            <dt><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2017/05/11/d09b1e328cb20850f4941f1dde5ed49f.jpg?x-oss-process=image/resize,m_lfit,w_85" alt="代理人焦亚萍"></dt>
+            <dd>
+              <span class="r-1">焦亚萍<i class="icon icon-renzheng-1"></i></span>
+              <span class="r-2">好评率：100%</span>
+              <!--<a class="r-3" target="_blank" href=""><i class="iconfont icon-xiaoxi"></i>咨询一下</a>-->
+              <a class="r-3" href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')"><i class="iconfont icon-xiaoxi"></i>咨询一下</a>
+            </dd>
+          </dl>
+        </li>
+        <li class="list">
+          <dl class="clearfix">
+            <dt><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2017/05/11/26f29e14023753ea5a0f6c4eb2b58374.jpg?x-oss-process=image/resize,m_lfit,w_85" alt="代理人宿科晓"></dt>
+            <dd>
+              <span class="r-1">宿科晓<i class="icon icon-renzheng-1"></i></span>
+              <span class="r-2">好评率：100%</span>
+              <!--<a class="r-3" target="_blank" href=""><i class="iconfont icon-xiaoxi"></i>咨询一下</a>-->
+              <a class="r-3" href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')"><i class="iconfont icon-xiaoxi"></i>咨询一下</a>
+            </dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <!-- end 代理人列表 -->
+    <div class="brandInfo-wrap">
+      <!-- start 填写商标基本信息 -->
+      <div class="section-base">
+        <table width="100%" class="table-1">
+          <tbody>
+            <tr class="row-type">
+              <td class="td-title" width="145px"><i class="i-star">*</i>商标类型：</td>
+              <td class="td-content">
+                <div class="myRadioBoxs" id="selectBrandType">
+                  <label class="label checked" data-type="1"><i class="iconfont icon-iconfontdanxuan"></i><i class="iconfont icon-danxuan"></i>文字</label>
+                  <label class="label" data-type="3"><i class="iconfont icon-iconfontdanxuan"></i><i class="iconfont icon-danxuan"></i>图形</label>
+                  <label class="label" data-type="2"><i class="iconfont icon-iconfontdanxuan"></i><i class="iconfont icon-danxuan"></i>文字及图形</label>
+                </div>
+                <a class="how-choose" href="/index/about/12.html" target="_blank">如何选择商标类型？</a>
+              </td>
+            </tr>
+            <tr class="row-name">
+              <td class="td-title"><i class="i-star">*</i>商标名称：</td>
+              <td class="td-content">
+                <input type="text" name="brandName" value="" class="myInput" placeholder="请输入商标名称">
+                <label id="jitu"></label>
+              </td>
+            </tr>
+            <tr class="row-tuyang show-create show-create1">
+              <td class="td-title" ><i class="i-star">*</i>商标图样：</td>
+              <td class="td-content">
+                <div class="myRadioBoxs" id="create-tuyang">
+                  <label class="label checked" data-type="1"><i class="iconfont icon-iconfontdanxuan"></i><i class="iconfont icon-danxuan"></i>自动生成</label>
+                  <label class="label " data-type="0"><i class="iconfont icon-iconfontdanxuan"></i><i class="iconfont icon-danxuan"></i>手动上传</label>
+                </div>
+                <!-- start 手动上传 -->
+                <div class="shoudong-create">
+                  <ul class="showPhotos newShowPhotos clearfix">
+                    <li class="list-photo">
+                      <div class="top">
+                        <div class="top-container" >
+                          <div class="photo-box btnuploadtuyang" style="z-index: 1;">
+                            <img class="photo colorshowurl">
+                            <div class="bg colorbg">
+                              <span class="icon"><i class="iconfont icon-jiahao"></i></span>
+                              <span class="text">不大于200k的jpg</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box">
+                            <i class="shadow"></i>
+                            <dd class="mybtns">
+                              <span class="box" >
+                                                <a class="btn colorlinkurl" href="https://www.quandashi.com/qdshome/images/ex-file.jpg" target="_blank">查看大图</a>
+                                                <a class="btn btnuploadtuyang" >重新上传</a>
+                                            <div id="html5_1cohigm7jjq81c1e15mc1j9a1kbh6_container" class="moxie-shim moxie-shim-html5" ><input id="html5_1cohigm7jjq81c1e15mc1j9a1kbh6" type="file"  accept="image/jpeg,.jpg"></div></span>
+                            </dd>
+                          </dl>
+                          <input type="hidden" name="colorbrandpic" value="">
+                          <div id="html5_1cohigm7g103q11225gu16ek9bc3_container" class="moxie-shim moxie-shim-html5">
+                            <input id="html5_1cohigm7g103q11225gu16ek9bc3" type="file" accept="image/jpeg,.jpg">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bottom">商标图样</div>
+                    </li>
+                  </ul>
+                  <dl class="msg-tips clearfix tips-2">
+                    <dt class="i-left"><i class="icon icon-warning-r"></i></dt>
+                    <dd class="i-right">
+                      上传黑白图样，注册后可以更换商标颜色使用；
+                      <br> 上传彩色图样，注册后只能按照该彩色图样使用，并在委托书商标名称后方增加文字“（指定颜色）”；
+                      <br> 上传的彩色图样需与黑白图样的样式一致。
+                      <br>
+                      <i class="color" onclick="brandZhuyi()">查看上传商标图样注意事项</i>
+                    </dd>
+                  </dl>
+                </div>
+                <!-- end 手动上传 -->
+                <!-- start 自动生成 -->
+                <div class="zidongdong-create">
+                  <ul class="showPhotos newShowPhotos clearfix">
+                    <li class="list-photo show">
+                      <div class="top">
+                        <div class="top-container">
+                          <div class="photo-box">
+                            <img class="photo createbrandpic" src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png">
+                            <div class="bg">
+                              <span class="icon"><i class="iconfont icon-jiahao"></i></span>
+                              <span class="text">不大于200k的jpg</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bottom getBrandPic" data-has="0"><a href="javascript:;" >生成黑白图样</a></div>
+                      <input type="hidden" name="createbrandpic" value="">
+                    </li>
+                  </ul>
+                  <dl class="msg-tips clearfix tips-1" >
+                    <dt class="i-left"><i class="icon icon-warning-r"></i></dt>
+                    <dd class="i-right">
+                      权大师平台默认以“宋体字样自左向右排列”递交官方；
+                    </dd>
+                  </dl>
+                </div>
+                <!-- end 自动生成 -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- end 填写商标基本信息 -->
+    </div>
+    <div id="uploader" class="plupload_modal"></div>
+    <div class="brandInfo-wrap">
+      <!-- start 填写商标基本信息 -->
+      <div class="categoryInfo-wrap">
+        <div class="c-row row-way">
+          <label>选择商标类别：</label>
+          <div class="c-row-content">
+            <a class="btn-choice" href="javascript:;" data-type="0"><i class="iconfont icon-duigou"></i>智能推荐</a>
+            <a class="btn-choice active" href="javascript:;" data-type="1"><i class="iconfont icon-duigou"></i>自助选择</a>
+          </div>
+        </div>
+        <div class="c-row row-industry1" style="display: none;">
+          <label><i class="i-star">*</i>选择所在领域：</label>
+          <div class="c-row-content">
+            <select class="myInput znfirst">
+              <option value="0">请选择</option>
+              <option value="3762">文教娱|文化.传媒.娱乐.教育</option>
+              <option value="3533">服务业|餐饮.维修等</option>
+              <option value="3027">农业领域|农.林.牧.渔等</option>
+              <option value="2728">机械制造|机械.车辆等</option>
+              <option value="2382">商业服务|广告.法律.金融等</option>
+              <option value="1802">房产建材|房产.建筑.物管等</option>
+              <option value="1312">交通运输|运输.物流.仓储等</option>
+              <option value="706">医保化工|医药.化工.能源等</option>
+              <option value="228">食品饮料|生鲜.保健.烟酒茶等</option>
+              <option value="218">服饰|服装.珠宝.化妆品等</option>
+              <option value="1">IT|通信.电子.互联网等</option>
+            </select>
+            <select class="myInput znsecond">
+              <option value="0">请选择</option>
+            </select>
+          </div>
+        </div>
+        <!--        <div class="noshangping" style="padding: 10px 0 0;color: #f0ad4e;text-indent: 130px;display: none;">没有包含关键词的规范商品</div>-->
+      </div>
+      <!-- start 智能推荐 -->
+      <div class="section-recommend" id="section-recommend" style="display: none;">
+        <h3 class="section-header">
+            <span class="s1">需要保护的商品/服务项目</span>
+                        <a class="btn-export uploadcgs" href="javascript:;">导出模板</a>
+                    </h3>
+        <!-- start section-bodyer -->
+        <div class="section-bodyer">
+        </div>
+        <!-- start 继续添加45大类 -->
+        <div class="add-category">
+          <a class="btn-add" href="javascript:;"><i>+</i>添加商标类别</a>
+          <ul class="list-box clearfix">
+            <li class="list" data-cgid="1" data-cgnum="01" data-cgname="化学原料">第<i class="color">01</i>类-化学原料</li>
+            <li class="list" data-cgid="952" data-cgnum="02" data-cgname="颜料油漆">第<i class="color">02</i>类-颜料油漆</li>
+            <li class="list" data-cgid="1102" data-cgnum="03" data-cgname="日化用品">第<i class="color">03</i>类-日化用品</li>
+            <li class="list" data-cgid="1415" data-cgnum="04" data-cgname="燃料油脂">第<i class="color">04</i>类-燃料油脂</li>
+            <li class="list" data-cgid="1552" data-cgnum="05" data-cgname="医药">第<i class="color">05</i>类-医药</li>
+            <li class="list" data-cgid="2028" data-cgnum="06" data-cgname="金属材料">第<i class="color">06</i>类-金属材料</li>
+            <li class="list" data-cgid="2533" data-cgnum="07" data-cgname="机械设备">第<i class="color">07</i>类-机械设备</li>
+            <li class="list" data-cgid="3596" data-cgnum="08" data-cgname="手工器械">第<i class="color">08</i>类-手工器械</li>
+            <li class="list" data-cgid="10455" data-cgnum="09" data-cgname="科学仪器">第<i class="color">09</i>类-科学仪器</li>
+            <li class="list" data-cgid="3900" data-cgnum="10" data-cgname="医疗器械">第<i class="color">10</i>类-医疗器械</li>
+            <li class="list" data-cgid="4137" data-cgnum="11" data-cgname="灯具空调">第<i class="color">11</i>类-灯具空调</li>
+            <li class="list" data-cgid="4533" data-cgnum="12" data-cgname="运输工具">第<i class="color">12</i>类-运输工具</li>
+            <li class="list" data-cgid="4874" data-cgnum="13" data-cgname="军火烟火">第<i class="color">13</i>类-军火烟火</li>
+            <li class="list" data-cgid="4970" data-cgnum="14" data-cgname="珠宝钟表">第<i class="color">14</i>类-珠宝钟表</li>
+            <li class="list" data-cgid="5083" data-cgnum="15" data-cgname="乐器">第<i class="color">15</i>类-乐器</li>
+            <li class="list" data-cgid="5184" data-cgnum="16" data-cgname="办公用品">第<i class="color">16</i>类-办公用品</li>
+            <li class="list" data-cgid="5663" data-cgnum="17" data-cgname="橡胶制品">第<i class="color">17</i>类-橡胶制品</li>
+            <li class="list" data-cgid="5824" data-cgnum="18" data-cgname="皮革皮具">第<i class="color">18</i>类-皮革皮具</li>
+            <li class="list" data-cgid="5961" data-cgnum="19" data-cgname="建筑材料">第<i class="color">19</i>类-建筑材料</li>
+            <li class="list" data-cgid="6281" data-cgnum="20" data-cgname="家具">第<i class="color">20</i>类-家具</li>
+            <li class="list" data-cgid="6640" data-cgnum="21" data-cgname="厨房洁具">第<i class="color">21</i>类-厨房洁具</li>
+            <li class="list" data-cgid="7054" data-cgnum="22" data-cgname="绳网袋蓬">第<i class="color">22</i>类-绳网袋蓬</li>
+            <li class="list" data-cgid="7179" data-cgnum="23" data-cgname="纱线丝">第<i class="color">23</i>类-纱线丝</li>
+            <li class="list" data-cgid="7234" data-cgnum="24" data-cgname="布料床单">第<i class="color">24</i>类-布料床单</li>
+            <li class="list" data-cgid="7413" data-cgnum="25" data-cgname="服装鞋帽">第<i class="color">25</i>类-服装鞋帽</li>
+            <li class="list" data-cgid="7637" data-cgnum="26" data-cgname="钮扣拉链">第<i class="color">26</i>类-钮扣拉链</li>
+            <li class="list" data-cgid="7796" data-cgnum="27" data-cgname="地毯席垫">第<i class="color">27</i>类-地毯席垫</li>
+            <li class="list" data-cgid="7825" data-cgnum="28" data-cgname="健身器材">第<i class="color">28</i>类-健身器材</li>
+            <li class="list" data-cgid="7956" data-cgnum="29" data-cgname="食品">第<i class="color">29</i>类-食品</li>
+            <li class="list" data-cgid="8423" data-cgnum="30" data-cgname="方便食品">第<i class="color">30</i>类-方便食品</li>
+            <li class="list" data-cgid="8797" data-cgnum="31" data-cgname="农林生鲜">第<i class="color">31</i>类-农林生鲜</li>
+            <li class="list" data-cgid="8983" data-cgnum="32" data-cgname="啤酒饮料">第<i class="color">32</i>类-啤酒饮料</li>
+            <li class="list" data-cgid="9051" data-cgnum="33" data-cgname="酒">第<i class="color">33</i>类-酒</li>
+            <li class="list" data-cgid="9091" data-cgnum="34" data-cgname="烟草烟具">第<i class="color">34</i>类-烟草烟具</li>
+            <li class="list" data-cgid="9138" data-cgnum="35" data-cgname="广告销售">第<i class="color">35</i>类-广告销售</li>
+            <li class="list" data-cgid="9261" data-cgnum="36" data-cgname="金融物管">第<i class="color">36</i>类-金融物管</li>
+            <li class="list" data-cgid="9360" data-cgnum="37" data-cgname="建筑修理">第<i class="color">37</i>类-建筑修理</li>
+            <li class="list" data-cgid="9514" data-cgnum="38" data-cgname="通讯服务">第<i class="color">38</i>类-通讯服务</li>
+            <li class="list" data-cgid="9556" data-cgnum="39" data-cgname="运输贮藏">第<i class="color">39</i>类-运输贮藏</li>
+            <li class="list" data-cgid="9674" data-cgnum="40" data-cgname="材料加工">第<i class="color">40</i>类-材料加工</li>
+            <li class="list" data-cgid="9813" data-cgnum="41" data-cgname="教育娱乐">第<i class="color">41</i>类-教育娱乐</li>
+            <li class="list" data-cgid="9945" data-cgnum="42" data-cgname="科技服务">第<i class="color">42</i>类-科技服务</li>
+            <li class="list" data-cgid="10041" data-cgnum="43" data-cgname="餐饮住宿">第<i class="color">43</i>类-餐饮住宿</li>
+            <li class="list" data-cgid="10080" data-cgnum="44" data-cgname="医疗园艺">第<i class="color">44</i>类-医疗园艺</li>
+            <li class="list" data-cgid="10150" data-cgnum="45" data-cgname="社会服务">第<i class="color">45</i>类-社会服务</li>
+          </ul>
+        </div>
+        <!-- end 继续添加45大类 -->
+        <div class="exportAll"><a class="btn-exportAll uploadcgs" href="javascript:;">导出模板</a></div>
+      </div>
+      <!-- end 智能推荐 -->
+      <!-- start 自助选择 -->
+      <div class="section-selfchoice clearfix" id="section-selfchoice" style="display: block;">
+        <!-- start 左-->
+        <div class="group-left">
+          <div class="ns-search-container">
+            <div class="myInputGroup">
+              <input type="text" name="keys" class="myInput" placeholder="请输入商品/服务名称进行查询">
+              <button class="myBtn" id="btn-search"><i class="iconfont icon-danchucengzhuanhuan"></i></button>
+            </div>
+          </div>
+          <ul class="group scroll">
+            <li class="list" data-cgid="1" data-cgnum="01" data-cgname="化学原料">
+              <span class="title-first" data-has-data="0" data-cgid="1">第<i class="color">01</i>类 化学原料</span>
+            </li>
+            <li class="list" data-cgid="952" data-cgnum="02" data-cgname="颜料油漆">
+              <span class="title-first" data-has-data="0" data-cgid="952">第<i class="color">02</i>类 颜料油漆</span>
+            </li>
+            <li class="list" data-cgid="1102" data-cgnum="03" data-cgname="日化用品">
+              <span class="title-first" data-has-data="0" data-cgid="1102">第<i class="color">03</i>类 日化用品</span>
+            </li>
+            <li class="list" data-cgid="1415" data-cgnum="04" data-cgname="燃料油脂">
+              <span class="title-first" data-has-data="0" data-cgid="1415">第<i class="color">04</i>类 燃料油脂</span>
+            </li>
+            <li class="list" data-cgid="1552" data-cgnum="05" data-cgname="医药">
+              <span class="title-first" data-has-data="0" data-cgid="1552">第<i class="color">05</i>类 医药</span>
+            </li>
+            <li class="list" data-cgid="2028" data-cgnum="06" data-cgname="金属材料">
+              <span class="title-first" data-has-data="0" data-cgid="2028">第<i class="color">06</i>类 金属材料</span>
+            </li>
+            <li class="list" data-cgid="2533" data-cgnum="07" data-cgname="机械设备">
+              <span class="title-first" data-has-data="0" data-cgid="2533">第<i class="color">07</i>类 机械设备</span>
+            </li>
+            <li class="list" data-cgid="3596" data-cgnum="08" data-cgname="手工器械">
+              <span class="title-first" data-has-data="0" data-cgid="3596">第<i class="color">08</i>类 手工器械</span>
+            </li>
+            <li class="list" data-cgid="10455" data-cgnum="09" data-cgname="科学仪器">
+              <span class="title-first" data-has-data="0" data-cgid="10455">第<i class="color">09</i>类 科学仪器</span>
+            </li>
+            <li class="list" data-cgid="3900" data-cgnum="10" data-cgname="医疗器械">
+              <span class="title-first" data-has-data="0" data-cgid="3900">第<i class="color">10</i>类 医疗器械</span>
+            </li>
+            <li class="list" data-cgid="4137" data-cgnum="11" data-cgname="灯具空调">
+              <span class="title-first" data-has-data="0" data-cgid="4137">第<i class="color">11</i>类 灯具空调</span>
+            </li>
+            <li class="list" data-cgid="4533" data-cgnum="12" data-cgname="运输工具">
+              <span class="title-first" data-has-data="0" data-cgid="4533">第<i class="color">12</i>类 运输工具</span>
+            </li>
+            <li class="list" data-cgid="4874" data-cgnum="13" data-cgname="军火烟火">
+              <span class="title-first" data-has-data="0" data-cgid="4874">第<i class="color">13</i>类 军火烟火</span>
+            </li>
+            <li class="list" data-cgid="4970" data-cgnum="14" data-cgname="珠宝钟表">
+              <span class="title-first" data-has-data="0" data-cgid="4970">第<i class="color">14</i>类 珠宝钟表</span>
+            </li>
+            <li class="list" data-cgid="5083" data-cgnum="15" data-cgname="乐器">
+              <span class="title-first" data-has-data="0" data-cgid="5083">第<i class="color">15</i>类 乐器</span>
+            </li>
+            <li class="list" data-cgid="5184" data-cgnum="16" data-cgname="办公用品">
+              <span class="title-first" data-has-data="0" data-cgid="5184">第<i class="color">16</i>类 办公用品</span>
+            </li>
+            <li class="list" data-cgid="5663" data-cgnum="17" data-cgname="橡胶制品">
+              <span class="title-first" data-has-data="0" data-cgid="5663">第<i class="color">17</i>类 橡胶制品</span>
+            </li>
+            <li class="list" data-cgid="5824" data-cgnum="18" data-cgname="皮革皮具">
+              <span class="title-first" data-has-data="0" data-cgid="5824">第<i class="color">18</i>类 皮革皮具</span>
+            </li>
+            <li class="list" data-cgid="5961" data-cgnum="19" data-cgname="建筑材料">
+              <span class="title-first" data-has-data="0" data-cgid="5961">第<i class="color">19</i>类 建筑材料</span>
+            </li>
+            <li class="list" data-cgid="6281" data-cgnum="20" data-cgname="家具">
+              <span class="title-first" data-has-data="0" data-cgid="6281">第<i class="color">20</i>类 家具</span>
+            </li>
+            <li class="list" data-cgid="6640" data-cgnum="21" data-cgname="厨房洁具">
+              <span class="title-first" data-has-data="0" data-cgid="6640">第<i class="color">21</i>类 厨房洁具</span>
+            </li>
+            <li class="list" data-cgid="7054" data-cgnum="22" data-cgname="绳网袋蓬">
+              <span class="title-first" data-has-data="0" data-cgid="7054">第<i class="color">22</i>类 绳网袋蓬</span>
+            </li>
+            <li class="list" data-cgid="7179" data-cgnum="23" data-cgname="纱线丝">
+              <span class="title-first" data-has-data="0" data-cgid="7179">第<i class="color">23</i>类 纱线丝</span>
+            </li>
+            <li class="list" data-cgid="7234" data-cgnum="24" data-cgname="布料床单">
+              <span class="title-first" data-has-data="0" data-cgid="7234">第<i class="color">24</i>类 布料床单</span>
+            </li>
+            <li class="list" data-cgid="7413" data-cgnum="25" data-cgname="服装鞋帽">
+              <span class="title-first" data-has-data="0" data-cgid="7413">第<i class="color">25</i>类 服装鞋帽</span>
+            </li>
+            <li class="list" data-cgid="7637" data-cgnum="26" data-cgname="钮扣拉链">
+              <span class="title-first" data-has-data="0" data-cgid="7637">第<i class="color">26</i>类 钮扣拉链</span>
+            </li>
+            <li class="list" data-cgid="7796" data-cgnum="27" data-cgname="地毯席垫">
+              <span class="title-first" data-has-data="0" data-cgid="7796">第<i class="color">27</i>类 地毯席垫</span>
+            </li>
+            <li class="list" data-cgid="7825" data-cgnum="28" data-cgname="健身器材">
+              <span class="title-first" data-has-data="0" data-cgid="7825">第<i class="color">28</i>类 健身器材</span>
+            </li>
+            <li class="list" data-cgid="7956" data-cgnum="29" data-cgname="食品">
+              <span class="title-first" data-has-data="0" data-cgid="7956">第<i class="color">29</i>类 食品</span>
+            </li>
+            <li class="list" data-cgid="8423" data-cgnum="30" data-cgname="方便食品">
+              <span class="title-first" data-has-data="0" data-cgid="8423">第<i class="color">30</i>类 方便食品</span>
+            </li>
+            <li class="list" data-cgid="8797" data-cgnum="31" data-cgname="农林生鲜">
+              <span class="title-first" data-has-data="0" data-cgid="8797">第<i class="color">31</i>类 农林生鲜</span>
+            </li>
+            <li class="list" data-cgid="8983" data-cgnum="32" data-cgname="啤酒饮料">
+              <span class="title-first" data-has-data="0" data-cgid="8983">第<i class="color">32</i>类 啤酒饮料</span>
+            </li>
+            <li class="list" data-cgid="9051" data-cgnum="33" data-cgname="酒">
+              <span class="title-first" data-has-data="0" data-cgid="9051">第<i class="color">33</i>类 酒</span>
+            </li>
+            <li class="list" data-cgid="9091" data-cgnum="34" data-cgname="烟草烟具">
+              <span class="title-first" data-has-data="0" data-cgid="9091">第<i class="color">34</i>类 烟草烟具</span>
+            </li>
+            <li class="list" data-cgid="9138" data-cgnum="35" data-cgname="广告销售">
+              <span class="title-first" data-has-data="0" data-cgid="9138">第<i class="color">35</i>类 广告销售</span>
+            </li>
+            <li class="list" data-cgid="9261" data-cgnum="36" data-cgname="金融物管">
+              <span class="title-first" data-has-data="0" data-cgid="9261">第<i class="color">36</i>类 金融物管</span>
+            </li>
+            <li class="list" data-cgid="9360" data-cgnum="37" data-cgname="建筑修理">
+              <span class="title-first" data-has-data="0" data-cgid="9360">第<i class="color">37</i>类 建筑修理</span>
+            </li>
+            <li class="list" data-cgid="9514" data-cgnum="38" data-cgname="通讯服务">
+              <span class="title-first" data-has-data="0" data-cgid="9514">第<i class="color">38</i>类 通讯服务</span>
+            </li>
+            <li class="list" data-cgid="9556" data-cgnum="39" data-cgname="运输贮藏">
+              <span class="title-first" data-has-data="0" data-cgid="9556">第<i class="color">39</i>类 运输贮藏</span>
+            </li>
+            <li class="list" data-cgid="9674" data-cgnum="40" data-cgname="材料加工">
+              <span class="title-first" data-has-data="0" data-cgid="9674">第<i class="color">40</i>类 材料加工</span>
+            </li>
+            <li class="list" data-cgid="9813" data-cgnum="41" data-cgname="教育娱乐">
+              <span class="title-first" data-has-data="0" data-cgid="9813">第<i class="color">41</i>类 教育娱乐</span>
+            </li>
+            <li class="list" data-cgid="9945" data-cgnum="42" data-cgname="科技服务">
+              <span class="title-first" data-has-data="0" data-cgid="9945">第<i class="color">42</i>类 科技服务</span>
+            </li>
+            <li class="list" data-cgid="10041" data-cgnum="43" data-cgname="餐饮住宿">
+              <span class="title-first" data-has-data="0" data-cgid="10041">第<i class="color">43</i>类 餐饮住宿</span>
+            </li>
+            <li class="list" data-cgid="10080" data-cgnum="44" data-cgname="医疗园艺">
+              <span class="title-first" data-has-data="0" data-cgid="10080">第<i class="color">44</i>类 医疗园艺</span>
+            </li>
+            <li class="list" data-cgid="10150" data-cgnum="45" data-cgname="社会服务">
+              <span class="title-first" data-has-data="0" data-cgid="10150">第<i class="color">45</i>类 社会服务</span>
+            </li>
+          </ul>
+        </div>
+        <!-- end 左-->
+        <!-- start 右-->
+        <div class="group-right">
+          <h3 class="title"><span>需要保护的商品\服务项目</span>
+                <div class="group-right-search">
+                    <input type="button" class="button" value="清空选项" onclick="confirmResetBrandCategory()">
+                    <div class="group-right-search-input">
+                                                <div class="" style="display: block">
+                            <input type="text" name="search" placeholder="请输入历史订单号">
+                            <input type="button" class="button searchOrder" value="导入">
+                        </div>
+                    </div>
+                </div>
+            </h3>
+          <img class="bgimg" src="https://www.quandashi.com/qdshome/images/selfchoice-bg.jpg" alt="请点击左侧选择商标类别">
+          <!-- start section -->
+          <div class="section scroll">
+          </div>
+          <!-- end section -->
+        </div>
+        <!-- end 右-->
+      </div>
+      <!-- end 自助选择 -->
+    </div>
+    <!-- end 商标信息 -->
+    <div class="last-pay">
+      <ul class="list-box">
+        <li class="row-officer">官费总额：￥<i>0</i></li>
+        <li class="row-invoice">发票税费：￥<i>0</i>
+          <img id="icon-img" class="icon-img" src="/qdshome/images/wen.png">
+        </li>
+        <!-- <i class="row-service">服务费：￥<i>0</i></li>
+            <li class="row-conserve">已为您节省：￥<i>0</i></li> -->
+        <li class="row-sense">应付总额：<em>￥<i>0</i></em></li>
+        <li class="row-step"><a class="btn-step submitorder" href="/order/ownermsg">下一步</a></li>
+      </ul>
+    </div>
+    <to-top />
+  </div>
+</template>
+<script>
+import toTop from '@/components/toTop'
+export default {
+  head() {
+    return {
+      title: "智能订单-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  components: {
+    toTop
+  }
+};
+
+</script>
+<style scoped>
+@import url('../../assets/css/order.css');
+</style>

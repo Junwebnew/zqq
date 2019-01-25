@@ -1,0 +1,1127 @@
+<template>
+    <div>
+        <mini/>
+        <div class="page-search w">
+            <span class="main-title">商标搜索</span>
+            <div class="search-input">
+                <input name="" placeholder="请输入商标名称" class="text fl" type="text">
+                <a href="javascript:void(0)" id="search" class="button search">搜索</a>
+                <div class="img-search-btn">
+                    <i id="select-btn" class="icon-camera"></i>
+                </div>
+            </div>
+            <div class="search-right">
+                <a href="/classify" target="_blank" class="button button-white">商品分类</a>
+                <a href="/notice" target="_blank" class="button button-white">初审公告</a>
+            </div>
+        </div>
+        <div class="page-nav">
+            <div class="page-nav-in w">
+                <a href="javascript:void(0)" class="active">近似商标</a>
+                <a href="javascript:void(0)" class="">精准商标</a>
+                <a href="javascript:void(0)" class="">申请号</a>
+                <a href="javascript:void(0)" class="">申请人</a>
+                <a href="javascript:void(0)" class="">商品/服务</a>
+                <a href="javascript:void(0)" class="">图形搜索</a>
+                <a href="javascript:void(0)" class="">代理公司</a>
+            </div>
+        </div>
+        <!-- //搜索正文大头开始 -->
+        <section class="w" style="margin-top:20px">
+            <!-- //字典 开始 -->
+            <div class="page-form clear2">
+                <div class="selected-category clear2">
+                    <label>已选类别</label>
+                    <span style="display: none;"></span>
+                    <div class="selected-category-box">
+                        <a href="javascript:void(0)" class="active">
+                            <span data-value="1" class="text">01类 化学原料</span>
+                            <i data-value="1" class="icon icon-close">×</i>
+                            <div class="selected-service-box checkbox-all-box">
+                                <div class="service-list">
+                                    <label class="checkbox-box">
+                                        <label class="checkbox checkbox-all checked"><input type="checkbox" name="" checked="checked"></label>
+                                        <span>全选</span>
+                                    </label>
+                                </div>
+                                <div class="selected-service-box-in scroll">
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0101"></label>
+                                            <span>0101 工业气体，单质(7)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0102"></label>
+                                            <span>0102 用于工业、科学、农业、园艺、林业的工业化工原料(8)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0103"></label>
+                                            <span>0103 放射性元素及其化学品(5)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0104"></label>
+                                            <span>0104 用于工业、科学的化学品、化学制剂，不属于其他类别的产品用的化学制品(10)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0105"></label>
+                                            <span>0105 用于农业、园艺、林业的化学品、化学制剂(7)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0106"></label>
+                                            <span>0106 化学试剂(5)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0107"></label>
+                                            <span>0107 摄影用化学用品及材料(7)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0108"></label>
+                                            <span>0108 未加工的人造合成树脂，未加工塑料物质（不包括未加工的天然树脂）(5)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0109"></label>
+                                            <span>0109 肥料(8)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0110"></label>
+                                            <span>0110 灭火、防火用合成物(7)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0111"></label>
+                                            <span>0111 淬火用化学制剂(5)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0112"></label>
+                                            <span>0112 焊接用化学制剂(7)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0113"></label>
+                                            <span>0113 食药用化学品（不包括食品用防腐盐）(8)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0114"></label>
+                                            <span>0114 鞣料及皮革用化学品(6)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0115"></label>
+                                            <span>0115 工业用粘合剂和胶（不包括纸用粘合剂）(9)</span>
+                                        </label>
+                                    </div>
+                                    <div class="service-list">
+                                        <label class="checkbox-box">
+                                            <label class="checkbox checked"><input type="checkbox" name="" checked="checked" value="0116"></label>
+                                            <span>0116 纸浆(5)</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="service-list service-button">
+                                    <input type="button" data-value="1" value="取消" class="button button-white">
+                                    <input type="button" data-value="1" value="确定" class="button ml6"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul>
+                    <li class="search-category" :class="{'open':doc == 1}">
+                        <a class="btn" @click="openLevel">更多</a>
+                        <label>图形要素</label>
+                        <div class="category-show-box">
+                            <a href="javascript:void(0)" data-value="A24.9.7" class="">冠顶尖端有小球的王冠(30725)</a>
+                            <a href="javascript:void(0)" data-value="24.9.2" class="">上部敝开的王冠(23022)</a>
+                            <a href="javascript:void(0)" data-value="18.1.7" class="">机动车(11156)</a>
+                            <a href="javascript:void(0)" data-value="A18.1.9" class="">小轿车(11150)</a>
+                            <a href="javascript:void(0)" data-value="13.1.6" class="">灯,小彩灯,灯笼,无线电电子管(8042)</a>
+                            <a href="javascript:void(0)" data-value="24.9.1" class="">上部封闭的王冠(7792)</a>
+                            <a href="javascript:void(0)" data-value="3.7.3" class="">公鸡,母鸡,小鸡(6549)</a>
+                            <a href="javascript:void(0)" data-value="4.1.2" class="">有翼的孩子(小天使,丘比特)(4699)</a>
+                            <a href="javascript:void(0)" data-value="24.1.5" class="">包含其它图形要素或文词的盾(3642)</a>
+                            <a href="javascript:void(0)" data-value="A13.1.17" class="">灯泡或灯管(3411)</a>
+                            <a href="javascript:void(0)" data-value="A13.1.8" class="">小彩灯,灯笼(A13.1.9除外)(2892)</a>
+                            <a href="javascript:void(0)" data-value="18.1.5" class="">自行车,摩托车,低座小摩托车,三轮车(2782)</a>
+                            <a href="javascript:void(0)" data-value="18.3.1" class="">划桨船,独木舟,平底船,小划艇,海豹皮小舟(2671)</a>
+                            <a href="javascript:void(0)" data-value="25.1.9" class="">框架和构架(2061)</a>
+                            <a href="javascript:void(0)" data-value="A25.1.10" class="">整体框架和构架(2021)</a>
+                            <a href="javascript:void(0)" data-value="4.2.20" class="">部分人体和部分动物体的其它生物;*孙悟空,*猪八戒,*米老鼠,*唐老鸭,*卡通 造型(1962)</a>
+                            <a href="javascript:void(0)" data-value="4.5.3" class="">拟人化的几何或立体图形,描绘成人物的几何或立体图形组合,*抽象人(1915)</a>
+                            <a href="javascript:void(0)" data-value="29.1.12" class="">两种主要的颜色(1872)</a>
+                            <a href="javascript:void(0)" data-value="25.1.25" class="">其它装饰图案(1837)</a>
+                            <a href="javascript:void(0)" data-value="19.3.3" class="">非圆筒形小容器,@马口铁罐头(非圆筒形)(1757)</a>
+                            <a href="javascript:void(0)" data-value="5.13.7" class="">植物组成的环,带,边,框(5.13.6除外)(1652)</a>
+                            <a href="javascript:void(0)" data-value="A5.13.8" class="">叶组成的环,带,边,框(1618)</a>
+                            <a href="javascript:void(0)" data-value="29.1.13" class="">三种主要的颜色(1534)</a>
+                            <a href="javascript:void(0)" data-value="3.5.7" class="">鼠,小耗子,鼹鼠(1514)</a>
+                            <a href="javascript:void(0)" data-value="19.3.1" class="">圆筒形小容器(如装药片或口红,化妆品用的小容器),@马口铁罐头(圆筒形)(1482)</a>
+                            <a href="javascript:void(0)" data-value="29.1.15" class="">五种颜色或更多的颜色(1188)</a>
+                            <a href="javascript:void(0)" data-value="26.1.12a" class="">一个或多个其它几何图形组成的圆或椭圆(1097)</a>
+                            <a href="javascript:void(0)" data-value="3.7.24" class="">风格化的鸟(921)</a>
+                            <a href="javascript:void(0)" data-value="3.1.1" class="">狮(848)</a>
+                            <a href="javascript:void(0)" data-value="26.1.12" class="">包含一个或多个其他几何图形的圆或椭圆(788)</a>
+                            <a href="javascript:void(0)" data-value="29.1.11" class="">一种主要的颜色(772)</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 字典结束 -->
+            <!-- 列表开始 -->
+            <div class="page-content clear2">
+                <!-- //左边列表层级 -->
+                <div class="page-content-left">
+                    <div class="search-top">权大师为您找到相关结果
+                        <i>72197</i> 个</div>
+                    <ul class="search-list">
+                        <li class=" line-animate">
+                            <div class="result-href">
+                                <div class="brand-img">
+                                    <a target="_blank" href="/index/searchdetail/745665446d664e394664574245534d693742417437673d3d.html"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/5410bcd9/7b323990/1d39eb1a/ed12e703/logo_middle.jpg" alt="小" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></a>
+                                </div>
+                                <div class="brand-info">
+                                    <h2 @click="goDetail">小</h2>
+                                    <div data-id="745665446d664e394664574245534d693742417437673d3d" class="brand-info-in">
+                                        <ul>
+                                            <li>
+                                                <label>当前状态：</label>
+                                                <span class="process-name">驳回待复审</span>
+                                            </li>
+                                            <li>
+                                                <label>商品类别：</label>
+                                                <span class="td-btype">09类 科学仪器</span>
+                                                <label>申请号：</label>
+                                                <span>19398625</span>
+                                            </li>
+                                            <li>
+                                                <label>申请日期：</label>
+                                                <span>2016-3-23</span>
+                                            </li>
+                                            <li>
+                                                <label>申请人：</label>
+                                                <span>上海葡萄纬度科技有限公司</span>
+                                            </li>
+                                            <li>
+                                                <label>初审公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                            <li>
+                                                <label>注册公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brand-status">
+                                <div>
+                                    <span data-flag="19398625" data-code="9" class="status1">关注</span>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbzr" class="btn status2">转让</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbbg" class="btn status2">变更</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class=" line-animate">
+                            <div class="result-href">
+                                <div class="brand-img">
+                                    <a target="_blank" href="/index/searchdetail/7735347868486a3241546a5862326f6b3143425166513d3d.html"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/46fe13c4/c96a62e1/ccc022b2/3ccfc8b0/logo_middle.jpg" alt="小" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></a>
+                                </div>
+                                <div class="brand-info">
+                                    <a target="_blank" href="/index/searchdetail/7735347868486a3241546a5862326f6b3143425166513d3d.html">
+                                        <h2>小
+                                            <!---->
+                                        </h2>
+                                    </a>
+                                    <div data-id="7735347868486a3241546a5862326f6b3143425166513d3d" class="brand-info-in">
+                                        <ul>
+                                            <li>
+                                                <label>当前状态：</label>
+                                                <span class="process-name">商标无效</span>
+                                            </li>
+                                            <li>
+                                                <label>商品类别：</label>
+                                                <span class="td-btype">35类 广告销售</span>
+                                                <label>申请号：</label>
+                                                <span>12883738</span>
+                                            </li>
+                                            <li>
+                                                <label>申请日期：</label>
+                                                <span>2013-7-9</span>
+                                            </li>
+                                            <li>
+                                                <label>申请人：</label>
+                                                <span>王小平</span>
+                                            </li>
+                                            <li>
+                                                <label>初审公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                            <li>
+                                                <label>注册公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brand-status">
+                                <div>
+                                    <span data-flag="12883738" data-code="35" class="status1">关注</span>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/bmkszc/4" class="btn status2">注册</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class=" line-animate">
+                            <div class="result-href">
+                                <div class="brand-img">
+                                    <a target="_blank" href="/index/searchdetail/71774f54697649316e646c326c564b6a5054326a75413d3d.html"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/a50fdd31/2f01fd79/4f43b428/fa29587a/logo_middle.jpg" alt="小" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></a>
+                                </div>
+                                <div class="brand-info">
+                                    <a target="_blank" href="/index/searchdetail/71774f54697649316e646c326c564b6a5054326a75413d3d.html">
+                                        <h2>小
+                                            <!---->
+                                        </h2>
+                                    </a>
+                                    <div data-id="71774f54697649316e646c326c564b6a5054326a75413d3d" class="brand-info-in">
+                                        <ul>
+                                            <li>
+                                                <label>当前状态：</label>
+                                                <span class="process-name">驳回待复审</span>
+                                            </li>
+                                            <li>
+                                                <label>商品类别：</label>
+                                                <span class="td-btype">30类 方便食品</span>
+                                                <label>申请号：</label>
+                                                <span>24032307</span>
+                                            </li>
+                                            <li>
+                                                <label>申请日期：</label>
+                                                <span>2017-5-9</span>
+                                            </li>
+                                            <li>
+                                                <label>申请人：</label>
+                                                <span>湖北众望科工贸有限公司</span>
+                                            </li>
+                                            <li>
+                                                <label>初审公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                            <li>
+                                                <label>注册公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brand-status">
+                                <div>
+                                    <span data-flag="24032307" data-code="30" class="status1">关注</span>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbzr" class="btn status2">转让</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbbg" class="btn status2">变更</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class=" line-animate">
+                            <div class="result-href">
+                                <div class="brand-img">
+                                    <a target="_blank" href="/index/searchdetail/55556f4162326161796234715747576565366b3447513d3d.html"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/ca38edce/bd25402a/5dffc893/5055d506/logo_middle.jpg" alt="小" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></a>
+                                </div>
+                                <div class="brand-info">
+                                    <a target="_blank" href="/index/searchdetail/55556f4162326161796234715747576565366b3447513d3d.html">
+                                        <h2>小
+                                            <!---->
+                                        </h2>
+                                    </a>
+                                    <div data-id="55556f4162326161796234715747576565366b3447513d3d" class="brand-info-in">
+                                        <ul>
+                                            <li>
+                                                <label>当前状态：</label>
+                                                <span class="process-name">驳回待复审</span>
+                                            </li>
+                                            <li>
+                                                <label>商品类别：</label>
+                                                <span class="td-btype">43类 餐饮住宿</span>
+                                                <label>申请号：</label>
+                                                <span>26532061</span>
+                                            </li>
+                                            <li>
+                                                <label>申请日期：</label>
+                                                <span>2017-9-21</span>
+                                            </li>
+                                            <li>
+                                                <label>申请人：</label>
+                                                <span>宁波牛奶面包创意家居有限公司</span>
+                                            </li>
+                                            <li>
+                                                <label>初审公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                            <li>
+                                                <label>注册公告日期：</label>
+                                                <span>--</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brand-status">
+                                <div>
+                                    <span data-flag="26532061" data-code="43" class="status1">关注</span>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbzr" class="btn status2">转让</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbbg" class="btn status2">变更</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                        <li class=" line-animate">
+                            <div class="result-href">
+                                <div class="brand-img">
+                                    <a target="_blank" href="/index/searchdetail/486b6d5270574b58532b6644794234423969306c51413d3d.html"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/678e7b77/9a1203e2/4e154846/1fe1018d/logo_middle.jpg" alt="小" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></a>
+                                </div>
+                                <div class="brand-info">
+
+                                    <h2>商标名称</h2>
+                                    <div data-id="486b6d5270574b58532b6644794234423969306c51413d3d" class="brand-info-in">
+                                        <ul>
+                                            <li>
+                                                <label>当前状态：</label>
+                                                <span class="process-name">已注册</span>
+                                            </li>
+                                            <li>
+                                                <label>商品类别：</label>
+                                                <span class="td-btype">35类 广告销售</span>
+                                                <label>申请号：</label>
+                                                <span>13184410</span>
+                                            </li>
+                                            <li>
+                                                <label>申请日期：</label>
+                                                <span>2013-9-3</span>
+                                            </li>
+                                            <li>
+                                                <label>申请人：</label>
+                                                <span>小浅(上海)贸易有限公司</span>
+                                            </li>
+                                            <li>
+                                                <label>初审公告日期：</label>
+                                                <span>2014-10-27</span>
+                                            </li>
+                                            <li>
+                                                <label>注册公告日期：</label>
+                                                <span>2015-1-28</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="brand-status">
+                                <div>
+                                    <span data-flag="13184410" data-code="35" class="status1">关注</span>
+                                    <span data-dataid="13184410" data-name="小" data-typecode="35" class="status1">购买</span>
+                                </div>
+                                <div>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbwxxgsq" class="btn status2">无效</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbcssq" class="btn status2">撤三</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbzr" class="btn status2">转让</a>
+                                    <a target="_blank" href="https://www.quandashi.com/sb/sbxz" class="btn status2">续展</a>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                    <div class="pagination">
+                        翻页组件的位置
+                    </div>
+                </div>
+                <!-- 右边商标出售 -->
+                <div class="page-content-right">
+                    <div data-type="2" class="hot-brand hot-brand-right">
+                        <h2>热门商标出售</h2>
+                        <ul class="">
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/72bdb7da/3110aed9/0ff45a72/5efefb44/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="炫盟">炫盟</h6>
+                                    <span class="hot-brand-category">42类 科技服务</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>13000</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/906e0d0b/b1e4fd00/65f965a2/1b0dc6f4/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="木佳翼">木佳翼</h6>
+                                    <span class="hot-brand-category">20类 家具</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>23440</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/d72702ac/103ddd5f/fd0a6984/0077327f/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="腾锐">腾锐</h6>
+                                    <span class="hot-brand-category">25类 服装鞋帽</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>12880</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/bfb1602a/64a17d7d/cbe8e198/3c5a16ef/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="常豆">常豆</h6>
+                                    <span class="hot-brand-category">25类 服装鞋帽</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>31090</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="javascript:;" class="more hide">查看更多&gt;&gt;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 列表结束 -->
+        </section>
+    </div>
+</template>
+  <script>
+import mini from "~/components/header/mini";
+import { openNewPage } from "~/assets/js/common.js";
+export default {
+    layout: "empt",
+    head() {
+        return {
+            title: "列表页面-知千秋"
+        };
+    },
+    created() {},
+    components: {
+        mini
+    },
+    data() {
+        return {
+            doc: 0
+        };
+    },
+    methods: {
+        openLevel() {
+            this.doc = this.doc == 1 ? 0 : 1;
+        },
+        goDetail() {
+            openNewPage(this, "/search/detail");
+        }
+    }
+};
+</script>
+<style scoped>
+* {
+    box-sizing: border-box;
+}
+/* //二级搜索 */
+.page-search {
+    padding: 30px 0;
+}
+.page-search .main-title {
+    display: inline-block;
+    margin-right: 45px;
+    font-size: 36px;
+    line-height: 1em;
+    color: #ff5c00;
+    vertical-align: middle;
+}
+.search-input {
+    display: inline-block;
+    position: relative;
+    margin-right: 40px;
+    border: 1px solid #ff5c00;
+    border-radius: 0 2px 2px 0;
+    overflow: hidden;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.page-search input.text {
+    padding-left: 20px;
+    width: 520px;
+    height: 38px;
+    border: none;
+    vertical-align: middle;
+    padding-right: 40px;
+}
+.page-search .button {
+    width: 130px;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.search-input .icon-camera {
+    display: block;
+    width: 30px;
+    height: 28px;
+    position: absolute;
+    right: 135px;
+    top: 5px;
+    z-index: 2;
+    background: url("../../assets/images/icon_photo.png") no-repeat center;
+    cursor: pointer;
+}
+.search-right {
+    display: inline-block;
+    margin-left: 20px;
+}
+.button.button-white {
+    color: #ff5c00;
+    background-color: #fff;
+    border: 1px solid #ff5c00;
+}
+.page-search .button {
+    width: 130px;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px 0 0 2px;
+}
+.search-right .button {
+    margin-left: 10px;
+}
+/* //黑底导航 */
+.page-nav {
+    line-height: 48px;
+    background-color: #39414e;
+}
+.page-nav a {
+    margin-right: 50px;
+    font-size: 15px;
+    color: #fff;
+}
+.page-nav a.active {
+    font-size: 16px;
+    color: #ff5c00;
+    font-weight: bold;
+}
+/* //字典配置************************************************************************* */
+body.overflow {
+    overflow: hidden;
+}
+.page-form {
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+.page-form ul li {
+    margin-bottom: 18px;
+}
+.page-form ul li > label {
+    float: left;
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 30px;
+    width: 60px;
+    font-size: 12px;
+    color: #666;
+}
+.search-category {
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+    transition: 0.1s;
+}
+.search-category.open {
+    height: auto;
+}
+.search-category .btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding-right: 15px;
+    color: #666;
+    background: url("../../assets/images/searchList/arrow-down.png") no-repeat
+        right center;
+}
+.search-category.open .btn {
+    background: url("../../assets/images/searchList/arrow-up.png") no-repeat
+        right center;
+}
+.selected-category {
+    margin-bottom: 5px;
+}
+.selected-category > label {
+    float: left;
+    margin-top: 5px;
+    margin-right: 40px;
+    font-size: 12px;
+    color: #000;
+}
+.selected-category-box {
+    float: left;
+    width: 980px;
+    min-height: 36px;
+}
+.selected-category-box a {
+    float: left;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 110px;
+    height: 26px;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    color: #f08b2f;
+    border: 1px solid #f08b2f;
+    border-radius: 2px;
+}
+.selected-category-box a .service-list {
+    text-align: left;
+}
+.selected-category-box a .service-list.service-button {
+    padding-right: 15px;
+    text-align: right;
+}
+.selected-category-box a .service-list.service-button .button {
+    width: 40px;
+    line-height: 20px;
+    background-color: #f08b2f;
+}
+.selected-category-box a .service-list.service-button .button.button-white {
+    color: #aaa;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.selected-category-box a .service-list .checkbox {
+    margin-top: 3px;
+    vertical-align: top;
+}
+.selected-category-box a .service-list span {
+    display: inline-block;
+    width: 300px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #666;
+    vertical-align: top;
+    margin-left: 4px;
+}
+.selected-category-box a .service-list .disabled span {
+    color: #999;
+}
+.selected-category-box a .service-list .checkbox-box {
+    display: block;
+    cursor: pointer;
+}
+.selected-category-box a .service-list .checkbox-box:hover span {
+    color: #f08b2f;
+}
+.selected-category-box a.active {
+    color: #fff;
+    background-color: #f08b2f;
+    border-color: #f08b2f;
+}
+.selected-category-box a:hover {
+    border-bottom: none;
+}
+.selected-category-box a:hover .selected-service-box {
+    display: block;
+}
+.selected-category-box a:not(.active):hover span.text {
+    position: relative;
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    z-index: 20;
+}
+.selected-category-box a span.text {
+    display: block;
+    padding-left: 10px;
+    height: 24px;
+    text-align: left;
+    font-size: 12px;
+}
+.selected-category-box .icon-close {
+    position: absolute;
+    right: 3px;
+    top: 1px;
+    width: 9px;
+    height: 9px;
+    z-index: 11;
+}
+.selected-service-box {
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 23px;
+    padding: 10px;
+    border: 1px solid #f08b2f;
+    background-color: #fff;
+    z-index: 20;
+}
+.selected-service-box-in {
+    width: 360px;
+    height: 124px;
+    overflow: auto;
+}
+.category-show-box {
+    float: left;
+    width: 1000px;
+}
+.category-show-box a {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 5px;
+}
+.category-show-box a.active {
+    color: #ff5c00;
+}
+.category-show-box.select-show-category a {
+    display: inline-block;
+    width: 140px;
+}
+.category-show-box.select-show-category a:nth-child(6n) {
+    margin-right: 0px;
+}
+.category-show-box.select-show-year a {
+    display: inline-block;
+    width: 85px;
+}
+.category-show-box.select-show-year a:nth-child(8n) {
+    margin-right: 0px;
+}
+.no-result-top {
+}
+.no-result-top span {
+    display: inline-block;
+    padding-left: 5px;
+    height: 1.05em;
+    color: #333;
+    line-height: 1em;
+    border-left: 2px solid #f08b2f;
+    vertical-align: middle;
+}
+.no-result-top a {
+    display: inline-block;
+    margin-left: 15px;
+    padding-left: 25px;
+    line-height: 1.2em;
+    height: 18px;
+    color: #f08b2f;
+    vertical-align: middle;
+}
+.no-result-category .talk {
+    /* background: url(../images/icon-talk.png) no-repeat 0 center; */
+    background-size: 22px;
+}
+.no-result-category-box {
+    margin-top: 18px;
+    overflow: hidden;
+}
+.no-result-category-box a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 110px;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    color: #999;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+/* .checkbox */
+.selected-category-box a .service-list .checkbox {
+    margin-top: 3px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.checkbox.checked {
+    background-image: url("../../assets/images/searchList/icon-checked.png");
+    border-color: #ff5c00;
+    background-size: 90%;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    user-select: none;
+}
+.checkbox input[type="checkbox"] {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+/*search-content列表的内容*************************************************************/
+.search-top {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333333;
+    text-align: left;
+}
+.search-top i {
+    color: #ff5c00;
+}
+.page-content {
+    padding-bottom: 40px;
+}
+.page-content-left {
+    float: left;
+    width: 1030px;
+}
+.page-content-left .tips {
+    display: inline-block;
+    margin-top: 5px;
+    padding-left: 20px;
+    color: #ff5c00;
+    font-size: 12px;
+}
+.search-list {
+    /* border: 1px solid #ddd; */
+}
+.search-list > li {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+}
+.search-list > li .result-href {
+    float: left;
+    width: 820px;
+}
+.search-list > li > a:hover {
+    color: #555;
+}
+.page-content-left .brand-img {
+    float: left;
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+.brand-img img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+.brand-info {
+    padding: 20px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+.brand-info h2 {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+}
+.brand-info h2:hover {
+    color: #ff5c00;
+}
+.brand-info h2 .chi {
+    display: inline-block;
+    margin-left: 4px;
+    width: 22px;
+    height: 22px;
+    /* background: url(../images/chi.png) no-repeat center; */
+    vertical-align: middle;
+    background-size: cover;
+}
+.brand-info-in {
+}
+.brand-info-in ul {
+    display: inline-block;
+    width: 750px;
+    vertical-align: top;
+}
+.brand-info li {
+    float: left;
+    margin-bottom: 5px;
+    min-width: 240px;
+    margin-right: 20px;
+}
+.brand-info li label {
+    color: #666;
+}
+.brand-info li span {
+    margin-right: 30px;
+}
+.brand-info li span.process-name {
+    font-weight: bold;
+    color: #f08b2f;
+}
+.brand-info li span:last-of-type {
+    margin-right: 0px;
+}
+.brand-status {
+    float: left;
+    margin-top: 55px;
+    vertical-align: top;
+    position: relative;
+    z-index: 10;
+}
+.brand-status div {
+    margin-bottom: 15px;
+}
+.brand-status span,
+.brand-status a {
+    display: inline-block;
+    width: 42px;
+    line-height: 19px;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 10px;
+}
+.brand-status .status1 {
+    border: 1px solid #81cdef;
+    border-radius: 56px;
+    cursor: pointer;
+}
+.brand-status .status1:hover {
+    color: #81cdef;
+}
+.brand-status .status2 {
+    border: 1px solid #f08b2f;
+    border-radius: 2px;
+}
+/*商标交易侧边栏****************************/
+.page-content-right {
+    float: right;
+    padding-top: 54px;
+}
+.hot-brand-right {
+    width: 150px;
+    z-index: 3;
+    background-color: #fff;
+}
+.hot-brand-right h2 {
+    position: relative;
+    padding-left: 25px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666;
+    border: 1px solid #ddd;
+    background-size: 20px;
+    font-weight: bolder;
+    background: url("../../assets/images/searchList/arrow-down.png") no-repeat
+        10px center;
+}
+.hot-brand.hot-brand-right ul {
+    margin-bottom: 0px;
+    min-height: 200px;
+    font-size: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.hot-brand.hot-brand-right ul li {
+    margin: 0px;
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top: none;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+    font-size: 14px;
+}
+.hot-brand.hot-brand-right ul li .hot-brand-image {
+    float: left;
+    margin-right: 10px;
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+.hot-brand ul li .hot-brand-image img {
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: middle;
+}
+.hot-brand ul li .hot-brand-name {
+    font-size: 14px;
+    color: #333333;
+    width: 120px;
+    height: 2em;
+    line-height: 2em;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.hot-brand ul li .hot-brand-category {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+}
+.hot-brand ul li .hot-brand-price {
+    display: block;
+    font-size: 15px;
+    color: #cb1f2b;
+    line-height: 2em;
+    font-weight: bold;
+}
+.hot-brand ul li .button {
+    display: inline-block;
+    padding: 3px 8px;
+    width: 100%;
+    color: #ff5c00;
+    border: 1px solid #ff5c00;
+    background-color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    outline: none;
+}
+.hot-brand ul li .button:hover {
+    background-color: #ff5c00;
+    color: #fff;
+}
+</style>

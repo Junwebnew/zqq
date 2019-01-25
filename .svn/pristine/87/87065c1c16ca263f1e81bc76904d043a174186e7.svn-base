@@ -1,0 +1,134 @@
+<template>
+    <div>
+        <div class="foot_top">
+            <div class="w link_flag">
+                <ul>
+                    <li class="nav_us">
+                        <a target="_blank" href="/about/1.html">关于我们</a>
+                        <a target="_blank" href="/about/2.html">加入我们</a>
+                        <a target="_blank" href="/about/3.html">联系我们</a>
+                        <a target="_blank" href="/about/4.html">常见问题</a>
+                        <a target="_blank" href="/about/5.html">服务说明</a>
+                        <a target="_blank" href="/about/6.html">模板下载</a>
+                        <a target="_blank" href="/map">网站地图</a>
+                    </li>
+                    <li>
+                        <span>热门产品：</span>
+                        <a target="_blank" href='/brand'>商标注册</a>
+                        <a target="_blank" href='/patent'>专利申请</a>
+                        <a target="_blank" href='/copyright'>版权登记</a>
+                        <a target="_blank" href='/show/navigation_patent_law_01.html'>驳回复审</a>
+                        <a target="_blank" href='/show/navigation_trademark_law_03.html'>撤三答辩</a>
+                        <a target="_blank" href='/show/navigation_trademark_law_08.html'>异议复审</a>
+                        <a target="_blank" href='/show/navigation_patent_international_01.html'>国际专利PCT申请</a>
+                        <a target="_blank" href='/show/navigation_copyright_register_01.html'>软件著作权登记</a>
+                    </li>
+                    <li>
+                        <span>关于我们：</span>
+                        <a target="_blank" href="/about/1.html">关于我们</a>
+                        <a target="_blank" href="/about/2.html">加入我们</a>
+                        <a target="_blank" href="/about/3.html">联系我们</a>
+                    </li>
+                </ul>
+                <div class="code">
+                    <div class="useCode">
+                        <p class="white mb8">关注知千秋</p>
+                        <img src="../../assets/images/main/code_wx.png" alt="微信">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="foot_down">
+            <div class="w friendLink">
+                <nav class="mb5">
+                    <span>友情链接：</span>
+                    <a href="http://www.dgg.cn/" target="_blank">顶呱呱官网</a>
+                    <span> | </span>
+                    <a href="http://rzdk.juqiwang.net/" target="_blank">小顶金融</a>
+                    <span> | </span>
+                    <a href="http://www.zdding.com/" target="_blank">转丁丁</a>
+                    <span> | </span>
+                    <a href="http://www.xiaodingpj.com/" target="_blank">小顶票据</a>
+                    <span> | </span>
+                    <a href="http://www.dgg.net/" target="_blank">顶呱呱网</a>
+                    <span> | </span>
+                    <a href="http://www.cddgg.net/" target="_blank">成都顶呱呱</a>
+                    <span> | </span>
+                    <a href="http://jiazhuang.xiaodingwang.com/" target="_blank">小顶家装</a>
+                    <span> | </span>
+                    <a href="http://yt.dggcome.com/cd/kj/20170628/xdw?cq" target="_blank">会计代理</a>
+                    <span> | </span>
+                    <a href="http://yt.dggjqw.com/cd/gs/20170712/register" target="_blank">工商注册</a>
+                    <span> | </span>
+                    <a href="http://yt.dggdf.com/cd/zc/20180108/sbcs" target="_blank">商标注册</a>
+                </nav>
+                <span>Copyright 2018 北京顶峰 版权所有 | 京ICP备16023355号-2</span>
+            </div>
+        </div>
+    </div>
+</template>
+  <script>
+export default {
+    created() {},
+    components: {}
+    // layout: "default"
+};
+</script>
+<style scoped>
+* {
+    box-sizing: border-box;
+}
+.foot_top {
+    background: #2b2e33;
+}
+.foot_top a,
+.foot_top span {
+    color: #999999;
+    margin-right: 26px;
+    font-size: 12px;
+}
+.foot_top a:hover {
+    color: #fd7d22;
+}
+.link_flag {
+    padding-top: 30px;
+    padding-bottom: 1px;
+    position: relative;
+}
+.link_flag li {
+    margin-bottom: 30px;
+}
+
+.nav_us a {
+    color: #fff;
+    font-size: 14px;
+    margin-right: 32px;
+}
+.code {
+    position: absolute;
+    right: 0;
+    top: 30px;
+}
+.useCode {
+    text-align: center;
+}
+.useCode img {
+    width: 100px;
+    max-width: 100px;
+}
+/* //下面脚部 */
+.foot_down {
+    background: #24272b;
+}
+.friendLink {
+    padding: 12px 0;
+}
+.friendLink span,
+.friendLink a {
+    color: #999999;
+    font-size: 12px;
+}
+.friendLink a:hover {
+    color: #fd7d22;
+}
+</style>

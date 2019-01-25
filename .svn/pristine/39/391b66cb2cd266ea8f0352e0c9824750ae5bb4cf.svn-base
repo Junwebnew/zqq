@@ -1,0 +1,83 @@
+<template>
+    <div>
+        <mini/>
+        <div class="w">
+            <div class="breadcrumb">
+                <span>当前位置：</span>
+                <a href="/search/notice/index" class="">初审公告 &gt; </a>
+                <a href="/search/notice/index#1614">第1614期 &gt; </a>
+                <span class="breadcrumb-title col">初审公告详情</span>
+            </div>
+            <div class="page-detail ">
+                <div class="btns fr">
+                    <a href="/search/notice/notice-detail?id=7470405&amp;issue=1614&amp;down=1&amp;name=MARCO+POLO" class="button button-white">下载</a>
+                    <a href="/index/searchdetail?brand=6b53314f4e58527642555150503754727169664231673d3d" class="button">商标详情</a>
+                </div>
+                <h2 class="f20 mb10">商标名称：MARCO POLO</h2>
+
+                <div class="content text-center">
+                    <img src="https://tm-images.oss-cn-beijing.aliyuncs.com/png/3869e8aa/984690c7/bae70b5f/409e5f99/1614_2_ora.png" alt="">
+                </div>
+
+            </div>
+        </div>
+        <toTop :showNav="'1'" />
+    </div>
+</template>
+<script>
+import mini from "~/components/header/mini";
+import toTop from "~/components/toTop";
+
+export default {
+    layout: "empt",
+    created() {},
+    components: {
+        mini,
+        toTop
+    },
+    data() {
+        return {
+            navArr: ["商标", "专利", "企业"],
+            holderArr: [
+                "请输入商标名称、申请号、申请人等信息",
+                "请输入专利名称",
+                "请输入企业名称"
+            ],
+            keyword: "",
+            styleIdx: 0
+        };
+    },
+    methods: {
+        goList() {
+            this.$router.push("/search/result");
+        }
+    }
+};
+</script>
+<style scoped>
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button.button-white {
+    color: #ff5c00;
+    background-color: #fff;
+    border: 1px solid #ff5c00;
+}
+.page-detail .btns .button {
+    display: inline-block;
+    margin-left: 10px;
+    width: 80px;
+    text-align: center;
+    line-height: 30px;
+}
+.content > img {
+    max-width: 100%;
+    margin-top: 16px;
+}
+</style>

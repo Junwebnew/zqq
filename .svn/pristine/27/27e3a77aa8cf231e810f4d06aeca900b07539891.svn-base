@@ -1,0 +1,667 @@
+<template>
+    <div>
+        <mini/>
+        <div class="w">
+            <div class="breadcrumb">
+                <span>当前位置：</span>
+                <span class="breadcrumb-title">
+                    <a href="">初审公告</a>
+                </span>
+            </div>
+            <div class="page-form">
+                <ul>
+                    <li>
+                        <label>商标名称：</label> <input type="text" name="brandName" placeholder="请输入商标名称"></li>
+                    <li>
+                        <label class="radiobox-box">
+                            <label class="radiobox checked"><input type="radio" name="status" checked="checked" value="all"></label>
+                            <span>精确+近似</span>
+                        </label>
+                        <label class="radiobox-box">
+                            <label class="radiobox"><input type="radio" name="status" value="accurate"></label>
+                            <span>精确</span>
+                        </label>
+                        <label class="radiobox-box">
+                            <label class="radiobox"><input type="radio" name="status" value="similar"></label>
+                            <span>近似</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label>申请号：</label> <input type="text" name="dataId" placeholder="请输入申请号"></li>
+                    <li>
+                        <label>代理机构：</label>
+                        <div class="page-select-box"><input type="text" name="agency" placeholder="请输入代理机构">
+                            <div class="page-select-list scroll"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>申请人：</label>
+                        <div class="page-select-box"><input type="text" name="applicants" placeholder="请输入申请人">
+                            <div class="page-select-list scroll"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>公告期号：</label>
+                        <div class="page-select-box select-notice-issue"><input type="text" name="noticeDate" placeholder="近12期全部初审公告" readonly="readonly" value="">
+                            <div class="page-select-btn"></div>
+                            <div class="page-select-list scroll">
+                                <span>近12期全部初审公告</span>
+                                <span title="1614" data-name="1614" class="">1614 (2018-09-06)</span>
+                                <span title="1613" data-name="1613" class="">1613 (2018-08-27)</span>
+                                <span title="1612" data-name="1612" class="">1612 (2018-08-20)</span>
+                                <span title="1611" data-name="1611" class="">1611 (2018-08-13)</span>
+                                <span title="1610" data-name="1610" class="">1610 (2018-08-06)</span>
+                                <span title="1609" data-name="1609" class="">1609 (2018-07-27)</span>
+                                <span title="1608" data-name="1608" class="">1608 (2018-07-20)</span>
+                                <span title="1607" data-name="1607" class="">1607 (2018-07-13)</span>
+                                <span title="1606" data-name="1606" class="">1606 (2018-07-06)</span>
+                                <span title="1605" data-name="1605" class="">1605 (2018-06-27)</span>
+                                <span title="1604" data-name="1604" class="">1604 (2018-06-20)</span>
+                                <span title="1603" data-name="1603" class="">1603 (2018-06-13)</span>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+                <ul>
+                    <li class="search-category" :class="{'open': isOpen}">
+                        <a href="javascript:void(0)" class="btn" @click="isOpen = !isOpen">更多</a>
+                        <label>申请类别：</label>
+                        <div class="category-show-box select-show-category">
+                            <a href="javascript:void(0)" data-value="1" class="">01类 化学原料</a>
+                            <a href="javascript:void(0)" data-value="2" class="">02类 颜料油漆</a>
+                            <a href="javascript:void(0)" data-value="3" class="">03类 日化用品</a>
+                            <a href="javascript:void(0)" data-value="4" class="">04类 燃料油脂</a>
+                            <a href="javascript:void(0)" data-value="5" class="">05类 医药</a>
+                            <a href="javascript:void(0)" data-value="6" class="">06类 金属材料</a>
+                            <a href="javascript:void(0)" data-value="7" class="">07类 机械设备</a>
+                            <a href="javascript:void(0)" data-value="8" class="">08类 手工器械</a>
+                            <a href="javascript:void(0)" data-value="9" class="">09类 科学仪器</a>
+                            <a href="javascript:void(0)" data-value="10" class="">10类 医疗器械</a>
+                            <a href="javascript:void(0)" data-value="11" class="">11类 灯具空调</a>
+                            <a href="javascript:void(0)" data-value="12" class="">12类 运输工具</a>
+                            <a href="javascript:void(0)" data-value="13" class="">13类 军火烟火</a>
+                            <a href="javascript:void(0)" data-value="14" class="">14类 珠宝钟表</a>
+                            <a href="javascript:void(0)" data-value="15" class="">15类 乐器</a>
+                            <a href="javascript:void(0)" data-value="16" class="">16类 办公用品</a>
+                            <a href="javascript:void(0)" data-value="17" class="">17类 橡胶制品</a>
+                            <a href="javascript:void(0)" data-value="18" class="">18类 皮革皮具</a>
+                            <a href="javascript:void(0)" data-value="19" class="">19类 建筑材料</a>
+                            <a href="javascript:void(0)" data-value="20" class="">20类 家具</a>
+                            <a href="javascript:void(0)" data-value="21" class="">21类 厨房洁具</a>
+                            <a href="javascript:void(0)" data-value="22" class="">22类 绳网袋蓬</a>
+                            <a href="javascript:void(0)" data-value="23" class="">23类 纱线丝</a>
+                            <a href="javascript:void(0)" data-value="24" class="">24类 布料床单</a>
+                            <a href="javascript:void(0)" data-value="25" class="">25类 服装鞋帽</a>
+                            <a href="javascript:void(0)" data-value="26" class="">26类 钮扣拉链</a>
+                            <a href="javascript:void(0)" data-value="27" class="">27类 地毯席垫</a>
+                            <a href="javascript:void(0)" data-value="28" class="">28类 健身器材</a>
+                            <a href="javascript:void(0)" data-value="29" class="">29类 食品</a>
+                            <a href="javascript:void(0)" data-value="30" class="">30类 方便食品</a>
+                            <a href="javascript:void(0)" data-value="31" class="">31类 农林生鲜</a>
+                            <a href="javascript:void(0)" data-value="32" class="">32类 啤酒饮料</a>
+                            <a href="javascript:void(0)" data-value="33" class="">33类 酒</a>
+                            <a href="javascript:void(0)" data-value="34" class="">34类 烟草烟具</a>
+                            <a href="javascript:void(0)" data-value="35" class="">35类 广告销售</a>
+                            <a href="javascript:void(0)" data-value="36" class="">36类 金融物管</a>
+                            <a href="javascript:void(0)" data-value="37" class="">37类 建筑修理</a>
+                            <a href="javascript:void(0)" data-value="38" class="">38类 通讯服务</a>
+                            <a href="javascript:void(0)" data-value="39" class="">39类 运输贮藏</a>
+                            <a href="javascript:void(0)" data-value="40" class="">40类 材料加工</a>
+                            <a href="javascript:void(0)" data-value="41" class="">41类 教育娱乐</a>
+                            <a href="javascript:void(0)" data-value="42" class="">42类 科技服务</a>
+                            <a href="javascript:void(0)" data-value="43" class="">43类 餐饮住宿</a>
+                            <a href="javascript:void(0)" data-value="44" class="">44类 医疗园艺</a>
+                            <a href="javascript:void(0)" data-value="45" class="">45类 社会服务</a>
+                        </div>
+                        <div class="clear"></div>
+                    </li>
+                </ul>
+                <div class="search-btns">
+                    <!---->
+                    <!---->
+                    <a href="javascript:void(0)" class="button search">查询</a>
+                </div>
+            </div>
+            <nuxt/>
+        </div>
+        <toolBox/>
+        <toTop/>
+    </div>
+</template>
+<script>
+import mini from "~/components/header/mini";
+import toolBox from "~/components/toolBox";
+import toTop from "~/components/toTop.vue";
+
+export default {
+    head() {
+        return {
+            title: "知千秋|商标查询|商标注册|专利查询|专利申请|版权登记",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    data() {
+        return {
+            isOpen: 0
+        };
+    },
+    components: { toolBox, toTop, mini }
+};
+</script>
+<style scoped>
+/* //新增 */
+body.overflow {
+    overflow: hidden;
+}
+.page-form {
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+.page-form ul li {
+    margin-bottom: 18px;
+}
+.page-form ul li > label {
+    float: left;
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 30px;
+    width: 60px;
+    font-size: 12px;
+    color: #666;
+}
+.search-category {
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+    transition: 0.1s;
+}
+.search-category.open {
+    height: auto;
+}
+.search-category .btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding-right: 15px;
+    color: #666;
+    background: url("../assets/images/main/narrow-down.png") no-repeat right
+        center;
+}
+.search-category.open .btn {
+    background: url("../assets/images/main/narrow-up.png") no-repeat right
+        center;
+}
+.selected-category {
+    margin-bottom: 5px;
+}
+.selected-category > label {
+    float: left;
+    margin-top: 5px;
+    margin-right: 40px;
+    font-size: 12px;
+    color: #000;
+}
+.selected-category-box {
+    float: left;
+    width: 1100px;
+    min-height: 36px;
+}
+.selected-category-box a {
+    float: left;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 110px;
+    height: 26px;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    color: #f08b2f;
+    border: 1px solid #f08b2f;
+    border-radius: 2px;
+}
+.selected-category-box a .service-list {
+    text-align: left;
+}
+.selected-category-box a .service-list.service-button {
+    padding-right: 15px;
+    text-align: right;
+}
+.selected-category-box a .service-list.service-button .button {
+    width: 40px;
+    line-height: 20px;
+    background-color: #f08b2f;
+}
+.selected-category-box a .service-list.service-button .button.button-white {
+    color: #aaa;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.selected-category-box a .service-list .checkbox {
+    margin-top: 3px;
+    vertical-align: top;
+}
+.selected-category-box a .service-list span {
+    display: inline-block;
+    width: 300px;
+    font-size: 12px;
+    line-height: 1.5em;
+    color: #666;
+    vertical-align: top;
+}
+.selected-category-box a .service-list .disabled span {
+    color: #999;
+}
+.selected-category-box a .service-list .checkbox-box {
+    display: block;
+}
+.selected-category-box a.active {
+    color: #fff;
+    background-color: #f08b2f;
+    border-color: #f08b2f;
+}
+.selected-category-box a:hover {
+    border-bottom: none;
+}
+.selected-category-box a:hover .selected-service-box {
+    display: block;
+}
+.selected-category-box a:not(.active):hover span.text {
+    position: relative;
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+}
+.selected-category-box a span.text {
+    display: block;
+    padding-left: 10px;
+    height: 24px;
+    text-align: left;
+    font-size: 12px;
+}
+.selected-category-box .icon-close {
+    position: absolute;
+    right: 3px;
+    top: 1px;
+    width: 9px;
+    height: 9px;
+    z-index: 11;
+}
+.selected-service-box {
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 23px;
+    padding: 10px;
+    border: 1px solid #f08b2f;
+    background-color: #fff;
+    z-index: 9;
+}
+.selected-service-box-in {
+    width: 360px;
+    height: 124px;
+    overflow: auto;
+}
+.category-show-box {
+    float: left;
+    width: 1000px;
+}
+.category-show-box a {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 5px;
+}
+.category-show-box a.active {
+    color: #ff5c00;
+}
+.category-show-box.select-show-category a {
+    display: inline-block;
+    width: 140px;
+}
+.category-show-box.select-show-category a:nth-child(6n) {
+    margin-right: 0px;
+}
+.category-show-box.select-show-year a {
+    display: inline-block;
+    width: 85px;
+}
+.category-show-box.select-show-year a:nth-child(8n) {
+    margin-right: 0px;
+}
+.no-result-top {
+}
+.no-result-top span {
+    display: inline-block;
+    padding-left: 5px;
+    height: 1.05em;
+    color: #333;
+    line-height: 1em;
+    border-left: 2px solid #f08b2f;
+    vertical-align: middle;
+}
+.no-result-top a {
+    display: inline-block;
+    margin-left: 15px;
+    padding-left: 25px;
+    line-height: 1.2em;
+    height: 18px;
+    color: #f08b2f;
+    vertical-align: middle;
+}
+.no-result-category .talk {
+    /* background: url(../images/icon-talk.png) no-repeat 0 center; */
+    background-size: 22px;
+}
+.no-result-category-box {
+    margin-top: 18px;
+    overflow: hidden;
+}
+.no-result-category-box a {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: 110px;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    color: #999;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+/*search-content*/
+
+/*å•†æ ‡äº¤æ˜“*/
+.page-content-right {
+    float: right;
+    padding-top: 54px;
+}
+.brand-trade {
+    width: 140px;
+    border: 1px solid #ddd;
+}
+.brand-trade h2 {
+    padding-left: 20px;
+    line-height: 40px;
+}
+.brand-trade li {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+.brand-trade li h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.brand-trade li p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #666;
+}
+.brand-trade li strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #d0021b;
+}
+.brand-trade li .button {
+    width: 100%;
+    line-height: 20px;
+    border: 1px solid #ff5c00;
+    border-radius: 2px;
+    text-align: center;
+}
+.brand-trade .brand-img {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 108px;
+    overflow: hidden;
+}
+.no-search-data {
+    padding: 120px 0;
+    font-size: 18px;
+    text-align: center;
+}
+.no-search-data img {
+    width: 150px;
+    vertical-align: middle;
+}
+.no-search-data .no-search-tips {
+    display: inline-block;
+    margin-left: 10px;
+    width: 400px;
+    font-size: 15px;
+    vertical-align: middle;
+    text-align: left;
+    color: #bbb;
+}
+.no-search-data h2 {
+    margin-bottom: 15px;
+    color: #f08b2f;
+    font-size: 18px;
+}
+.no-search-data .no-search-tips a {
+    color: #f08b2f;
+    text-decoration: underline;
+}
+.page-form ul li.list {
+    margin-bottom: 0;
+}
+.search-help {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+}
+.search-help .tips {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+}
+.search-help .tips .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #fff;
+    cursor: pointer;
+}
+.search-help .tips a.know {
+    position: absolute;
+    width: 132px;
+    height: 60px;
+}
+.search-help .tips.tips1 {
+    top: 62px;
+    margin-left: 280px;
+}
+.search-help .tips.tips1 a.know {
+    top: 320px;
+    left: 123px;
+}
+.search-help .tips.tips2 {
+    top: 222px;
+    margin-left: -543px;
+}
+.search-help .tips.tips2 a.know {
+    top: 351px;
+    left: 229px;
+}
+.search-help .tips.tips3 {
+    top: 221px;
+    margin-left: -704px;
+}
+.search-help .tips.tips3 a.know {
+    top: 201px;
+    left: 24px;
+}
+.search-help .tips.tips4 {
+    top: 61px;
+    margin-left: 250px;
+}
+.search-help .tips.tips4 a.know {
+    top: 321px;
+    left: 76px;
+}
+/* //***************************************** */
+.breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.breadcrumb-title,
+.breadcrumb-title a {
+    color: #ff7200;
+}
+.page-form {
+    padding-bottom: 5px;
+}
+
+.page-form ul li:not(.search-category) {
+    float: left;
+    margin-right: 40px;
+    margin-bottom: 10px;
+}
+.page-form ul li > label {
+    margin-top: 5px;
+    margin-right: 5px;
+    width: auto;
+    font-size: 14px;
+    color: #333;
+}
+.page-form input[type="text"] {
+    padding-left: 5px;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #dddddd;
+}
+.page-form .select-notice-issue {
+    background-color: #ffffff;
+}
+.page-form .select-notice-issue input[type="text"] {
+    position: relative;
+    padding-right: 30px;
+    z-index: 1;
+    background-color: transparent;
+}
+.page-form ul li .radiobox-box {
+    width: auto;
+}
+.page-form .radiobox-box {
+    margin-right: 15px;
+}
+.search-btns {
+    padding: 10px 0;
+    text-align: right;
+    border-top: 1px solid #e2e3e8;
+}
+.search-btns .search-num {
+    float: left;
+    margin-top: 5px;
+}
+.search-btns .search-num i {
+    color: #ff7200;
+}
+.search-btns .button {
+    width: 80px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background-color: #ff7200;
+}
+.search-category {
+    height: 25px;
+}
+.category-show-box {
+    padding-top: 5px;
+}
+.search-category .btn {
+    top: 5px;
+}
+.page-detail h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+.page-detail .btns {
+    float: right;
+}
+.page-detail .btns .button {
+    display: inline-block;
+    margin-left: 10px;
+    width: 80px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.search-btns .button-white {
+    margin-right: 15px;
+}
+.page-detail .content {
+    text-align: center;
+}
+.page-detail .content img {
+    margin-top: 20px;
+}
+.page-detail .content span {
+    display: inline-block;
+    margin-top: 100px;
+    font-size: 20px;
+}
+.page-select-box {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.page-select-btn {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    width: 30px;
+    height: 22px;
+    border-left: 1px solid #ddd;
+    background: url("../assets/images/main/narrow-down.png") no-repeat center;
+}
+.page-select-list {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 9;
+}
+.page-select-list span {
+    display: block;
+    padding-left: 5px;
+    height: 2.4em;
+    line-height: 2.4em;
+    font-size: 13px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.page-select-list span.active {
+    color: #fff;
+    background-color: #ff7200;
+}
+.page-select-list span:hover {
+    color: #fff;
+    background-color: #ff7200;
+}
+</style>
+

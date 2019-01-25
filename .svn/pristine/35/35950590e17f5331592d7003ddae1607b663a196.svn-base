@@ -1,0 +1,298 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+
+const _5ab22108 = () => import('..\\pages\\show.vue' /* webpackChunkName: "pages_show" */).then(m => m.default || m)
+const _547de07d = () => import('..\\pages\\question\\index.vue' /* webpackChunkName: "pages_question_index" */).then(m => m.default || m)
+const _286f1f1a = () => import('..\\pages\\patentSearch\\index.vue' /* webpackChunkName: "pages_patentSearch_index" */).then(m => m.default || m)
+const _1b38c3e5 = () => import('..\\pages\\brandmanage\\index.vue' /* webpackChunkName: "pages_brandmanage_index" */).then(m => m.default || m)
+const _56f7f2ac = () => import('..\\pages\\copyright\\index.vue' /* webpackChunkName: "pages_copyright_index" */).then(m => m.default || m)
+const _a180000a = () => import('..\\pages\\patent\\index.vue' /* webpackChunkName: "pages_patent_index" */).then(m => m.default || m)
+const _4273e26a = () => import('..\\pages\\brand\\index.vue' /* webpackChunkName: "pages_brand_index" */).then(m => m.default || m)
+const _7e2bce89 = () => import('..\\pages\\404.vue' /* webpackChunkName: "pages_404" */).then(m => m.default || m)
+const _687a0224 = () => import('..\\pages\\center\\index.vue' /* webpackChunkName: "pages_center_index" */).then(m => m.default || m)
+const _fd5d2020 = () => import('..\\pages\\news\\index.vue' /* webpackChunkName: "pages_news_index" */).then(m => m.default || m)
+const _fce0d9c2 = () => import('..\\pages\\classify\\index.vue' /* webpackChunkName: "pages_classify_index" */).then(m => m.default || m)
+const _3853948b = () => import('..\\pages\\notice\\index.vue' /* webpackChunkName: "pages_notice_index" */).then(m => m.default || m)
+const _2598ad80 = () => import('..\\pages\\patentSearch\\detail.vue' /* webpackChunkName: "pages_patentSearch_detail" */).then(m => m.default || m)
+const _307b0abc = () => import('..\\pages\\question\\show.vue' /* webpackChunkName: "pages_question_show" */).then(m => m.default || m)
+const _4033ac16 = () => import('..\\pages\\notice\\list.vue' /* webpackChunkName: "pages_notice_list" */).then(m => m.default || m)
+const _6cc40d04 = () => import('..\\pages\\search\\result.vue' /* webpackChunkName: "pages_search_result" */).then(m => m.default || m)
+const _e3647e84 = () => import('..\\pages\\search\\searchPage.vue' /* webpackChunkName: "pages_search_searchPage" */).then(m => m.default || m)
+const _499410d4 = () => import('..\\pages\\brandmanage\\addmanagementcompany.vue' /* webpackChunkName: "pages_brandmanage_addmanagementcompany" */).then(m => m.default || m)
+const _6840efc2 = () => import('..\\pages\\center\\flow.vue' /* webpackChunkName: "pages_center_flow" */).then(m => m.default || m)
+const _bc55baba = () => import('..\\pages\\center\\message.vue' /* webpackChunkName: "pages_center_message" */).then(m => m.default || m)
+const _24aeb94e = () => import('..\\pages\\order\\pay.vue' /* webpackChunkName: "pages_order_pay" */).then(m => m.default || m)
+const _51152338 = () => import('..\\pages\\search\\detail.vue' /* webpackChunkName: "pages_search_detail" */).then(m => m.default || m)
+const _098029c9 = () => import('..\\pages\\center\\account.vue' /* webpackChunkName: "pages_center_account" */).then(m => m.default || m)
+const _7e5c14bf = () => import('..\\pages\\order\\order.vue' /* webpackChunkName: "pages_order_order" */).then(m => m.default || m)
+const _5b6a4bfe = () => import('..\\pages\\order\\ordinary.vue' /* webpackChunkName: "pages_order_ordinary" */).then(m => m.default || m)
+const _62d23728 = () => import('..\\pages\\center\\setting.vue' /* webpackChunkName: "pages_center_setting" */).then(m => m.default || m)
+const _4a50a75b = () => import('..\\pages\\brandmanage\\list.vue' /* webpackChunkName: "pages_brandmanage_list" */).then(m => m.default || m)
+const _457406ed = () => import('..\\pages\\order\\orderinfo.vue' /* webpackChunkName: "pages_order_orderinfo" */).then(m => m.default || m)
+const _6d55b0cf = () => import('..\\pages\\news\\show.vue' /* webpackChunkName: "pages_news_show" */).then(m => m.default || m)
+const _5f318dae = () => import('..\\pages\\classify\\all.vue' /* webpackChunkName: "pages_classify_all" */).then(m => m.default || m)
+const _6a720c68 = () => import('..\\pages\\notice\\detail.vue' /* webpackChunkName: "pages_notice_detail" */).then(m => m.default || m)
+const _f2bb6f04 = () => import('..\\pages\\passport\\forget.vue' /* webpackChunkName: "pages_passport_forget" */).then(m => m.default || m)
+const _b06ae018 = () => import('..\\pages\\passport\\register.vue' /* webpackChunkName: "pages_passport_register" */).then(m => m.default || m)
+const _0f95b30d = () => import('..\\pages\\order\\ownermsg.vue' /* webpackChunkName: "pages_order_ownermsg" */).then(m => m.default || m)
+const _36e4812c = () => import('..\\pages\\center\\order.vue' /* webpackChunkName: "pages_center_order" */).then(m => m.default || m)
+const _3bd79fe8 = () => import('..\\pages\\passport\\login.vue' /* webpackChunkName: "pages_passport_login" */).then(m => m.default || m)
+const _73aff23a = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
+const _e4c0c5d2 = () => import('..\\pages\\404.vue' /* webpackChunkName: "" */).then(m => m.default || m)
+
+
+
+if (process.client) {
+  window.history.scrollRestoration = 'manual'
+}
+const scrollBehavior = function (to, from, savedPosition) {
+  // if the returned position is falsy or an empty object,
+  // will retain current scroll position.
+  let position = false
+
+  // if no children detected
+  if (to.matched.length < 2) {
+    // scroll to the top of the page
+    position = { x: 0, y: 0 }
+  } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+    // if one of the children has scrollToTop option set to true
+    position = { x: 0, y: 0 }
+  }
+
+  // savedPosition is only available for popstate navigations (back button)
+  if (savedPosition) {
+    position = savedPosition
+  }
+
+  return new Promise(resolve => {
+    // wait for the out transition to complete (if necessary)
+    window.$nuxt.$once('triggerScroll', () => {
+      // coords will be used if no selector is provided,
+      // or if the selector didn't match any element.
+      if (to.hash) {
+        let hash = to.hash
+        // CSS.escape() is not supported with IE and Edge.
+        if (typeof window.CSS !== 'undefined' && typeof window.CSS.escape !== 'undefined') {
+          hash = '#' + window.CSS.escape(hash.substr(1))
+        }
+        try {
+          if (document.querySelector(hash)) {
+            // scroll to anchor by returning the selector
+            position = { selector: hash }
+          }
+        } catch (e) {
+          console.warn('Failed to save scroll position. Please add CSS.escape() polyfill (https://github.com/mathiasbynens/CSS.escape).')
+        }
+      }
+      resolve(position)
+    })
+  })
+}
+
+
+export function createRouter () {
+  return new Router({
+    mode: 'history',
+    base: '/',
+    linkActiveClass: 'nuxt-link-active',
+    linkExactActiveClass: 'nuxt-link-exact-active',
+    scrollBehavior,
+    routes: [
+		{
+			path: "/show",
+			component: _5ab22108,
+			name: "show"
+		},
+		{
+			path: "/question",
+			component: _547de07d,
+			name: "question"
+		},
+		{
+			path: "/patentSearch",
+			component: _286f1f1a,
+			name: "patentSearch"
+		},
+		{
+			path: "/brandmanage",
+			component: _1b38c3e5,
+			name: "brandmanage"
+		},
+		{
+			path: "/copyright",
+			component: _56f7f2ac,
+			name: "copyright"
+		},
+		{
+			path: "/patent",
+			component: _a180000a,
+			name: "patent"
+		},
+		{
+			path: "/brand",
+			component: _4273e26a,
+			name: "brand"
+		},
+		{
+			path: "/404",
+			component: _7e2bce89,
+			name: "404"
+		},
+		{
+			path: "/center",
+			component: _687a0224,
+			name: "center"
+		},
+		{
+			path: "/news",
+			component: _fd5d2020,
+			name: "news"
+		},
+		{
+			path: "/classify",
+			component: _fce0d9c2,
+			name: "classify"
+		},
+		{
+			path: "/notice",
+			component: _3853948b,
+			name: "notice"
+		},
+		{
+			path: "/patentSearch/detail",
+			component: _2598ad80,
+			name: "patentSearch-detail"
+		},
+		{
+			path: "/question/show",
+			component: _307b0abc,
+			name: "question-show"
+		},
+		{
+			path: "/notice/list",
+			component: _4033ac16,
+			name: "notice-list"
+		},
+		{
+			path: "/search/result",
+			component: _6cc40d04,
+			name: "search-result"
+		},
+		{
+			path: "/search/searchPage",
+			component: _e3647e84,
+			name: "search-searchPage"
+		},
+		{
+			path: "/brandmanage/addmanagementcompany",
+			component: _499410d4,
+			name: "brandmanage-addmanagementcompany"
+		},
+		{
+			path: "/center/flow",
+			component: _6840efc2,
+			name: "center-flow"
+		},
+		{
+			path: "/center/message",
+			component: _bc55baba,
+			name: "center-message"
+		},
+		{
+			path: "/order/pay",
+			component: _24aeb94e,
+			name: "order-pay"
+		},
+		{
+			path: "/search/detail",
+			component: _51152338,
+			name: "search-detail"
+		},
+		{
+			path: "/center/account",
+			component: _098029c9,
+			name: "center-account"
+		},
+		{
+			path: "/order/order",
+			component: _7e5c14bf,
+			name: "order-order"
+		},
+		{
+			path: "/order/ordinary",
+			component: _5b6a4bfe,
+			name: "order-ordinary"
+		},
+		{
+			path: "/center/setting",
+			component: _62d23728,
+			name: "center-setting"
+		},
+		{
+			path: "/brandmanage/list",
+			component: _4a50a75b,
+			name: "brandmanage-list"
+		},
+		{
+			path: "/order/orderinfo",
+			component: _457406ed,
+			name: "order-orderinfo"
+		},
+		{
+			path: "/news/show",
+			component: _6d55b0cf,
+			name: "news-show"
+		},
+		{
+			path: "/classify/all",
+			component: _5f318dae,
+			name: "classify-all"
+		},
+		{
+			path: "/notice/detail",
+			component: _6a720c68,
+			name: "notice-detail"
+		},
+		{
+			path: "/passport/forget",
+			component: _f2bb6f04,
+			name: "passport-forget"
+		},
+		{
+			path: "/passport/register",
+			component: _b06ae018,
+			name: "passport-register"
+		},
+		{
+			path: "/order/ownermsg",
+			component: _0f95b30d,
+			name: "order-ownermsg"
+		},
+		{
+			path: "/center/order",
+			component: _36e4812c,
+			name: "center-order"
+		},
+		{
+			path: "/passport/login",
+			component: _3bd79fe8,
+			name: "passport-login"
+		},
+		{
+			path: "/",
+			component: _73aff23a,
+			name: "index"
+		},
+		{
+			path: "*",
+			component: _e4c0c5d2,
+			name: "custom"
+		}
+    ],
+    
+    
+    fallback: false
+  })
+}

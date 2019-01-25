@@ -1,0 +1,1925 @@
+<template>
+    <div class="order">
+       <ol class="status">
+           <li class="atthis">1.填写商标注册信息-快速注册</li>
+           <li>2.确认支付订单</li>
+       </ol>
+
+       <div class="content">
+           <div class="title"><span>申请主体信息</span></div>
+
+           <dl>
+               <dt>申请主体类型</dt>
+               <dd><a class="radio" :class="{'atthis': applyType == 1}" @click="tabFn" data-type="1" href="javascript:;">企业(大陆)</a> <a class="radio" @click="tabFn" :class="{'atthis': applyType == 0}" data-type="0" href="javascript:;">个体工商户(大陆)</a></dd>
+           </dl>
+           <dl>
+               <dt>申请主体身份证明</dt>
+               <dd>
+                    <button @click="isTemp = true">选择模板</button>
+                    <ol>
+                        <li class="upload">
+                            <p v-if="applyType == 1">请上传营业执照<br>复印件盖章</p>
+                            <p v-if="applyType == 0">请上传营业执照<br>复印件签字</p><img width="120" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!applyZt.businessLicenceFile">
+                            <img width="120" height="94" :src="fsHost+applyZt.businessLicenceFile" alt="身份证" v-if="applyZt.businessLicenceFile">
+                            <button  @click="uploadAll('businessLicenceFile')">上传图片</button>
+                            <input ref="businessLicenceFile" type="file" accept="image/jpeg,.jpg,application/pdf,.pdf">
+                        </li>
+
+                        <li>
+                            <b class="sl"></b>
+                            <img src="../../assets/images/order/temp_yezz.jpg" alt="示例图片">
+                            <a v-if="templateUrl" target="_blank" :href="templateUrl[1].fileUrl" class="fd">放大</a>
+                        </li>
+
+                        <li class="upload" v-if="applyType == 0">
+                            <p>请上传身份证<br>正反面复印件签字</p>
+                            <img width="120" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!applyZt.applicantCardFile">
+                            <img width="120" height="94" :src="fsHost+applyZt.applicantCardFile" alt="身份证" v-if="applyZt.applicantCardFile">
+                            <button  @click="uploadAll('applicantCardFile')">上传图片</button>
+                            <input ref="applicantCardFile" type="file" accept="image/jpeg,.jpg,application/pdf,.pdf">
+                        </li>
+
+                        <li v-if="applyType == 0">
+                            <b class="sl"></b>
+                            <img src="../../assets/images/order/ex-file-sfz.jpg" alt="示例图片" >
+                            <a v-if="templateUrl" target="_blank" :href="templateUrl[0].fileUrl" class="fd">放大</a>
+                        </li>
+                    </ol>
+                    <div class="tips">请按照要求上传扫描件，jpg格式、小于5M</div>
+               </dd>
+           </dl>
+
+           <dl>
+               <dt>邮政编码</dt>
+               <dd><input type="text" v-validate="'required|postcode'" name="cfcode"  v-model="applyZt.postalcode" maxlength="6" placeholder="请输入邮政编码"></dd>
+           </dl>
+           <dl v-if="applyType == 0">
+               <dt>身份证号</dt>
+               <dd><input type="text" v-validate="'required|idcard'" name="idcard"  v-model="applyZt.applicantCardNo" maxlength="18" placeholder="请输入身份证号"></dd>
+           </dl>
+           <dl>
+               <dt>联系人及联系方式</dt>
+               <dd><input class="w140" v-model="applyZt.contactName" type="text" maxlength="6" placeholder="请输入联系人"><input v-model="applyZt.contactPhone" v-validate="'required|phone'" name="cfcontactTel" class="w320" type="text" placeholder="请输入联系方式" maxlength="11"></dd>
+           </dl>
+           <dl>
+               <dt>联系邮箱</dt>
+               <dd><input type="text" v-model="applyZt.contactEmail" v-validate="'required|email'" name="cfcontactMail" maxlength="30" placeholder="请输入联系邮箱"></dd>
+           </dl>
+
+           <div class="auto">
+               <h2>自动识别</h2>
+               <p>请上传清晰的身份证图片，系统识别后请再次核对信息，若识别有误请修改</p>
+               <ul>
+                   <li>
+                       <p>申请主体</p>
+                       <input type="text" v-model="applyZt.applicantName"  maxlength="30" placeholder="请输入申请主体">
+                   </li>
+                   <li>
+                       <p>证件地址</p>
+                       <input type="text" v-model="applyZt.businessLicenceAddress"  maxlength="30" placeholder="请输入证件地址">
+                       <span>若不含省、市（县）请补足，以免不予受理</span>
+                   </li>
+                   <li>
+                       <p>社会代码</p>
+                       <input type="text" v-model="applyZt.businessLicenceNo"  maxlength="30" placeholder="请输入社会代码">
+                   </li>
+               </ul>
+               <div class="note">主体信息将以主体名称存为模板，可在<a href="/center/template">模板管理</a>修改</div>
+           </div>
+            
+            <div class="title"><span>申请商标信息</span></div>
+            
+            <dl>
+               <dt>商标名称</dt>
+               <dd><input class="sbname" v-model="name" type="text" maxlength="30" placeholder="请输入商标名称"><button @click="isTest = true">智能评测</button>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">商标名称即注册商标的代用词，包含注册商标的文字、图形、<br>字母、数字等要素、商标局会对商标的要素分开审查。<a  @click="isTian2=true" href="javascript:;">怎么填？</a>
+                </span>
+               </dd>
+            </dl>
+
+            <dl>
+               <dt>商标说明</dt>
+               <dd><textarea name="" v-model="explain" id="" cols="30" rows="10"></textarea>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">商标说明即对注册商标的含义说明。<a @click="isTian1=true" href="javascript:;">怎么填？</a>
+                </span>
+               </dd>
+            </dl>
+            <div class="mark_main" v-show="isTian1">
+                <!--商标说明怎么填-->
+                <h3 class="mark_til"><i class="iconfont" @click="isTian1=false">&#xe7fc;</i>怎么填</h3>
+                <div class="mark_cont2 tleft font14">
+                    <ul>
+                        <li><strong class="font16 mr20">含有汉字的</strong><span>填写字体</span></li>
+                        <li><strong class="font16 mr20">含有拼音的</strong><span>填写说明拼音的中文</span></li>
+                        <li><strong class="font16 mr20">含有英文的</strong><span>填写英文的中文含义</span></li>
+                        <li><strong class="font16 mr20">含有图形的</strong><span>填写图形设计要素及含义</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mark_main branName" v-show="isTian2">
+                <!--商标说明怎么填-->
+                <h3 class="mark_til"><i class="iconfont" @click="isTian2=false">&#xe7fc;</i>怎么填</h3>
+                <div class="mark_cont2 tleft font14">
+                    <ul>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">纯文字商标</strong></p>
+                           <p class="mt5">填写商标中含有的文字，中文英文（或拼音）以“+”隔开，注意字母大小写必须与商标图样一致</p>
+                           <div class="clearfix mt20 center">
+                               <div class="left">
+                               <img src="../../assets/images/order/exp1.jpg">
+                                   <p>易名中国</p>
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp2.jpg">
+                                   <p>商标注册网+www.tm.cn</p>
+                               </div>
+                               </div>
+                       </li>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">纯图标商标</strong></p>
+                           <p class="mt5">仅由图形组成，不包含文字的图标，统一写成“图形”</p>
+                           <div class="clearfix mt20 center">
+                               <div class="left">
+                                   <img src="../../assets/images/order/exp3.jpg">
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp4.jpg">
+                               </div>
+                           </div>
+                       </li>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">图文组合商标</strong></p>
+                           <p class="mt5">填写商标中含有的文字，中文英文（或拼音）以“+”隔开，并加上“图形”</p>
+                           <div class="clearfix center mt20">
+                               <div class="left">
+                                   <img src="../../assets/images/order/exp5.jpg">
+                                   <p>易名中国+NME+图形</p>
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp6.jpg">
+                                   <p>WATCH+图形</p>
+                               </div>
+                           </div>
+                       </li>
+                   </ul>
+                </div>
+            </div>
+
+            <dl class="tuyang">
+               <dt>商标图样</dt>
+               <dd><input type="radio" name="ty" id="hb" @click="autoType=1" checked="checked"><label for="hb" @click="autoType=1">黑白</label> <input @click="autoType=2" name="ty" type="radio" id="zs"><label for="zs" @click="autoType=2">着色</label>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">注册着色商标，注册后只能使用着色图样；注册黑白商标，注册后不限颜色使用。</span> <br>
+                <div class="tu">
+                    <p v-if="autoType == 1">请上传或生成黑白图样</p>
+                    <p v-if="autoType == 2">请上传着色图样</p>
+                    <img v-if="!createdRes && !uploadRes" width="134" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片">
+                    <img v-if="createdRes" height="94" width="134" class="photo createbrandpic" :src="createdRes.fsHost+createdRes.fsPath">
+                    <img v-if="uploadRes" height="94" width="134" class="photo createbrandpic" :src="uploadRes.fsHost+uploadRes.fsPath">
+                    <button class="zn" v-if="autoType == 1" @click="createdImg">智能生成</button><button @click="upload">上传图片</button>
+                    <input ref="uploadImg" type="file" accept="image/jpeg,image/x-png">
+                </div>
+                 <span class="wh"><img src="../../assets/images/order/icon_tx.png" alt="">像素介于“400*400-150*1500”，通过扫描获得商标图样的，应<br>按24位彩色、RGB格式、300dpi分辨率扫描，jpg格式，小于10M</span>
+               </dd>
+            </dl>
+
+            <dl class="tuyang">
+               <dt>上传委托书</dt>
+               <dd>
+                <div class="tu">
+                    <p>请上传委托书</p>
+                    <img width="134" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!uploadFile">
+                    <img width="134" height="94" :src="uploadFile.fsHost+uploadFile.fsPath" alt="上传图片" v-if="uploadFile">
+                    
+                    <button class="zn" @click="goDown">下载委托书</button><button @click="uploadAll('proxyFile')">上传图片</button>
+                    <input ref="proxyFile" type="file" accept="image/jpeg,.jpg">
+                </div>
+                <div class="sltu">
+                    <b class="sl"></b>
+                    <img src="../../assets/images/order/temp_wts.jpg" alt="示例图片">
+                    <a v-if="templateUrl" target="_blank" :href="templateUrl[2].fileUrl" class="fd">放大</a>
+                </div>
+                 <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">委托书已自动生成，您只需要下载后仔细核对后打印。企业<br>
+盖章（个体工商户签字）后扫描彩色件上传。 <b>（注意：部分<br>
+企业的营业执照地址不含省份，导致自动生成的委托书中<br>
+“委托人地址”缺少省份信息，请下载委托书后补全省份信<br>
+息再打印，否则商标局将不予审核通过）</b><br>
+                <span class="wh"><img src="../../assets/images/order/icon_tx.png" alt="">JPG格式，文件小于10M</span>
+                </span>
+               </dd>
+            </dl>
+
+
+            <div class="title"><span>商标信息</span></div>
+            
+            <dl>
+               <dt>选择商标类别</dt>
+               <dd><a class="radio" @click="brandType = 0" :class="{'atthis': brandType == 0}"  href="javascript:;">智能推荐</a> <a class="radio" :class="{'atthis': brandType == 1}" @click="brandType = 1" href="javascript:;">自助选择</a></dd>
+           </dl>
+           <dl v-show="brandType == 0">
+               <dt>选择所在领域</dt>
+               <dd><div class="c-row-content">
+                        <select class="znfirst" @change="changeIndex">
+                            <option value="">请选择</option>
+                            <option v-if="doMain" v-for="(item,index) in doMain" :selected="doMainIndex === index" :key="item.id" :value="index">{{item.name}}</option>
+                        </select>
+                        <select class="znsecond" @change="getRecom" v-if="doMain[doMainIndex]">
+                            <option value="0">请选择</option>
+                            <option v-for="(item) in doMain[doMainIndex].sonArr" :selected="doMainchildIndex == item.id" :key="item.id" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div></dd>
+           </dl>
+
+            <div class="brandInfo-wrap">
+               <!-- start 智能推荐 -->
+                <div class="section-recommend" id="section-recommend" v-if="brandType == 0">
+                    <h3 class="section-header">
+                        <span class="s1">需要保护的商品/服务项目</span>
+                    </h3>
+                    <div class="section-bodyer">
+
+                        <div class="article" v-for="(item, index) in selectList" :key="item.id" data-cgid="7956" data-cgnum="29" data-cgname="食品">
+                            <h4 class="article-header clearfix">
+                                <div class="header-left">
+                                    <span class="col-1">第
+                                        <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+
+                                    <a class="col-3" onclick="var left = (window.screen.width-10-800)/2; window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549')" style="cursor: pointer;">
+                                        <i class="iconfont icon-xiaoxi"></i>咨询</a>
+                                </div>
+                                <div class="header-right">
+                                    <span class="header-right-secNum">已选择
+                                        <i>{{item.sonArr.length}}</i>项</span>
+                                    <span class="col-1 price">￥
+                                        <i v-if="item.sonArr.length<=10">300</i>
+                                        <i v-if="item.sonArr.length>10">{{item.sonArr.length*30}}</i>
+                                    </span>
+                                    <a class="col-2 delete" href="javascript:;">
+                                        <i @click="deleRecom(index)" class="iconfont icon-shanchu">&#xe610;</i>
+                                    </a>
+                                </div>
+                            </h4>
+                            <div class="article-bodyer clearfix">
+                                <ul class="list-box clearfix">
+                                    <li v-for="(itemChild, childIndex) in item.sonArr" :key="itemChild.id" class="list choosecg">
+                                        <span class="text">{{itemChild.number}}类-{{itemChild.name}}</span>
+                                        <a class="close" @click="deleThreeType(index, childIndex, itemChild, item)" href="javascript:;" title="关闭">×</a>
+                                    </li>
+                                </ul>
+                                <div class="add-group" @click="addSamllType(item.number, index)">
+                                    <a class="btn" href="javascript:;">
+                                        <i class="iconfont icon-jiahao" v-if="!item.isAdd">&#xe623;</i>
+                                        <i class="iconfont icon-jiahao" v-if="item.isAdd">&#xe692;</i>{{item.isAdd?'收缩':'添加'}}</a>
+                                </div>
+                                <div class="group clearfix" v-if="item.isAdd">
+                                    <ul class="group-left">
+                                        <li class="list" :class="{'active': samllTypeIndex['_'+item.number] == i}" v-for="(smallItem,i) in sallTypes['_'+item.number]" @click="getTreeType(item.number, smallItem.number, i, index)" :key="smallItem.id">{{smallItem.number}} {{smallItem.name}}</li>
+                                    </ul>
+                                    <div class="group-right" v-if="sallTypes['_'+item.number][samllTypeIndex['_'+item.number]]">
+                                        <ul class="item active clearfix">
+                                            <li class="list" v-for="(threeItem) in sallTypes['_'+item.number][samllTypeIndex['_'+item.number]].sonArr" @click="addTreeType(item.number, index, threeItem)" :class="{'selected': threeItem.checked}" :key="threeItem.id">
+                                                <i class="iconfont icon-jiahao">&#xe623;</i>
+                                                <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="add-category">
+                        <a class="btn-add" @click="toggelType" href="javascript:;">
+                            <i>+</i>添加商标类别</a>
+                        <ul class="list-box clearfix" v-if="isAddType">
+                            <li class="list" @click="addType(index)" v-for="(item,index) in trademarkList" :key="item.id" :class="{'selected': item.checked}">第
+                                <i class="color">{{item.number}}</i>类-{{item.name}}</li>
+                        </ul>
+                    </div>
+                    <!-- end 继续添加45大类 -->
+                </div>
+                <!-- end 智能推荐 -->
+                <!-- start 自助选择 -->
+                <div class="section-selfchoice clearfix" id="section-selfchoice" v-if="brandType == 1">
+                    <!-- start 左-->
+                    <div class="group-left">
+                        <div class="ns-search-container">
+                            <div class="myInputGroup">
+                                <input type="text" name="keys" v-model="searcKey" class="myInput" placeholder="请输入商品/服务名称进行查询">
+                                <button class="myBtn" @click="searchType" id="btn-search">
+                                    <i class="iconfont icon-danchucengzhuanhuan">&#xe678;</i>
+                                </button>
+                            </div>
+                        </div>
+                        <ul class="group scroll">
+                            <li class="list" @click="getAllchild($event, 'two',item.number, index, false)" v-for="(item,index) in trademarkSearchListAll" :key="item.id" :class="{'selected': !item.checked}">
+                                <span class="title-first">第
+                                    <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+                                <div class="title-second" v-show="item.selected" @click="getAllchild($event, 'three',secondItem.number,index,secondIndex)" v-for="(secondItem,secondIndex) in item.sonArr" :key="secondItem.id">
+                                    <span class="second-lg">{{secondItem.number}} {{secondItem.name}}</span>
+                                    <dl class="second-sm" v-show="secondItem.selected">
+                                        <dt class="row" :class="{'selected': threeItem.checked}" @click="addAutoType(item, threeItem, $event)" v-for="(threeItem) in secondItem.sonArr" :key="threeItem.id">
+                                            <i class="iconfont icon-jiahao">&#xe623;</i>
+                                            <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                        </dt>
+                                        <dt v-if="!secondItem.isAll" class="get-all-small" @click="getAllchild($event, 'three', secondItem.number,index, secondIndex, true)">展开全部子项</dt>
+                                    </dl>
+                                </div>
+                                <div class="title-second" v-if="!item.isAll" v-show="item.selected" @click="getAllchild($event,'two', item.number,index, false, true)">
+                                    <span class="get-all-second">展开全部群组</span>
+                                </div>
+                            </li>
+                            <li class="list" @click="getSonType($event, 'two',item.number, index)" v-for="(item,index) in trademarkListAll" :key="item.id" :class="{'selected': item.checked}">
+                                <span class="title-first" data-has-data="0" data-cgid="1">第
+                                    <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+                                <div class="title-second" v-show="item.selected" @click="getSonType($event, 'three',secondItem.number,index,secondIndex)" v-for="(secondItem,secondIndex) in item.sonArr" :key="secondItem.id">
+                                    <span class="second-lg">{{secondItem.number}} {{secondItem.name}}</span>
+                                    <dl class="second-sm" v-show="secondItem.selected">
+                                        <dt class="row" :class="{'selected': threeItem.checked}" @click="addAutoType(item, threeItem, $event)" v-for="(threeItem) in secondItem.sonArr" :key="threeItem.id">
+                                            <i class="iconfont icon-jiahao">&#xe623;</i>
+                                            <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                        </dt>
+                                    </dl>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end 左-->
+                    <!-- start 右-->
+                    <div class="group-right">
+                        <h3 class="title">
+                            <span>需要保护的商品\服务项目</span>
+                            <div class="group-right-search">
+                                <input type="button" class="button" value="清空选项" @click="clearAll()">
+                            </div>
+                        </h3>
+                        <img class="bgimg" v-if="!selectAutoList.length" src="../../assets/images/order/selfchoice-bg.jpg" alt="请点击左侧选择商标类别">
+                        <!-- start section -->
+                        <div class="section scroll" v-if="selectAutoList.length">
+                            <div class="article" v-if="item" v-for="(item, index) in selectAutoList" :key="item.number">
+                                <h4 class="article-header clearfix">
+                                    <div class="header-left">
+                                        <span class="col-1">第{{item.number}}类 {{item.name}}</span>
+                                        <a class="col-3" onclick="var left = (window.screen.width-10-800)/2; window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549')" style="cursor: pointer;">
+                                            <i class="iconfont icon-xiaoxi"></i>咨询</a>
+                                    </div>
+                                    <div class="header-right">
+                                        <span class="header-right-secNum red-color">已选择
+                                            <i>{{item.sonArr.length}}</i>项</span>
+                                        <span class="col-1 price">￥
+                                            <i v-if="item.sonArr.length<=10">300</i>
+                                            <i v-if="item.sonArr.length>10">{{item.sonArr.length*30}}</i>
+                                        </span>
+                                        <a class="col-2 delete" href="javascript:;">
+                                            <i @click="deleteType('two', index)" class="iconfont icon-shanchu">&#xe610;</i>
+                                        </a>
+                                    </div>
+                                </h4>
+                                <div class="article-bodyer clearfix" v-if="item.sonArr.length">
+                                    <ul class="list-box clearfix">
+                                        <li v-for="(childItem,childIndex) in item.sonArr" :key="childItem.id" class="list choosecg">
+                                            <span class="text">{{childItem.number}} {{childItem.name}}</span>
+                                            <a class="close" @click="deleteType('three', index, childIndex)" href="javascript:;" title="关闭">×</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end section -->
+                    </div>
+                    <!-- end 右-->
+                </div>
+                <!-- end 自助选择 -->
+           </div>
+
+           <div class="last-pay">
+                <ul class="list-box">
+                    <li class="row-officer">官费总额：￥
+                        <i>{{officeTotal.toFixed(2)}}</i>
+                    </li>
+                    <!-- <li class="row-invoice">发票税费：￥<i>0</i>
+              <i class="iconfont icon-img">&#xe61d;</i>
+            </li> -->
+                    <li class="row-service">服务费：￥<i>0.00</i></li>
+                <!-- <li class="row-conserve">已为您节省：￥<i>0</i></li> -->
+                    <li class="row-sense">应付总额：
+                        <em>￥
+                            <i>{{officeTotal.toFixed(2)}}</i>
+                        </em>
+                    </li>
+                </ul>
+            </div>
+          <div class="agree-box">
+            <i v-if="!isAgree" @click="isAgree=true" class="iconfont checkbox2" data-id="">&#xe65d;</i>
+            <i v-if="isAgree" @click="isAgree=false" class="iconfont checkbox2 checked" data-id="">&#xe612;</i>
+            <span @click="isAgree=!isAgree">
+              已阅读并同意
+              <a href="/about/8.html" target="_blank" id="show-contract">《商标服务合同》</a>
+            </span>
+          </div>
+
+            <div class="fn12 c_gray upbtn center">
+                <dl class="mian mr20 registhide" @click="submit(0,0)">
+                    <dt class="fn22 c_gray4">免审提交</dt>
+                    <dd>同意自行承担风险，提交后即可付款</dd>
+                </dl>
+                <dl class="dai mr20" @click="submit(0,1)">
+                    <dt class="fn22 c_orange">提交待审</dt>
+                    <dd>顾问审核需1-2个工作日，审核成功再付款</dd>
+                </dl>
+                <dl class="kuai" @click="submit(0, 2)">
+                    <dt class="fn22 c_blue">提交快审</dt>
+                    <dd>不评估近似风险，只审查申请材料</dd>
+                </dl>
+                <p class="saveLoca">若暂不提交，您可先<a href="javascript:void(0);" @click="submit(0, 3)">保存订单</a></p>
+            </div>
+           
+       </div>
+       <to-top />
+        
+        <div class="model" v-if="isTemp">
+            <div class="cont">
+                 <i class="iconfont" @click="isTemp=false">&#xe7fc;</i>
+                <div class="tab">
+                    <a @click="tabFn" data-type="1" :class="{'atthis': applyType == 1}" href="javascript:;">大陆企业</a>
+                    <a @click="tabFn" data-type="0" href="javascript:;" :class="{'atthis': applyType == 0}">大陆个体工商户</a>
+                </div>
+                <ul class="list" v-show="applyType == 1">
+                    <li @click="seletedZt(1, index)" v-for="(item, index) in applicantCompany" :key="item.id" ><a href="javascript:;"><span>{{item.templateName}}</span>{{item.applicantName}}</a></li>
+                </ul>
+                <ul class="list" v-show="applyType == 0">
+                    <li @click="seletedZt(0, index)" v-for="(item, index) in applicantPerson" :key="item.id"><a href="javascript:;"><span>{{item.templateName}}</span>{{item.applicantName}}</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model" v-if="isTest">
+            <div class="cont test">
+                <img v-if="!isEvaluat" src="../../assets/images/order/safe_icon.png" alt="">
+                <img v-if="isEvaluat" src="../../assets/images/order/at_icon.png" alt="">
+                <input v-if="!isEvaluat" type="text" v-model="name" maxlength="30" placeholder="请输入商标名称">
+                <select name="" id="" v-if="!isEvaluat && industryList.length" v-model="industryIndex">
+                    <option :value="item.id" v-for="(item, index) in industryList" :key="index">{{item.name}}</option>
+                </select>
+                <div class="btn" v-if="!isEvaluat">
+                    <a class="active" @click="isTest = false" href="javascript:;">取消</a>
+                    <a href="javascript:;" @click="passingRate">立即评测</a>
+                </div>
+                <div v-if="isEvaluat" class="res">智能查近结果：
+                    <p class="ml35">商标“<a href="javascript:void();" id="simi_tname">{{name}}</a>”在<samp id="simi_tsort">{{industryList[industryIndex].name}}</samp>的注册成功率为：<em id="simi_sucrule"><em class="c_orange bold">{{industryRes.score}}%</em> 
+                      <span v-if="industryRes.score>80">风险较低</span> 
+                      <span v-if="industryRes.score>20 && industryRes.score<50">风险高</span> 
+                      <span v-if="industryRes.score>50 && industryRes.score<80">风险低</span> 
+                      <span v-if="industryRes.score>0 && industryRes.score<20">风险非常高</span>，<a href="http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549" target="blank">点击联系顾问</a>获得解决方案 <em class="font14">(评测结果仅供参考)</em></em></p>
+                </div>
+                <div class="btn" v-if="isEvaluat">
+                    <a class="active" @click="isTest = false;isEvaluat = false" href="javascript:;">取消</a>
+                    <a href="javascript:;" @click="isEvaluat = false; isTest = true">重新评测</a>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="model" v-if="isNoTen">
+            <div class="cont">
+                <h1>注意</h1>
+                <p>以下类别选择的商品/服务项目不足10项。
+                    </p>
+                        <p v-for="item in noTens" :key="item.id">第{{item.number}}类 {{item.name}}，已选择{{item.sonArr.length}}个项目;</p>
+                        <div class="btn">
+                            <a class="active" @click="isNoTen = false" href="javascript:;">继续修改</a>
+                            <a href="javascript:;" @click="submit(true)">提交</a>
+                        </div>
+            </div>
+        </div>
+
+       <div class="model" v-if="isNoNumber">
+            <div class="cont">
+                <h1>注意</h1>
+                <p>以下类别选择的商品/服务项目必须选择
+                    <b class="red">1</b>个三级类别。
+                    </p>
+                        <p v-for="item in noTens" v-if="item.sonArr.length == 0" :key="item.id">第{{item.number}}类 {{item.name}}</p>
+                        <div class="btn">
+                            <a class="active" @click="isNoNumber = false" href="javascript:;">添加</a>
+                        </div>
+            </div>
+        </div>
+
+        <loginBox :isShow="showLogin" @close='closeLogin'  @backFn="loginBack" />
+    </div>
+</template>
+
+<script>
+import toTop from "@/components/toTop";
+import axios from "axios";
+import popup from "~/components/popup"; //消息
+import loginBox from "~/components/loginBox"; //消息
+import Cookies from "js-cookie";
+export default {
+    head() {
+        return {
+            title: "智能注册-知千秋",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    components: {
+        toTop,
+        loginBox
+    },
+    data() {
+        return {
+            isTips: false,
+            isTemp: false,
+            isTest: false,
+            isAgree: false,
+            isNoTen: false,
+            isTian1: false,
+            isTian2: false,
+            showLogin: false,
+            isEvaluat: false,
+            fsHost: null,
+            industryIndex: 1,
+            audit: 0, // 订单状态
+            industryList: [], // 行业类别
+            industryRes: null,
+            applicantPerson: [],
+            applicantCompany: [],
+            applyZt: {
+                id: null,
+                applicantCardAddress:null,
+                applicantCardFile:null,
+                applicantCardNo:null,
+                applicantName: null,
+                applicantType:null,
+                applicantUserName:null,
+                businessLicenceAddress:null,
+                businessLicenceArea: null,
+                businessLicenceFile:null,
+                businessLicenceNo:null,
+                contactEmail:null,
+                contactName:null,
+                contactPhone:null,
+                postalcode:null,
+                priorityFile:null,
+                proxyFile:null,
+            },
+            templateUrl: null,
+            isNoNumber: false,
+            noZeros: [], // 一项都没有的
+            noTens: [], // 不足10个小项的
+            type: 1, // 商标类型
+            applyType: 1, 
+            autoType: 1, // 生成类型
+            brandType: 0, // 商标类别
+            name: null, // 商标名称
+            explain: null, // 说明
+            doMain: [],
+            doMainIndex: null,
+            doMainchildIndex: null,
+            isAddType: false,
+            selectList: [], // 用户选择的服务项
+            selectAutoList: [], // 自主选择的服务项
+            trademarkList: null, // 45大类
+            trademarkListAll: null, //所有分类
+            trademarkSearchListAll: null, // 搜索的分类
+            sallTypes: {}, // 待添加的小类
+            samllTypeIndex: {}, // 小类选中
+            uploadRes: null, // 上传图的
+            uploadFile: null, // 委托书
+            createdRes: null, // 创建图
+            searcKey: null,
+            product: Cookies.getJSON("product")
+        };
+    },
+    mounted() {
+        this.loadIndustry()
+        if (this.$route.query.id) {
+            if (!this.$store.state.userInfo.userId) {
+               this.showLogin = true 
+               return false
+            }
+            // this.loadOrderInfo()
+        } else {
+            if (!this.product) {
+                popup.created({
+                    content: "产品过期，请重新下单",
+                    time: 2000
+                });
+                window.location.href = "/show/navigation_trademark_register_04&S7741102214293331969.html";
+            }
+        }
+        if (this.$store.state.userInfo.userId) {
+            this.loadApplicantName()
+            this.loadTemplateUrl()
+            if (this.$route.query.id) {
+                Promise.all([this.loadDomain(), this.loadType()]).then((res) => {
+                    this.loadOrderInfo()
+                })
+            } else {
+                this.loadType();
+                this.loadDomain();
+            }
+        }
+        // 登录弹窗
+        let that = this
+        window.addEventListener("click", function(e){
+           if (e.target.tagName == 'INPUT' && !that.$store.state.userInfo.userId) {
+                that.showLogin = true
+           }
+        });
+    },
+    methods: {
+        // 加载订单信息
+        loadOrderInfo() {
+            this.$Http(
+                "/order/findOrderById",
+                { orderId: this.$route.query.id,userId: this.$store.state.userInfo.userId },
+                "get",
+                true
+            ).then(res => {
+                let orderInfo = res.data.data;
+                this.product = {}
+                this.product.serviceId = orderInfo.order.serviceId
+                this.product.serviceAttrId = orderInfo.order.serviceAttrId,
+                // this.officeTotal = orderInfo.order.allPrice
+                this.product.num = orderInfo.order.allNum
+                this.auditType = orderInfo.order.auditType
+                this.applyZt.contactName = orderInfo.order.contactName
+                this.applyZt.contactPhone = orderInfo.order.contactPhone
+                this.applyZt.contactEmail = orderInfo.order.contactEmail
+                this.applyZt.contactTelephone = orderInfo.order.contactTelephone
+                this.applyZt.id = orderInfo.order.templateId
+                this.remark = orderInfo.order.remark
+                this.fsHost = orderInfo.fsHost
+
+                let trademarkTypes = {
+                    "trademark_type4": 1,
+                    "trademark_type5": 2
+                }
+                let exampleType = [null, "example_type1", "example_type2"];
+                let classCreateWay = {"class_create_way1": 0, "class_create_way2": 1};
+                let applicantType = {"applicant_type2": 0, "applicant_type1": 1};
+
+                this.autoType = trademarkTypes[orderInfo.trademarkAndApplicant.type]
+                this.name = orderInfo.trademarkAndApplicant.name
+                this.explain = orderInfo.trademarkAndApplicant.explain
+                // exampleType = exampleType[2],
+                if (this.autoType == 1) {
+                    this.createdRes = {
+                        fsHost: orderInfo.fsHost,
+                        fsPath: orderInfo.trademarkAndApplicant.exampleAddress}
+                } else {
+                    this.uploadRes = {
+                        fsHost: orderInfo.fsHost,
+                        fsPath: orderInfo.trademarkAndApplicant.exampleAddress
+                    }
+                }
+                
+                this.brandType = classCreateWay[orderInfo.trademarkAndApplicant.classCreateWay]
+                this.doMain.map((item, index) => {
+                    if (item.id == orderInfo.trademarkAndApplicant.suggestedFirstLevel) {
+                        this.doMainIndex = index
+                    }
+                })
+
+
+                this.doMainchildIndex = orderInfo.trademarkAndApplicant.suggestedSecondLevel
+               
+                this.applyType = applicantType[orderInfo.trademarkAndApplicant.applicantType]
+                this.applyZt.applicantName = orderInfo.trademarkAndApplicant.applicantName
+
+                this.applyZt.applicantCardNo = orderInfo.trademarkAndApplicant.applicantCardNo
+
+                this.applyZt.businessLicenceArea = orderInfo.trademarkAndApplicant.businessLicenceArea
+
+                this.applyZt.postalcode = orderInfo.trademarkAndApplicant.postalcode
+                this.applyZt.businessLicenceAddress = orderInfo.trademarkAndApplicant.businessLicenceAddress
+                this.applyZt.applicantCardFile = orderInfo.trademarkAndApplicant.applicantCardFile
+                this.applyZt.businessLicenceFile = orderInfo.trademarkAndApplicant.businessLicenceFile
+                this.applyZt.businessLicenceNo = orderInfo.trademarkAndApplicant.businessLicenceNo
+                this.uploadFile = {
+                    fsHost: orderInfo.fsHost,
+                    fsPath: orderInfo.trademarkAndApplicant.proxyFile
+                }
+
+                let obj = []
+                orderInfo.trademarkClassList.map((item) => {
+                    if (obj[parseInt(item.classLevel1Code)]) {
+                        obj[parseInt(item.classLevel1Code)].sonArr.push({
+                            id: item.classLevel3Code,
+                            isColour:0,
+                            isRecommend:0,
+                            isShow:null,
+                            name: item.classLevel3Name,
+                            number: item.classLevel3Code,
+                            remark:null,
+                            secondId: null,
+                            secondNumber: null
+                        })
+                    } else {
+                        obj[parseInt(item.classLevel1Code)] = {
+                            id: item.classLevel1Code,
+                            isColour:0,
+                            isRecommend:0,
+                            isShow:0,
+                            name: item.classLevel1Name,
+                            number: item.classLevel1Code,
+                            sonArr: [{
+                                id: item.classLevel3Code,
+                                isColour:0,
+                                isRecommend:0,
+                                isShow:null,
+                                name: item.classLevel3Name,
+                                number: item.classLevel3Code,
+                                remark:null,
+                                secondId: null,
+                                secondNumber: null
+                            }]
+                        }
+                    }
+                    
+                })
+                
+                
+                if (this.brandType == 0) {
+                    let objArr = []
+                    obj.map((item) => {
+                        objArr.push(item)
+                    })
+                    this.selectList = objArr
+                } else {
+                    this.doMainIndex = null
+                    this.selectAutoList = obj
+                    // 默认展开选择
+                    // this.trademarkListAll.map((trademarkItem, index) => {
+                    //     obj.map((item) => {
+                    //         if (item && parseInt(trademarkItem.id) == parseInt(item.id)) {
+                    //             this.getSonType(null, 'two',item.number, index).then(() => {
+                    //                 trademarkItem.sonArr.map((threeItem, childIndex) => {
+                    //                     item.sonArr.map((fourItem) => {
+                    //                         if (fourItem && parseInt(threeItem.number) == parseInt(fourItem.number.substr(0, 4))) {
+                    //                             this.getSonType(null, 'three',threeItem.number.substr(0, 4), index, childIndex).then(() => {
+                    //                                 threeItem.sonArr.map((fiveItem) => {
+                    //                                     if (fiveItem.number == fourItem.number) {
+                    //                                         fiveItem.checked = true
+                    //                                     }
+                    //                                 })
+                    //                             })
+                    //                         }
+                    //                     })
+                    //                 })
+                    //             })
+                                
+                    //         }
+                    //     })
+                    // })
+                    
+                }
+
+            });
+        },
+        // 商标通过率
+        passingRate() {
+          let loading = popup.created({
+              type: "loading",
+              icon: "&#xe61c",
+              content: "测算中..."
+          });
+          sessionStorage.setItem("isFrom", true);
+          this.$Http(
+                "/predicate/registerPassingRate",
+                { 
+                  brand: this.name,
+                  industry: this.industryList[this.industryIndex].id
+                },
+                "post",
+                false
+            ).then(res => {
+                loading.close()
+                this.isEvaluat = true
+                sessionStorage.setItem("isFrom", false);
+                this.industryRes = res.data.data
+            }).catch(() => {
+                loading.close()
+                sessionStorage.setItem("isFrom", false);
+            });
+        },
+        // 行业查询
+        loadIndustry() {
+          this.$Http(
+                "/predicate/allIndustries",
+                {},
+                "post",
+                false
+            ).then(res => {
+                this.industryList = res.data.data
+            })
+        },
+        // 登录成功后回调
+        loginBack () {
+            this.loadApplicantName()
+            this.loadTemplateUrl()
+            if (this.$route.query.id) {
+                Promise.all([this.loadDomain(), this.loadType()]).then((res) => {
+                    // this.loadOrderInfo()
+                })
+            } else {
+                this.loadType();
+                this.loadDomain();
+            }
+        },
+        // 关闭登录
+        closeLogin () {
+            this.showLogin = false
+        },
+        // 动态的tab切换
+        tabFn(e) {
+            let type = e.target.dataset.type;
+            this.applyType = type;
+        },
+        // 选择模板
+        seletedZt (type, index) {
+            if (type) {
+                this.applyZt = this.applicantCompany[index]
+            } else {
+                this.applyZt = this.applicantPerson[index]
+            }
+            this.isTemp = false
+        },
+        // 加载模板
+        loadApplicantName() {
+            this.$Http(
+                "/applicantTemplate/find",
+                { createrId: this.$store.state.userInfo.userId},
+                "get",
+                true
+            ).then(res => {
+                let arr = res.data.data;
+                this.fsHost = res.data.data.fsHost
+                this.applicantPerson = arr.applicant_type2
+                this.applicantCompany = arr.applicant_type1   
+            });
+        },
+        // 选择分类
+        selectedType(e, name) {
+            if (e.target.nodeName === "LABEL" || e.target.nodeName === "I") {
+                this[name] = e.target.dataset.type;
+            }
+            if (e.target.nodeName === "A") {
+                this[name] = e.target.dataset.type;
+            }
+        },
+        // 加载推荐
+        loadDomain() {
+            return this.$Http(
+                "/industry/queryDomain",
+                { userId: this.$store.state.userInfo.userId },
+                "get",
+                true
+            ).then(res => {
+                this.doMain = res.data.data;
+            });
+        },
+        // 加载所有分类
+        loadType(index) {
+            return this.$Http(
+                "/industry/queryTrademarkList",
+                { userId: this.$store.state.userInfo.userId },
+                "get"
+            ).then(res => {
+                this.trademarkList = res.data.data;
+                this.trademarkListAll = res.data.data;
+            });
+        },
+        // 搜索分类
+        searchType() {
+            if (this.searcKey == null) {
+                this.loadType();
+                this.trademarkSearchListAll = [];
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkSearchList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    searcKey: this.searcKey
+                },
+                "get"
+            ).then(res => {
+                //this.trademarkList = res.data.data
+                let arr = res.data.data;
+                if (arr.length == 0) {
+                    popup.created({
+                        content: "未找到相关类别",
+                        time: 2000
+                    });
+                    return false;
+                }
+                arr.map(item => {
+                    item.selected = true;
+                    this.trademarkListAll.map((childItem, childIndex) => {
+                        if (item.id === childItem.id) {
+                            this.trademarkListAll.splice(childIndex, 1);
+                        }
+                    });
+                    this.selectAutoList.map((childItem, childIndex) => {
+                        if (childItem && item.id === childItem.id) {
+                            childItem.sonArr.map(threeItem => {
+                                item.sonArr.map(fourItem => {
+                                    fourItem.sonArr.map(fiveItem => {
+                                        if (threeItem.id === fiveItem.id) {
+                                            fiveItem.checked = true;
+                                            console.log(fiveItem);
+                                        }
+                                    });
+                                });
+                            });
+                        }
+                    });
+                    item.sonArr.map(childItem => {
+                        childItem.selected = true;
+                    });
+                });
+                this.trademarkSearchListAll = arr;
+            });
+        },
+        changeIndex(e) {
+            if (e.target.value != null) {
+                this.doMainIndex = parseInt(e.target.value);
+            } else {
+                this.doMainIndex = null;
+            }
+        },
+
+        // 添加小类
+        addSamllType(number, index) {
+            if (this.sallTypes["_" + number]) {
+                this.$set(
+                    this.selectList[index],
+                    "isAdd",
+                    !this.selectList[index].isAdd
+                );
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: "two"
+                },
+                "get",
+                true
+            ).then(res => {
+                this.$set(this.sallTypes, "_" + number, res.data.data);
+                this.$set(
+                    this.selectList[index],
+                    "isAdd",
+                    !this.selectList[index].isAdd
+                );
+            });
+        },
+        // 获取三级分类
+        getTreeType(two, type, index, i) {
+            this.$set(this.samllTypeIndex, "_" + two, index);
+            if (this.sallTypes["_" + two][index].sonArr) {
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: type,
+                    numberType: "three"
+                },
+                "get",
+                true
+            ).then(res => {
+                let arr = res.data.data;
+                // arr.map(item => {
+                //     this.selectList[i].sonArr.map(childItem => {
+                //         if (item.id === childItem.id) {
+                //             item.checked = true;
+                //         }
+                //     });
+                // });
+
+                arr.map((item) => {
+                    this.selectList.map((childItem, index) => {
+                        childItem.sonArr.map((threeItem, childrenIndex) => {
+                            if (childItem && item.number == threeItem.number) {
+                                item.checked = true
+                                console.log(this.selectList[index])
+                                this.$set(this.selectList[index].sonArr, childrenIndex, item)
+                            }
+                        })
+                    })
+                })
+                this.$set(this.sallTypes["_" + two][index], "sonArr", arr);
+            });
+        },
+        // 获取推荐
+        getRecom(e) {
+            this.doMainchildIndex = e.target.value;
+            this.$Http(
+                "/industry/queryCommodity",
+                { id: e.target.value },
+                "get",
+                true
+            ).then(res => {
+                this.selectList = res.data.data;
+            });
+        },
+        toggelType() {
+            this.isAddType = !this.isAddType;
+        },
+        // 删除推荐
+        deleRecom(index) {
+            this.selectList.splice(index, 1);
+        },
+        // 删除小类
+        deleThreeType(index, childIndex, itemChild, item) {
+            if (this.sallTypes["_" + item.number]) {
+                let arr = this.sallTypes["_" + item.number][
+                    this.samllTypeIndex["_" + item.number]
+                ].sonArr;
+                arr.map(childItem => {
+                    if (itemChild.id == childItem.id) {
+                        childItem.checked = false;
+                    }
+                });
+            }
+            this.selectList[index].sonArr.splice(childIndex, 1);
+        },
+        // 添加大类
+        addType(index) {
+            if (this.trademarkList[index].checked) {
+                return false;
+            }
+            let obj = Object.assign({}, this.trademarkList[index]);
+            obj.sonArr = [];
+            this.selectList.push(obj);
+        },
+        // 添加小类
+        addTreeType(two, index, item) {
+            let arr = this.selectList[index].sonArr;
+            if (item.checked) {
+                return false;
+            }
+            item.checked = true;
+            arr.push(item);
+            this.$set(this.selectList[index], "sonArr", arr);
+        },
+        // 创建图片
+        createdImg() {
+            if (!this.name) {
+                popup.created({
+                    content: "请输入商标名称",
+                    time: 2000
+                });
+                return false;
+            }
+            this.$Http(
+                "/file/createTrademark",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    text: this.name,
+                    imgWidth: 150,
+                    imgHeight: 150
+                },
+                "get",
+                true
+            ).then(res => {
+                this.createdRes = res.data.data;
+                this.uploadRes = null;
+            });
+        },
+        // 上传图片
+        uploadAll(type) {
+            if (!this.$store.state.userInfo.userId) {
+                this.showLogin = true
+                return false
+            }
+            this.$refs[type].click();
+            this.$refs[type].onchange = e => {
+                let file = e.target.files[0];
+                if (!file) {
+                    return false;
+                }
+                if (type == 'proxyFile') {
+                    if (file.size > 10485760) {
+                        popup.created({
+                            content: "上传文件不能大于10M",
+                            time: 2000
+                        });
+                        return false;
+                    }
+                } else {
+                   if (file.size > 10485760/2) {
+                        popup.created({
+                            content: "上传文件不能大于5M",
+                            time: 2000
+                        });
+                        return false;
+                    } 
+                }
+                
+                if (
+                    file.type != "image/jpeg"
+                ) {
+                    popup.created({
+                        content: "只能上传.jpg",
+                        time: 2000
+                    });
+                    return false;
+                }
+                let param = new FormData(); // 创建form对象
+                param.append("file", file);
+                param.append("userId", this.$store.state.userInfo.userId);
+                param.append("type", "upload_file_type_04");
+                let loading = popup.created({
+                    type: "loading",
+                    icon: "&#xe61c",
+                    content: "上传中..."
+                });
+                axios.post(`${this.$baseUrl}/file/singleUpload`, param, {
+                        headers: { 
+                        "Content-Type": "multipart/form-data",
+                        'token':Cookies.get('token') }
+                    })
+                    .then(res => {
+                        loading.close();
+                        if (res.data.code == 0) {
+                            if (type == 'proxyFile') {
+                                popup.created({
+                                    content: "上传成功",
+                                    time: 2000
+                                });
+                                this.uploadFile = res.data.data
+                            }  else {
+                                this.fsHost = res.data.data.fsHost
+                                this.$set(this.applyZt, type, res.data.data.fsPath);
+                                // 判断 营业执照还是身份证
+                                let loading2 = popup.created({
+                                    type: "loading",
+                                    icon: "&#xe61c",
+                                    content: "识别中..."
+                                });
+                                if (type == 'businessLicenceFile') {
+                                    this.$Http(
+                                            "/imgidentify/license",
+                                            { filePath:  res.data.data.fsHost+res.data.data.fsPath},
+                                            "get",
+                                            false
+                                        ).then(res2 => {
+                                            loading2.close();
+                                            this.applyZt.applicantName = res2.data.data.org;
+                                            this.applyZt.businessLicenceAddress = res2.data.data.address;
+                                            this.applyZt.businessLicenceNo = res2.data.data.no;
+                                        }).catch(() => {
+                                            loading2.close();
+                                        });
+                                } else if (type == 'applicantCardFile') {
+                                    this.$Http(
+                                            "/imgidentify/idCard",
+                                            { filePath:  res.data.data.fsHost+res.data.data.fsPath, idCardSide: 'front'},
+                                            "get",
+                                            false
+                                        ).then(res2 => {
+                                            loading2.close();
+                                            this.applyZt.applicantCardNo = res2.data.data.no;
+                                        }).catch(() => {
+                                            loading2.close();
+                                        });
+                                }
+                            } 
+                        } else {
+                            popup.created({
+                                content: "上传错误，稍后重试",
+                                time: 2000
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        loading.close();
+                        popup.created({
+                            content: "上传错误，稍后重试",
+                            time: 2000
+                        });
+                    });
+            };
+        },
+        loadTemplateUrl() {
+            this.$Http(
+                "/template/findTemplateUrl",
+                { userId: this.$store.state.userInfo.userId },
+                "get",
+                true
+            ).then(res => {
+                this.templateUrl = res.data.data;
+            });
+        },
+        // 上传图片
+        upload() {
+            if (!this.$store.state.userInfo.userId) {
+                this.showLogin = true
+                return false
+            }
+            this.$refs.uploadImg.click();
+            this.$refs.uploadImg.onchange = e => {
+                let file = e.target.files[0];
+                if (!file) {
+                    return false;
+                }
+                if (file.size > 10485760) {
+                    popup.created({
+                        content: "上传文件不能大于10M",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (file.type != "image/jpeg") {
+                    popup.created({
+                        content: "只能上传.jpg文件",
+                        time: 2000
+                    });
+                    return false;
+                }
+
+                let param = new FormData(); // 创建form对象
+                param.append("file", file);
+                param.append("userId", this.$store.state.userInfo.userId);
+                param.append("type", "upload_file_type_02");
+                let loading = popup.created({
+                    type: "loading",
+                    icon: "&#xe61c",
+                    content: "上传中..."
+                });
+                axios
+                    .post(`${this.$baseUrl}/file/singleUpload`, param, {
+                        headers: { "Content-Type": "multipart/form-data" ,
+                        'token':Cookies.get('token')}
+                    })
+                    .then(res => {
+                        loading.close();
+                        if (res.data.code == 0) {
+                            popup.created({
+                                content: "上传成功",
+                                time: 2000
+                            });
+                            this.uploadRes = res.data.data;
+                            this.createdRes = null
+                        } else {
+                            popup.created({
+                                content: "上传错误，稍后重试",
+                                time: 2000
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        loading.close();
+                        popup.created({
+                            content: "上传错误，稍后重试",
+                            time: 2000
+                        });
+                    });
+            };
+        },
+        // 自主选择
+        // 获取剩下的收缩项
+        getAllchild(e, type, number, index, childIndex, force) {
+            e.stopPropagation();
+            if (childIndex === false) {
+                if (this.trademarkSearchListAll[index].sonArr && !force) {
+                    this.trademarkSearchListAll[index].selected = !this
+                        .trademarkSearchListAll[index].selected;
+                    return false;
+                }
+            } else {
+                if (
+                    this.trademarkSearchListAll[index].sonArr[childIndex]
+                        .sonArr &&
+                    !force
+                ) {
+                    this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].selected = !this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].selected;
+                    return false;
+                }
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: type
+                },
+                "get",
+                true
+            ).then(res => {
+                if (type == "two") {
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "selected",
+                        true
+                    );
+                    // 保存之前的
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "oldsonArr",
+                        this.trademarkSearchListAll[index].sonArr
+                    );
+                    let arr = res.data.data;
+                    // this.trademarkSearchListAll[index].sonArr[childIndex].sonArr.map((item) => {
+                    //     arr.map((childItem) => {
+                    //         if (item.id == childItem.id && item.checked) {
+                    //             childItem.checked = true
+                    //         }
+                    //     })
+
+                    // })
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "sonArr",
+                        arr
+                    );
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "isAll",
+                        true
+                    );
+                }
+                if (type == "three") {
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "selected",
+                        true
+                    );
+                    // 保存之前的
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "oldsonArr",
+                        this.trademarkSearchListAll[index].sonArr[childIndex]
+                            .sonArr
+                    );
+                    let arr = res.data.data;
+                    this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].sonArr.map(item => {
+                        arr.map(childItem => {
+                            if (item.id == childItem.id && item.checked) {
+                                childItem.checked = true;
+                            }
+                        });
+                    });
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "sonArr",
+                        arr
+                    );
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "isAll",
+                        true
+                    );
+                }
+            });
+        },
+        // 获取下级分类
+        getSonType(e, type, number, index, childIndex) {
+            e && e.stopPropagation();
+            if (isNaN(childIndex)) {
+                if (this.trademarkListAll[index].sonArr) {
+                    this.trademarkListAll[index].selected = !this
+                        .trademarkListAll[index].selected;
+                    return false;
+                }
+            } else {
+                if (this.trademarkListAll[index].sonArr[childIndex].sonArr) {
+                    this.trademarkListAll[index].sonArr[
+                        childIndex
+                    ].selected = !this.trademarkListAll[index].sonArr[
+                        childIndex
+                    ].selected;
+                    return false;
+                }
+            }
+
+            return this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: type
+                },
+                "get",
+                true
+            ).then(res => {
+                if (type == "two") {
+                    this.$set(this.trademarkListAll[index], "selected", true);
+                    this.$set(
+                        this.trademarkListAll[index],
+                        "sonArr",
+                        res.data.data
+                    );
+                }
+                if (type == "three") {
+                    this.$set(
+                        this.trademarkListAll[index].sonArr[childIndex],
+                        "selected",
+                        true
+                    );
+                    let arr = res.data.data
+                    arr.map((item) => {
+                        this.selectAutoList.map((childItem, index) => {
+                            childItem.sonArr.map((threeItem, childrenIndex) => {
+                                if (childItem && item.number == threeItem.number) {
+                                    item.checked = true
+                                    console.log(this.selectAutoList[index])
+                                    this.$set(this.selectAutoList[index].sonArr, childrenIndex, item)
+                                }
+                            })
+                        })
+                    })
+                    this.$set(
+                        this.trademarkListAll[index].sonArr[childIndex],
+                        "sonArr",
+                        res.data.data
+                    );
+                }
+            });
+        },
+        // 选择添加小项
+        addAutoType(item, childItem, e) {
+            e.stopPropagation();
+            if (childItem.checked) {
+                return false;
+            }
+            let arr = [];
+            if (this.selectAutoList[parseInt(item.number)]) {
+                arr = this.selectAutoList[parseInt(item.number)].sonArr;
+            }
+            childItem.checked = true;
+            arr.push(childItem);
+            this.$set(this.selectAutoList, parseInt(item.number), {
+                id: item.id,
+                isColour: item.isColour,
+                isRecommend: item.isRecommend,
+                isShow: item.isShow,
+                name: item.name,
+                number: item.number,
+                remark: item.remark,
+                sonArr: arr
+            });
+        },
+        goDown () {
+            this.templateUrl && window.open(this.templateUrl[3].fileUrl)
+        },
+        // 删除小类
+        deleteType(type, index, childIndex) {
+            if (type == "two") {
+                if (this.selectAutoList[index]) {
+                    this.selectAutoList[index].sonArr.map(childItem => {
+                        childItem.checked = false;
+                    });
+                }
+                this.selectAutoList.splice(index, 1);
+            }
+            if (type == "three") {
+                let arr = this.selectAutoList[index].sonArr;
+                arr[childIndex].checked = false;
+                arr.splice(childIndex, 1);
+                this.$set(this.selectAutoList[index], "sonArr", arr);
+            }
+        },
+        // 清空所有
+        clearAll() {
+            this.selectAutoList.map(item => {
+                if (item) {
+                    item.sonArr.map(childItem => {
+                        childItem.checked = false;
+                    });
+                }
+            });
+            this.selectAutoList = [];
+        },
+
+        //提交
+        submit(type, audit) {
+            
+            if (!this.applyZt.businessLicenceFile) {
+                popup.created({
+                    content: "请先上传营业执照",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.postalcode) {
+                popup.created({
+                    content: "请输入邮政编码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.applyType == 0 && !this.applyZt.applicantCardNo) {
+                popup.created({
+                    content: "请输入身份证号码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactName) {
+                popup.created({
+                    content: "请输入联系人",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactPhone) {
+                popup.created({
+                    content: "请输入联系电话",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactEmail) {
+                popup.created({
+                    content: "请输入邮箱",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.applicantName) {
+                popup.created({
+                    content: "请输入申请主体",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.businessLicenceAddress) {
+                popup.created({
+                    content: "请输入证件地址",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.businessLicenceNo) {
+                popup.created({
+                    content: "请输入社会代码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcode")) {
+                popup.created({
+                    content: "请输入正确邮编",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("idcard")) {
+                popup.created({
+                    content: "请输入正确身份证号码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcontactTel")) {
+                popup.created({
+                    content: "请输入正确电话",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcontactMail")) {
+                popup.created({
+                    content: "请输入正确邮箱",
+                    time: 2000
+                });
+                return false;
+            }
+            if (this.errors.has("fidcardcode")) {
+                popup.created({
+                    content: "请输入正确身份证",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (parseInt(this.type) == 1) {
+                if (!this.name) {
+                    popup.created({
+                        content: "商标名称不能为空",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (!this.createdRes && !this.uploadRes) {
+                    popup.created({
+                        content: "请先上传或生成商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (parseInt(this.type == 2)) {
+                if (!this.uploadRes) {
+                    popup.created({
+                        content: "请先上传商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (parseInt(this.type == 3)) {
+                if (!this.name) {
+                    popup.created({
+                        content: "商标名称不能为空",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (!this.uploadRes) {
+                    popup.created({
+                        content: "请先上传商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (!this.explain) {
+                popup.created({
+                    content: "必须输入商标说明",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.uploadFile) {
+                popup.created({
+                    content: "请必须上传委托书",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!parseInt(this.officeTotal)) {
+                popup.created({
+                    content: "请先选择商标类别",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.isAgree) {
+                popup.created({
+                    content: "请阅读并勾选商标服务合同",
+                    time: 2000
+                });
+                return false;
+            }
+            
+            // 不足10个小项
+            this.noTens = [];
+            this.noZeros = [];
+            if (this.brandType) {
+                this.selectAutoList.map(item => {
+                    if (item) {
+                        if (item.sonArr.length < 10) {
+                            this.noTens.push(item);
+                            if (item.sonArr.length == 0) {
+                                this.noZeros.push(item);
+                            }
+                        }
+                    }
+                });
+            } else {
+                this.selectList.map(item => {
+                    if (item.sonArr.length < 10) {
+                        this.noTens.push(item);
+                        if (item.sonArr.length == 0) {
+                            this.noZeros.push(item);
+                        }
+                    }
+                });
+            }
+            
+
+            if (this.brandType == 1) {
+                this.selectList = [];
+            } else {
+                this.selectAutoList = [];
+            }
+            if (this.type != 1) {
+                this.createdRes = null;
+            } else {
+                if (this.autoType == 1) {
+                    this.uploadRes = null;
+                } else {
+                    this.createdRes = null;
+                }
+            }
+            let auditType = null
+            console.log(audit)
+            if (audit) {
+                this.audit = audit
+            }
+            if (this.audit == 0) {
+                auditType = 'oder_audit_type_01'
+            }
+            if (this.audit == 1) {
+                auditType = 'oder_audit_type_02'
+            }
+            if (this.audit == 2) {
+                auditType = 'oder_audit_type_03'
+            }
+            if (this.audit == 3) {
+                auditType = 'oder_audit_type_04'
+            }
+
+            
+
+            if (!type && this.noZeros.length) {
+                this.isNoNumber = true;
+                return false;
+            }
+
+            if (!type && this.noTens.length) {
+                this.isNoTen = true;
+                return false;
+            }
+
+
+            let arr = [
+                null,
+                "trademark_type4",
+                "trademark_type5"
+            ];
+
+            let exampleType = [null, "example_type1", "example_type2"];
+            let classCreateWay = ["class_create_way1", "class_create_way2"];
+            let applicantType = ["applicant_type2", "applicant_type1"];
+            let codes = [];
+            this.selectList.map(item => {
+                item.sonArr.map(childItem => {
+                    codes.push({
+                        classLevel1Code: item.number,
+                        classLevel1Name: item.name,
+                        classLevel3Code: childItem.number,
+                        classLevel3Name: childItem.name
+                    });
+                });
+            });
+            this.selectAutoList.map(item => {
+                if (item) {
+                    item.sonArr.map(childItem => {
+                        codes.push({
+                            classLevel1Code: item.number,
+                            classLevel1Name: item.name,
+                            classLevel3Code: childItem.number,
+                            classLevel3Name: childItem.name
+                        });
+                    });
+                }
+            });
+            let obj = {
+                orderJson: JSON.stringify({
+                    invoiceFee: 0,
+                    id: this.$route.query.id,
+                    userId: this.$store.state.userInfo.userId,
+                    serviceId: this.product.serviceId,
+                    serviceAttrId: this.product.serviceAttrId
+                        ? this.product.serviceAttrId
+                        : null,
+                    allPrice: this.officeTotal,
+                    allNum: this.product.num,
+                    auditType: auditType,
+                    contactName: this.applyZt.contactName,
+                    contactPhone: this.applyZt.contactPhone,
+                    contactEmail: this.applyZt.contactEmail,
+                    contactTelephone: this.applyZt.contactTelephone,
+                    remark: null
+                }),
+                trademarkAndApplicantJson: JSON.stringify({
+                    type: arr[this.autoType],
+                    templateId: this.applyZt.id,
+                    name: this.name,
+                    explain: this.explain,
+                    exampleType: exampleType[2],
+                    exampleAddress: this.createdRes
+                        ? this.createdRes.fsPath
+                        : this.uploadRes.fsPath,
+                    classCreateWay: classCreateWay[this.brandType],
+                    suggestedFirstLevel: this.doMainIndex
+                        ? this.doMain[parseInt(this.doMainIndex)].id
+                        : null,
+                    suggestedSecondLevel: this.doMainchildIndex,
+                    applicantType: applicantType[parseInt(this.applyType)],
+                    applicantName: this.applyZt.applicantName,
+                    applicantCardNo: this.applyZt.applicantCardNo,
+                    businessLicenceArea: this.applyZt.businessLicenceArea,
+                    postalcode: this.applyZt.postalcode,
+                    businessLicenceAddress: this.applyZt.businessLicenceAddress,
+                    applicantCardFile: this.applyZt.applicantCardFile,
+                    businessLicenceFile: this.applyZt.businessLicenceFile,
+                    businessLicenceNo: this.applyZt.businessLicenceNo,
+                    proxyFile: this.uploadFile.fsPath,
+                    priorityFile: null
+                }),
+                trademarkClassListJson: JSON.stringify(codes)
+            };
+
+            sessionStorage.setItem("isFrom", true);
+            this.isNoTen = false
+            if (this.$route.query.id) {
+               this.$Http("/order/updateAutoOrder", obj, "post", true).then(res => {
+                    sessionStorage.setItem("isFrom", false);
+                    Cookies.remove("product");
+                    this.$router.replace("/order/pay/" + res.data.data);
+                }); 
+           } else {
+                this.$Http("/order/saveAutoOrder2", obj, "post", true).then(res => {
+                    sessionStorage.setItem("isFrom", false);
+                    Cookies.remove("product");
+                    this.$router.replace("/order/pay/" + res.data.data);
+                });
+           }
+            
+        }
+    },
+    computed: {
+        officeTotal() {
+            let total = 0;
+            if (parseInt(this.brandType)) {
+                this.selectAutoList.map(item => {
+                    if (item) {
+                        if (item.sonArr.length <= 10) {
+                            total += 300;
+                        } else {
+                            total += item.sonArr.length * 30;
+                        }
+                    }
+                });
+                return total;
+            }
+            this.selectList.map(item => {
+                if (item.sonArr.length <= 10) {
+                    total += 300;
+                } else {
+                    total += item.sonArr.length * 30;
+                }
+            });
+            return total;
+        }
+    },
+    watch: {
+        selectList() {
+            this.trademarkList.map(item => {
+                item.checked = false;
+                this.selectList.map(childItem => {
+                    if (item.id === childItem.id) {
+                        item.checked = true;
+                    }
+                });
+            });
+        }
+    }
+};
+</script>
+
+<style scoped lang="stylus">
+    @import "../../assets/css/order.styl";
+</style>
+

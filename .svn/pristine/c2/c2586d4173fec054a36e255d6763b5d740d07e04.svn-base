@@ -1,0 +1,37 @@
+<template>
+  <div class="content">
+    矮矮的
+  </div>
+</template>
+
+<script>
+export default {
+    head() {
+        return {
+            title: "个人中心-知千秋",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    layout: 'center',
+    components: {
+    }
+};
+</script>
+
+<style scoped>
+
+</style>
+

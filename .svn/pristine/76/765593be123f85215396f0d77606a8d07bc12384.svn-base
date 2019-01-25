@@ -1,0 +1,264 @@
+<template>
+  <div class="content">
+    <div class="news-lists-wrap">
+      <div class="news-lists">
+        <!-- start mytab -->
+        <div class="mytab">
+          <ul class=" mytap-header">
+            <li class="list selected"><a href="/news/index">全部</a></li>
+            <li class="list"><a href="/news/index/1">行业新闻</a></li>
+            <li class="list"><a href="/news/index/2">权先声</a></li>
+            <li class="list"><a href="/news/index/27">知产知识</a></li>
+            <li class="list"><a href="/news/index/28">数据报告</a></li>
+          </ul>
+          <div class="mytap-body">
+            <!-- content 全部 -->
+            <div class="content selected">
+              <ul class="item">
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">26</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12875" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/26/cfbb61eac7ca0c44ca7c7826df5e4229.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12875" target="_black">家具，拿什么保护你？——简评两则家具外观设计专利侵权案例</a></h3>
+                    <p><a class="a1" href="/news/show?id=12875" target="_black">
+                                         如果有人问：床板雕刻的图案由玫瑰改为牡丹，椅子靠背的四根鱼骨头改成三根，扶手椅子去掉两个扶手，茶几底部多加了底脚支撑，算不算外观设计侵权？                                     </a><a href="/news/show?id=12875" target="_black">［详细］</a></p>
+                    <span class="t">专利业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">26</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12874" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/26/6c36937f91c80242bf18838eae6d1193.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12874" target="_black">商标续展or重新注册？看完就明白了！</a></h3>
+                    <p><a class="a1" href="/news/show?id=12874" target="_black">
+                                         我国商标有效期是10年，到期后需要做商标续展。如果不续展，商标就作废了。当然，你也可以重新注册。不过，续展和注册可是有很大区别的！了解一下。                                    </a><a href="/news/show?id=12874" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">26</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12873" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/26/d69a3fa6328abb562754539e8d7cf307.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12873" target="_black">你还敢说“大姨妈”来了？有人注册商标已被判赔200万！</a></h3>
+                    <p><a class="a1" href="/news/show?id=12873" target="_black">
+                                         “大姨妈”一个亲属的称谓，一个女性生理周期的通俗叫法，一个生活中人人都可以用的词，但是这家公司把这个注册商标用在产品上却被法院判赔200万元...                                     </a><a href="/news/show?id=12873" target="_black">［详细］</a></p>
+                    <span class="t">行业新闻</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">25</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12872" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/25/626bd7a68b716522967182a84f6b832c.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12872" target="_black">一枚小商标质押贷款竟然换得1,000万！商标起名到底怎么取才能有大价值？</a></h3>
+                    <p><a class="a1" href="/news/show?id=12872" target="_black">
+                                         说起兰州的牛肉面馆，大家是不是脑子里立刻浮现了遍及全国各地的兰州拉面呢？                                    </a><a href="/news/show?id=12872" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">25</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12871" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/25/cce29aa1d898d89f85625cf4da144814.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12871" target="_black">一次破产、三次改名！通讯巨头转型专利运营，2500件专利年入2.5亿</a></h3>
+                    <p><a class="a1" href="/news/show?id=12871" target="_black">
+                                         前段时间，Unwired Planet起诉苹果的消息引起了果粉们的注意。起诉华为、讨伐苹果：16名员工、2500件专利年营收2.5亿                                     </a><a href="/news/show?id=12871" target="_black">［详细］</a></p>
+                    <span class="t">行业新闻</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">25</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12870" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/25/696f60f0f56550eeeb3baf8fed854be2.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12870" target="_black">这些商标注册的骗局要警惕！</a></h3>
+                    <p><a class="a1" href="/news/show?id=12870" target="_black">
+                                         知识产权一向是冷门行业，也是这几年国家大力宣传推广之后，才逐渐为更多人所知。在这类行业里，普通人想要在短期内精通必然是很难的，因为需要专业知识贮备。                                    </a><a href="/news/show?id=12870" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">21</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12869" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/21/b5e26f7c442ac332fe17e9495334a990.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12869" target="_black">蓝月亮公司申请“月亮节”商标注册遭驳回！</a></h3>
+                    <p><a class="a1" href="/news/show?id=12869" target="_black">
+                                         自2013年8月启动首届“蓝月亮节”以来，广州蓝月亮实业有限公司（下称蓝月亮）已将其作为一年一度的大型盛会。然而，蓝月亮欲在教育、安排和组织会议等服务上申请“月.....                                    </a><a href="/news/show?id=12869" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">21</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12868" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/21/fd6576445163288cfe8b4c3194e109c5.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12868" target="_black">注册商标前期工作之商标查询是非常重要的</a></h3>
+                    <p><a class="a1" href="/news/show?id=12868" target="_black">
+                                         “商标查询”是指在提交商标注册申请文件前，商标注册申请人自行或委托商标代理机构，通过商标局官网等渠道，以查询自己准备注册申请的商标是否与他人已经成功注册或提交申.....                                    </a><a href="/news/show?id=12868" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">21</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12867" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/21/c432bb50356f423a4263f069ab0ce1bc.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12867" target="_black">十年“掐架” 南北“稻香村”注册商标之争走到线上</a></h3>
+                    <p><a class="a1" href="/news/show?id=12867" target="_black">
+                                         不过，在这份惬意的背后却是商家的激烈搏杀。最近，知名糕点品牌“稻香村”的注册商标争夺再次进入公众视野。北稻苏稻围绕“临时线上销售禁令”斗起了法……                                     </a><a href="/news/show?id=12867" target="_black">［详细］</a></p>
+                    <span class="t">行业新闻</span>
+                  </div>
+                </li>
+                <li class="list">
+                  <div class="list-l">
+                    <span class="time-day">20</span>
+                    <span class="time-month">2018-09</span>
+                  </div>
+                  <div class="list-m"><a href="/news/show?id=12866" target="_black"><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2018/09/20/8d75a70318988d42aad143f4588840da.jpg?x-oss-process=image/resize,m_lfit,w_235" target="_black"></a></div>
+                  <div class="list-r">
+                    <h3><a href="/news/show?id=12866" target="_black">商标侵权的形式及需承担的责任</a></h3>
+                    <p><a class="a1" href="/news/show?id=12866" target="_black">
+                                         商标侵权指行为人未经商标权人许可，在相同或类似商品上使用与其注册商标相同或近似的商标，或者其他干涉、妨碍商标权人使用其注册商标，损害商标权人合法权益的其他行为。.....                                    </a><a href="/news/show?id=12866" target="_black">［详细］</a></p>
+                    <span class="t">商标业务</span>
+                  </div>
+                </li>
+              </ul>
+              <!-- <div class="myloading">
+                            <em class="icon icon-loading"></em>
+                            <span class="text">内容加载中</span>
+                        </div> -->
+              <!-- start 分页 -->
+              <div class="paging">
+                <ul class="pagination">
+                  <li class="prev disabled"><span>上一页</span></li>
+                  <li class="active"><a href="/news/index-1" data-page="0">1</a></li>
+                  <li><a href="/news/index-2" data-page="1">2</a></li>
+                  <li><a href="/news/index-3" data-page="2">3</a></li>
+                  <li><a href="/news/index-4" data-page="3">4</a></li>
+                  <li><a href="/news/index-5" data-page="4">5</a></li>
+                  <li><a href="/news/index-6" data-page="5">6</a></li>
+                  <li><a href="/news/index-7" data-page="6">7</a></li>
+                  <li><a href="/news/index-8" data-page="7">8</a></li>
+                  <li><a href="/news/index-9" data-page="8">9</a></li>
+                  <li><a href="/news/index-10" data-page="9">10</a></li>
+                  <li class="next"><a href="/news/index-2" data-page="1">下一页</a></li>
+                  <li style="width:28px;height:26px;color:#777;margin-left:52px;">到第</li>
+                  <input class="j-input" type="text" value="1">
+                  <input class="j-btn" type="button" value="确定" onclick="javascript:var page=this.previousSibling.value<=0?1:this.previousSibling.value;location='/news/index?page='+page+''">
+                </ul>
+              </div>
+              <!-- end 分页 -->
+            </div>
+            <!-- end content 全部 -->
+          </div>
+          <!-- end mytab -->
+        </div>
+      </div>
+    </div>
+    <to-top />
+  </div>
+</template>
+<script>
+import toTop from '@/components/toTop'
+export default {
+  head() {
+    return {
+      title: "资讯-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  components: {
+    toTop
+  }
+};
+
+</script>
+<style scoped>
+
+
+.news-lists-wrap .news-lists{ width: 100%; }
+.news-lists-wrap .news-lists{ width: 1240px; margin: auto; }
+.news-lists-wrap .mytab .mytap-header{ margin-top: 40px; }
+.news-lists-wrap .mytab .mytap-header .list{ margin-right: 0;}
+.news-lists-wrap .mytab .mytap-header .list a{ background-color: #f5f5f5;}
+.mytab .mytap-header .list a{
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+.news-lists-wrap .mytab .mytap-body .content{ padding-top: 25px; }
+.news-lists-wrap .mytab .mytap-body .content .list{ *zoom: 1; padding: 20px 0; border-bottom: dotted 1px #ebebeb; }
+.news-lists-wrap .mytab .mytap-body .content .list:after{ content: ""; display: block; clear: both; height: 0; visibility: hidden; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-l, .news-lists-wrap .mytab .mytap-body .content .list .list-m, .news-lists-wrap .mytab .mytap-body .content .list .list-r{ display: block; float: left; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-l{ width: 92px; height: 135px; text-align: center; color: #dbdbdb; cursor: default; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-l .time-day{ display: block; font-size: 60px; font-weight: bold; line-height: 55px; margin: 25px 0 0; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-l .time-month{ display: block; font-size: 18px; line-height: 28px; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-m{ width: 235px; height: 135px; margin: 0 35px 0 80px; background-color: #f08c2f; overflow: hidden; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-m img{ width: 100%;
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+.news-lists-wrap .mytab .mytap-body .content .list .list-r{ width: 760px; height: 135px; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r h3{ }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r h3 a{ font-size: 20px; font-weight: bold; color: #555; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r p{ padding: 12px 0 0; height: 80px; line-height: 27px; overflow: hidden; color: #999; font-size: 14px; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r p .a1{ color: #999; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r p a{ color: #f08c2f; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-r .t{ color: #f08c2f; font-size: 12px; }
+.news-lists-wrap .mytab .mytap-body .content .list:hover .list-l{ color: #f08c2f; }
+.news-lists-wrap .mytab .mytap-body .content .list .list-m:hover img{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.news-lists-wrap .mytab .mytap-body .content .list:hover .list-l{ color: #f08c2f; }
+.news-lists-wrap .mytab .mytap-body .content .list:hover .list-r h3 a{ color: #f08c2f; }
+
+.mytab .mytap-header{ overflow: hidden; border-left: solid 1px #eee; }
+.mytab .mytap-header .list{ float: left; margin-left: -1px; }
+.mytab .mytap-header .list a{ display: block; padding: 0 15px; height: 40px; line-height: 40px; text-align: center; color: #555; border: solid 1px #eee; }
+.mytab .mytap-header .list a:hover{ color: #fff; background-color: #f08c2f; border: solid 1px #f08c2f; }
+.mytab .mytap-header .list.selected a{ color: #fff; background-color: #f08c2f; border: solid 1px #f08c2f; }
+.mytab .mytap-body .content{ display: none; }
+.mytab .mytap-body .content.selected{ display: block; }
+</style>

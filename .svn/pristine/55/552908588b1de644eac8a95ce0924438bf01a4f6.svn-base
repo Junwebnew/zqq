@@ -1,0 +1,184 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+
+const _4eccf009 = () => import('..\\pages\\show.vue' /* webpackChunkName: "pages_show" */).then(m => m.default || m)
+const _fba5ef48 = () => import('..\\pages\\404.vue' /* webpackChunkName: "pages_404" */).then(m => m.default || m)
+const _657126c3 = () => import('..\\pages\\news\\index.vue' /* webpackChunkName: "pages_news_index" */).then(m => m.default || m)
+const _26d04d01 = () => import('..\\pages\\center\\index.vue' /* webpackChunkName: "pages_center_index" */).then(m => m.default || m)
+const _4a8f6c9c = () => import('..\\pages\\brandmanage\\index.vue' /* webpackChunkName: "pages_brandmanage_index" */).then(m => m.default || m)
+const _0a4d4e0e = () => import('..\\pages\\patent\\index.vue' /* webpackChunkName: "pages_patent_index" */).then(m => m.default || m)
+const _b456c892 = () => import('..\\pages\\copyright\\index.vue' /* webpackChunkName: "pages_copyright_index" */).then(m => m.default || m)
+const _4e81a872 = () => import('..\\pages\\classify\\index.vue' /* webpackChunkName: "pages_classify_index" */).then(m => m.default || m)
+const _216ff5d0 = () => import('..\\pages\\question\\index.vue' /* webpackChunkName: "pages_question_index" */).then(m => m.default || m)
+const _3b69f412 = () => import('..\\pages\\brand\\index.vue' /* webpackChunkName: "pages_brand_index" */).then(m => m.default || m)
+const _4dcd468b = () => import('..\\pages\\search\\searchPage.vue' /* webpackChunkName: "pages_search_searchPage" */).then(m => m.default || m)
+const _23422222 = () => import('..\\pages\\question\\show.vue' /* webpackChunkName: "pages_question_show" */).then(m => m.default || m)
+const _73608151 = () => import('..\\pages\\search\\result.vue' /* webpackChunkName: "pages_search_result" */).then(m => m.default || m)
+const _902b03ae = () => import('..\\pages\\brandmanage\\addmanagementcompany.vue' /* webpackChunkName: "pages_brandmanage_addmanagementcompany" */).then(m => m.default || m)
+const _b9da9824 = () => import('..\\pages\\brandmanage\\list.vue' /* webpackChunkName: "pages_brandmanage_list" */).then(m => m.default || m)
+const _506b58c8 = () => import('..\\pages\\news\\show.vue' /* webpackChunkName: "pages_news_show" */).then(m => m.default || m)
+const _57b19785 = () => import('..\\pages\\search\\detail.vue' /* webpackChunkName: "pages_search_detail" */).then(m => m.default || m)
+const _627bd014 = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
+const _95a9a3a0 = () => import('..\\pages\\404.vue' /* webpackChunkName: "" */).then(m => m.default || m)
+
+
+
+if (process.client) {
+  window.history.scrollRestoration = 'manual'
+}
+const scrollBehavior = function (to, from, savedPosition) {
+  // if the returned position is falsy or an empty object,
+  // will retain current scroll position.
+  let position = false
+
+  // if no children detected
+  if (to.matched.length < 2) {
+    // scroll to the top of the page
+    position = { x: 0, y: 0 }
+  } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+    // if one of the children has scrollToTop option set to true
+    position = { x: 0, y: 0 }
+  }
+
+  // savedPosition is only available for popstate navigations (back button)
+  if (savedPosition) {
+    position = savedPosition
+  }
+
+  return new Promise(resolve => {
+    // wait for the out transition to complete (if necessary)
+    window.$nuxt.$once('triggerScroll', () => {
+      // coords will be used if no selector is provided,
+      // or if the selector didn't match any element.
+      if (to.hash) {
+        let hash = to.hash
+        // CSS.escape() is not supported with IE and Edge.
+        if (typeof window.CSS !== 'undefined' && typeof window.CSS.escape !== 'undefined') {
+          hash = '#' + window.CSS.escape(hash.substr(1))
+        }
+        try {
+          if (document.querySelector(hash)) {
+            // scroll to anchor by returning the selector
+            position = { selector: hash }
+          }
+        } catch (e) {
+          console.warn('Failed to save scroll position. Please add CSS.escape() polyfill (https://github.com/mathiasbynens/CSS.escape).')
+        }
+      }
+      resolve(position)
+    })
+  })
+}
+
+
+export function createRouter () {
+  return new Router({
+    mode: 'history',
+    base: '/',
+    linkActiveClass: 'nuxt-link-active',
+    linkExactActiveClass: 'nuxt-link-exact-active',
+    scrollBehavior,
+    routes: [
+		{
+			path: "/show",
+			component: _4eccf009,
+			name: "show"
+		},
+		{
+			path: "/404",
+			component: _fba5ef48,
+			name: "404"
+		},
+		{
+			path: "/news",
+			component: _657126c3,
+			name: "news"
+		},
+		{
+			path: "/center",
+			component: _26d04d01,
+			name: "center"
+		},
+		{
+			path: "/brandmanage",
+			component: _4a8f6c9c,
+			name: "brandmanage"
+		},
+		{
+			path: "/patent",
+			component: _0a4d4e0e,
+			name: "patent"
+		},
+		{
+			path: "/copyright",
+			component: _b456c892,
+			name: "copyright"
+		},
+		{
+			path: "/classify",
+			component: _4e81a872,
+			name: "classify"
+		},
+		{
+			path: "/question",
+			component: _216ff5d0,
+			name: "question"
+		},
+		{
+			path: "/brand",
+			component: _3b69f412,
+			name: "brand"
+		},
+		{
+			path: "/search/searchPage",
+			component: _4dcd468b,
+			name: "search-searchPage"
+		},
+		{
+			path: "/question/show",
+			component: _23422222,
+			name: "question-show"
+		},
+		{
+			path: "/search/result",
+			component: _73608151,
+			name: "search-result"
+		},
+		{
+			path: "/brandmanage/addmanagementcompany",
+			component: _902b03ae,
+			name: "brandmanage-addmanagementcompany"
+		},
+		{
+			path: "/brandmanage/list",
+			component: _b9da9824,
+			name: "brandmanage-list"
+		},
+		{
+			path: "/news/show",
+			component: _506b58c8,
+			name: "news-show"
+		},
+		{
+			path: "/search/detail",
+			component: _57b19785,
+			name: "search-detail"
+		},
+		{
+			path: "/",
+			component: _627bd014,
+			name: "index"
+		},
+		{
+			path: "*",
+			component: _95a9a3a0,
+			name: "custom"
+		}
+    ],
+    
+    
+    fallback: false
+  })
+}

@@ -1,0 +1,202 @@
+<template>
+  <div class="content">
+    <div class="accountSecurity-page order-page">
+      <h2 class="order-main-title">账户安全</h2>
+      <!-- start section1 -->
+      <div class="section1 clearfix">
+        <a class="safe-level">
+        <span class="s1">安全级别：</span>
+            <span class="column-2 s2">
+                <i class="bgcolor" style="width: 60%;background-color:#FF9900"></i>
+             </span>
+            <span class="s3">
+                <i class="icon icon-mid"></i><span>中</span>
+            </span>
+                            <span class="column-4">建议您启动全部设置，以保障账户安全。</span>
+                    </a>
+      </div>
+      <!-- end section1 -->
+      <!-- start section2 -->
+      <div class="section2">
+        <table width="100%">
+          <tbody>
+            <tr>
+              <td class="column-1"><i class="iconfont icon-duigou">&#xe770;</i>登录密码</td>
+              <td class="column-2 songti">|</td>
+              <td class="column-3">安全性高的密码可以使您的账号更安全，建议您定期的更改密码。</td>
+              <td class="column-4">
+                <a class="color" href="/center/flow">设置</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="column-1"><i class="iconfont icon-jinggao">&#xe8ed;</i>邮箱验证</td>
+              <td class="column-2 songti">|</td>
+              <td class="column-3"><span class="s1">建议您绑定邮箱，以便于接收权大师给您发送的重要通知。</span>
+              </td>
+              <td class="column-4"><a class="color" href="/center/flow">绑定</a></td>
+            </tr>
+            <tr>
+              <td class="column-1"><i class="iconfont icon-duigou">&#xe770;</i>手机验证</td>
+              <td class="column-2 songti">|</td>
+              <td class="column-3">您验证的手机189****0312若丢失或停用，请立即更换，避免账户被盗。</td>
+              <td class="column-4">
+                <a class="color" href="/center/flow">更换</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="column-1"><i class="iconfont icon-jinggao">&#xe8ed;</i>微信</td>
+              <td class="column-2 songti">|</td>
+              <td class="column-3"><span class="s1">建议您授权微信登录权大师提高账号安全。</span></td>
+              <td class="column-4">
+                <a class="color" href="https://open.weixin.qq.com/connect/qrconnect?appid=wxda1517190b7bcdfb&amp;redirect_uri=https://account.quandashi.com/passport/auth-login&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE#wechat_redirect">未授权</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="column-1"><i class="iconfont icon-duigou">&#xe770;</i>QQ</td>
+              <td class="column-2 songti">|</td>
+              <td class="column-3">您的QQ********已授权登录权大师，为了账号内资料安全，请绑定手机号。</td>
+              <td class="column-4">
+                <a class="color" href="javacript:void(0)">已授权</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- end section2 -->
+      <!-- start section3 -->
+      <div class="section3 songti">
+        <h6>安全服务提升</h6>
+        <p>1.确认您登录的是权大师网址http://www.quandashi.com，注意防范进入钓鱼网站，不要轻信各种即时通讯工具发送的服务或支付链接，谨防网络诈骗。</p>
+        <p>2.建议您安装杀毒软件，并定期更新操作系统等软件补丁，确保账户及交易安全。</p>
+      </div>
+      <!-- end section3 -->
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  head() {
+    return {
+      title: "个人中心-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  layout: 'center',
+  components: {}
+};
+
+</script>
+<style scoped>
+
+.color {
+    color: #ff7200;
+}
+.safe-level {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+.safe-level-complete{
+    display: inline-block;
+    margin-left: 15px;
+    color: #ff7200;
+    vertical-align: middle;
+}
+.safe-level .s1 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.safe-level .s2 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.safe-level .s3 {
+    display: inline-block;
+    line-height: 12px;
+    color: #ff0000;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.safe-level .s3 .icon {
+    margin-right: 3px;
+    vertical-align: middle;
+}
+
+.safe-level .s3 span {
+    vertical-align: middle
+}
+
+.accountSecurity-page{  }
+.accountSecurity-page .section1 .column-1{ font-size: 16px; }
+.accountSecurity-page .section1 .column-2{ width: 260px; height: 12px; background-color: #ddd; }
+.accountSecurity-page .section1 .column-2 .bgcolor{ display: block; height: 100%; background-color: #ff0000; }
+.accountSecurity-page .section1 .column-3{  margin: 0px 0 0 10px; color: #ff0000; }
+.accountSecurity-page .section1 .column-3 .iconfont{ font-size: 18px; margin: -1px 3px 0 0; }
+.accountSecurity-page .section1 .column-4{ font-size: 12px; margin: 2px 0 0 30px; color: #999; }
+.accountSecurity-page .section2{ margin-top: 50px; }
+.accountSecurity-page .section2 td{ padding: 18px 0; border-top: solid 1px #eee; border-bottom: solid 1px #eee; }
+.accountSecurity-page .section2 .column-1{ width: 110px; padding-left: 5px; font-size: 16px; }
+.accountSecurity-page .section2 .column-1 .iconfont{ color: #94d16d; font-size: 16px; margin-right: 15px; }
+.accountSecurity-page .section2 .column-1 .icon-jinggao{ color: #f19038; }
+.accountSecurity-page .section2 .column-2{ width: 80px; text-align: center; color: #ddd; }
+.accountSecurity-page .section2 .column-3{ width: 590px; color: #666; font-size: 14px; }
+.accountSecurity-page .section2 .column-3 .s1{ color: #ff0000; }
+.accountSecurity-page .section2 .column-4{ width: 70px; text-align: center; font-size: 14px;}
+.accountSecurity-page .section3{ width: 850px; margin-top: 50px; color: #aaa; font-size: 12px; border: solid 1px #eee; padding: 15px 22px; position: relative; }
+.accountSecurity-page .section3 h6{ position: absolute; top: -8px; left: 50px; padding: 0 10px; background-color: #fff; }
+.accountSecurity-page .section3 p{ padding: 8px 0; }
+
+.order-main-title{
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 2.8em;
+    font-weight: normal;
+    border-bottom: 1px solid #e2e3e8;
+}
+.order-page{
+    padding: 20px;
+    padding-top: 0px;
+    min-height: 700px;
+    background-color: #fff;
+    box-shadow:0 4px 6px 0 rgba(113,114,119,0.10);
+}
+.order-page .no-pay-tips{
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #999;
+}
+.order-page .no-pay-tips .icon{
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+}
+.order-page .no-pay-tips span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.order-page .price-box{
+    padding-right: 20px;
+    text-align: right;
+}
+.order-page .price-box .button{
+    margin-left: 20px;
+    width: 120px;
+    line-height: 32px;
+    text-align: center;
+}
+
+</style>

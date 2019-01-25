@@ -1,0 +1,27 @@
+<template>
+    <div>
+        <nuxt/>
+        <toolBox/>
+        <toTop/>
+    </div>
+</template>
+<script>
+import toolBox from "~/components/toolBox";
+import toTop from "~/components/toTop.vue";
+
+export default {
+    head() {
+        return {
+            title: "知千秋|商标查询|商标注册|专利查询|专利申请|版权登记"
+        };
+    },
+    mounted() {
+        if (this.$store.state.userInfo)
+            sessionStorage.setItem("userId", this.$store.state.userInfo.userId);
+    },
+    components: { toolBox, toTop }
+};
+</script>
+<style>
+</style>
+

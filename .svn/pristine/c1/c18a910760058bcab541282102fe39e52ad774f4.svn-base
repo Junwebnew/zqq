@@ -1,0 +1,403 @@
+<template>
+  <div class="have-answer">
+      <!-- start item-->
+      <p class="noData" v-if="!total">暂无相关数据</p>
+      <ul class="item" v-if="total">
+        <li class="list" v-for="item in list" :key="item.question.id">
+          <div class="t-title">
+              <div class="c-td t-1">
+                  <em class="icon">[{{item.question.question}}]</em>
+                  <span class="s1"><a :href="'/question/show/'+item.question.id+'.html'">{{item.question.question}}</a></span>
+              </div>
+              <div class="c-td t-4 t-icon">
+                  <span class="s1">已有 <i class="color">{{item.question.answerCount}}</i> 人回答</span>
+              </div>
+          </div>
+          <div class="t-p" v-if="item.answer"><a :href="'/question/show/'+item.question.id+'.html'" >{{item.answer.answer}}</a></div>
+          <dl class="t-bottom" v-if="item.answer">
+            <dt class="t-b-1">{{item.question.keyWord}}</dt>
+            <dt class="t-b-2">
+              <em class="iconfont">&#xe636;</em>
+              <span class="s1">{{item.answer.createrName}}</span>
+            </dt>
+            <dt class="t-b-3">
+              <em class="iconfont">&#xe629;</em>
+              <span class="s1">{{item.answer.createTime}}</span>
+            </dt>
+          </dl>
+        </li>
+      </ul>
+      <!-- end item -->
+      <!-- start 分页 -->
+      <div class="paging">
+        <pagination :totalPage="total" :pageNum="pageNum"  :pageSize="pageSize" @pagechange="pagechange" />
+      </div>
+      <!-- end 分页 -->
+    </div>
+</template>
+<script>
+import toTop from '@/components/toTop'
+import axios from 'axios'
+import pagination from "~/components/pagination.vue";
+
+export default {
+  async asyncData ({ params, redirect, error, env, store }) {
+      if (!params.type) {
+        error({statusCode: 500, message: '参数错误'})
+        return false
+      } 
+      if (isNaN(params.type)) {
+        let paramsTemp = params.type.split('.')[0]
+        let pageSize = 10
+        let pageNum = paramsTemp.split(',')[1] || 1
+        let keyword = paramsTemp.split(',')[2] || ''
+        let res = ''
+        if (!keyword) {
+          res = await axios.get(`${env.baseUrl}/question/pageQueryByTypeLevel1Code?typeLevel1Code=${paramsTemp.split(',')[0]}&pageSize=${pageSize}&pageNum=${pageNum}`)
+        } else {
+          res = await axios.get(`${env.baseUrl}/question/pageQueryByKeyWord?typeLevel1Code=${paramsTemp.split(',')[0]}&pageSize=${pageSize}&pageNum=${pageNum}&keyword=${keyword}`)
+        }
+        
+        // 不存在数据
+        return {
+           list: res.data.data?res.data.data.list: [],
+           total: res.data.data?res.data.data.count: 0,
+           pageNum: Number(pageNum),
+           pageSize
+        }
+      }
+  },
+  head() {
+    return {
+      title: "问答专区-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "商标查询，中国商标官网查询，商标搜索，商标检索，知千秋，权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  components: {
+    toTop,
+    pagination
+  },
+  layout: 'question',
+  mounted() {
+
+  },
+  methods: {
+    pagechange (page) {
+      let keyWord = this.$route.params.type.split('.')[0].split(',')
+      if (keyWord.length == 3) {
+        keyWord = keyWord[2]
+      } else {
+        keyWord = ''
+      }
+      this.$router.push(`/question/${this.list[0].question.typeLevel1Code},${page},${keyWord}.html`)
+    }
+  }
+};
+
+</script>
+<style scoped>
+/* ---------- start 权知道 ---------- */
+.noData{
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 30px;
+}
+/* 已回答、等我回答tab列表 */
+
+.qianzhidaoQA-wrap .mytab .mytap-body .mytab .mytap-header-2 .list {
+  margin-right: -1px;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .mytab .mytap-header-2 .list:hover {
+  background-color: #fff;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .mytab .mytap-header-2 .list a {
+  padding: 0 50px;
+  background-color: #fff;
+  color: #999;
+  border: solid 1px #f0f0f0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .mytab .mytap-header-2 .list.selected a {
+  background-color: #fff;
+  color: #f08b30;
+  border: solid 1px #f0f0f0;
+  border-top: solid 3px #f08b30;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list {
+  padding: 25px 15px;
+  border-bottom: dashed 1px #f0f0f0;
+  overflow: hidden;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list:hover {
+  background-color: #f9f9f9;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .c-td {
+  float: left;
+  height: 18px;
+  line-height: 18px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .c-td .icon {
+  float: left;
+  width: 14px;
+  height: 14px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .c-td .s1 {
+  display: block;
+  float: left;
+  width: 100%;
+  margin-left: -14px;
+  padding: 0 10px 0 20px;
+  font-size: 12px;
+  color: #999;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .c-td .s1 a {
+  color: #999;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .c-td .s1 a:hover {
+  color: #f08c2e;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-1 {
+  width: 810px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-1 .icon {
+  width: auto;
+  line-height: 17px;
+  margin-right: 10px;
+  font-size: 12px;
+  color: #f08c2e;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-1 .s1 {
+  color: #777;
+  font-size: 14px;
+  margin-left: -160px;
+  padding-left: 160px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-2 {
+  width: 160px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-2 .icon {
+  margin: 2px 0 0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-3 {
+  width: 110px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-3 .icon {
+  width: 16px;
+  height: 9px;
+  margin: 4px 0 0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-3 .s1 {
+  margin-left: -16px;
+  padding: 0 10px 0 22px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-4 {
+  width: 150px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-4 .icon {
+  margin: 2px 0 0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-5 {
+  width: 120px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-5 .s1 a {
+  color: #f08b30;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .list .t-5 .icon {
+  margin: 2px 0 0;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .mypaging {
+  margin-top: 35px;
+  text-align: left;
+}
+
+
+/*已回答*/
+
+.qianzhidaoQA-wrap .mytab .mytap-body .content {
+  overflow: hidden;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer {
+  width: 970px;
+  float: left;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list {
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-title {
+  overflow: hidden;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-title .t-1 {
+  width: 685px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-title .t-3 {
+  width: 100px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-title .t-4 {
+  width: 120px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-title .t-4 .s1 {
+  margin: 0;
+  padding: 0 10px 0 0px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-p {
+  padding: 12px 0px 0;
+  font-size: 12px;
+  color: #999;
+  line-height: 24px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-p a {
+  color: #999;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-p a:hover {
+  color: #f08b30;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom {
+  overflow: hidden;
+  padding: 15px 0 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom dt {
+  float: left;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom .t-b-1 {
+  width: 240px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom .t-b-2 {
+  width: 160px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom .icon {
+  float: left;
+  width: 14px;
+  height: 14px;
+}
+
+.qianzhidaoQA-wrap .mytab .mytap-body .have-answer .list .t-bottom .s1 {
+  width: 100%;
+  margin-left: -14px;
+  padding: 0 10px 0 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+/*搜索无结果*/
+
+.qianzhidaoQA-wrap .no-search-result {
+  height: 80px;
+  color: #777;
+  border: dashed 1px #f0f0f0;
+  padding: 10px 22px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl {
+  height: 100%;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dt {
+  float: left;
+  height: 100%;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dt .icon {
+  width: 54px;
+  height: 54px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dd {
+  float: left;
+  height: 100%;
+  margin-left: 22px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dd .p1 {
+  padding: 6px 0 5px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dd .p1 .color {
+  color: #555;
+  font-size: 16px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dd .p2 {
+  font-size: 12px;
+}
+
+.qianzhidaoQA-wrap .no-search-result dl dd .p2 .color {
+  color: #ee8c3c;
+  display: inline-block;
+  padding: 0 3px;
+}
+
+
+/*搜索数量*/
+
+.qianzhidaoQA-wrap .search-number {
+  padding: 28px 2px 20px;
+  color: #999;
+  font-size: 12px;
+  border-bottom: solid 1px #f0f0f0;
+}
+
+.qianzhidaoQA-wrap .search-number .color {
+  color: #ee8c3c;
+  display: inline-block;
+  padding: 0 2px;
+}
+</style>

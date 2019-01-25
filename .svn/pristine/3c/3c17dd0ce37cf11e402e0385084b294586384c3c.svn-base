@@ -1,0 +1,106 @@
+<template>
+    <div>
+        <mini/>
+        <div class="w">
+            <div class="breadcrumb">
+                <span>当前位置：</span>
+                <span class="breadcrumb-title col">初审公告详情</span>
+            </div>
+            <div class="page-detail ">
+                <div class="btns fr">
+                    <a href="/search/notice/notice-detail?id=7470405&amp;issue=1614&amp;down=1&amp;name=MARCO+POLO" class="button button-white">下载</a>
+                    <a href="/index/searchdetail?brand=6b53314f4e58527642555150503754727169664231673d3d" class="button">商标详情</a>
+                </div>
+                <h2 class="f20 mb10">商标名称：{{json.name}}</h2>
+
+                <div class="content text-center" v-if="json.ggImgLocalData && json.ggImgLocalData.ggUrl">
+                    <img :src="json.ggImgLocalData.ggUrl" alt="">
+                </div>
+                <div v-else class="noMsg">
+                    暂无初审公告数据！
+                </div>
+            </div>
+        </div>
+        <toTop :showNav="'1'" />
+    </div>
+</template>
+<script>
+import mini from "~/components/header/mini";
+import toTop from "~/components/toTop";
+import axios from "axios";
+import { Http } from "~/plugins/axios.js";
+import qs from "qs";
+
+export default {
+    layout: "empt",
+    async asyncData({ params, redirect, error, env }) {
+        let ids = params.details.split(/\.|_/)[1];
+
+        return {
+            id: ids
+        };
+
+        let requireOnj = qs.stringify({
+            id: ids
+        });
+
+        let { data } = await axios.post(
+            `${env.baseUrl}/term/getTradeMarkInfo`,
+            requireOnj
+        );
+        if (data.code == 0) {
+            return {
+                json: data.data,
+                id: ids
+            };
+        } else {
+            error({ statusCode: 500, message: data.msg });
+        }
+    },
+    components: {
+        mini,
+        toTop
+    },
+    mounted() {},
+    data() {
+        return {
+            id: "",
+            json: {}
+        };
+    },
+    methods: {}
+};
+</script>
+<style scoped>
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.breadcrumb {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.button.button-white {
+    color: #ff5c00;
+    background-color: #fff;
+    border: 1px solid #ff5c00;
+}
+.page-detail .btns .button {
+    display: inline-block;
+    margin-left: 10px;
+    width: 80px;
+    text-align: center;
+    line-height: 30px;
+}
+.content > img {
+    max-width: 100%;
+    margin-top: 16px;
+}
+.noMsg {
+    width: 100%;
+    line-height: 400px;
+    text-align: center;
+    font-size: 14px;
+}
+</style>

@@ -1,0 +1,269 @@
+<template>
+    <div class="minheader">
+        <div class="fixed">
+            <div class="wapper clear">
+                <div class="left">
+                    <div class="logo">
+                        <a href="/"><img src="../../assets/images/mini_logo.png" alt="知千秋"></a>
+                    </div>
+                    <ul class="clear">
+                        <li class="menu" @mouseover="isShow=1" @mouseout="isShow=0">
+                            <h1>
+                                <a href="javascript:void(0);">全部导航</a>
+                            </h1>
+                        </li>
+                        <li class="navLi">
+                            <a href="javascript:void(0);">商标注册<i class="icon icon-hot"></i></a>
+        
+                        </li>
+                        <li class="navLi">
+                            <a href="javascript:void(0);" @click="$store.commit('isShowToolBox',1)">智能工具</a>
+                        </li>
+                        <li class="navLi">
+                            <a href="javascript:void(0);">业务咨询<i class="icon icon-hot"></i></a>
+                            
+                        </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <a class="register" href="/register">注册</a>
+                    <a class="login" href="/login">登录</a>
+                    <div class="search">
+                        <div class="type" @mouseover="searchMouseover" @mouseout="searchMouseout">
+                            <b>{{search_type[search_type_index]}}</b>
+                            <div class="list" v-show="search_type_show">
+                                <a v-for="(item, index) in search_type" @click="()=>changeSeachType(index)" :key="item" href="javascript:void(0);">{{item}}</a>
+                            </div>
+                        </div>
+                        <input type="text" :placeholder="search_type[search_type_index]+'名称、申请号、申请人等信息'">
+                        <a href="javascript:void(0);" @click="searchPhoto" class="photo"></a>
+                        <a href="javascript:void(0);" class="btn-search"></a>
+                    </div>
+                    <form action="" method="post" class="none">
+                        <input class="select-input" ref="fileinput" type="file" name="fileinput" accept="image/png,image/gif,image/jpg,image/jpeg">
+                    </form>
+                </div>
+            </div>
+            <minNav @mouseFunc='showMinNav' :isShow='isShow' />
+        </div>
+    </div>
+</template>
+
+<script>
+import minNav from "../minNav";
+
+export default {
+    name: "miniHead",
+    data() {
+        return {
+            search_type_index: 0,
+            search_type_show: false,
+            search_type: ["商标", "专利", "企业"],
+            isShow: 0
+        };
+    },
+    components: { minNav },
+    methods: {
+        changeSeachType(i) {
+            this.search_type_index = i;
+            this.search_type_show = false;
+        },
+        searchMouseout(e) {
+            e.stopPropagation();
+            this.search_type_show = false;
+        },
+        searchMouseover(e) {
+            e.stopPropagation();
+            this.search_type_show = true;
+        },
+        searchPhoto() {
+            this.$refs.fileinput.click();
+        },
+        showMinNav(num) {
+            this.isShow = num;
+        }
+    }
+};
+</script>
+
+<style scoped lang='stylus'>
+    
+      
+.none {
+    display: none;
+}
+
+.minheader {
+    height: 70px;
+    margin: 0 auto;
+
+    >.fixed {
+        background: #fff;
+        line-height: 70px;
+        user-select: none;
+        position: fixed;
+        top: 0;
+        z-index: 99;
+        width: 100%;
+        border-bottom: 1px solid #f5f5f5;
+        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+
+        .wapper {
+            max-width: 1800px;
+            min-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+
+            .left {
+                float: left;
+
+                .logo {
+                    float: left;
+                }
+
+                ul {
+                    padding-left: 40px;
+                    float: left;
+
+                    li {
+                        float: left;
+
+                        a {
+                            display: block;
+                            padding-right: 30px;
+                            font-size: 16px;
+                            color: #333;
+                        }
+
+                        &.menu {
+                            position: relative;
+
+                            a {
+                                background: transparent url('../../assets/images/icon_menu.png') no-repeat left center;
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+
+                    .navLi {
+                        a:hover {
+                            color: #fd7d22;
+                        }
+                        .icon {
+                          display: inline-block;
+                          background-repeat: no-repeat;
+                        }    
+                        .icon-hot {
+                          width: 12px;
+                          height: 16px;
+                          margin: 10px 0 0 5px;
+                          background: url('../../assets/images/main/icon-hot.png') no-repeat center;
+                        }  
+                    }
+                }
+            }
+
+            .right {
+                float: right;
+                font-size: 14px;
+
+                >a {
+                    float: right;
+                    padding: 0 25px;
+                    line-height: 40px;
+                    height: 40px;
+                    background: #fd7d22;
+                    color: #fff;
+                    margin-top: 14px;
+                    border-radius: 5px;
+
+                    &.login {
+                        margin-right: 8px;
+                        background: transparent;
+                        border: 1px solid #ddd;
+                        color: #333;
+                    }
+                }
+
+                .search {
+                    float: right;
+                    background: #f5f5f5;
+                    height: 42px;
+                    margin-top: 14px;
+                    border-radius: 5px;
+                    margin-right: 5px;
+                    line-height: 36px;
+
+                    .type {
+                        width: 70px;
+                        text-indent: 15px;
+                        float: left;
+                        position: relative;
+
+                        b {
+                            font-weight: normal;
+                            color: #333;
+                            line-height: 40px;
+                            display: block;
+                        }
+
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            display: block;
+                            width: 0;
+                            height: 0;
+                            border: 5px solid #333;
+                            border-color: #333 transparent transparent transparent;
+                            top: 19px;
+                            right: 10px;
+                        }
+
+                        a {
+                            display: block;
+                            color: #333;
+                            line-height: 30px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+
+                        .list {
+                            background: #f5f5f5;
+                            padding: 5px 0 10px;
+                        }
+                    }
+
+                    input {
+                        border: 0;
+                        border-left: 1px solid #ddd;
+                        text-indent: 10px;
+                        width: 260px;
+                        background: #f5f5f5;
+                        height: 22px;
+                        line-height: 22px;
+                        vertical-align: middle;
+                    }
+
+                    .photo {
+                        display: inline-block;
+                        width: 27px;
+                        height: 23px;
+                        background: transparent url('../../assets/images/icon_photo.png') no-repeat left center;
+                        vertical-align: middle;
+                        margin-right: 25px;
+                    }
+
+                    .btn-search {
+                        display: inline-block;
+                        width: 27px;
+                        height: 22px;
+                        background: transparent url('../../assets/images/icon_search.png') no-repeat left center;
+                        vertical-align: middle;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>

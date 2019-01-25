@@ -1,0 +1,93 @@
+<template>
+    <div>
+        <div class="main_head pos_re">
+            <div class="fl">
+                <router-link to='/'><img src="../../assets/images/main/logo.png" alt="logo" class="logo"></router-link>
+                <span class='text'>大数据+知识产权智能化服务平台</span>
+            </div>
+            <ul class="fr nav">
+                <li class="fr" v-if="!$store.state.userInfo">
+                    <router-link to='/passport/login'>登录</router-link>
+                </li>
+                <li class="fr center" v-if="$store.state.userInfo">
+                    <router-link to='/center'>
+                        <i class="iconfont">&#xe636;</i>{{$store.state.userInfo.nikename?$store.state.userInfo.nikename:$store.state.userInfo.phoneNo}}</router-link>
+                </li>
+                <li class="fr">
+                    <a href="javascript:;" onclick="var left = (window.screen.width-10-800)/2; window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', '', 'height=600, width=800,top=200, left='+left)">客户服务</a>
+
+                </li>
+                <li class="fr">
+                    <a v-if="$store.state.docArr.length" target="_blank" :href="'/question/' + $store.state.docArr[0].code+'.html' ">帮助中心</a>
+                </li>
+                <li class="fr" v-if="$store.state.userInfo">
+                    <router-link to='/center'>我的知千秋</router-link>
+                </li>
+            </ul>
+            <div class="freeReg" v-if="!$store.state.userInfo">
+                <router-link to='/passport/register'>免费注册</router-link>
+            </div>
+        </div>
+    </div>
+</template>
+  <script>
+export default {
+    created() {},
+    components: {}
+    // layout: "default"
+};
+</script>
+<style scoped>
+.main_head {
+    height: 42px;
+    width: 100%;
+    background: #282b3a;
+    color: #fff;
+    padding-left: 50px;
+    line-height: 40px;
+    border-bottom: 1px solid #666;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.main_head .text {
+    margin-left: 30px;
+}
+.nav > li {
+    margin-right: 40px;
+}
+.nav > li a {
+    color: #fff;
+}
+.nav > li.center a {
+    vertical-align: middle;
+}
+.nav > li.center a i {
+    font-size: 16px;
+    margin-right: 5px;
+    position: relative;
+    top: 1px;
+}
+.freeReg {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    width: 120px;
+    height: 56px;
+    line-height: 56px;
+    background: #4d5165;
+    color: #fff;
+    border-radius: 0 0 0 4px;
+    text-align: center;
+    z-index: 2;
+}
+.freeReg a {
+    background: #4d5165;
+    color: #fff;
+    font-size: 16px;
+}
+.freeReg a:hover,
+.nav > li a:hover {
+    color: #fd7d22;
+}
+</style>

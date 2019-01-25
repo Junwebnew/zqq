@@ -1,0 +1,396 @@
+<template>
+  <div class="content">
+    <div class="banner">
+        <a href="#"><img width="1920" src="../../assets/images/brand/bannerTop.jpg" alt=""></a>
+    </div>
+    <div class="tab-catalog-00">
+        <div class="w1200">
+            <a class="atthis" href="#handle">办理商标注册</a>
+            <a href="#search">查询是否可以注册</a>
+            <a href="#defuse">商标障碍化解</a>
+            <a href="#objection">异议他人商标</a>
+            <a href="#change">商标信息变更</a>
+            <a href="#international">国际商标业务</a>
+        </div>
+    </div>
+    <div id="handle" class="w1200 handle">
+        <div class="title-catalog-00">办理商标注册</div>
+        <ul>
+            <li>
+                <div  class="line-animate">
+                    <img src="../../assets/images/brand/img_gn.png" width="114" alt="">
+                    <h3>国内商标注册</h3>
+                    <b>￥1818 <span>/件</span></b>
+                    <p>商标担保申请、当日提交注册无忧</p>
+                    <a href="#">立即办理</a>
+                </div>
+            </li>
+            <li>
+                <div class="line-animate">
+                    <img src="../../assets/images/brand/img_bm.png" width="108" alt="">
+                    <h3>保姆式商标注册</h3>
+                    <b>￥1818 <span>/件</span></b>
+                    <p>商标担保申请、当日提交注册无忧</p>
+                    <a href="#">立即办理</a>
+                </div>
+            </li>
+            <li>
+                <div class="line-animate">
+                    <img src="../../assets/images/brand/img_zn.png" width="106" alt="">
+                    <h3>商标智能注册</h3>
+                    <b>￥1818 <span>/件</span></b>
+                    <p>商标担保申请、当日提交注册无忧</p>
+                    <a href="#">立即办理</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div id="search" class="search">
+        <div class="w1200">
+            <div class="title-catalog-00">查询是否可以注册</div>
+            <div class="search-content">
+                <div class="right">
+                    <b>￥99 <span>/件</span></b>
+                    <a href="#">立即办理</a>
+                </div>
+                <div class="hidden">
+                    <img src="../../assets/images/brand/img_search_sb.png" width="73" alt="">
+                    <div class="hidden">
+                        <h4>国内商标查询（报告）</h4>
+                        <p>专业代理人认真负责 最全数据库提供360°查询 检索结果和分析意见尽在报告中</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="defuse" class="defuse w1200">
+        <div class="title-catalog-00">遇到障碍如何化解</div>
+        <ul>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+        </ul>
+    </div>
+
+    <div id="objection" class="objection defuse">
+        <div class="w1200">
+            <div class="title-catalog-00">异议他人商标</div>
+            <ul>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="change" class="defuse w1200">
+        <div class="title-catalog-00">商标信息变更</div>
+        <ul>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+            <li class="line-animate"><a href="#">
+                <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                <span></span>
+            </a></li>
+        </ul>
+    </div>
+
+    <div id="international" class="objection defuse">
+        <div class="w1200">
+            <div class="title-catalog-00">国际商标业务</div>
+            <ul>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+                <li class="line-animate"><a href="#">
+                    <h4><b>￥1818<span> /件</span></b>商标驳回复审</h4>
+                    <p>商标申请被驳回15日内，专业代理人分析案情组织证据材料，向商评委申请复审，争取注册成功。</p>
+                    <span></span>
+                </a></li>
+            </ul>
+        </div>
+    </div>
+    <floor :floorAttr="[{name: '办理商标', type: '#handle'},{name: '查询商标', type: '#search'},{name: '障碍商标', type: '#defuse'},{name: '异议商标', type: '#objection'},{name: '商标变更', type: '#change'},{name: '国际商标', type: '#international'}]" />  
+    <to-top />
+  </div>
+</template>
+
+<script>
+import floor from '@/components/floor/floor'
+import toTop from '@/components/toTop'
+export default {
+    head() {
+        return {
+            title: "商标注册-知千秋",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    components: {
+        floor,
+        toTop
+    }
+};
+</script>
+
+<style scoped lang="stylus">
+.content
+    overflow: hidden;
+.banner
+    width: 1920px;
+    position: relative;
+    left: 50%;
+    margin-left: -960px;
+.tab-catalog-00
+    border-bottom:1px solid #d8d8d8;
+    line-height: 58px;
+    font-size: 14px;
+    height: 58px;
+    margin-top: 30px;
+    a
+        margin: 0 51px;
+        padding: 0 3px;
+        float: left;
+        line-height: 55px;
+        &.atthis
+            border-bottom: 4px solid #fd7d22;
+.title-catalog-00
+    font-size: 20px;
+    line-height: 48px;
+    color: #333;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-top: 30px;
+.handle
+    ul
+        overflow: hidden;
+        padding-top: 40px;
+        padding-bottom: 45px;
+        li
+            float: left;
+            width: 400px;
+            box-sizing: border-box;
+            text-align: center;
+            >div
+                width: 255px;
+                padding-top: 35px;
+                margin: 0 auto;
+                border: 1px solid #fff;
+            h3
+                font: normal 18px/40px 'microsoft yahei';
+                color:#333;
+                margin-top: 10px;
+            b
+                font: bold 24px/30px 'microsoft yahei';
+                color: #ff6000;
+                span
+                    font-size: 14px;
+                    font-weight: normal;
+            p
+                font-size: 14px;
+                color: #999;
+                margin-top: 10px;
+            a
+                padding: 0 15px;
+                display: inline-block;
+                border: 1px solid #ff6000;
+                border-radius: 30px;
+                color: #ff6000;
+                font-size: 14px;
+                line-height: 26px;
+                height: 28px;
+                vertical-align: middle;
+                margin: 25px 0 30px;
+                position: relative;
+                z-index: 9;
+                &:hover
+                    background: #ff6000;
+                    color: #fff;
+            
+.search
+    background:#f9f9f9;
+    overflow: hidden;
+    .search-content
+        background: #fff;
+        overflow: hidden;
+        margin: 30px 0 35px;
+        .right
+            float: right;
+            padding-right: 45px;
+            padding-top: 50px;
+            b
+                font-size: 24px;
+                color: #ff6000;
+                span
+                    font-size: 14px;
+                    color: #999;
+                    font-weight: normal;
+                margin-right: 25px;
+            a
+                display: inline-block;
+                height: 28px;
+                line-height: 26px;
+                border: 1px solid #ff6000;
+                color: #ff6000;
+                border-radius: 30px;
+                padding: 0 15px;
+                &:hover
+                    background:#ff6000;
+                    color: #fff;
+        >div
+            img
+                float: left;
+                margin: 27px 15px 35px 47px;
+            >div
+                padding-top: 37px;
+                h4
+                    font-size: 18px;
+                    line-height: 30px;
+                    color: #333;
+                    font-weight: normal;
+                p
+                    font-size: 14px;
+                    line-height: 28px;
+                    color: #666;
+.defuse
+    ul
+        overflow: hidden;
+        padding-top: 25px;
+        padding-bottom: 50px;
+        li
+            width: 380px;
+            height: 140px;
+            box-sizing: border-box;
+            float: left;
+            margin: 0 10px 20px; 
+            border: 1px solid #ddd;
+            padding: 10px;
+            position: relative;
+            h4
+                font-size: 18px;
+                color: #333;
+                padding: 20px 0 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: norwap;
+                font-weight: normal;
+                b
+                    float: right;
+                    font-size: 24px;
+                    color: #ff6000;
+                    span
+                        font-size: 14px;
+                        color: #999;
+                        font-weight: normal;
+            p
+                font-size: 14px;
+                color: #666;
+            a
+                >span
+                    display: block;
+                    position: absolute;
+                    width: 23px;
+                    height: 16px;
+                    left: 320px;
+                    top: 110px;
+                    opacity: 0;
+                    background: transparent url('../../assets/images/brand/icon_right.png') no-repeat left top;
+                    transition: all .5s;
+                    z-index: 9;
+            &:hover
+                a>span
+                    opacity: 1;
+                    left: 340px;
+.objection
+    background: #f9f9f9;
+    ul
+        li
+            background: #fff;
+            border: 1px solid transparent;          
+                
+</style>
+

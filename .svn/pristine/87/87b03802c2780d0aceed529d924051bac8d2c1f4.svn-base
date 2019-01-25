@@ -1,0 +1,204 @@
+<template>
+    <div class="page-index">
+        <div class="page-index-title">最新12期初审公告数据</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>公告期</th>
+                    <th>初审公告日期</th>
+                    <th>异议绝限申请日期</th>
+                    <th>异议绝限剩余时间</th>
+                    <th>初审商标数</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>第1614期</td>
+                    <td>2018-09-06</td>
+                    <td>2018-12-06</td>
+                    <td>剩余68天</td>
+                    <td>350076</td>
+                    <td class="td-href">
+                        <a href="/notice/list" data-id="1614">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1613期</td>
+                    <td>2018-08-27</td>
+                    <td>2018-11-27</td>
+                    <td>剩余59天</td>
+                    <td>255844</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1613">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1612期</td>
+                    <td>2018-08-20</td>
+                    <td>2018-11-20</td>
+                    <td>剩余52天</td>
+                    <td>367285</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1612">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1611期</td>
+                    <td>2018-08-13</td>
+                    <td>2018-11-13</td>
+                    <td>剩余45天</td>
+                    <td>297597</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1611">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1610期</td>
+                    <td>2018-08-06</td>
+                    <td>2018-11-06</td>
+                    <td>剩余38天</td>
+                    <td>193180</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1610">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1609期</td>
+                    <td>2018-07-27</td>
+                    <td>2018-10-27</td>
+                    <td>剩余28天</td>
+                    <td>268593</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1609">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1608期</td>
+                    <td>2018-07-20</td>
+                    <td>2018-10-20</td>
+                    <td>剩余21天</td>
+                    <td>318272</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1608">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1607期</td>
+                    <td>2018-07-13</td>
+                    <td>2018-10-13</td>
+                    <td>剩余14天</td>
+                    <td>200254</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1607">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1606期</td>
+                    <td>2018-07-06</td>
+                    <td>2018-10-06</td>
+                    <td>剩余7天</td>
+                    <td>258063</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1606">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1605期</td>
+                    <td>2018-06-27</td>
+                    <td>2018-09-27</td>
+                    <td>剩余-1天</td>
+                    <td>214557</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1605">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1604期</td>
+                    <td>2018-06-20</td>
+                    <td>2018-09-20</td>
+                    <td>剩余-8天</td>
+                    <td>272365</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1604">查看详情</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>第1603期</td>
+                    <td>2018-06-13</td>
+                    <td>2018-09-13</td>
+                    <td>剩余-15天</td>
+                    <td>215179</td>
+                    <td class="td-href">
+                        <a data-href="javascript:void(0)" data-id="1603">查看详情</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+<script>
+export default {
+    layout: "notice",
+    head() {
+        return {
+            title: "初审公告页面"
+        };
+    }
+};
+</script>
+<style scoped>
+.page-index-title {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 23px;
+}
+.page-index-title:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    margin-top: -3px;
+    width: 6px;
+    height: 6px;
+    background-color: #ff4422;
+    border-radius: 50%;
+}
+.page-content {
+    margin-top: 30px;
+}
+.table {
+    width: 100%;
+    text-align: center;
+}
+.table thead {
+    background-color: #e5e5e5;
+}
+.table tr {
+    height: 40px;
+}
+.table td.table-top {
+    padding-left: 20px;
+    text-align: left;
+    background-color: #f5f5f5;
+}
+.table tr.table-margin {
+    height: 15px;
+}
+.table td.table-top i {
+    color: #ff4422;
+}
+.table td {
+    width: 200px;
+}
+.table tr td.td-href a {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #ff7200;
+    text-decoration: underline;
+}
+.table tr td.td-href a:last-of-type {
+    margin-bottom: 0px;
+}
+</style>
+

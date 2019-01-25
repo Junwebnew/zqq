@@ -1,0 +1,61 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
+import popup from "~/components/popup";
+
+Vue.use(Vuex)
+
+const store = () => new Vuex.Store({
+  state: {
+    testState: "测试",
+    toolBox: 0, //打开智能工具弹框
+    token: "c7e7395d-aead-42ed-85a6-d9ce950a3dba",
+    userInfo: ''
+  },
+  mutations: { //定义方法
+    isShowToolBox(state, bool) {
+      state.toolBox = bool
+    },
+    setToken(state, str) {
+      state.token = str
+    },
+    SET_USER(state, obj) {
+      state.userInfo = obj
+    }
+  },
+  actions: {
+    nuxtServerInit({ commit }, { req }) {
+      if (req.session && req.session.authUser) {
+        commit('SET_USER', req.session.authUser)
+      }
+    },
+    async login({ commit }, obj) {
+      try {
+        const { data } = await axios.post('/api/login', obj,{
+        headers: {
+            token: this.state.token
+        }})
+        if (data.code != 0 ) {
+          let loading = popup.created({
+              content: data.msg,
+              time: 3000
+          });
+        } else {
+          commit('SET_USER', data.data)
+        }
+        
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          throw new Error('Bad credentials')
+        }
+        throw error
+      }
+    },
+    async logout({ commit }) {
+      await axios.post('/api/logout')
+      commit('SET_USER', null)
+    }
+  }
+})
+
+export default store

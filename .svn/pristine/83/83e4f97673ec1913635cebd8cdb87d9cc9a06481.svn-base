@@ -1,0 +1,79 @@
+<template>
+    <div class="zoom" v-if="isShow">
+        <transition name="fadeIn">
+            <div class="content">
+                <i class="iconfont" v-if="icon" :class="{'loading': type == 'loading'}" v-html="icon"></i>
+                <p>{{content}}</p>
+            </div>
+        </transition>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+           isShow: true,
+           icon: undefined
+        };
+    },
+    created() {},
+    mounted() {
+        if (this.time) {
+            t && clearTimeout(t)
+            let t = setTimeout(() => {
+                this.close()
+            }, this.time)
+        }
+    },
+    methods: {
+        close () {
+            this.isShow = false
+        }
+    }
+};
+</script>
+<style scoped>
+.zoom{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    /*background: rgba(0, 0, 0, .6);*/
+    z-index: 101;
+    text-align: center;
+    line-height: 100%;
+}
+.zoom .content{
+    background: rgba(0, 0, 0, .8);
+    display: inline-block;
+    padding: 20px;
+    min-width: 100px;
+    border-radius: 5px;
+    vertical-align: middle;
+    line-height: 30px;
+    position: relative;
+    top: 30%;
+    color: #fff;
+}
+.zoom .content i{
+    font-size: 40px;
+    margin-top: 10px;
+    display: inline-block;
+}
+@keyframes loading{
+    0% {
+        transform: rotate(0deg)
+    }
+    50% {
+        transform: rotate(180deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+.loading{
+    animation: loading 2s linear infinite;
+}
+</style>

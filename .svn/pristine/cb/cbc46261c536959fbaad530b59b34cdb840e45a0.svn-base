@@ -1,0 +1,422 @@
+<template>
+    <div class="minheader">
+        <div class="fixed">
+            <div class="wapper clear">
+                <div class="left">
+                    <div class="logo">
+                        <a href="/"><img src="../../assets/images/mini_logo.png" alt="知千秋" title='知千秋'></a>
+                    </div>
+                    <ul class="clear">
+
+                        <li class="menu" @mouseover="isShow=1" @mouseout="isShow=0">
+                            <h1>
+                                <a href="javascript:void(0);">全部导航</a>
+                            </h1>
+                        </li>
+                        <li class="navLi">
+                            <a href="/" class="col">首页</a>
+                        </li>
+                        <li class="navLi">
+                            <a href="/show/navigation_trademark_register_01&S7741101919677030400.html">商标注册
+                                <i class="icon icon-hot"></i>
+                            </a>
+
+                        </li>
+                        <li class="navLi">
+                            <a href="javascript:void(0);" @click="$store.commit('isShowToolBox',1)">智能工具</a>
+                        </li>
+                        <li class="navLi">
+                            <a href="javascript:void(0);" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', '_blank')">业务咨询
+                                <i class="icon icon-hot"></i>
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <a v-if="!$store.state.userInfo" class="register" href="/passport/register">注册</a>
+                    <a v-if="!$store.state.userInfo" class="login" href="/passport/login">登录</a>
+                    <a v-if="$store.state.userInfo" class="center" href="/center">
+                        <i class="iconfont">&#xe636;</i>{{$store.state.userInfo.nikename?$store.state.userInfo.nikename:$store.state.userInfo.phoneNo}}
+                    </a>
+                    <div class="scrollBox">
+                        <transition name="fadeIn">
+                            <div class="search" v-show="isShowSearch">
+                                <div class="type" @mouseover="searchMouseover" @mouseout="searchMouseout">
+                                    <b>{{search_type[search_type_index]}}</b>
+                                    <div class="list" v-show="search_type_show">
+                                        <a v-for="(item, index) in search_type" @click="()=>changeSeachType(index)" :key="item" href="javascript:void(0);">{{item}}</a>
+                                    </div>
+                                </div>
+                                <input type="text" :placeholder="holderArr[search_type_index]" v-model="keyWord" @keyup.enter='goList'>
+                                <span class="cameraBox">
+                                    <a v-if='search_type_index == 0' href="javascript:void(0);" @click="upload" class="photo"></a>
+                                </span>
+                                <a href="javascript:void(0);" class="btn-search" @click="goList"></a>
+                                <input ref="uploadImg" type="file" accept="image/jpeg,image/x-png" style="display:none">
+                            </div>
+                        </transition>
+                        <transition name="fadeIn">
+                            <div class="nav" v-show='!isShowSearch'>
+                                <a href="/center">我的知千秋</a>
+                                <a v-if="$store.state.docArr.length" target="_blank" :href="'/question/' + $store.state.docArr[0].code+'.html' ">帮助中心</a>
+                                <a href="javascript:;" onclick="window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', '_blank')">客户服务</a>
+                            </div>
+                        </transition>
+                    </div>
+
+                </div>
+
+            </div>
+            <minNav @mouseFunc='showMinNav' :isShow='isShow' />
+        </div>
+    </div>
+</template>
+
+<script>
+import minNav from "../minNav";
+import { uploadImg } from "~/assets/js/common.js";
+import Cookies from "js-cookie";
+
+export default {
+    name: "miniHead",
+    props: {
+        hasFloor: {
+            type: Number,
+            default: 0
+        }
+    },
+    data() {
+        return {
+            keyWord: "",
+            search_type_index: 0,
+            search_type_show: false,
+            search_type: ["商标", "专利", "企业"],
+            holderArr: [
+                "请输入商标名称、申请号、申请人等信息",
+                "请输入专利名称",
+                "请输入企业名称"
+            ],
+            isShow: 0,
+            Loading: "",
+            isShowSearch: 1
+        };
+    },
+    components: { minNav },
+    mounted() {
+        if (this.hasFloor) {
+            window.addEventListener("scroll", this.handleScroll);
+            this.isShowSearch = 0;
+        }
+    },
+    methods: {
+        changeSeachType(i) {
+            this.search_type_index = i;
+            this.search_type_show = false;
+        },
+        searchMouseout(e) {
+            e.stopPropagation();
+            this.search_type_show = false;
+        },
+        searchMouseover(e) {
+            e.stopPropagation();
+            this.search_type_show = true;
+        },
+        searchPhoto() {
+            this.$refs.fileinput.click();
+        },
+        showMinNav(num) {
+            this.isShow = num;
+        },
+        goList() {
+            if (!this.keyWord) {
+                this.$Popup.created({
+                    content: "搜索关键字不能为空",
+                    time: 2000
+                });
+                return;
+            }
+
+            this.Loading = this.$Popup.created({
+                content: "搜索中...",
+                type: "loading",
+                icon: "&#xe61c",
+                time: 3000
+            });
+            let str = this.keyWord.replace(/\//g, "");
+            if (this.search_type_index === 0)
+                this.$router.push({
+                    path: "/list/result_" + str + ".html"
+                });
+            else if (this.search_type_index === 1)
+                this.$router.push({
+                    path: "/patentSearch/list_" + str + ".html"
+                });
+            else if (this.search_type_index === 2) {
+                window.open(
+                    "https://dqc.dgg.net/#/Company?type=all&keyWord=" + str,
+                    "_blank"
+                );
+                this.Loading.close();
+            }
+        },
+        //upload上传图片
+        upload() {
+            uploadImg({
+                ele: this.$refs.uploadImg,
+                success: res => {
+                    // console.log("当前路径", this.$route);
+                    if (this.$route.fullPath == "/list/asImg")
+                        window.location.reload();
+                    else this.$router.push("/list/asImg");
+                }
+            });
+        },
+        handleScroll() {
+            var scrollTop =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop;
+            if (scrollTop > 170) {
+                this.isShowSearch = 1;
+            } else {
+                this.isShowSearch = 0;
+            }
+        }
+    },
+    destroyed() {
+        if (this.Loading) this.Loading.close();
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+};
+</script>
+
+<style scoped lang='stylus'>
+.none {
+    display: none;
+}
+
+.minheader {
+    height: 70px;
+    margin: 0 auto;
+
+    >.fixed {
+        background: #fff;
+        line-height: 70px;
+        user-select: none;
+        position: fixed;
+        top: 0;
+        z-index: 101;
+        width: 100%;
+        border-bottom: 1px solid #f5f5f5;
+        box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+
+        .wapper {
+            max-width: 1800px;
+            min-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+
+            .left {
+                float: left;
+
+                .logo {
+                    float: left;
+                }
+
+                ul {
+                    padding-left: 40px;
+                    float: left;
+
+                    li {
+                        float: left;
+
+                        a {
+                            display: block;
+                            padding-right: 30px;
+                            font-size: 16px;
+                            color: #333;
+                        }
+
+                        &.menu {
+                            position: relative;
+
+                            a {
+                                background: transparent url('../../assets/images/icon_menu.png') no-repeat left center;
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+
+                    .navLi {
+                        a:hover {
+                            color: #fd7d22;
+                        }
+
+                        .icon {
+                            display: inline-block;
+                            background-repeat: no-repeat;
+                        }
+
+                        .icon-hot {
+                            width: 12px;
+                            height: 16px;
+                            margin: 10px 0 0 5px;
+                            background: url('../../assets/images/main/icon-hot.png') no-repeat center;
+                        }
+                    }
+                }
+            }
+
+            .right {
+                float: right;
+                font-size: 14px;
+
+                >a {
+                    float: right;
+                    padding: 0 25px;
+                    line-height: 40px;
+                    height: 40px;
+                    background: #fd7d22;
+                    color: #fff;
+                    margin-top: 14px;
+                    border-radius: 5px;
+
+                    &.login {
+                        margin-right: 8px;
+                        background: transparent;
+                        border: 1px solid #ddd;
+                        color: #333;
+                    }
+
+                    &.center {
+                        margin-right: 8px;
+                        background: transparent;
+                        border: 0;
+                        color: #333;
+                        vertical-align: middle;
+
+                        i {
+                            font-size: 20px;
+                            margin-right: 5px;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+
+                .scrollBox {
+                    float: right;
+                    height: 70px;
+                    position: relative;
+                    width: 430px;
+                    margin-right: 40px;
+
+                    .search {
+                        background: #f5f5f5;
+                        height: 42px;
+                        margin-top: 14px;
+                        border-radius: 5px;
+                        margin-right: 5px;
+                        line-height: 36px;
+
+                        .type {
+                            width: 70px;
+                            text-indent: 15px;
+                            float: left;
+                            position: relative;
+
+                            b {
+                                font-weight: normal;
+                                color: #333;
+                                line-height: 40px;
+                                display: block;
+                            }
+
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                display: block;
+                                width: 0;
+                                height: 0;
+                                border: 5px solid #333;
+                                border-color: #333 transparent transparent transparent;
+                                top: 19px;
+                                right: 10px;
+                            }
+
+                            a {
+                                display: block;
+                                color: #333;
+                                line-height: 30px;
+                                text-align: center;
+                                text-indent: 0;
+                            }
+
+                            .list {
+                                background: #f5f5f5;
+                                padding: 5px 0 10px;
+                            }
+                        }
+
+                        input {
+                            border: 0;
+                            border-left: 1px solid #ddd;
+                            text-indent: 10px;
+                            width: 260px;
+                            background: #f5f5f5;
+                            height: 22px;
+                            line-height: 22px;
+                            vertical-align: middle;
+                        }
+
+                        .cameraBox {
+                            display: inline-block;
+                            width: 27px;
+                            height: 23px;
+                            margin-right: 25px;
+
+                            .photo {
+                                display: inline-block;
+                                width: 100%;
+                                height: 100%;
+                                background: transparent url('../../assets/images/icon_photo.png') no-repeat left center;
+                                vertical-align: middle;
+                            }
+                        }
+
+                        .btn-search {
+                            display: inline-block;
+                            width: 27px;
+                            height: 22px;
+                            background: transparent url('../../assets/images/icon_search.png') no-repeat left center;
+                            vertical-align: middle;
+                            margin-right: 10px;
+                        }
+                    }
+
+                    .nav {
+                        height: 42px;
+                        // margin-top: 14px;
+                        border-radius: 5px;
+                        margin-right: 5px;
+                        line-height: 42px;
+                        position: absolute;
+                        right: 0;
+                        top: 14px;
+
+                        a {
+                            font-size: 14px;
+                            margin-left: 40px;
+                            color: #333;
+                        }
+
+                        a:hover {
+                            color: #fd7d22;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</style>

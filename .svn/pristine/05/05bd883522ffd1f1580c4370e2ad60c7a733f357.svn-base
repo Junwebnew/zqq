@@ -1,0 +1,81 @@
+<template>
+    <div>
+        <div class="main_head pos_re">
+            <div class="fl">
+                <router-link to='/'><img src="../../assets/images/main/logo.png" alt="logo" class="logo"></router-link>
+                <span class='text'>大数据+知识产权智能化服务平台</span>
+            </div>
+            <ul class="fr nav">
+                <li class="fr">
+                    <router-link to='/'>登录</router-link>
+                </li>
+                <li class="fr">
+                    <router-link to='/'>客户服务</router-link>
+
+                </li>
+                <li class="fr">
+                    <router-link to='/question'>帮助中心</router-link>
+
+                </li>
+                <li class="fr">
+                    <router-link to='/center'>我的知千秋</router-link>
+                </li>
+            </ul>
+            <div class="freeReg">
+                <router-link to='/'>免费注册</router-link>
+            </div>
+        </div>
+    </div>
+</template>
+  <script>
+export default {
+    created() {},
+    components: {}
+    // layout: "default"
+};
+</script>
+<style scoped>
+.main_head {
+    height: 42px;
+    width: 100%;
+    background: #282b3a;
+    color: #fff;
+    padding-left: 50px;
+    line-height: 40px;
+    border-bottom: 1px solid #666;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.main_head .text {
+    margin-left: 30px;
+}
+.nav > li {
+    margin-right: 40px;
+}
+.nav > li a {
+    color: #fff;
+}
+.freeReg {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    width: 120px;
+    height: 56px;
+    line-height: 56px;
+    background: #4d5165;
+    color: #fff;
+    border-radius: 0 0 0 4px;
+    text-align: center;
+    z-index: 2;
+}
+.freeReg a {
+    background: #4d5165;
+    color: #fff;
+    font-size: 16px;
+}
+.freeReg a:hover,
+.nav > li a:hover {
+    color: #fd7d22;
+}
+</style>

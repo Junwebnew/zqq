@@ -1,0 +1,859 @@
+<template>
+  <div class="smartRegister-page smartRegister3-page">
+    <div class="progressBar clearfix">
+      <ul>
+        <li class="step step-2 finish">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">填写商标信息</dt>
+          </dl>
+        </li>
+        <li class="line finish"></li>
+        <li class="step step-3 finish">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">填写申请人信息</dt>
+          </dl>
+        </li>
+        <li class="line"></li>
+        <li class="step step-4">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">申请信息确认</dt>
+          </dl>
+        </li>
+        <li class="line"></li>
+        <li class="step step-5">
+          <em class="icon-bar-circle"></em>
+          <dl class="explain">
+            <dt class="text">支付交官费用</dt>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="agent" data-v-127632e4="">
+      <h6 class="agent-header" data-v-127632e4=""><i class="iconfont icon-consult" data-v-127632e4=""></i>商标顾问与帮助</h6>
+      <ul class="agent-bodyer" data-v-127632e4="">
+        <li class="list" data-v-127632e4="">
+          <dl class="clearfix" data-v-127632e4="">
+            <dt data-v-127632e4=""><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/avatar/2018/05/21/f47fe7f9-2c10-42ce-a356-ea86c099c2a1.png?x-oss-process=image/resize,m_lfit,w_85" alt="代理人刘朝" data-v-127632e4=""></dt>
+            <dd data-v-127632e4=""><span class="r-1" data-v-127632e4="">刘朝<i class="icon icon-renzheng-1" data-v-127632e4=""></i></span><span class="r-2" data-v-127632e4="">好评率：100%</span><a href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')" class="r-3" data-v-127632e4=""><i class="iconfont icon-xiaoxi" data-v-127632e4=""></i>咨询一下</a></dd>
+          </dl>
+        </li>
+        <li class="list" data-v-127632e4="">
+          <dl class="clearfix" data-v-127632e4="">
+            <dt data-v-127632e4=""><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2017/05/11/d09b1e328cb20850f4941f1dde5ed49f.jpg?x-oss-process=image/resize,m_lfit,w_85" alt="代理人焦亚萍" data-v-127632e4=""></dt>
+            <dd data-v-127632e4=""><span class="r-1" data-v-127632e4="">焦亚萍<i class="icon icon-renzheng-1" data-v-127632e4=""></i></span><span class="r-2" data-v-127632e4="">好评率：100%</span><a href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')" class="r-3" data-v-127632e4=""><i class="iconfont icon-xiaoxi" data-v-127632e4=""></i>咨询一下</a></dd>
+          </dl>
+        </li>
+        <li class="list" data-v-127632e4="">
+          <dl class="clearfix" data-v-127632e4="">
+            <dt data-v-127632e4=""><img src="https://tm-files.oss-cn-beijing.aliyuncs.com/third/2017/05/11/26f29e14023753ea5a0f6c4eb2b58374.jpg?x-oss-process=image/resize,m_lfit,w_85" alt="代理人宿科晓" data-v-127632e4=""></dt>
+            <dd data-v-127632e4=""><span class="r-1" data-v-127632e4="">宿科晓<i class="icon icon-renzheng-1" data-v-127632e4=""></i></span><span class="r-2" data-v-127632e4="">好评率：100%</span><a href="javascript:;" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')" class="r-3" data-v-127632e4=""><i class="iconfont icon-xiaoxi" data-v-127632e4=""></i>咨询一下</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="agentInfo-wrap applicant-wrap">
+      <h2 class="order-title">申请人信息</h2>
+      <div class="section-base">
+        <table class="table-1">
+          <thead>
+            <tr>
+              <td class="td-title"><i class="i-star">*</i>申请人资质：</td>
+              <td class="td-content">
+                <a class="btn-choice fownertype " :class="{'active': type == 1}" href="javascript:;" @click="tabFn" data-type="1"><i class="iconfont icon-duigou"></i>企业</a>
+                <a class="btn-choice fownertype" :class="{'active': type == 0}" href="javascript:;" @click="tabFn" data-type="0"><i class="iconfont icon-duigou"></i>个体工商户</a>
+              </td>
+            </tr>
+          </thead>
+        </table>
+        <div class="applicant-form">
+          <table width="100%" class="table-1 table-applicant table-type1">
+            <tbody class="tbody-qiye" :class="{'atthis': type == 1}">
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>公司名称：</td>
+                <td class="td-content contact-select-container">
+                  <input type="hidden" name="applicantId" value="35400">
+                  <dl class="mySelect mySelectInput contact-select-input">
+                    <dt class="select-text">
+                      <input class="text" value="顶呱呱" name="fname" type="text" placeholder="请输入/选择企业名称" isnew="0"><span class="arrow"><i class="icon-arrowdown"></i></span></dt>
+                    <dd class="select-menu">
+                      <span class="menu " fownerid="44373" fowner_name="成都豫川网络" fowner_idcard="" fowner_address="四川省成都市高新区" fowner_phone="15928406913" fowner_contactperson="易晓莉" fowner_contactphone="15928406913" fowner_mail="zhuerhongyan@163.com" fowner_licensepic="" fowner_idcardimg="" fprov="23" fcity="411" farea="2529" fcode="610000">
+                                <a>成都豫川网络</a>
+                            </span>
+                      <span class="menu checked" fownerid="35400" fowner_name="顶呱呱" fowner_idcard="" fowner_address="四川省成都市金牛区" fowner_phone="17313185522" fowner_contactperson="订单" fowner_contactphone="17313185522" fowner_mail="111@qq.com" fowner_licensepic="" fowner_idcardimg="" fprov="23" fcity="411" farea="2531" fcode="610000">
+                                <a>顶呱呱</a>
+                            </span>
+                    </dd>
+                  </dl>
+                </td>
+              </tr>
+              <tr class="company">
+                <td class="td-title td-top"><i class="i-star">*</i>营业执照所在地区：</td>
+                <td class="td-content">
+                </td>
+              </tr>
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>邮政编码：</td>
+                <td class="td-content">
+                  <input type="text" id="qiye-postcode" name="fcode" value="610000" class="myInput code" placeholder="请填写申请人所在行政区县的邮政编码">
+                </td>
+              </tr>
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>营业执照详情地址：</td>
+                <td class="td-content">
+                  <input type="text" name="faddress" id="qiye-street" class="myInput address m-address" value="四川省成都市金牛区" placeholder="请与营业执照区/县后具体地址保持一致">
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="tbody-gsh" :class="{'atthis': type == 0}">
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>个人名称：</td>
+                <td class="td-content contact-select-container">
+                  <input type="hidden" name="applicantId" value="35400">
+                  <dl class="mySelect mySelectInput contact-select-input">
+                    <dt class="select-text">
+                      <input class="text" name="fname" value="" type="text" placeholder="请与个体工商户营业执照的字号名称一致" isnew="0"><span class="arrow"><i class="icon-arrowdown"></i></span></dt>
+                    <dd class="select-menu">
+                      <span class="menu " fownerid="37451" fowner_name="" fowner_idcard="" fowner_address="" fowner_phone="" fowner_contactperson="1569477481" fowner_contactphone="" fowner_mail="6255454@qq.com" fowner_licensepic="" fowner_idcardimg="" fprov="0" fcity="0" farea="0" fcode="">
+                                <a></a>
+                            </span>
+                    </dd>
+                  </dl>
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>身份证号：</td>
+                <td class="td-content">
+                  <input type="text" id="geren-idCard" name="fidcardcode" value="" class="myInput" placeholder="请填写营业执照字号名称对应的身份证号">
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title td-top"><i class="i-star">*</i>营业执照所在地区：</td>
+                <td class="td-content">
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>邮政编码 ：</td>
+                <td class="td-content">
+                  <input type="text" id="geren-postcode" name="fcode" value="610000" class="myInput code" placeholder="请填写申请人所在行政区县的邮政编码">
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>营业执照详情地址：</td>
+                <td class="td-content">
+                  <input type="text" name="faddressl" id="geren-street" class="myInput address m-address" value="四川省成都市金牛区" placeholder="请与营业执照区/县后具体地址保持一致">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="uploader" class="plupload_modal"></div>
+          <h2 class="order-title">订单联系人</h2>
+          <table width="100%" class="table-1">
+            <tbody class="tbody-qiye" :class="{'atthis': type == 1}">
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>客户联系人：</td>
+                <td class="td-content">
+                  <input type="text" name="fcontactName" value="订单" class="myInput" placeholder="此信息很重要，官方文件送达需与您联系">
+                </td>
+              </tr>
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>联系电话：</td>
+                <td class="td-content">
+                  <input type="text" name="fcontactTel" value="17313185522" class="myInput" placeholder="请填写11位手机号码">
+                </td>
+              </tr>
+              <tr class="company">
+                <td class="td-title"><i class="i-star">*</i>电子邮箱：</td>
+                <td class="td-content">
+                  <input type="text" name="fcontactMail" value="111@qq.com" class="myInput" placeholder="重要官文会通过邮件通知，请注意查收并及时回复">
+                </td>
+              </tr>
+              <tr>
+                <td class="td-title"><i class="i-star"></i>座机电话：</td>
+                <td class="td-content">
+                  <input type="text" name="ftelephone" value="17313185522" class="myInput" placeholder="区号-座机号码">
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="tbody-gsh" :class="{'atthis': type == 0}">
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>客户联系人：</td>
+                <td class="td-content">
+                  <input name="fcontactName" value="订单" type="text" class="myInput" placeholder="此信息很重要，官方文件送达需与您联系">
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>联系电话：</td>
+                <td class="td-content">
+                  <input type="text" name="fcontactTel" value="17313185522" class="myInput" placeholder="请填写11位手机号码">
+                </td>
+              </tr>
+              <tr class="personal">
+                <td class="td-title"><i class="i-star">*</i>电子邮箱：</td>
+                <td class="td-content">
+                  <input type="text" name="fcontactMail" value="111@qq.com" class="myInput" placeholder="重要官文会通过邮件通知，请注意查收并及时回复">
+                </td>
+              </tr>
+              <tr>
+                <td class="td-title"><i class="i-star"></i>座机电话：</td>
+                <td class="td-content">
+                  <input type="text" name="ftelephone" value="17313185522" class="myInput" placeholder="区号-座机号码">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 class="order-title">
+                材料信息
+                <span class="file-info-tips">（可在支付完成后，在订单中进行上传）<i class="au"></i></span>
+            </h2>
+        <div class="material-form">
+          <a href="javascript:void(0)" class="file-upload-warning" onclick="zhuyi()">查看上传文件注意事项</a>
+          <!--国内文件上传-->
+          <div class="file-upload-container table-type1 active">
+            <div class="f-content file-qiye tbody-qiye scroll">
+              <div class="file-upload-list">
+                <label>营业执照
+                  <br>副本复印件</label>
+                <div class="l-content">
+                  <ul class="showPhotos clearfix">
+                    <input type="hidden" name="flicense" value="">
+                    <li class="list-photo flicenseli ">
+                      <div class="top">
+                        <div class="top-container">
+                          <div class="photo-box btnupload" type="flicense">
+                            <img class="photo flicensepic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg flicensebg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">（需盖公章）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn flicenselink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload " type="flicense ">重新上传</a>
+                                        <div id="html5_1cohligl31g294go1iif2b125u6_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligl31g294go1iif2b125u6 " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohligl11ioe18dfltg262149c3_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohligl11ioe18dfltg262149c3 " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/yyzz.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn " href="/qdshome/ex-pdf-jpg/qy-yyzz.jpg " target="_blank ">查看示例</a>
+                                        </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">营业执照盖公章示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>
+                  委托书
+                  <a class="btn createpower " href="javascript:void(0) ">下载模板</a>
+                </label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="fproxy " value=" ">
+                    <li class="list-photo fproxyli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="fproxy ">
+                            <img class="photo fproxypic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg fproxybg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">（需盖公章）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn fproxylink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                            <a class="btn btnupload "  type="fproxy ">重新上传</a>
+                                        <div id="html5_1cohligl73loh8agin7nt1pffc_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligl73loh8agin7nt1pffc " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohligl61cn31l226251v5p7ga9_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohligl61cn31l226251v5p7ga9 " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/ex-file-wts.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn " href="/qdshome/ex-pdf-jpg/qy-wts.jpg " target="_blank ">查看示例</a>
+                                        </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">查看委托书示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>
+                  <a class="icon icon-qm " href="/index/about/13.html " target="_blank "></a>
+                  <span>优先权证明</span>
+                </label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="fpriority " value=" ">
+                    <li class="list-photo fpriorityli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="fpriority " style="z-index: 1; ">
+                            <img class="photo fprioritypic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg fprioritybg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">针对巴黎公约<br>后续申请</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn fprioritylink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                            <a class="btn btnupload "  type="fpriority ">重新上传</a>
+                                        <div id="html5_1cohligla25213doqnk15o7kksi_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligla25213doqnk15o7kksi " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohligl8cmrmea58d1rfv664f_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohligl8cmrmea58d1rfv664f " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/ex-file-yxqzm.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn " href="/brand-order/show-li?type=priority&amp;ownertype=1 " target="_blank ">查看示例</a>
+                                        </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">优先权证明示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>公证文件</label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="notarial " value=" ">
+                    <li class="list-photo notarialli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="notarial " style="z-index: 1; ">
+                            <img class="photo notarialpic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg notarialbg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">（需盖公章）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                            <a class="btn notariallink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                            <a class="btn btnupload "  type="notarial ">重新上传</a>
+                                        <div id="html5_1cohliglc1gpapen1k8jebpa3qo_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohliglc1gpapen1k8jebpa3qo " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohliglb1nsb9okn5dqu4cfl_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohliglb1nsb9okn5dqu4cfl " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="f-content file-gsh tbody-gsh scroll ">
+              <div class="file-upload-list ">
+                <label>身份证复印件</label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="fidcard " value=" ">
+                    <li class="list-photo fidcardli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="fidcard " style="z-index: 1; ">
+                            <img class="photo fidcardpic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg fidcardbg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">正反面复印件<br>（需签字）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn fidcardlink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload "  type="fidcard ">重新上传</a>
+                                            <div id="html5_1cohliglf113i1tesep4i8it4qu_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohliglf113i1tesep4i8it4qu " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohligle19m21tooisj5521669r_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohligle19m21tooisj5521669r " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/ex-file-sfz.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn " href="/qdshome/ex-pdf-jpg/gr-sfz.jpg " target="_blank ">查看示例</a>
+                                            </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">身份证签字示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>个体户营业执照</label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="flicense " value=" ">
+                    <li class="list-photo flicenseli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="flicense " style="z-index: 1; ">
+                            <img class="photo flicensepic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg flicensebg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">复印件<br>（需签字）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn flicenselink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload "  type="flicense ">重新上传</a>
+                                            <div id="html5_1cohliglhd00vki17adopgrs214_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohliglhd00vki17adopgrs214 " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohliglgpet150fbqe1i961qfc11_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohliglgpet150fbqe1i961qfc11 " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/yyzz.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn " href="/qdshome/ex-pdf-jpg/gr-yyzz.jpg " target="_blank ">查看示例</a>
+                                            </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">营业执照签字示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>
+                  委托书
+                  <div>
+                    <a class="btn createpower " href="javascript:void(0) ">下载模板</a>
+                  </div>
+                </label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="fproxy " value=" ">
+                    <li class="list-photo fproxyli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="fproxy " style="z-index: 1; ">
+                            <img class="photo fproxypic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg fproxybg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">（需签字）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn fproxylink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload "  type="fproxy ">重新上传</a>
+                                            <div id="html5_1cohligljoofhe3o9u7cqfpf1a_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligljoofhe3o9u7cqfpf1a " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohliglits4o247tt1t8831m17_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohliglits4o247tt1t8831m17 " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/ex-file-wts.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn " href="/qdshome/ex-pdf-jpg/gr-wts.jpg " target="_blank ">查看示例</a>
+                                            </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">查看委托书示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>
+                  <a class="icon icon-qm " href="/index/about/13.html " target="_blank "></a>
+                  <span>优先权证明</span>
+                </label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="fpriority " value=" ">
+                    <li class="list-photo fpriorityli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="fpriority " style="z-index: 1; ">
+                            <img class="photo fprioritypic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png?x-oss-process=image/resize,w_150 ">
+                            <div class="bg fprioritybg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">针对巴黎公约<br>后续申请</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn fprioritylink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload "  type="fpriority ">重新上传</a>
+                                            <div id="html5_1cohligllvl3atgdj71s1c18n61g_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligllvl3atgdj71s1c18n61g " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohliglk14vuhc1bjg102f1jsb1d_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohliglk14vuhc1bjg102f1jsb1d " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="list-photo photo-shili show ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box ">
+                            <i class="icon-tag-shili "></i>
+                            <img class="photo " src="https://www.quandashi.com/qdshome/images/ex-file-yxqzm.jpg ">
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn " href="/brand-order/show-li?type=priority&amp;ownertype=0 " target="_blank ">查看示例</a>
+                                            </span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                      <!--                        <div class="bottom " style="color: #ff0000; ">优先权证明示例</div>-->
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="file-upload-list ">
+                <label>公证文件</label>
+                <div class="l-content ">
+                  <ul class="showPhotos clearfix ">
+                    <input type="hidden " name="notarial " value=" ">
+                    <li class="list-photo notarialli ">
+                      <div class="top ">
+                        <div class="top-container ">
+                          <div class="photo-box btnupload " type="notarial ">
+                            <img class="photo notarialpic " src="https://www.quandashi.com/qdshome/images/no-picture-opacity.png ">
+                            <div class="bg notarialbg ">
+                              <span class="icon "><i class="iconfont icon-jiahao "></i></span>
+                              <span class="text ">（需盖公章）</span>
+                            </div>
+                          </div>
+                          <dl class="shadow-box ">
+                            <i class="shadow "></i>
+                            <dd class="mybtns ">
+                              <span class="box ">
+                                                <a class="btn notariallink " href="https://www.quandashi.com/qdshome/images/no-picture-opacity.png " target="_blank ">查看大图</a>
+                                                <a class="btn btnupload "  type="notarial ">重新上传</a>
+                                            <div id="html5_1cohligln131rdn11gic1lnn1ga81m_container " class="moxie-shim moxie-shim-html5 " ><input id="html5_1cohligln131rdn11gic1lnn1ga81m " type="file "  accept="image/jpeg,.jpg,application/pdf,.pdf "></div></span>
+                            </dd>
+                          </dl>
+                          <div id="html5_1cohliglmmaqq1rjd19lc1m0i1j_container " class="moxie-shim moxie-shim-html5 ">
+                            <input id="html5_1cohliglmmaqq1rjd19lc1m0i1j " type="file " accept="image/jpeg,.jpg,application/pdf,.pdf ">
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-btns clearfix ">
+          <a class="btn-step btn-inverse " href="/order/order ">上一步</a>
+          <a class="btn-step " href="/order/orderinfo ">下一步</a>
+        </div>
+      </div>
+    </div>
+    <to-top />
+  </div>
+</template>
+<script>
+import toTop from '@/components/toTop'
+export default {
+  middleware: 'auth',
+  head() {
+    return {
+      title: "智能订单-知千秋 ",
+      meta: [{
+          name: "keywords ",
+          hid: "keywords ",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师 "
+        },
+        {
+          name: "description ",
+          hid: "description ",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋 "
+        }
+      ]
+    };
+  },
+  data() {
+    return {
+      type: 0
+    }
+  },
+  methods: {
+    tabFn(e) {
+      let type = e.target.dataset.type
+      this.type = type
+    }
+  },
+  components: {
+    toTop
+  }
+};
+
+</script>
+<style scoped>
+@import url('../../assets/css/order.css');
+
+/*文件上传*/
+
+.file-upload-container {
+  display: none;
+}
+
+.file-upload-container.active {
+  display: block;
+}
+
+.file-upload-container .btns {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.file-upload-container .btns .button {
+  border-radius: 2px;
+  width: 180px;
+  line-height: 32px;
+}
+
+.file-upload-container .btns .button.disabled {
+  opacity: 0.5;
+}
+
+.file-content {
+  display: none;
+  padding-left: 30px;
+  height: 415px;
+  overflow: auto;
+}
+
+.file-content.active {
+  display: block;
+}
+
+.file-bottom {
+  margin-top: 20px;
+}
+
+.file-upload-list .i-star {
+  display: inline-block;
+  width: 10px;
+  padding-top: 2px;
+  color: #f08b2f;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.file-upload-list>label {
+  display: inline-block;
+  padding-right: 25px;
+  width: 145px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.file-upload-list>label {}
+
+.file-upload-list>label .icon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+.file-upload-list>label span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.file-upload-list .l-content {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.file-upload-list .createpower {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #F08B2F;
+  text-decoration: underline;
+}
+
+.file-detail-top {
+  text-align: right;
+  overflow: hidden;
+}
+
+.file-detail-top .crumbs {
+  float: left;
+}
+
+.file-detail-date {
+  display: inline-block;
+}
+
+.file-detail-date span {
+  margin-right: 20px;
+}
+
+.file-detail-btn {
+  float: right;
+}
+
+.file-detail-btn .button {
+  margin-left: 10px;
+  padding: 1px 10px;
+}
+
+.file-detail-img img {
+  width: 100%;
+}
+
+.file-detail-img {
+  margin-top: 20px;
+  border: 1px solid #eee;
+}
+
+.file-detail-img iframe {
+  width: 100%;
+  min-height: 900px;
+}
+
+.td-content .administrative-division .tab-content .item {
+  padding-top: 5px;
+}
+
+.order-form-file .showPhotos {
+  display: inline-block;
+}
+
+.file-upload-btns {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.file-upload-btns .button {
+  display: inline-block;
+  width: 180px;
+  line-height: 32px;
+}
+
+</style>

@@ -1,0 +1,436 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
+
+const _4273e26a = () => import('..\\pages\\brand\\index.vue' /* webpackChunkName: "pages_brand_index" */).then(m => m.default || m)
+const _3853948b = () => import('..\\pages\\notice\\index.vue' /* webpackChunkName: "pages_notice_index" */).then(m => m.default || m)
+const _334f4790 = () => import('..\\pages\\main.vue' /* webpackChunkName: "pages_main" */).then(m => m.default || m)
+const _a180000a = () => import('..\\pages\\patent\\index.vue' /* webpackChunkName: "pages_patent_index" */).then(m => m.default || m)
+const _c74c0ea6 = () => import('..\\pages\\map.vue' /* webpackChunkName: "pages_map" */).then(m => m.default || m)
+const _855f7fe6 = () => import('..\\pages\\loading.vue' /* webpackChunkName: "pages_loading" */).then(m => m.default || m)
+const _7e2bce89 = () => import('..\\pages\\404.vue' /* webpackChunkName: "pages_404" */).then(m => m.default || m)
+const _2520382a = () => import('..\\pages\\sbzc\\index.vue' /* webpackChunkName: "pages_sbzc_index" */).then(m => m.default || m)
+const _479a8791 = () => import('..\\pages\\contract.vue' /* webpackChunkName: "pages_contract" */).then(m => m.default || m)
+const _687a0224 = () => import('..\\pages\\center\\index.vue' /* webpackChunkName: "pages_center_index" */).then(m => m.default || m)
+const _1b38c3e5 = () => import('..\\pages\\brandmanage\\index.vue' /* webpackChunkName: "pages_brandmanage_index" */).then(m => m.default || m)
+const _fce0d9c2 = () => import('..\\pages\\classify\\index.vue' /* webpackChunkName: "pages_classify_index" */).then(m => m.default || m)
+const _56f7f2ac = () => import('..\\pages\\copyright\\index.vue' /* webpackChunkName: "pages_copyright_index" */).then(m => m.default || m)
+const _6840efc2 = () => import('..\\pages\\center\\flow.vue' /* webpackChunkName: "pages_center_flow" */).then(m => m.default || m)
+const _457406ed = () => import('..\\pages\\order\\orderinfo.vue' /* webpackChunkName: "pages_order_orderinfo" */).then(m => m.default || m)
+const _59b4f582 = () => import('..\\pages\\shangbiao\\freesearch.vue' /* webpackChunkName: "pages_shangbiao_freesearch" */).then(m => m.default || m)
+const _0f95b30d = () => import('..\\pages\\order\\ownermsg.vue' /* webpackChunkName: "pages_order_ownermsg" */).then(m => m.default || m)
+const _b06ae018 = () => import('..\\pages\\passport\\register.vue' /* webpackChunkName: "pages_passport_register" */).then(m => m.default || m)
+const _3bd79fe8 = () => import('..\\pages\\passport\\login.vue' /* webpackChunkName: "pages_passport_login" */).then(m => m.default || m)
+const _f2bb6f04 = () => import('..\\pages\\passport\\forget.vue' /* webpackChunkName: "pages_passport_forget" */).then(m => m.default || m)
+const _098029c9 = () => import('..\\pages\\center\\account.vue' /* webpackChunkName: "pages_center_account" */).then(m => m.default || m)
+const _5b6a4bfe = () => import('..\\pages\\order\\ordinary.vue' /* webpackChunkName: "pages_order_ordinary" */).then(m => m.default || m)
+const _4a50a75b = () => import('..\\pages\\brandmanage\\list.vue' /* webpackChunkName: "pages_brandmanage_list" */).then(m => m.default || m)
+const _aa769218 = () => import('..\\pages\\brandmanage\\add.vue' /* webpackChunkName: "pages_brandmanage_add" */).then(m => m.default || m)
+const _8331ee28 = () => import('..\\pages\\shangbiao\\asImg\\index.vue' /* webpackChunkName: "pages_shangbiao_asImg_index" */).then(m => m.default || m)
+const _36e4812c = () => import('..\\pages\\center\\order.vue' /* webpackChunkName: "pages_center_order" */).then(m => m.default || m)
+const _7e5c14bf = () => import('..\\pages\\order\\order.vue' /* webpackChunkName: "pages_order_order" */).then(m => m.default || m)
+const _63bc6064 = () => import('..\\pages\\order\\auto.vue' /* webpackChunkName: "pages_order_auto" */).then(m => m.default || m)
+const _631195ce = () => import('..\\pages\\center\\smartOrder.vue' /* webpackChunkName: "pages_center_smartOrder" */).then(m => m.default || m)
+const _bc55baba = () => import('..\\pages\\center\\message.vue' /* webpackChunkName: "pages_center_message" */).then(m => m.default || m)
+const _7ce4ce44 = () => import('..\\pages\\list\\asImg\\index.vue' /* webpackChunkName: "pages_list_asImg_index" */).then(m => m.default || m)
+const _a40e7da8 = () => import('..\\pages\\brand\\reg.vue' /* webpackChunkName: "pages_brand_reg" */).then(m => m.default || m)
+const _62d23728 = () => import('..\\pages\\center\\setting.vue' /* webpackChunkName: "pages_center_setting" */).then(m => m.default || m)
+const _a42951e4 = () => import('..\\pages\\center\\template.vue' /* webpackChunkName: "pages_center_template" */).then(m => m.default || m)
+const _5052844a = () => import('..\\pages\\center\\orderDetail.vue' /* webpackChunkName: "pages_center_orderDetail" */).then(m => m.default || m)
+const _44473d74 = () => import('..\\pages\\list\\searchPage.vue' /* webpackChunkName: "pages_list_searchPage" */).then(m => m.default || m)
+const _7d3a6a08 = () => import('..\\pages\\question\\show\\_id.vue' /* webpackChunkName: "pages_question_show__id" */).then(m => m.default || m)
+const _de5170de = () => import('..\\pages\\order\\pay\\_orderNumber.vue' /* webpackChunkName: "pages_order_pay__orderNumber" */).then(m => m.default || m)
+const _23f9f00a = () => import('..\\pages\\news\\show\\_id.vue' /* webpackChunkName: "pages_news_show__id" */).then(m => m.default || m)
+const _78ac0604 = () => import('..\\pages\\notice\\details\\_details.vue' /* webpackChunkName: "pages_notice_details__details" */).then(m => m.default || m)
+const _296c6eb8 = () => import('..\\pages\\list\\details\\_details.vue' /* webpackChunkName: "pages_list_details__details" */).then(m => m.default || m)
+const _149c1ea0 = () => import('..\\pages\\patentSearch\\detail\\_detail.vue' /* webpackChunkName: "pages_patentSearch_detail__detail" */).then(m => m.default || m)
+const _083f3998 = () => import('..\\pages\\order\\examine\\_id.vue' /* webpackChunkName: "pages_order_examine__id" */).then(m => m.default || m)
+const _6de71e18 = () => import('..\\pages\\shangbiaoxq\\_code.vue' /* webpackChunkName: "pages_shangbiaoxq__code" */).then(m => m.default || m)
+const _74a23f25 = () => import('..\\pages\\classify\\_all.vue' /* webpackChunkName: "pages_classify__all" */).then(m => m.default || m)
+const _756f3eda = () => import('..\\pages\\xwxq\\_id.vue' /* webpackChunkName: "pages_xwxq__id" */).then(m => m.default || m)
+const _61b50444 = () => import('..\\pages\\question\\_type.vue' /* webpackChunkName: "pages_question__type" */).then(m => m.default || m)
+const _b07c3e38 = () => import('..\\pages\\login\\_login.vue' /* webpackChunkName: "pages_login__login" */).then(m => m.default || m)
+const _5eafdf15 = () => import('..\\pages\\sbzc\\_result.vue' /* webpackChunkName: "pages_sbzc__result" */).then(m => m.default || m)
+const _611962e8 = () => import('..\\pages\\questionxq\\_id.vue' /* webpackChunkName: "pages_questionxq__id" */).then(m => m.default || m)
+const _e2eed892 = () => import('..\\pages\\news\\_type.vue' /* webpackChunkName: "pages_news__type" */).then(m => m.default || m)
+const _2b330e6b = () => import('..\\pages\\about\\_type.vue' /* webpackChunkName: "pages_about__type" */).then(m => m.default || m)
+const _d6a61b00 = () => import('..\\pages\\show\\_code.vue' /* webpackChunkName: "pages_show__code" */).then(m => m.default || m)
+const _92eacdbe = () => import('..\\pages\\shangbiao\\_result.vue' /* webpackChunkName: "pages_shangbiao__result" */).then(m => m.default || m)
+const _3a1e4585 = () => import('..\\pages\\notice\\_code.vue' /* webpackChunkName: "pages_notice__code" */).then(m => m.default || m)
+const _b617b070 = () => import('..\\pages\\patentDetail\\_detail.vue' /* webpackChunkName: "pages_patentDetail__detail" */).then(m => m.default || m)
+const _578a164b = () => import('..\\pages\\xw\\_type.vue' /* webpackChunkName: "pages_xw__type" */).then(m => m.default || m)
+const _407b4c22 = () => import('..\\pages\\list\\_result.vue' /* webpackChunkName: "pages_list__result" */).then(m => m.default || m)
+const _7184639e = () => import('..\\pages\\patentSearch\\_list.vue' /* webpackChunkName: "pages_patentSearch__list" */).then(m => m.default || m)
+const _73aff23a = () => import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
+const _e4c0c5d2 = () => import('..\\pages\\404.vue' /* webpackChunkName: "" */).then(m => m.default || m)
+
+
+
+if (process.client) {
+  window.history.scrollRestoration = 'manual'
+}
+const scrollBehavior = function (to, from, savedPosition) {
+  // if the returned position is falsy or an empty object,
+  // will retain current scroll position.
+  let position = false
+
+  // if no children detected
+  if (to.matched.length < 2) {
+    // scroll to the top of the page
+    position = { x: 0, y: 0 }
+  } else if (to.matched.some((r) => r.components.default.options.scrollToTop)) {
+    // if one of the children has scrollToTop option set to true
+    position = { x: 0, y: 0 }
+  }
+
+  // savedPosition is only available for popstate navigations (back button)
+  if (savedPosition) {
+    position = savedPosition
+  }
+
+  return new Promise(resolve => {
+    // wait for the out transition to complete (if necessary)
+    window.$nuxt.$once('triggerScroll', () => {
+      // coords will be used if no selector is provided,
+      // or if the selector didn't match any element.
+      if (to.hash) {
+        let hash = to.hash
+        // CSS.escape() is not supported with IE and Edge.
+        if (typeof window.CSS !== 'undefined' && typeof window.CSS.escape !== 'undefined') {
+          hash = '#' + window.CSS.escape(hash.substr(1))
+        }
+        try {
+          if (document.querySelector(hash)) {
+            // scroll to anchor by returning the selector
+            position = { selector: hash }
+          }
+        } catch (e) {
+          console.warn('Failed to save scroll position. Please add CSS.escape() polyfill (https://github.com/mathiasbynens/CSS.escape).')
+        }
+      }
+      resolve(position)
+    })
+  })
+}
+
+
+export function createRouter () {
+  return new Router({
+    mode: 'history',
+    base: '/',
+    linkActiveClass: 'nuxt-link-active',
+    linkExactActiveClass: 'nuxt-link-exact-active',
+    scrollBehavior,
+    routes: [
+		{
+			path: "/brand",
+			component: _4273e26a,
+			name: "brand"
+		},
+		{
+			path: "/notice",
+			component: _3853948b,
+			name: "notice"
+		},
+		{
+			path: "/main",
+			component: _334f4790,
+			name: "main"
+		},
+		{
+			path: "/patent",
+			component: _a180000a,
+			name: "patent"
+		},
+		{
+			path: "/map",
+			component: _c74c0ea6,
+			name: "map"
+		},
+		{
+			path: "/loading",
+			component: _855f7fe6,
+			name: "loading"
+		},
+		{
+			path: "/404",
+			component: _7e2bce89,
+			name: "404"
+		},
+		{
+			path: "/sbzc",
+			component: _2520382a,
+			name: "sbzc"
+		},
+		{
+			path: "/contract",
+			component: _479a8791,
+			name: "contract"
+		},
+		{
+			path: "/center",
+			component: _687a0224,
+			name: "center"
+		},
+		{
+			path: "/brandmanage",
+			component: _1b38c3e5,
+			name: "brandmanage"
+		},
+		{
+			path: "/classify",
+			component: _fce0d9c2,
+			name: "classify"
+		},
+		{
+			path: "/copyright",
+			component: _56f7f2ac,
+			name: "copyright"
+		},
+		{
+			path: "/center/flow",
+			component: _6840efc2,
+			name: "center-flow"
+		},
+		{
+			path: "/order/orderinfo",
+			component: _457406ed,
+			name: "order-orderinfo"
+		},
+		{
+			path: "/shangbiao/freesearch",
+			component: _59b4f582,
+			name: "shangbiao-freesearch"
+		},
+		{
+			path: "/order/ownermsg",
+			component: _0f95b30d,
+			name: "order-ownermsg"
+		},
+		{
+			path: "/passport/register",
+			component: _b06ae018,
+			name: "passport-register"
+		},
+		{
+			path: "/passport/login",
+			component: _3bd79fe8,
+			name: "passport-login"
+		},
+		{
+			path: "/passport/forget",
+			component: _f2bb6f04,
+			name: "passport-forget"
+		},
+		{
+			path: "/center/account",
+			component: _098029c9,
+			name: "center-account"
+		},
+		{
+			path: "/order/ordinary",
+			component: _5b6a4bfe,
+			name: "order-ordinary"
+		},
+		{
+			path: "/brandmanage/list",
+			component: _4a50a75b,
+			name: "brandmanage-list"
+		},
+		{
+			path: "/brandmanage/add",
+			component: _aa769218,
+			name: "brandmanage-add"
+		},
+		{
+			path: "/shangbiao/asImg",
+			component: _8331ee28,
+			name: "shangbiao-asImg"
+		},
+		{
+			path: "/center/order",
+			component: _36e4812c,
+			name: "center-order"
+		},
+		{
+			path: "/order/order",
+			component: _7e5c14bf,
+			name: "order-order"
+		},
+		{
+			path: "/order/auto",
+			component: _63bc6064,
+			name: "order-auto"
+		},
+		{
+			path: "/center/smartOrder",
+			component: _631195ce,
+			name: "center-smartOrder"
+		},
+		{
+			path: "/center/message",
+			component: _bc55baba,
+			name: "center-message"
+		},
+		{
+			path: "/list/asImg",
+			component: _7ce4ce44,
+			name: "list-asImg"
+		},
+		{
+			path: "/brand/reg",
+			component: _a40e7da8,
+			name: "brand-reg"
+		},
+		{
+			path: "/center/setting",
+			component: _62d23728,
+			name: "center-setting"
+		},
+		{
+			path: "/center/template",
+			component: _a42951e4,
+			name: "center-template"
+		},
+		{
+			path: "/center/orderDetail",
+			component: _5052844a,
+			name: "center-orderDetail"
+		},
+		{
+			path: "/list/searchPage",
+			component: _44473d74,
+			name: "list-searchPage"
+		},
+		{
+			path: "/question/show/:id?",
+			component: _7d3a6a08,
+			name: "question-show-id"
+		},
+		{
+			path: "/order/pay/:orderNumber?",
+			component: _de5170de,
+			name: "order-pay-orderNumber"
+		},
+		{
+			path: "/news/show/:id?",
+			component: _23f9f00a,
+			name: "news-show-id"
+		},
+		{
+			path: "/notice/details/:details?",
+			component: _78ac0604,
+			name: "notice-details-details"
+		},
+		{
+			path: "/list/details/:details?",
+			component: _296c6eb8,
+			name: "list-details-details"
+		},
+		{
+			path: "/patentSearch/detail/:detail?",
+			component: _149c1ea0,
+			name: "patentSearch-detail-detail"
+		},
+		{
+			path: "/order/examine/:id?",
+			component: _083f3998,
+			name: "order-examine-id"
+		},
+		{
+			path: "/shangbiaoxq/:code?",
+			component: _6de71e18,
+			name: "shangbiaoxq-code"
+		},
+		{
+			path: "/classify/:all",
+			component: _74a23f25,
+			name: "classify-all"
+		},
+		{
+			path: "/xwxq/:id?",
+			component: _756f3eda,
+			name: "xwxq-id"
+		},
+		{
+			path: "/question/:type?",
+			component: _61b50444,
+			name: "question-type"
+		},
+		{
+			path: "/login/:login?",
+			component: _b07c3e38,
+			name: "login-login"
+		},
+		{
+			path: "/sbzc/:result",
+			component: _5eafdf15,
+			name: "sbzc-result"
+		},
+		{
+			path: "/questionxq/:id?",
+			component: _611962e8,
+			name: "questionxq-id"
+		},
+		{
+			path: "/news/:type?",
+			component: _e2eed892,
+			name: "news-type"
+		},
+		{
+			path: "/about/:type?",
+			component: _2b330e6b,
+			name: "about-type"
+		},
+		{
+			path: "/show/:code?",
+			component: _d6a61b00,
+			name: "show-code"
+		},
+		{
+			path: "/shangbiao/:result?",
+			component: _92eacdbe,
+			name: "shangbiao-result"
+		},
+		{
+			path: "/notice/:code",
+			component: _3a1e4585,
+			name: "notice-code"
+		},
+		{
+			path: "/patentDetail/:detail?",
+			component: _b617b070,
+			name: "patentDetail-detail"
+		},
+		{
+			path: "/xw/:type?",
+			component: _578a164b,
+			name: "xw-type"
+		},
+		{
+			path: "/list/:result?",
+			component: _407b4c22,
+			name: "list-result"
+		},
+		{
+			path: "/patentSearch/:list?",
+			component: _7184639e,
+			name: "patentSearch-list"
+		},
+		{
+			path: "/",
+			component: _73aff23a,
+			name: "index"
+		},
+		{
+			path: "*",
+			component: _e4c0c5d2,
+			name: "custom"
+		}
+    ],
+    
+    
+    fallback: true
+  })
+}

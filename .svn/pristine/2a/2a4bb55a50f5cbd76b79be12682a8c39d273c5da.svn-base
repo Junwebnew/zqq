@@ -1,0 +1,113 @@
+<template>
+  <div class="content">
+      <div class="message-page order-page">
+    <h2 class="order-main-title">消息</h2>
+          <h3 class="joinJiGou-wrap">暂无消息</h3>
+          <!-- start 分页 -->
+          <table width="100%" class="table">
+                <caption>
+                    <h6>
+                        <span class="column-1">智能单待付款提醒</span>
+                        <span class="time">18/09/28 12:03</span>
+                        <a class="iconfont icon-shanchu" onclick="deleteMessage('13191585')">&#xe610;</a>
+                    </h6>
+                </caption>
+                <tbody>
+                <tr><td><a class="hover" href="javascript:;">您有待付款订单，商标名称“al”订单Z80928515369，为了您的商标申请尽快递交，避免被抢注，请尽快完成支付，如已支付请忽略。</a></td></tr>
+                </tbody>
+            </table>
+         <div class="myPaging">
+             <ul class="myPaging-list">
+                     </ul>
+          </div>
+      </div>
+  </div>
+</template>
+<script>
+export default {
+  head() {
+    return {
+      title: "个人中心-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  layout: 'center',
+  components: {}
+};
+
+</script>
+<style scoped>
+.joinJiGou-wrap{
+  margin-top:50px;
+  text-align:center;
+  font-size: 14px;
+  color: #999;
+  font-weight: normal;
+}
+.color {
+    color: #ff7200;
+}
+.order-main-title{
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 2.8em;
+    font-weight: normal;
+    border-bottom: 1px solid #e2e3e8;
+}
+.order-page{
+    padding: 20px;
+    padding-top: 0px;
+    min-height: 700px;
+    background-color: #fff;
+    box-shadow:0 4px 6px 0 rgba(113,114,119,0.10);
+}
+.order-page .no-pay-tips{
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #999;
+}
+.order-page .no-pay-tips .icon{
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+}
+.order-page .no-pay-tips span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.order-page .price-box{
+    padding-right: 20px;
+    text-align: right;
+}
+.order-page .price-box .button{
+    margin-left: 20px;
+    width: 120px;
+    line-height: 32px;
+    text-align: center;
+}
+
+/* ---------- start 消息页 ---------- */
+.message-page{ }
+.message-page .page-title{ position: relative; padding-left: 8px; font-size: 16px; color: #000; }
+.message-page .table{ border: solid 1px #e9e9e9; margin-top: 20px; }
+.message-page .table caption{ padding: 0; }
+.message-page .table caption h6{ background-color: #eee; padding: 10px 10px; border: solid 1px #e9e9e9; border-bottom: 0; position: relative; text-align: left; }
+.message-page .table caption h6 .column-1{color: #333; font-size: 14px; font-weight: normal; }
+.message-page .table caption h6 .time{ font-weight: normal; display: block; float: right; margin-right: 40px; }
+.message-page .table caption h6 .iconfont{ display: block; position: absolute; right: 15px; top: 12px; cursor: pointer; }
+.message-page .table td{ border: 0; padding: 10px 10px; color: #888; font-size: 12px; }
+.message-page .table td a{ color: #888; }
+.message-page .table td a:hover{ color: #ff7200; }
+/* ---------- end 消息页 ---------- */
+</style>

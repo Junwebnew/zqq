@@ -1,0 +1,127 @@
+import popup from "~/components/popup";
+import axios from 'axios';
+import Cookies from "js-cookie";
+
+const baseUrl = require('../../nuxt.config').env.baseUrl
+export const Jump = function (ele, num) { //页面滚动
+
+  let total = ele.offsetTop; //滚动到元素的位置
+  if (num) {
+    total += num;
+  }
+  let distance = document.documentElement.scrollTop || document.body.scrollTop //当前浏览器滚动的位置
+
+  // 平滑滚动，时长500ms，每10ms一跳，共50跳
+  let step = total / 50
+  if (total > distance) {
+    smoothDown()
+  } else {
+    let newTotal = distance - total
+    step = newTotal / 50
+    smoothUp()
+  }
+
+  function smoothDown() {
+    if (distance < total) {
+      distance += step
+      document.body.scrollTop = distance
+      document.documentElement.scrollTop = distance
+      setTimeout(smoothDown, 5)
+    } else {
+      document.body.scrollTop = total
+      document.documentElement.scrollTop = total
+    }
+  }
+
+  function smoothUp() {
+    if (distance > total) {
+      distance -= step
+      document.body.scrollTop = distance
+      document.documentElement.scrollTop = distance
+      setTimeout(smoothUp, 10)
+    } else {
+      document.body.scrollTop = total
+      document.documentElement.scrollTop = total
+    }
+  }
+}
+//新开一个窗口页面
+export const openNewPage = (that, path, data) => {
+
+  let str = path
+  if (data) {
+    str += '/' + data.code + (data.id ? ('&' + data.id) : '') + '.html'
+  }
+
+  const {
+    href
+  } = that.$router.resolve({
+    path: str
+  })
+  window.open(href, '_blank')
+}
+// 上传图片
+export const uploadImg = (params) => {
+
+  params.ele.click()
+  params.ele.onchange = (e) => {
+    let file = e.target.files[0]
+    console.log("图片改变", file)
+    if (!file) {
+      return false
+    }
+    if (file.size > 10485760) {
+      popup.created({
+        content: "上传文件不能大于10M",
+        time: 1500
+      });
+      return false;
+    }
+    if (
+      file.type != "image/jpeg" &&
+      file.type != "image/png"
+    ) {
+      popup.created({
+        content: "只能上传.jpg或.png文件",
+        time: 1500
+      });
+      return false;
+    }
+    let param = new FormData() // 创建form对象
+    param.append('file', file)
+    let loading = popup.created({
+      type: "loading",
+      icon: "&#xe61c",
+      content: "上传中..."
+    })
+    axios.post(`${baseUrl}file/trademarkSearchUpload`, param, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }).then((res) => {
+      loading.close()
+      if (res.data.code == 0) {
+        // popup.created({
+        //   content: "上传成功",
+        //   time: 2000
+        // })
+        params.success(res.data.data)
+        let str = res.data.data.fsHost + res.data.data.fsPath;
+        let str2 = str.replace("https", "http");
+        Cookies.set("imgUrl", str2);
+      } else {
+        popup.created({
+          content: res.data.msg,
+          time: 2000
+        })
+      }
+    }).catch((res) => {
+      console.log(res)
+      loading.close()
+      popup.created({
+        content: "上传错误，稍后重试",
+        time: 2000
+      })
+    })
+  }
+}

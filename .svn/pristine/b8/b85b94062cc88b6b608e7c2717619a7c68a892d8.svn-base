@@ -1,0 +1,368 @@
+<template>
+    <div>
+        <div class="patentDetail-wrap w waterMark" v-if='json'>
+            <!-- start 时间轴 -->
+            <ul class="time-axis songti" style="right: 331.5px; display: block;">
+                <div class="time-axis-arrow" :style="{top:scollTop}"></div>
+                <i class="bg-top"></i>
+                <li class="time-axis-header clearfix cur" v-for='(item,idx) in rightNav' :key="idx" :class="{'active':index == idx}" @click="JumpEle(item.id,idx)">
+                    <a>
+                        <i class="icon icon-disc"></i>
+                    </a>
+                    <span class="text">{{item.name}}</span>
+                </li>
+                <!-- <li class="time-axis-header clearfix">
+                    <a @click="JumpEle()">
+                        <i class="icon icon-disc"></i>
+                    </a>
+                    <span class="text">信息查询</span>
+                </li> -->
+                <i class="bg-bottom"></i>
+            </ul>
+            <!-- end 时间轴 -->
+
+            <!-- start 悬浮 -->
+            <div class="xuanfuTop">
+                <!-- start 标题 -->
+                <h1 class="page-title clearfix">
+                    <span class="type">
+                        [{{json.kindCodeDesc || '--'}}]
+                    </span>
+                    <span class="title">
+                        <a data-href="#">{{json.piInventName}}</a>
+                    </span>
+                    <!-- <span class="law-state bgcolor-1">
+                        公开 </span>
+                    <span class="law-state bgcolor-1">
+                        实质审查的生效 </span>
+                    <span class="law-state bgcolor-1">
+                        发明专利申请公布后的视为撤回 </span> -->
+
+                    <!--<span class="law-state bgcolor-1">有效专利</span>-->
+                    <dl class="btn">
+                        <a class="mybtn btn-related" target="_blank" data-href="/index/search?id=CN102047956A">
+                            <i class="icon icon-related2"></i>相似专利</a>
+                        <span class="mybtn btn-download" data-href="">
+                            <i class="icon icon-download"></i>
+                            <em>下载全文</em>
+                            <div class="btn-bodyer">
+                                <a class="mybtn" target="_blank" data-href="/index/img/8c5d5611d1ceee4ba5d5bfc93ec0bbcbbee378762a31ac91c681ed9c54ff9af40fbe6b6580075a5436691a372d66c526?down=download&amp;numNo=CN102047956A">下载pdf</a>
+                                <a class="mybtn" target="_blank" data-href="/index/img/5686c651889d10cd6c932ec228370a9539005639f6e09f68fd9a363b4959be439184ff5e706f3302778b082b9c89fbcf?down=download&amp;numNo=CN102047956A">下载word</a>
+                            </div>
+                        </span>
+                    </dl>
+                </h1>
+                <!-- end 标题 -->
+                <!-- start 关键词 -->
+                <div class="keyword-box songti clearfix" id="keyword-box">
+                    <span class="main-title">关键词：</span>
+                    <div class="fl" v-html="initKey(json.keyWord)" style="width:80%">
+                        <!-- <a class="search-keyword" data-href="javascript:;" data-color="markcolor0">目赤肿痛夜盲</a> -->
+                    </div>
+
+                </div>
+                <!-- end 关键词 -->
+                <div class="mytab">
+                    <ul class="mytap-header clearfix">
+                        <li class="list selected">
+                            <a data-href="/index/detail?apn=200910117555.3&amp;flag=pub">专利公开详情</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end 悬浮 -->
+            <!-- start 公开详情 -->
+            <div class="detail-box" id="detail-box">
+                <!-- start 基本信息 -->
+                <div class="base-info time-axis-body" id="base-info" style="overflow: hidden; height: 215px;">
+                    <h3 class="list-title">基本信息</h3>
+                    <table class="songti" width="100%">
+                        <tbody>
+                            <tr>
+                                <td width="95px">申请号：</td>
+                                <td>{{json.applicationNumber || '--'}}</td>
+                                <td width="100px">公开/公告号：</td>
+                                <td>{{json.publicationNumber || '--'}}</td>
+                            </tr>
+                            <tr>
+                                <td>申请日：</td>
+                                <td>{{json.applicationDate || '--'}}</td>
+                                <td>公开/公告日：</td>
+                                <td>{{json.publicationDate || '--'}}</td>
+                            </tr>
+                            <tr>
+                                <td>主分类号：</td>
+                                <td>{{json.iPCList || '--'}}</td>
+                                <td>申请人：</td>
+                                <td>
+                                    <!-- <a class="s-brand" target="_blank" title="搜商标" data-href="http://so.quandashi.com/index/search?key=兰州工业研究院&amp;param=3">兰州工业研究院
+                                        <span class="btn">《搜商标</span>
+                                    </a> -->
+                                    {{json.assigneestring || '--'}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>分类号：</td>
+                                <td>{{json.piClassifyNum || '--'}}</td>
+                                <td>发明/设计人：</td>
+                                <td>{{json.inventorString || '--'}}</td>
+                            </tr>
+                            <tr>
+                                <td>地址：</td>
+                                <td>{{json.piAddress || '--'}}</td>
+                                <td>专利代理机构：</td>
+                                <td>{{json.agency || '--'}}</td>
+
+                            </tr>
+                            <tr>
+                                <td>优先权：</td>
+                                <td>{{json.priority || '--'}}</td>
+                                <td>代理人：</td>
+                                <td>{{json.agent || '--'}}</td>
+                            </tr>
+                            <!-- 下面这些字段暂无 -->
+                            <!-- <tr>
+                                <td>颁证日：</td>
+                                <td>{{json.agent || '--'}}</td>
+                                <td>范畴分类：</td>
+                                <td>{{json.agent || '--'}}</td>
+                            </tr>
+                            <tr>
+                                <td>国际申请：</td>
+                                <td>暂无信息</td>
+                                <td>分案申请：</td>
+                                <td>暂无信息</td>
+                            </tr>
+                            <tr>
+                                <td>国际公布：</td>
+                                <td>暂无信息</td>
+                                <td>国省代码：</td>
+                                <td>暂无信息</td>
+                            </tr>
+                            <tr>
+                                <td>进入国家日期：</td>
+                                <td>暂无信息</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                    <!-- <a class="show-more songti" data-href="javascript:;">
+                        <i class="icon-triangle-up icon-selected"></i>
+                        <span>展开</span>
+                    </a> -->
+                </div>
+                <!-- end 基本信息 -->
+
+                <!-- start 法律状态 -->
+                <div class="law-state time-axis-body" id="law-state" v-if='json.lawInfos'>
+                    <h3 class="list-title">法律状态</h3>
+                    <ul class="list-content songti">
+                        <li class="item clearfix" v-for='(item,idx) in json.lawInfos' :key='idx'>
+                            <i class="icon icon-disc"></i>
+                            <span class="text">{{item.lawDate}}</span>
+                            <span class="text">{{item.lawStatus}}</span>
+                        </li>
+                        <!-- <i class="bg-bottom"></i> -->
+                    </ul>
+                </div>
+
+                <!-- end 法律状态 -->
+
+                <!-- start 摘要 -->
+                <div class="profiles clearfix time-axis-body" id="profiles">
+                    <dl class="profiles-left">
+                        <h3 class="list-title">摘要</h3>
+                        <div class="list-content songti">{{json.abstracts || '暂无'}}</div>
+                    </dl>
+                    <dl class="profiles-right">
+                        <h3 class="list-title">摘要附图</h3>
+                        <div class="list-content">
+                            <a><img :src="initImg(json.desDrawings)" :onerror="logo" alt="摘要附图" title="摘要附图"></a>
+                        </div>
+                    </dl>
+                </div>
+                <!-- end 摘要 -->
+
+                <!-- start 权利要求 -->
+                <div class="claims time-axis-body" id="claims" v-if='json.claInfo'>
+                    <h3 class="list-title">权利要求</h3>
+                    <div class="list-content" v-html='json.claInfo'>
+                        <!-- <div class="text songti">
+                            <div class="graph">
+                                <span class="article">小米(谷子)酸奶的工艺，其特征是具有如下特点</span>
+                            </div>
+                            <div class="graph">
+                                <span class="article">1.小米加工成粥后经高压均质或不均质加入到鲜牛奶中按照酸奶加工工艺添加辅料蔗糖、稳定剂经杀菌(90℃，300s)、冷却(45℃)接入乳酸菌保温发酵得到的小米酸奶。</span>
+                            </div>
+                            <div class="graph">
+                                <span class="article">2.充分利用小米(谷子)的营养特点(含铁量高、高价低钠、维生素和矿物元素含量丰富，但必需氨基酸中的赖氨酸含量低)与牛奶营养特点(营养丰富、蛋白含量高，但缺铁、维生素C等)的互补性经过乳酸发酵制成营养更均衡的、具有一定保健功能的新型酸奶。非常适宜幼儿、妇女及老年人群。</span>
+                            </div>
+                            <div class="graph">
+                                <span class="article">3.本工艺既可在发酵之前添加小米粥制成凝固性酸奶；也可在发酵后再加小米粥制成搅拌型酸奶。也可整粒添加，增加酸奶的咀嚼感。</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end 权利要求 -->
+
+                <!-- start 说明书 -->
+                <div class="instructions time-axis-body" id="instructions" v-if='json.desInfo'>
+                    <h3 class="list-title">说明书</h3>
+                    <div class="list-content" v-html="json.desInfo">
+                        <!-- <div class="text songti">
+                            <div class="graph">
+                                <span class="title">技术领域</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0001]</i>
+                                <span class="article">本发明涉及一种以小米加工营养酸奶的工艺，属于食品加工技术领域。</span>
+                            </div>
+                            <div class="graph">
+                                <span class="title">背景技术</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0002]</i>
+                                <span class="article">小米又名粟，古代叫禾，是一年生草本植物，属禾本科，我国北方通称谷子，去壳后叫小米，粒小，色淡黄或深黄，质地较硬，制成品有甜香味。《本草纲目》说，小米“治反胃热痢，煮粥食，益丹田，补虚损，开肠胃。”我国北方许多妇女在生育后，都有用小米加红糖来调养身体的传统。小米熬粥营养丰富，有“代参汤”之美称。</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0003]</i>
+                                <span class="article">中国专利200710069391涉及一种以胡桃肉，小米，红枣，黑芝麻等为原料配制核桃小米粥的方法，该产品具有温补肾阳、养血健脾的功效；中国专利200710069379申请一种预防治疗目赤肿痛、夜盲及视力下降的保健食品及制备方法，该发明将密蒙花、菊花、谷精草、石决明、小米、蜂蜜等按配比混合，适用于目赤肿痛，夜盲以及视力减退等症状，具有健脾开胃、清肝明目、疏散风热之功效；中国专利93106834涉及一种速溶小米奶粉，该产品由小米、鲜牛奶、蔗糖和蜂蜜为原料制成。小米经过精选，淘洗，浸泡，用胶体磨磨成浆体和其它原料配制在一起在均质机中均质处理，再经灭菌，真空浓缩，喷雾干燥制成。这种产品比普通奶粉成本降低30％，而且色、香、味、维生素含量和有益于人体的矿物质含量都高于普通奶粉，适于小孩和老年人食用；中国专利200410050251涉及一种功能性速溶小米粥的制备方法，该发明研制成的速溶小米粥营养丰富、功能性强，克服了以往膨化方便粥复水后没有粘稠度的缺点，保持了小米粥食品的天然形状和风味；中国专利01141731申请一种以小米为原&nbsp;料酶法液态糖化液态发酵生产酿造酒的工艺方法，该法改变了传统的半固态工艺方法，采用酶法液态糖化，液态发酵，使周期减短。国内专利均未涉及以小米加工营养酸奶的制备方法及应用。</span>
+                            </div>
+                            <div class="graph">
+                                <span class="title">发明内容</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0004]</i>
+                                <span class="article">本发明的目的是利用小米与牛奶营养特点的互补性经过乳酸发酵制成营养更均衡的、具有一定保健功能、非常适宜幼儿、妇女及老年人群的新型酸奶。</span>
+                            </div>
+                            <div class="graph">
+                                <span class="title">具体实施方式</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0005]</i>
+                                <span class="article">工艺流程为：①将小米加水熬煮后与牛奶混匀，加入酸奶辅料然后再进行高压均质经杀菌(90℃，300s)、冷却(45℃)，接入乳酸菌，保温发酵而成。</span>
+                            </div>
+                            <div class="graph">
+                                <i class="line-number">[0006]</i>
+                                <span class="article">②小米(谷子脱皮)经膨化粉碎至60-180目与牛奶混合，混合物经高压均质、瞬间高温杀菌冷却后接入乳酸菌发酵得到谷子酸奶。</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- end 说明书 -->
+
+                <!-- start 附图 -->
+                <div class="figure time-axis-body" id="figure" v-if='json.desImg'>
+                    <h3 class="list-title">附图</h3>
+                    <div class="list-content">
+                        <dl class="songti" v-for='(item,idx) in json.desImg' :key='idx'>
+                            <dt>
+                                <a><img :src="item.clUrl" :onerror="logo" alt="附图" title="附图"></a>
+                            </dt>
+                            <dd>图{{idx+1}}</dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- end 附图 -->
+
+                <!-- start 信息查询 -->
+                <!-- <div class="information-search time-axis-body" id="information-search">
+                    <h3 class="list-title">信息查询</h3>
+                    <div class="list-content songti clearfix">
+                        <a data-href="#">收费信息</a>
+                        <a data-href="#">专利证书发文信息</a>
+                        <a data-href="#">通知书发文信息</a>
+                        <a data-href="#">退信信息</a>
+                        <a data-href="#">事务性公告</a>
+                    </div>
+                </div> -->
+                <!-- end 信息查询 -->
+
+            </div>
+            <!-- end 公开详情 -->
+        </div>
+        <toTop/>
+    </div>
+</template>
+  <script>
+import toTop from "~/components/toTop.vue";
+import axios from "axios";
+import img from "~/assets/images/default.png";
+import { Jump } from "~/assets/js/common";
+export default {
+    components: {
+        toTop
+    },
+    async asyncData({ params, redirect, error, env }) {
+        let code = params.detail.split(".")[0];
+
+        let { data } = await axios.get(
+            `${
+                env.baseUrl
+            }patentSearch/detail?key=applicationNumber&val=${code}`
+        );
+        if (data.code == 0) {
+            return {
+                code: code,
+                json: data.data[0]
+            };
+        } else {
+            error({ statusCode: 500, message: data.msg });
+        }
+    },
+    data() {
+        return {
+            rightNav: [
+                { name: "基本信息", id: "base-info" },
+                { name: "法律状态", id: "law-state" },
+                { name: "摘要", id: "profiles" },
+                { name: "权利要求", id: "claims" },
+                { name: "说明书", id: "instructions" },
+                { name: "附图", id: "figure" }
+            ],
+            openAll: 0,
+            code: "",
+            logo: 'this.src="' + img + '"',
+            json: "",
+            index: 0,
+            scollTop: "17px"
+        };
+    },
+
+    mounted() {
+        console.log("json", this.json);
+    },
+    methods: {
+        initKey(allStr) {
+            if (!allStr) return "";
+
+            let arr = allStr.split("、");
+            let html = "";
+            for (let key of arr) {
+                html += ` <a class="search-keyword">${key}</a>`;
+            }
+            return html;
+        },
+        initImg(arr) {
+            if (arr == undefined || arr.length == 0) {
+                return "";
+            } else {
+                return arr[0].clUrl;
+            }
+        },
+        JumpEle(id, idx) {
+            let ele = document.getElementById(id);
+            if (ele) {
+                this.index = idx;
+                Jump(ele, -110);
+                this.scollTop = 17 + idx * 47 + "px";
+            }
+        }
+    }
+};
+</script>
+<style scoped>
+@import url("../../../assets/css/patentSearch");
+* {
+    box-sizing: border-box;
+}
+</style>

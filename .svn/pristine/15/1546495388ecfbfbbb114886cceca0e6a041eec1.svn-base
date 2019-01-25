@@ -1,0 +1,588 @@
+<template>
+    <div class="page-content">
+        <!---->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>商标图样</th>
+                    <th>商标名称</th>
+                    <th>商品类别</th>
+                    <th>申请号</th>
+                    <th>申请人</th>
+                    <th>初审公告日期</th>
+                    <th>异议绝限日期</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-margin">
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="table-top">
+                        提起异议绝限日期：
+                        <i>2018-12-6</i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/25b7d7fa/57c2328a/112d147b/f3cbfda8/logo_middle.jpg" alt="图形" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>图形</td>
+                    <td>
+                        <span class="td-btype">30类 方便食品</span>
+                    </td>
+                    <td>6144753</td>
+                    <td>切迟-杜威有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" href="/notice/detail">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/24e42d89/050a3f1b/2c8af714/d277e8a7/logo_middle.jpg" alt="MARCO POLO" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>MARCO POLO</td>
+                    <td>
+                        <span class="td-btype">11类 灯具空调</span>
+                    </td>
+                    <td>7470405</td>
+                    <td>广东唯美陶瓷有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" href="/notice/detail">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/a99b987b/1037a731/8e8a6822/5b56c554/logo_middle.jpg" alt="六粮液" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>六粮液</td>
+                    <td>
+                        <span class="td-btype">33类 酒</span>
+                    </td>
+                    <td>9047721</td>
+                    <td>四川省宜宾五粮液集团有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" href="/notice/detail">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/a450a3a4/2abb22f0/802945cf/26892515/logo_middle.jpg" alt="VACHERON CONSTANTIN" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>VACHERON CONSTANTIN</td>
+                    <td>
+                        <span class="td-btype">25类 服装鞋帽</span>
+                    </td>
+                    <td>9122613</td>
+                    <td>历峰国际有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=9122613&amp;issue=1614&amp;name=VACHERON CONSTANTIN">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/8ed5a456/03724d20/6756d05a/a5cf2473/logo_middle.jpg" alt="绿巨人 GREEN GIANT" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>绿巨人 GREEN GIANT</td>
+                    <td>
+                        <span class="td-btype">30类 方便食品</span>
+                    </td>
+                    <td>9124316</td>
+                    <td>美国通用磨坊食品公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=9124316&amp;issue=1614&amp;name=绿巨人 GREEN GIANT">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/1be23514/15caf84c/cf65ef56/4fc40d4e/logo_middle.jpg" alt="高投" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>高投</td>
+                    <td>
+                        <span class="td-btype">37类 建筑修理</span>
+                    </td>
+                    <td>9639271</td>
+                    <td>青岛高新区投资开发集团有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=9639271&amp;issue=1614&amp;name=高投">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/11f44a69/4901d98f/44235550/1a16bc55/logo_middle.jpg" alt="HUMAND" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>HUMAND</td>
+                    <td>
+                        <span class="td-btype">09类 科学仪器</span>
+                    </td>
+                    <td>10090687</td>
+                    <td>青岛亨达股份有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=10090687&amp;issue=1614&amp;name=HUMAND">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/65c9eddd/aa3ffbaf/0c52c241/edc30d5f/logo_middle.jpg" alt="BEAUTYGE" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>BEAUTYGE</td>
+                    <td>
+                        <span class="td-btype">03类 日化用品</span>
+                    </td>
+                    <td>10449715</td>
+                    <td>美艳格美容集团有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=10449715&amp;issue=1614&amp;name=BEAUTYGE">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/8514cc64/31e3e1a6/206cfef6/423bd739/logo_middle.jpg" alt="WRIGHT BROTHER" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>WRIGHT BROTHER</td>
+                    <td>
+                        <span class="td-btype">25类 服装鞋帽</span>
+                    </td>
+                    <td>10600683</td>
+                    <td>广州居信贸易有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=10600683&amp;issue=1614&amp;name=WRIGHT BROTHER">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/06d748e6/52c8309e/2a5d6b50/768e9899/logo_middle.jpg" alt="好太太好幸福 HTAITAI" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>好太太好幸福 HTAITAI</td>
+                    <td>
+                        <span class="td-btype">11类 灯具空调</span>
+                    </td>
+                    <td>10901610</td>
+                    <td>王小波</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=10901610&amp;issue=1614&amp;name=好太太好幸福 HTAITAI">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/cecbe611/e943f891/69daa2cd/9cd98593/logo_middle.jpg" alt="高雅" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>高雅</td>
+                    <td>
+                        <span class="td-btype">30类 方便食品</span>
+                    </td>
+                    <td>11211400</td>
+                    <td>林德和斯普伦杰利巧克力公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11211400&amp;issue=1614&amp;name=高雅">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/39787253/763356fe/fa43ca93/ec4caa97/logo_middle.jpg" alt="PARSA BEAUTY" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>PARSA BEAUTY</td>
+                    <td>
+                        <span class="td-btype">14类 珠宝钟表</span>
+                    </td>
+                    <td>11214075</td>
+                    <td>帕莎发饰时尚有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11214075&amp;issue=1614&amp;name=PARSA BEAUTY">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/79bd219e/84399684/537cda6c/3d6c7e4a/logo_middle.jpg" alt="多乐士" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>多乐士</td>
+                    <td>
+                        <span class="td-btype">21类 厨房洁具</span>
+                    </td>
+                    <td>11346705</td>
+                    <td>阿克苏诺贝尔涂料国际有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11346705&amp;issue=1614&amp;name=多乐士">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/9a5261aa/7a0e1b01/f3b869a1/e8da473d/logo_middle.jpg" alt="多乐士 DULUX" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>多乐士 DULUX</td>
+                    <td>
+                        <span class="td-btype">21类 厨房洁具</span>
+                    </td>
+                    <td>11346725</td>
+                    <td>阿克苏诺贝尔涂料国际有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11346725&amp;issue=1614&amp;name=多乐士 DULUX">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/fb7cf5ca/baf9dd43/20384d52/93ed4da8/logo_middle.jpg" alt="多乐士 多彩生活 LET＇S COLOUR" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>多乐士 多彩生活 LET＇S COLOUR</td>
+                    <td>
+                        <span class="td-btype">21类 厨房洁具</span>
+                    </td>
+                    <td>11346825</td>
+                    <td>阿克苏诺贝尔涂料国际有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11346825&amp;issue=1614&amp;name=多乐士 多彩生活 LET＇S COLOUR">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/84f26fc1/d2de6d3a/214f6856/48ac4060/logo_middle.jpg" alt="BRIAN ATWOOD" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>BRIAN ATWOOD</td>
+                    <td>
+                        <span class="td-btype">35类 广告销售</span>
+                    </td>
+                    <td>11633695</td>
+                    <td>贝恩品牌控股有限责任公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11633695&amp;issue=1614&amp;name=BRIAN ATWOOD">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/80a09ed4/29284e96/033b77b7/bb2f458a/logo_middle.jpg" alt="BE MOVED" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>BE MOVED</td>
+                    <td>
+                        <span class="td-btype">09类 科学仪器</span>
+                    </td>
+                    <td>11633843</td>
+                    <td>索尼公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=11633843&amp;issue=1614&amp;name=BE MOVED">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/08a26961/502eb94b/9af80d91/e22c5e0f/logo_middle.jpg" alt="路虎" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>路虎</td>
+                    <td>
+                        <span class="td-btype">35类 广告销售</span>
+                    </td>
+                    <td>12171260</td>
+                    <td>捷豹路虎有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=12171260&amp;issue=1614&amp;name=路虎">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/fe064c6d/0d510de2/1ad1ca9e/f048e015/logo_middle.jpg" alt="SUZUKI" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>SUZUKI</td>
+                    <td>
+                        <span class="td-btype">09类 科学仪器</span>
+                    </td>
+                    <td>12182878</td>
+                    <td>国际铃木协会</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=12182878&amp;issue=1614&amp;name=SUZUKI">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+                <!---->
+                <tr>
+                    <td>
+                        <div class="brand-img"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/c892f9f1/b98616b7/c1488131/72c429be/logo_middle.jpg" alt="PANERAI" onerror="this.src='https://so.quandashi.com/home/images/error-img.png'"></div>
+                    </td>
+                    <td>PANERAI</td>
+                    <td>
+                        <span class="td-btype">43类 餐饮住宿</span>
+                    </td>
+                    <td>12262605</td>
+                    <td>沛纳海有限公司</td>
+                    <td>2018-9-6</td>
+                    <td>2018-12-6</td>
+                    <td class="td-data-href">
+                        <a target="_blank" data-href="/search/notice/notice-detail?id=12262605&amp;issue=1614&amp;name=PANERAI">查看详情</a><br>
+                        <a data-href="javascript:void(0)" onclick="NTKF.im_openInPageChat('kf_9479_1482483215983')">我要异议</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            翻页组件
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    layout: "notice",
+    head() {
+        return {
+            title: "初审公告页面"
+        };
+    }
+};
+</script>
+<style scoped>
+.search-top {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333333;
+    text-align: left;
+}
+.search-top i {
+    color: #ff5c00;
+}
+.page-content {
+    padding-bottom: 40px;
+}
+.page-content-left {
+    float: left;
+    width: 1080px;
+}
+.page-content-left .tips {
+    display: inline-block;
+    margin-top: 5px;
+    padding-left: 20px;
+    color: #ff5c00;
+    font-size: 12px;
+}
+.search-list {
+    border: 1px solid #ddd;
+}
+.search-list > li {
+    border-bottom: 1px solid #ddd;
+}
+.search-list > li .result-data-href {
+    float: left;
+    width: 860px;
+}
+.search-list > li > a:hover {
+    color: #555;
+}
+.search-list > li:last-of-type {
+    border-bottom: none;
+}
+.page-content-left .brand-img {
+    float: left;
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+.brand-img {
+    margin: 10px auto;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+.brand-img img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+.brand-info {
+    padding: 20px;
+    padding-bottom: 15px;
+    overflow: hidden;
+}
+.brand-info h2 {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+}
+.brand-info h2 .chi {
+    display: inline-block;
+    margin-left: 4px;
+    width: 22px;
+    height: 22px;
+    /* background: url(../images/chi.png) no-repeat center; */
+    vertical-align: middle;
+    background-size: cover;
+}
+.brand-info-in {
+}
+.brand-info-in ul {
+    display: inline-block;
+    width: 750px;
+    vertical-align: top;
+}
+.brand-info li {
+    float: left;
+    margin-bottom: 5px;
+    min-width: 280px;
+}
+.brand-info li label {
+    color: #666;
+}
+.brand-info li span {
+    margin-right: 30px;
+}
+.brand-info li span.process-name {
+    font-weight: bold;
+    color: #f08b2f;
+}
+.brand-info li span:last-of-type {
+    margin-right: 0px;
+}
+.brand-status {
+    float: left;
+    margin-top: 55px;
+    vertical-align: top;
+}
+.brand-status div {
+    margin-bottom: 15px;
+}
+.brand-status span,
+.brand-status a {
+    display: inline-block;
+    width: 42px;
+    line-height: 19px;
+    font-size: 12px;
+    text-align: center;
+}
+.brand-status .status1 {
+    border: 1px solid #81cdef;
+    border-radius: 56px;
+    cursor: pointer;
+}
+.brand-status .status2 {
+    border: 1px solid #f08b2f;
+    border-radius: 2px;
+}
+.page-index-title {
+    position: relative;
+    margin-top: 25px;
+    margin-bottom: 23px;
+}
+.page-index-title:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -15px;
+    margin-top: -3px;
+    width: 6px;
+    height: 6px;
+    background-color: #ff4422;
+    border-radius: 50%;
+}
+.page-content {
+    margin-top: 30px;
+}
+.table {
+    width: 100%;
+    text-align: center;
+}
+.table thead {
+    background-color: #e5e5e5;
+}
+.table tr {
+    height: 40px;
+}
+.table td.table-top {
+    padding-left: 20px;
+    text-align: left;
+    background-color: #f5f5f5;
+}
+.table tr.table-margin {
+    height: 15px;
+}
+.table td.table-top i {
+    color: #ff4422;
+}
+.table td {
+    width: 200px;
+}
+.table tr td.td-data-href a {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #ff7200;
+    text-decoration: underline;
+}
+.table tr td.td-data-href a:last-of-type {
+    margin-bottom: 0px;
+}
+</style>
+

@@ -1,0 +1,917 @@
+<template>
+    <div>
+        <mini/>
+        <div class="page-search w2">
+            <span class="main-title">商标搜索</span>
+            <div class="search-input">
+                <input name="" placeholder="请输入商标名称" class="text fl" type="text">
+                <a href="javascript:void(0)" id="search" class="button search">搜索</a>
+                <div class="img-search-btn">
+                    <i id="select-btn" class="icon-camera"></i>
+                </div>
+            </div>
+            <div class="search-right">
+                <a href="/classify" target="_blank" class="button button-white">商品分类</a>
+                <a href="/notice" target="_blank" class="button button-white">初审公告</a>
+            </div>
+        </div>
+        <div class="page-nav" id="brandTitle">
+            <div class="page-nav-in w2">
+                <a href="javascript:void(0)" v-for="(item,idx) in keyArr" :key="idx" :class="{'active':idx == keyIndex}" @click="switchTab(idx,item.val)">{{item.name}}</a>
+            </div>
+        </div>
+        <!-- //搜索正文大头开始 -->
+        <section class="w2" style="margin-top:20px">
+            <div class="page-checkbox w-center">
+                <div class=" checkbox-all-box">
+                    <label class="checkbox-box" v-for='(item,idx) in conditionArr' :key='idx' @click="selectCondition(idx)">
+                        <label class="checkbox" :class="{'checked':conditionIdxArr[idx]}"></label>
+                        <span>{{item}}</span>
+                    </label>
+                </div>
+            </div>
+            <!-- //字典 开始 -->
+            <div class="page-form clear2">
+                <div class="selected-category clear2">
+                    <a class="btn cancelAll" @click="cancelAll" v-show="selectArr.length > 0">全部清除</a>
+                    <label>已选类别</label>
+                    <div class="selected-category-box">
+                        <template v-for='(item,idx) in selectArr'>
+                            <categoryBox :json='item' :index='idx' :key='idx' @remove='removeCategoryBox' @getSelect='getCategoryBoxCode' />
+                        </template>
+                    </div>
+                </div>
+                <ul>
+                    <li class="search-category" v-for='(val,key,idx) in docData' :class="{'open':openDoc[idx]}" :key='idx'>
+                        <a class="btn" @click="openLevel(idx)">更多</a>
+                        <label>{{matchName(key)}}</label>
+                        <div class="category-show-box">
+                            <a href="javascript:void(0)" v-for='(item,idx2) in val' :key='idx2' :class="{'active': (key == 'apply_type_p' && docStyleIdxArr[idx2]) || ( key != 'apply_type_p' && val.length == 1) }" @click="selectOption(key,idx2,item.key)" v-if=" item.val>0">{{item.key}}({{item.val}})</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 字典结束 -->
+
+            <!-- 列表开始 -->
+            <div class="page-content clear2">
+
+                <!-- //左边列表层级 -->
+                <div class="page-content-left">
+                    <template v-if="total > 0">
+                        <div class="search-top">知千秋为您找到相关结果
+                            <i>{{total}}</i> 个</div>
+                        <ul class="search-list">
+                            <li class=" line-animate" v-for='(item,idx) in listData' :key='idx'>
+                                <div class="result-href">
+                                    <div class="brand-img">
+                                        <a><img :src="item.imageUrl ? item.imageUrl : ''" :onerror="logo" /></a>
+                                    </div>
+                                    <div class="brand-info">
+                                        <h2 @click="goDetail">{{item.name}}</h2>
+                                        <div class="brand-info-in">
+                                            <ul>
+                                                <li>
+                                                    <label>当前状态：</label>
+                                                    <span class="process-name">{{item.status}}</span>
+                                                </li>
+                                                <li>
+                                                    <label>商品类别：</label>
+                                                    <span class="td-btype">{{item.intCls}}</span>
+                                                    <label>申请号：</label>
+                                                    <span>{{item.regNo}}</span>
+                                                </li>
+                                                <li>
+                                                    <label>申请日期：</label>
+                                                    <span>{{item.appDate}}</span>
+                                                </li>
+                                                <li>
+                                                    <label>申请人：</label>
+                                                    <span>{{item.applicantCn}}</span>
+                                                </li>
+                                                <li>
+                                                    <label>初审公告日期：</label>
+                                                    <span>{{item.announcementDate}}</span>
+                                                </li>
+                                                <li>
+                                                    <label>注册公告日期：</label>
+                                                    <span>{{item.regDate}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="brand-status">
+                                    <div>
+                                        <span data-flag="19398625" data-code="9" class="status1">关注</span>
+                                    </div>
+                                    <div>
+                                        <a target="_blank" href="https://www.quandashi.com/sb/sbzr" class="btn status2">转让</a>
+                                        <a target="_blank" href="https://www.quandashi.com/sb/sbbg" class="btn status2">变更</a>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                        </ul>
+                        <!-- start 分页 -->
+                        <pagination :totalPage="total" :pageSize="pageSize" @pagechange="pagechange" />
+                        <!-- end 分页 -->
+                    </template>
+                    <noFind :keyWord="keyword" :type="'商标'" v-else/>
+                </div>
+
+                <!-- 右边商标出售 -->
+                <div class="page-content-right">
+                    <div data-type="2" class="hot-brand hot-brand-right">
+                        <h2>热门商标出售</h2>
+                        <ul class="">
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/72bdb7da/3110aed9/0ff45a72/5efefb44/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="炫盟">炫盟</h6>
+                                    <span class="hot-brand-category">42类 科技服务</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>13000</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/906e0d0b/b1e4fd00/65f965a2/1b0dc6f4/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="木佳翼">木佳翼</h6>
+                                    <span class="hot-brand-category">20类 家具</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>23440</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/d72702ac/103ddd5f/fd0a6984/0077327f/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="腾锐">腾锐</h6>
+                                    <span class="hot-brand-category">25类 服装鞋帽</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>12880</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hot-brand-image"><img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/bfb1602a/64a17d7d/cbe8e198/3c5a16ef/logo_middle.jpg"></div>
+                                <div class="hot-brand-detail fl">
+                                    <h6 class="hot-brand-name" title="常豆">常豆</h6>
+                                    <span class="hot-brand-category">25类 服装鞋帽</span>
+                                    <strong class="hot-brand-price">￥
+                                        <i>31090</i>
+                                    </strong>
+                                    <a href="javascript:void(0)" class="button">我有兴趣</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="javascript:;" class="more hide">查看更多&gt;&gt;</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 列表结束 -->
+
+        </section>
+    </div>
+</template>
+  <script>
+import mini from "~/components/header/mini";
+import { openNewPage } from "~/assets/js/common.js";
+import { Http } from "~/plugins/axios.js";
+import popup from "~/components/popup";
+import pagination from "~/components/pagination.vue";
+import img from "~/assets/images/default.png";
+import noFind from "~/components/noFind";
+import { Jump } from "~/assets/js/common";
+import categoryBox from "~/components/categoryBox";
+
+export default {
+    layout: "empt",
+    async asyncData(context) {
+        let keyword = context.params.result.split(/\.|_/)[1];
+        let requireObj = {
+            pageIndex: 1, //开始页
+            pageSize: 20, //每页多少条
+            key: "nameJs", //搜索key，取值： 近似商标 nameJs; 精准商标 name; 申请号 regNo; 申请人 applicantCn; 代理公司 tmSection;
+            keyWord: keyword,
+            filterType: "all", //过滤条件，取值： all 全选； jq 精确； bf 部分； jiaz 加字； jianz 减字； bz 变字； hx 换序； py 拼音； tszf 特殊字符; xjz 形近字；
+            applyType: "", //申请类别，传值多个值直接用“-”分隔；
+            layStatus: "", //法律状态
+            applyYear: "" //申请年份
+        };
+
+        let [data1, data2] = await Promise.all([
+            Http("brandSearch/searchList", requireObj, "post"),
+            Http("brandSearch/approximate", requireObj, "post")
+        ]);
+        if (data1.data.code == 0 && data2.data.code == 0) {
+            let listData = data1.data.data,
+                docData = data2.data.data;
+            return {
+                listData: listData.listData,
+                total: Number(listData.totalCount || 0),
+                docData: docData
+            };
+        }
+    },
+    head() {
+        return {
+            title: `${this.keyword}-全球更好用的商标搜索-知千秋`
+        };
+    },
+    components: {
+        mini,
+        noFind,
+        pagination,
+        categoryBox
+    },
+    data() {
+        return {
+            openDoc: [], //展开成熟的初始关闭
+            listData: [], //列表数组
+            keyword: this.$route.params.result.split(/\.|_/)[1],
+            total: 0, //总数
+            pageIndex: 1,
+            pageSize: 20,
+            logo: 'this.src="' + img + '"',
+
+            conditionArr: [
+                "全选",
+                "精确结果",
+                "部分相同",
+                "加字",
+                "减字",
+                "变字",
+                "换序",
+                "拼音",
+                "特殊字符",
+                "形近字"
+            ],
+            docData: {}, //字典对象
+            docStyleIdxArr: [],
+            keyIndex: 0, //搜索key，取值： 近似商标 nameJs; 精准商标 name; 申请号 regNo; 申请人 applicantCn; 代理公司 tmSection;
+            keyArr: [
+                { name: "近似商标", val: "nameJs" },
+                { name: "精准商标", val: "name" },
+                { name: "申请号", val: "regNo" },
+                { name: "申请人", val: "applicantCn" },
+                { name: "商品服务", val: "" },
+                { name: "图形搜索", val: "" },
+                { name: "代理公司", val: "tmSection" }
+            ],
+            conditionIdxArr: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //过滤条件 小分类初始全部选中
+            filterType: "all", //过滤条件，取值： all 全选； jq 精确； bf 部分； jiaz 加字； jianz 减字； bz 变字； hx 换序； py 拼音； tszf 特殊字符; xjz 形近字；
+            filterTypeArr: [
+                "all",
+                "jq",
+                "bf",
+                "jiaz",
+                "jianz",
+                "bz",
+                "hx",
+                "py",
+                "tszf",
+                "xjz"
+            ],
+            applyType: "", //申请45类别，传值多个值直接用“-”分隔；并获取子级
+            layStatus: "", //法律状态
+            applyYear: "", //申请年份
+            goodsNum: "", //申请小类别，编辑大类下面的小类的数字号，取值：获取前面数字，如“0120-0122-03-22”，多个用“-”分隔；
+            selectArr: [] //已选条件
+        };
+    },
+    methods: {
+        getList(requireObj) {
+            Http("brandSearch/searchList", requireObj, "post", 1).then(res => {
+                let listData = res.data.data;
+
+                this.listData = listData.listData;
+                this.total = Number(listData.totalCount || 0);
+                Jump(document.getElementById("brandTitle"), -72);
+            });
+        },
+        getDoc(requireObj) {
+            Http("brandSearch/approximate", requireObj, "post", 1).then(res => {
+                let docObj = res.data.data;
+
+                if (docObj.apply_type_p_SMALL) {
+                    this.selectArr = docObj.apply_type_p_SMALL || [];
+                    delete docObj.apply_type_p_SMALL;
+                } else {
+                    this.selectArr = [];
+                }
+
+                let obj = Object.assign({}, this.docData, docObj);
+
+                //如果选中只留一个
+                // obj = this.isHasOption("layStatus", obj, "lay_status");
+                // obj = this.isHasOption("applyYear", obj, "apply_year");
+                // console.log("返回的字典", obj);
+                this.docData = obj;
+            });
+        },
+        //如果有选中的条件这里分析
+        isHasOption(key, obj, key2) {
+            if (this[key]) {
+                for (let item of obj[key2]) {
+                    if (item.key == this[key]) {
+                        obj[key2] = [item];
+                    }
+                }
+            }
+            return obj;
+        },
+        //浏览器请求在这里
+        httpRequire(type) {
+            let requireObj = {
+                keyWord: this.keyword,
+                pageIndex: this.pageIndex,
+                pageSize: this.pageSize,
+                key: this.keyArr[this.keyIndex].val,
+                filterType: this.filterType,
+                applyType: this.applyType,
+                layStatus: this.layStatus,
+                applyYear: this.applyYear,
+                goodsNum: this.goodsNum
+            };
+            !type && this.getDoc(requireObj); //有参数时就只会请求列表 如翻页
+            this.getList(requireObj);
+        },
+        openLevel(num) {
+            let newArr = [...this.openDoc];
+            newArr[num] = newArr[num] ? 0 : 1;
+            this.openDoc = newArr;
+        },
+        goDetail() {
+            openNewPage(this, "/search/detail");
+        },
+        //黑底导航条分类
+        switchTab(num, val) {
+            if (val) {
+                this.keyIndex = num;
+                this.httpRequire();
+            }
+        },
+        //匹配字典名
+        matchName(name) {
+            let str = "其他";
+            switch (name) {
+                case "apply_type_p":
+                    str = "申请类别";
+                    break;
+                case "apply_year":
+                    str = "申请年份";
+                    break;
+                case "lay_status":
+                    str = "法律状态";
+                    break;
+            }
+            return str;
+        },
+        //近似商标下面的小分类
+        selectCondition(num) {
+            let allArr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                oldArr = [...this.conditionIdxArr];
+            if (num) {
+                oldArr[num] = oldArr[num] ? 0 : 1;
+                allArr = oldArr;
+            } else {
+                allArr = oldArr[0] ? [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] : allArr;
+            }
+            let minStyle = "";
+            for (let i = 1; i < allArr.length; i++) {
+                if (allArr[i] === 0) {
+                    allArr[0] = 0;
+                } else {
+                    minStyle += this.filterTypeArr[i] + "-";
+                }
+            }
+            if (allArr[0]) minStyle = "all";
+            else minStyle = minStyle.substr(0, minStyle.length - 1);
+            if (!minStyle) minStyle = "all";
+
+            this.conditionIdxArr = allArr;
+            if (this.filterType != minStyle) {
+                this.filterType = minStyle;
+                this.httpRequire();
+            }
+        },
+        //字典的分类选中
+        selectOption(key, num, code) {
+            //45大类的选中与取消选中
+            if (key == "apply_type_p") {
+                let newArr = [...this.docStyleIdxArr];
+                newArr[num] = newArr[num] ? 0 : 1;
+                this.docStyleIdxArr = newArr;
+                this.get45Select(newArr);
+            } else if (key == "apply_year") {
+                //年的选中
+                this.applyYear = this.applyYear ? "" : code;
+            } else if (key == "lay_status") {
+                //法律状态的选中
+                this.layStatus = this.layStatus ? "" : code;
+            }
+
+            this.httpRequire();
+        },
+        //45类的选中 产生applyType
+        get45Select(arr) {
+            let str = "",
+                _45Arr = this.docData.apply_type_p;
+
+            for (let i = 0; i < _45Arr.length; i++) {
+                if (arr[i]) {
+                    str += _45Arr[i].key + "-";
+                }
+            }
+            if (str) str = str.substr(0, str.length - 1);
+
+            this.applyType = str;
+        },
+        //翻页
+        pagechange(page) {
+            this.pageIndex = page;
+            this.httpRequire(1);
+        },
+        //清除所有已选条件
+        cancelAll() {
+            this.selectArr = [];
+            this.docStyleIdxArr = [];
+            this.applyType = "";
+            this.httpRequire();
+        },
+        //清除单独的一个已选条件
+        removeCategoryBox(idx, name) {
+            //已选数组的清除
+            let arr = [...this.selectArr];
+            arr.splice(idx, 1);
+            this.selectArr = arr;
+            //45类选中的的取消
+            let newArr = [...this.docStyleIdxArr];
+            let _45Arr = this.docData.apply_type_p;
+            for (let i = 0; i < _45Arr.length; i++) {
+                if (_45Arr[i].key == name) {
+                    newArr[i] = 0;
+                    break;
+                }
+            }
+            this.docStyleIdxArr = newArr;
+            this.get45Select(newArr);
+            this.httpRequire();
+        },
+        //获取每一个CategoryBox 里面小选项的选中的code，全选为空用数组存起来
+        getCategoryBoxCode(str, index) {
+            console.log("boxID", str, index);
+        }
+    }
+};
+</script>
+<style scoped>
+* {
+    box-sizing: border-box;
+}
+/* //搜索选项 */
+.page-checkbox {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.page-checkbox .checkbox-box {
+    margin-right: 20px;
+}
+.page-checkbox span {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+/* //二级搜索 */
+.page-search {
+    padding: 30px 0;
+}
+.page-search .main-title {
+    display: inline-block;
+    margin-right: 45px;
+    font-size: 36px;
+    line-height: 1em;
+    color: #ff5c00;
+    vertical-align: middle;
+}
+.search-input {
+    display: inline-block;
+    position: relative;
+    margin-right: 40px;
+    border: 1px solid #ff5c00;
+    border-radius: 0 2px 2px 0;
+    overflow: hidden;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.page-search input.text {
+    padding-left: 20px;
+    width: 520px;
+    height: 38px;
+    border: none;
+    vertical-align: middle;
+    padding-right: 40px;
+}
+.page-search .button {
+    width: 130px;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.search-input .icon-camera {
+    display: block;
+    width: 30px;
+    height: 28px;
+    position: absolute;
+    right: 135px;
+    top: 5px;
+    z-index: 2;
+    background: url("../../assets/images/icon_photo.png") no-repeat center;
+    cursor: pointer;
+}
+.search-right {
+    display: inline-block;
+    margin-left: 20px;
+}
+.button.button-white {
+    color: #ff5c00;
+    background-color: #fff;
+    border: 1px solid #ff5c00;
+}
+.page-search .button {
+    width: 130px;
+    line-height: 36px;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px 0 0 2px;
+}
+.search-right .button {
+    margin-left: 10px;
+}
+/* //黑底导航 */
+.page-nav {
+    line-height: 48px;
+    background-color: #39414e;
+}
+.page-nav a {
+    margin-right: 50px;
+    font-size: 15px;
+    color: #fff;
+}
+.page-nav a.active {
+    font-size: 16px;
+    color: #ff5c00;
+    font-weight: bold;
+}
+.checkbox.checked {
+    background-image: url("../../assets/images/searchList/icon-checked.png");
+    border-color: #ff5c00;
+    background-size: 90%;
+}
+
+.checkbox {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    user-select: none;
+}
+/* //字典配置************************************************************************* */
+body.overflow {
+    overflow: hidden;
+}
+.page-form {
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+.page-form ul li {
+    margin-bottom: 18px;
+}
+.page-form ul li > label {
+    float: left;
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 30px;
+    width: 60px;
+    font-size: 12px;
+    color: #666;
+}
+.search-category {
+    position: relative;
+    height: 20px;
+    overflow: hidden;
+    transition: 0.1s;
+}
+.search-category.open {
+    height: auto;
+}
+.search-category .btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    padding-right: 15px;
+    color: #666;
+    background: url("../../assets/images/searchList/arrow-down.png") no-repeat
+        right center;
+}
+.search-category.open .btn {
+    background: url("../../assets/images/searchList/arrow-up.png") no-repeat
+        right center;
+}
+.selected-category {
+    margin-bottom: 16px;
+    border-bottom: 1px dashed #ccc;
+}
+.selected-category .cancelAll {
+    margin-left: 28px;
+    color: #fd7d22;
+}
+.selected-category > label {
+    float: left;
+    margin-top: 5px;
+    margin-right: 40px;
+    font-size: 12px;
+    color: #000;
+}
+.selected-category-box {
+    float: left;
+    width: 980px;
+    min-height: 36px;
+}
+
+.selected-service-box {
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 23px;
+    padding: 10px;
+    border: 1px solid #f08b2f;
+    background-color: #fff;
+    z-index: 20;
+}
+.selected-service-box-in {
+    width: 360px;
+    height: 124px;
+    overflow: auto;
+}
+.category-show-box {
+    float: left;
+    width: 1000px;
+}
+.category-show-box a {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 5px;
+    min-width: 136px;
+}
+.category-show-box a.active {
+    color: #ff5c00;
+}
+
+/*search-content列表的内容*************************************************************/
+.search-top {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333333;
+    text-align: left;
+}
+.search-top i {
+    color: #ff5c00;
+}
+.page-content {
+    padding-bottom: 40px;
+}
+.page-content-left {
+    float: left;
+    width: 1030px;
+}
+.page-content-left .tips {
+    display: inline-block;
+    margin-top: 5px;
+    padding-left: 20px;
+    color: #ff5c00;
+    font-size: 12px;
+}
+.search-list {
+    /* border: 1px solid #ddd; */
+}
+.search-list > li {
+    border: 1px solid #ddd;
+    margin-top: -1px;
+}
+.search-list > li .result-href {
+    float: left;
+    width: 820px;
+}
+.search-list > li > a:hover {
+    color: #555;
+}
+.page-content-left .brand-img {
+    float: left;
+    margin: 20px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+    line-height: 90px;
+}
+.brand-img img {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+.brand-info {
+    padding: 20px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+.brand-info h2 {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+}
+.brand-info h2:hover {
+    color: #ff5c00;
+}
+.brand-info h2 .chi {
+    display: inline-block;
+    margin-left: 4px;
+    width: 22px;
+    height: 22px;
+    /* background: url(../images/chi.png) no-repeat center; */
+    vertical-align: middle;
+    background-size: cover;
+}
+.brand-info-in {
+}
+.brand-info-in ul {
+    display: inline-block;
+    width: 750px;
+    vertical-align: top;
+}
+.brand-info li {
+    float: left;
+    margin-bottom: 5px;
+    min-width: 240px;
+    margin-right: 20px;
+}
+.brand-info li label {
+    color: #666;
+}
+.brand-info li span {
+    margin-right: 30px;
+}
+.brand-info li span.process-name {
+    font-weight: bold;
+    color: #f08b2f;
+}
+.brand-info li span:last-of-type {
+    margin-right: 0px;
+}
+.brand-status {
+    float: left;
+    margin-top: 55px;
+    vertical-align: top;
+    position: relative;
+    z-index: 10;
+}
+.brand-status div {
+    margin-bottom: 15px;
+}
+.brand-status span,
+.brand-status a {
+    display: inline-block;
+    width: 42px;
+    line-height: 19px;
+    font-size: 12px;
+    text-align: center;
+    margin-right: 10px;
+}
+.brand-status .status1 {
+    border: 1px solid #81cdef;
+    border-radius: 56px;
+    cursor: pointer;
+}
+.brand-status .status1:hover {
+    color: #81cdef;
+}
+.brand-status .status2 {
+    border: 1px solid #f08b2f;
+    border-radius: 2px;
+}
+/*商标交易侧边栏****************************/
+.page-content-right {
+    float: right;
+    padding-top: 54px;
+}
+.hot-brand-right {
+    width: 150px;
+    z-index: 3;
+    background-color: #fff;
+}
+.hot-brand-right h2 {
+    position: relative;
+    padding-left: 25px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #666;
+    border: 1px solid #ddd;
+    background-size: 20px;
+    font-weight: bolder;
+    background: url("../../assets/images/searchList/arrow-down.png") no-repeat
+        10px center;
+}
+.hot-brand.hot-brand-right ul {
+    margin-bottom: 0px;
+    min-height: 200px;
+    font-size: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.hot-brand.hot-brand-right ul li {
+    margin: 0px;
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-top: none;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+    font-size: 14px;
+}
+.hot-brand.hot-brand-right ul li .hot-brand-image {
+    float: left;
+    margin-right: 10px;
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+}
+.hot-brand ul li .hot-brand-image img {
+    display: inline-block;
+    max-width: 100%;
+    vertical-align: middle;
+}
+.hot-brand ul li .hot-brand-name {
+    font-size: 14px;
+    color: #333333;
+    width: 120px;
+    height: 2em;
+    line-height: 2em;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.hot-brand ul li .hot-brand-category {
+    display: block;
+    font-size: 14px;
+    color: #999999;
+}
+.hot-brand ul li .hot-brand-price {
+    display: block;
+    font-size: 15px;
+    color: #cb1f2b;
+    line-height: 2em;
+    font-weight: bold;
+}
+.hot-brand ul li .button {
+    display: inline-block;
+    padding: 3px 8px;
+    width: 100%;
+    color: #ff5c00;
+    border: 1px solid #ff5c00;
+    background-color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    outline: none;
+}
+.hot-brand ul li .button:hover {
+    background-color: #ff5c00;
+    color: #fff;
+}
+</style>

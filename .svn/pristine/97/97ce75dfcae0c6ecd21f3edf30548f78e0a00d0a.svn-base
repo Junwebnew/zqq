@@ -1,0 +1,2889 @@
+<template>
+    <div class="order">
+       <ol class="status">
+           <li class="atthis">1.填写商标注册信息-快速注册</li>
+           <li>2.确认支付订单</li>
+       </ol>
+
+       <div class="content">
+           <div class="title"><span>申请主体信息</span></div>
+
+           <dl>
+               <dt>申请主体类型</dt>
+               <dd><a class="radio" :class="{'atthis': applyType == 1}" @click="tabFn" data-type="1" href="javascript:;">企业(大陆)</a> <a class="radio" @click="tabFn" :class="{'atthis': applyType == 0}" data-type="0" href="javascript:;">个体工商户(大陆)</a></dd>
+           </dl>
+           <dl>
+               <dt>申请主体身份证明</dt>
+               <dd>
+                    <button @click="isTemp = true">选择模板</button>
+                    <ol>
+                        <li class="upload">
+                            <p v-if="applyType == 1">请上传营业执照<br>复印件盖章</p>
+                            <p v-if="applyType == 0">请上传营业执照<br>复印件签字</p><img width="120" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!applyZt.businessLicenceFile">
+                            <img width="120" height="94" :src="applyZt.businessLicenceFile" alt="身份证" v-if="applyZt.businessLicenceFile">
+                            <button  @click="uploadAll('business')">上传图片</button>
+                            <input ref="business" type="file" accept="image/jpeg,.jpg,application/pdf,.pdf">
+                        </li>
+
+                        <li>
+                            <b class="sl"></b>
+                            <img src="../../assets/images/order/temp_yezz.jpg" alt="示例图片">
+                            <a v-if="templateUrl" target="_blank" :href="templateUrl[1].fileUrl" class="fd">放大</a>
+                        </li>
+
+                        <li class="upload" v-if="applyType == 0">
+                            <p>请上传身份证<br>正反面复印件签字</p>
+                            <img width="120" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!applyZt.applicantCardFile">
+                            <img width="120" height="94" :src="applyZt.applicantCardFile" alt="身份证" v-if="applyZt.applicantCardFile">
+                            <button  @click="uploadAll('card')">上传图片</button>
+                            <input ref="card" type="file" accept="image/jpeg,.jpg,application/pdf,.pdf">
+                        </li>
+
+                        <li v-if="applyType == 0">
+                            <b class="sl"></b>
+                            <img src="../../assets/images/order/ex-file-sfz.jpg" alt="示例图片" >
+                            <a v-if="templateUrl" target="_blank" :href="templateUrl[0].fileUrl" class="fd">放大</a>
+                        </li>
+                    </ol>
+                    <div class="tips">请按照要求上传扫描件，jpg格式、小于5M</div>
+               </dd>
+           </dl>
+
+           <dl>
+               <dt>邮政编码</dt>
+               <dd><input type="text" v-validate="'required|postcode'" name="cfcode"  v-model="applyZt.postalcode" maxlength="6" placeholder="请输入邮政编码"></dd>
+           </dl>
+           <dl>
+               <dt>联系人及联系方式</dt>
+               <dd><input class="w140" v-model="applyZt.contactName" type="text" maxlength="6" placeholder="请输入联系人"><input v-model="applyZt.contactPhone" v-validate="'required|phone'" name="cfcontactTel" class="w320" type="text" placeholder="请输入联系方式" maxlength="11"></dd>
+           </dl>
+           <dl>
+               <dt>联系邮箱</dt>
+               <dd><input type="text" v-model="applyZt.contactEmail" v-validate="'required|email'" name="cfcontactMail" maxlength="30" placeholder="请输入联系邮箱"></dd>
+           </dl>
+
+           <div class="auto">
+               <h2>自动识别</h2>
+               <p>请上传清晰的身份证图片，系统识别后请再次核对信息，若识别有误请修改</p>
+               <ul>
+                   <li>
+                       <p>申请主体</p>
+                       <input type="text" v-model="applyZt.applicantName"  maxlength="30" placeholder="请输入申请主体">
+                   </li>
+                   <li>
+                       <p>证件地址</p>
+                       <input type="text" v-model="applyZt.businessLicenceAddress"  maxlength="30" placeholder="请输入证件地址">
+                       <span>若不含省、市（县）请不足，以免不予受理</span>
+                   </li>
+                   <li>
+                       <p>社会代码</p>
+                       <input type="text" v-model="applyZt.businessLicenceNo"  maxlength="30" placeholder="请输入社会代码">
+                   </li>
+               </ul>
+               <div class="note">主体信息将以主体名称存为模板，可在<a href="/center/template">模板管理</a>修改</div>
+           </div>
+            
+            <div class="title"><span>申请商标信息</span></div>
+            
+            <dl>
+               <dt>商标名称</dt>
+               <dd><input class="sbname" v-model="name" type="text" maxlength="30" placeholder="请输入商标名称"><button>智能评测</button>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">商标名称即注册商标的代用词，包含注册商标的文字、图形、<br>字母、数字等要素、商标局会对商标的要素分开审查。<a  @click="isTian2=true" href="javascript:;">怎么填？</a>
+                </span>
+               </dd>
+            </dl>
+
+            <dl>
+               <dt>商标说明</dt>
+               <dd><textarea name="" v-model="explain" id="" cols="30" rows="10"></textarea>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">商标说明即对注册商标的含义说明。<a @click="isTian1=true" href="javascript:;">怎么填？</a>
+                </span>
+               </dd>
+            </dl>
+            <div class="mark_main" v-show="isTian1">
+                <!--商标说明怎么填-->
+                <h3 class="mark_til"><i class="iconfont" @click="isTian1=false">&#xe7fc;</i>怎么填</h3>
+                <div class="mark_cont2 tleft font14">
+                    <ul>
+                        <li><strong class="font16 mr20">含有汉字的</strong><span>填写字体</span></li>
+                        <li><strong class="font16 mr20">含有拼音的</strong><span>填写说明拼音的中文</span></li>
+                        <li><strong class="font16 mr20">含有英文的</strong><span>填写英文的中文含义</span></li>
+                        <li><strong class="font16 mr20">含有图形的</strong><span>填写图形设计要素及含义</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mark_main branName" v-show="isTian2">
+                <!--商标说明怎么填-->
+                <h3 class="mark_til"><i class="iconfont" @click="isTian2=false">&#xe7fc;</i>怎么填</h3>
+                <div class="mark_cont2 tleft font14">
+                    <ul>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">纯文字商标</strong></p>
+                           <p class="mt5">填写商标中含有的文字，中文英文（或拼音）以“+”隔开，注意字母大小写必须与商标图样一致</p>
+                           <div class="clearfix mt20 center">
+                               <div class="left">
+                               <img src="../../assets/images/order/exp1.jpg">
+                                   <p>易名中国</p>
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp2.jpg">
+                                   <p>商标注册网+www.tm.cn</p>
+                               </div>
+                               </div>
+                       </li>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">纯图标商标</strong></p>
+                           <p class="mt5">仅由图形组成，不包含文字的图标，统一写成“图形”</p>
+                           <div class="clearfix mt20 center">
+                               <div class="left">
+                                   <img src="../../assets/images/order/exp3.jpg">
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp4.jpg">
+                               </div>
+                           </div>
+                       </li>
+                       <li>
+                           <p class="center"><strong class="font16 mr20">图文组合商标</strong></p>
+                           <p class="mt5">填写商标中含有的文字，中文英文（或拼音）以“+”隔开，并加上“图形”</p>
+                           <div class="clearfix center mt20">
+                               <div class="left">
+                                   <img src="../../assets/images/order/exp5.jpg">
+                                   <p>易名中国+NME+图形</p>
+                               </div>
+                               <div class="right">
+                                   <img src="../../assets/images/order/exp6.jpg">
+                                   <p>WATCH+图形</p>
+                               </div>
+                           </div>
+                       </li>
+                   </ul>
+                </div>
+            </div>
+
+            <dl class="tuyang">
+               <dt>商标图样</dt>
+               <dd><input type="radio" name="ty" id="hb" @click="autoType=1" checked="checked"><label for="hb" @click="autoType=1">黑白</label> <input @click="autoType=2" name="ty" type="radio" id="zs"><label for="zs" @click="autoType=2">着色</label>
+                <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">注册着色商标，注册后只能使用着色图样；注册黑白商标，注册后不限颜色使用。</span> <br>
+                <div class="tu">
+                    <p v-if="autoType == 1">请上传或生成黑白图样</p>
+                    <p v-if="autoType == 2">请上传着色图样</p>
+                    <img v-if="!createdRes && !uploadRes" width="134" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片">
+                    <img v-if="createdRes" height="94" width="134" class="photo createbrandpic" :src="createdRes.fsHost+createdRes.fsPath">
+                    <img v-if="uploadRes" height="94" width="134" class="photo createbrandpic" :src="uploadRes.fsHost+uploadRes.fsPath">
+                    <button class="zn" v-if="autoType == 1" @click="createdImg">智能生成</button><button @click="upload">上传图片</button>
+                    <input ref="uploadImg" type="file" accept="image/jpeg,image/x-png">
+                </div>
+                 <span class="wh"><img src="../../assets/images/order/icon_tx.png" alt="">像素介于“400*400-150*1500”，通过扫描获得商标图样的，应<br>按24位彩色、RGB格式、300dpi分辨率扫描，jpg格式，小于10M</span>
+               </dd>
+            </dl>
+
+            <dl class="tuyang">
+               <dt>上传委托书</dt>
+               <dd>
+                <div class="tu">
+                    <p>请上传委托书</p>
+                    <img width="134" height="94" src="../../assets/images/order/upload.jpg" alt="上传图片" v-if="!uploadFile">
+                    <img width="134" height="94" :src="uploadFile.fsHost+uploadFile.fsPath" alt="上传图片" v-if="uploadFile">
+                    
+                    <button class="zn" @click="goDown">下载委托书</button><button @click="uploadAll('proxyFile')">上传图片</button>
+                    <input ref="proxyFile" type="file" accept="image/jpeg,.jpg">
+                </div>
+                <div class="sltu">
+                    <b class="sl"></b>
+                    <img src="../../assets/images/order/temp_wts.jpg" alt="示例图片">
+                    <a v-if="templateUrl" target="_blank" :href="templateUrl[2].fileUrl" class="fd">放大</a>
+                </div>
+                 <span class="wh"><img src="../../assets/images/order/icon_wh.png" alt="">委托书已自动生成，您只需要下载后仔细核对后打印。企业<br>
+盖章（个体工商户签字）后扫描彩色件上传。 <b>（注意：部分<br>
+企业的营业执照地址不含省份，导致自动生成的委托书中<br>
+“委托人地址”缺少省份信息，请下载委托书后补全省份信<br>
+息再打印，否则商标局将不予审核通过）</b><br>
+                <span class="wh"><img src="../../assets/images/order/icon_tx.png" alt="">JPG格式，文件小于10M</span>
+                </span>
+               </dd>
+            </dl>
+
+
+            <div class="title"><span>商标信息</span></div>
+            
+            <dl>
+               <dt>选择商标类别</dt>
+               <dd><a class="radio" @click="brandType = 0" :class="{'atthis': brandType == 0}"  href="javascript:;">智能推荐</a> <a class="radio" :class="{'atthis': brandType == 1}" @click="brandType = 1" href="javascript:;">自助选择</a></dd>
+           </dl>
+           <dl v-show="brandType == 0">
+               <dt>选择所在领域</dt>
+               <dd><div class="c-row-content">
+                        <select class="znfirst" @change="changeIndex">
+                            <option value="">请选择</option>
+                            <option v-if="doMain" v-for="(item,index) in doMain" :selected="doMainIndex === index" :key="item.id" :value="index">{{item.name}}</option>
+                        </select>
+                        <select class="znsecond" @change="getRecom" v-if="doMain[doMainIndex]">
+                            <option value="0">请选择</option>
+                            <option v-for="(item) in doMain[doMainIndex].sonArr" :selected="doMainchildIndex == item.id" :key="item.id" :value="item.id">{{item.name}}</option>
+                        </select>
+                    </div></dd>
+           </dl>
+
+            <div class="brandInfo-wrap">
+               <!-- start 智能推荐 -->
+                <div class="section-recommend" id="section-recommend" v-if="brandType == 0">
+                    <h3 class="section-header">
+                        <span class="s1">需要保护的商品/服务项目</span>
+                    </h3>
+                    <div class="section-bodyer">
+
+                        <div class="article" v-for="(item, index) in selectList" :key="item.id" data-cgid="7956" data-cgnum="29" data-cgname="食品">
+                            <h4 class="article-header clearfix">
+                                <div class="header-left">
+                                    <span class="col-1">第
+                                        <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+
+                                    <a class="col-3" onclick="var left = (window.screen.width-10-800)/2; window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', '', 'height=600, width=800,top=200, left='+left)" style="cursor: pointer;">
+                                        <i class="iconfont icon-xiaoxi"></i>咨询</a>
+                                </div>
+                                <div class="header-right">
+                                    <span class="header-right-secNum">已选择
+                                        <i>{{item.sonArr.length}}</i>项</span>
+                                    <span class="col-1 price">￥
+                                        <i v-if="item.sonArr.length<=10">300</i>
+                                        <i v-if="item.sonArr.length>10">{{item.sonArr.length*30}}</i>
+                                    </span>
+                                    <a class="col-2 delete" href="javascript:;">
+                                        <i @click="deleRecom(index)" class="iconfont icon-shanchu">&#xe610;</i>
+                                    </a>
+                                </div>
+                            </h4>
+                            <div class="article-bodyer clearfix">
+                                <ul class="list-box clearfix">
+                                    <li v-for="(itemChild, childIndex) in item.sonArr" :key="itemChild.id" class="list choosecg">
+                                        <span class="text">{{itemChild.number}}类-{{itemChild.name}}</span>
+                                        <a class="close" @click="deleThreeType(index, childIndex, itemChild, item)" href="javascript:;" title="关闭">×</a>
+                                    </li>
+                                </ul>
+                                <div class="add-group" @click="addSamllType(item.number, index)">
+                                    <a class="btn" href="javascript:;">
+                                        <i class="iconfont icon-jiahao" v-if="!item.isAdd">&#xe623;</i>
+                                        <i class="iconfont icon-jiahao" v-if="item.isAdd">&#xe692;</i>{{item.isAdd?'收缩':'添加'}}</a>
+                                </div>
+                                <div class="group clearfix" v-if="item.isAdd">
+                                    <ul class="group-left">
+                                        <li class="list" :class="{'active': samllTypeIndex['_'+item.number] == i}" v-for="(smallItem,i) in sallTypes['_'+item.number]" @click="getTreeType(item.number, smallItem.number, i, index)" :key="smallItem.id">{{smallItem.number}} {{smallItem.name}}</li>
+                                    </ul>
+                                    <div class="group-right" v-if="sallTypes['_'+item.number][samllTypeIndex['_'+item.number]]">
+                                        <ul class="item active clearfix">
+                                            <li class="list" v-for="(threeItem) in sallTypes['_'+item.number][samllTypeIndex['_'+item.number]].sonArr" @click="addTreeType(item.number, index, threeItem)" :class="{'selected': threeItem.checked}" :key="threeItem.id">
+                                                <i class="iconfont icon-jiahao">&#xe623;</i>
+                                                <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="add-category">
+                        <a class="btn-add" @click="toggelType" href="javascript:;">
+                            <i>+</i>添加商标类别</a>
+                        <ul class="list-box clearfix" v-if="isAddType">
+                            <li class="list" @click="addType(index)" v-for="(item,index) in trademarkList" :key="item.id" :class="{'selected': item.checked}">第
+                                <i class="color">{{item.number}}</i>类-{{item.name}}</li>
+                        </ul>
+                    </div>
+                    <!-- end 继续添加45大类 -->
+                </div>
+                <!-- end 智能推荐 -->
+                <!-- start 自助选择 -->
+                <div class="section-selfchoice clearfix" id="section-selfchoice" v-if="brandType == 1">
+                    <!-- start 左-->
+                    <div class="group-left">
+                        <div class="ns-search-container">
+                            <div class="myInputGroup">
+                                <input type="text" name="keys" v-model="searcKey" class="myInput" placeholder="请输入商品/服务名称进行查询">
+                                <button class="myBtn" @click="searchType" id="btn-search">
+                                    <i class="iconfont icon-danchucengzhuanhuan">&#xe678;</i>
+                                </button>
+                            </div>
+                        </div>
+                        <ul class="group scroll">
+                            <li class="list" @click="getAllchild($event, 'two',item.number, index, false)" v-for="(item,index) in trademarkSearchListAll" :key="item.id" :class="{'selected': !item.checked}">
+                                <span class="title-first">第
+                                    <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+                                <div class="title-second" v-show="item.selected" @click="getAllchild($event, 'three',secondItem.number,index,secondIndex)" v-for="(secondItem,secondIndex) in item.sonArr" :key="secondItem.id">
+                                    <span class="second-lg">{{secondItem.number}} {{secondItem.name}}</span>
+                                    <dl class="second-sm" v-show="secondItem.selected">
+                                        <dt class="row" :class="{'selected': threeItem.checked}" @click="addAutoType(item, threeItem, $event)" v-for="(threeItem) in secondItem.sonArr" :key="threeItem.id">
+                                            <i class="iconfont icon-jiahao">&#xe623;</i>
+                                            <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                        </dt>
+                                        <dt v-if="!secondItem.isAll" class="get-all-small" @click="getAllchild($event, 'three', secondItem.number,index, secondIndex, true)">展开全部子项</dt>
+                                    </dl>
+                                </div>
+                                <div class="title-second" v-if="!item.isAll" v-show="item.selected" @click="getAllchild($event,'two', item.number,index, false, true)">
+                                    <span class="get-all-second">展开全部群组</span>
+                                </div>
+                            </li>
+                            <li class="list" @click="getSonType($event, 'two',item.number, index)" v-for="(item,index) in trademarkListAll" :key="item.id" :class="{'selected': item.checked}">
+                                <span class="title-first" data-has-data="0" data-cgid="1">第
+                                    <i class="color">{{item.number}}</i>类 {{item.name}}</span>
+                                <div class="title-second" v-show="item.selected" @click="getSonType($event, 'three',secondItem.number,index,secondIndex)" v-for="(secondItem,secondIndex) in item.sonArr" :key="secondItem.id">
+                                    <span class="second-lg">{{secondItem.number}} {{secondItem.name}}</span>
+                                    <dl class="second-sm" v-show="secondItem.selected">
+                                        <dt class="row" :class="{'selected': threeItem.checked}" @click="addAutoType(item, threeItem, $event)" v-for="(threeItem) in secondItem.sonArr" :key="threeItem.id">
+                                            <i class="iconfont icon-jiahao">&#xe623;</i>
+                                            <span class="text">{{threeItem.number}} {{threeItem.name}}</span>
+                                        </dt>
+                                    </dl>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end 左-->
+                    <!-- start 右-->
+                    <div class="group-right">
+                        <h3 class="title">
+                            <span>需要保护的商品\服务项目</span>
+                            <div class="group-right-search">
+                                <input type="button" class="button" value="清空选项" @click="clearAll()">
+                            </div>
+                        </h3>
+                        <img class="bgimg" v-if="!selectAutoList.length" src="../../assets/images/order/selfchoice-bg.jpg" alt="请点击左侧选择商标类别">
+                        <!-- start section -->
+                        <div class="section scroll" v-if="selectAutoList.length">
+                            <div class="article" v-if="item" v-for="(item, index) in selectAutoList" :key="item.number">
+                                <h4 class="article-header clearfix">
+                                    <div class="header-left">
+                                        <span class="col-1">第{{item.number}}类 {{item.name}}</span>
+                                        <a class="col-3" onclick="var left = (window.screen.width-10-800)/2; window.open('http://p.qiao.baidu.com/cps/chat?siteId=12640048&userId=26537549', '', 'height=600, width=800,top=200, left='+left)" style="cursor: pointer;">
+                                            <i class="iconfont icon-xiaoxi"></i>咨询</a>
+                                    </div>
+                                    <div class="header-right">
+                                        <span class="header-right-secNum red-color">已选择
+                                            <i>{{item.sonArr.length}}</i>项</span>
+                                        <span class="col-1 price">￥
+                                            <i v-if="item.sonArr.length<=10">300</i>
+                                            <i v-if="item.sonArr.length>10">{{item.sonArr.length*30}}</i>
+                                        </span>
+                                        <a class="col-2 delete" href="javascript:;">
+                                            <i @click="deleteType('two', index)" class="iconfont icon-shanchu">&#xe610;</i>
+                                        </a>
+                                    </div>
+                                </h4>
+                                <div class="article-bodyer clearfix" v-if="item.sonArr.length">
+                                    <ul class="list-box clearfix">
+                                        <li v-for="(childItem,childIndex) in item.sonArr" :key="childItem.id" class="list choosecg">
+                                            <span class="text">{{childItem.number}} {{childItem.name}}</span>
+                                            <a class="close" @click="deleteType('three', index, childIndex)" href="javascript:;" title="关闭">×</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end section -->
+                    </div>
+                    <!-- end 右-->
+                </div>
+                <!-- end 自助选择 -->
+           </div>
+
+           <div class="last-pay">
+                <ul class="list-box">
+                    <li class="row-officer">官费总额：￥
+                        <i>{{officeTotal.toFixed(2)}}</i>
+                    </li>
+                    <!-- <li class="row-invoice">发票税费：￥<i>0</i>
+              <i class="iconfont icon-img">&#xe61d;</i>
+            </li> -->
+                    <li class="row-service">服务费：￥<i>0.00</i></li>
+                <!-- <li class="row-conserve">已为您节省：￥<i>0</i></li> -->
+                    <li class="row-sense">应付总额：
+                        <em>￥
+                            <i>{{officeTotal.toFixed(2)}}</i>
+                        </em>
+                    </li>
+                </ul>
+            </div>
+          <div class="agree-box">
+            <i v-if="!isAgree" @click="isAgree=true" class="iconfont checkbox2" data-id="">&#xe65d;</i>
+            <i v-if="isAgree" @click="isAgree=false" class="iconfont checkbox2 checked" data-id="">&#xe612;</i>
+            <span @click="isAgree=!isAgree">
+              已阅读并同意
+              <a href="/about/8.html" target="_blank" id="show-contract">《商标服务合同》</a>
+            </span>
+          </div>
+
+            <div class="fn12 c_gray upbtn center">
+                <dl class="mian mr20 registhide" @click="submit(0,0)">
+                    <dt class="fn22 c_gray4">免审提交</dt>
+                    <dd>同意自行承担风险，提交后即可付款</dd>
+                </dl>
+                <dl class="dai mr20" @click="submit(0,1)">
+                    <dt class="fn22 c_orange">提交待审</dt>
+                    <dd>顾问审核需1-2个工作日，审核成功再付款</dd>
+                </dl>
+                <dl class="kuai" @click="submit(0, 2)">
+                    <dt class="fn22 c_blue">提交快审</dt>
+                    <dd>不评估近似风险，只审查申请材料</dd>
+                </dl>
+                <p class="saveLoca">若暂不提交，您可先<a href="javascript:void(0);" @click="submit(0, 3)">保存订单</a></p>
+            </div>
+           
+       </div>
+       <to-top />
+        
+        <div class="model" v-if="isTemp">
+            <div class="cont">
+                 <i class="iconfont" @click="isTemp=false">&#xe7fc;</i>
+                <div class="tab">
+                    <a @click="tabFn" data-type="1" :class="{'atthis': applyType == 1}" href="javascript:;">大陆企业</a>
+                    <a @click="tabFn" data-type="0" href="javascript:;" :class="{'atthis': applyType == 0}">大陆个体工商户</a>
+                </div>
+                <ul class="list" v-show="applyType == 1">
+                    <li @click="seletedZt(1, index)" v-for="(item, index) in applicantCompany" :key="item.id" ><a href="javascript:;"><span>{{item.templateName}}</span>{{item.applicantName}}</a></li>
+                </ul>
+                <ul class="list" v-show="applyType == 0">
+                    <li @click="seletedZt(0, index)" v-for="(item, index) in applicantPerson" :key="item.id"><a href="javascript:;"><span>{{item.templateName}}</span>{{item.applicantName}}</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="model" v-if="isTest">
+            <div class="cont test">
+                <img src="../../assets/images/order/safe_icon.png" alt="">
+                <img src="../../assets/images/order/at_icon.png" alt="">
+                <input type="text" maxlength="30" placeholder="请输入商标名称">
+                <select name="" id="">
+                    <option value="1">第01类 化学原料</option>
+                </select>
+                <div class="btn">
+                    <a class="active" @click="isTest = false" href="javascript:;">取消</a>
+                    <a href="javascript:;" >立即评测</a>
+                </div>
+                <div class="res">智能查近结果：
+                    <p class="ml35">商标“<a href="javascript:void();" id="simi_tname">啊</a>”在<samp id="simi_tsort">第01类 化学原料</samp>的注册成功率为：<em id="simi_sucrule"><em class="c_orange bold">30%</em> 风险非常高，<a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzkzODA3MTU1MV8yODU5MjdfNDAwMDY5OTM5M18yXw" target="blank">点击联系顾问</a>获得解决方案 <em class="font14">(评测结果仅供参考)</em></em></p>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="model" v-if="isNoTen">
+            <div class="cont">
+                <h1>注意</h1>
+                <p>以下类别选择的商品/服务项目不足10项。
+                    </p>
+                        <p v-for="item in noTens" :key="item.id">第{{item.number}}类 {{item.name}}，已选择{{item.sonArr.length}}个项目;</p>
+                        <div class="btn">
+                            <a class="active" @click="isNoTen = false" href="javascript:;">继续修改</a>
+                            <a href="javascript:;" @click="submit(true)">提交</a>
+                        </div>
+            </div>
+        </div>
+
+       <div class="model" v-if="isNoNumber">
+            <div class="cont">
+                <h1>注意</h1>
+                <p>以下类别选择的商品/服务项目必须选择
+                    <b class="red">1</b>个三级类别。
+                    </p>
+                        <p v-for="item in noTens" v-if="item.sonArr.length == 0" :key="item.id">第{{item.number}}类 {{item.name}}</p>
+                        <div class="btn">
+                            <a class="active" @click="isNoNumber = false" href="javascript:;">添加</a>
+                        </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import toTop from "@/components/toTop";
+import axios from "axios";
+import popup from "~/components/popup"; //消息
+import Cookies from "js-cookie";
+export default {
+    head() {
+        return {
+            title: "智能注册-知千秋",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    components: {
+        toTop
+    },
+    data() {
+        return {
+            isTips: false,
+            isTemp: false,
+            isTest: false,
+            isAgree: false,
+            isNoTen: false,
+            isTian1: false,
+            isTian2: false,
+            audit: 0, // 订单状态
+            applicantPerson: [],
+            applicantCompany: [],
+            applyZt: {
+                applicantCardAddress:"",
+                applicantCardFile:"",
+                applicantCardNo:"",
+                applicantName: "",
+                applicantType:"",
+                applicantUserName:"",
+                businessLicenceAddress:"",
+                businessLicenceArea: "",
+                businessLicenceFile:"",
+                businessLicenceNo:"",
+                contactEmail:"",
+                contactName:"",
+                contactPhone:"",
+                postalcode:"",
+                priorityFile:"",
+                proxyFile:"",
+            },
+            templateUrl: '',
+            isNoNumber: false,
+            noZeros: [], // 一项都没有的
+            noTens: [], // 不足10个小项的
+            type: 1, // 商标类型
+            applyType: 1, 
+            autoType: 1, // 生成类型
+            brandType: 0, // 商标类别
+            name: "", // 商标名称
+            explain: '', // 说明
+            doMain: [],
+            doMainIndex: "",
+            doMainchildIndex: "",
+            isAddType: false,
+            selectList: [], // 用户选择的服务项
+            selectAutoList: [], // 自主选择的服务项
+            trademarkList: "", // 45大类
+            trademarkListAll: "", //所有分类
+            trademarkSearchListAll: "", // 搜索的分类
+            sallTypes: {}, // 待添加的小类
+            samllTypeIndex: {}, // 小类选中
+            uploadRes: "", // 上传图的
+            uploadFile: '', // 委托书
+            createdRes: "", // 创建图
+            searcKey: "",
+            product: Cookies.getJSON("product")
+        };
+    },
+    mounted() {
+        if (!this.product) {
+            popup.created({
+                content: "产品过期，请重新下单",
+                time: 2000
+            });
+            window.location.href = "/show/navigation_trademark_register_04&S7741102214293331969.html";
+        }
+        if (this.$store.state.userInfo.userId) {
+            this.loadDomain();
+            this.loadType();
+            this.loadApplicantName()
+            this.loadTemplateUrl()
+        }
+    },
+    methods: {
+        tabFn(e) {
+            let type = e.target.dataset.type;
+            this.applyType = type;
+        },
+        seletedZt (type, index) {
+            if (type) {
+                this.applyZt = this.applicantCompany[index]
+            } else {
+                this.applyZt = this.applicantPerson[index]
+            }
+            this.isTemp = false
+        },
+        loadApplicantName() {
+            this.$Http(
+                "/applicantTemplate/find",
+                { createrId: '424c4677-c45f-4ee3-99d5-e7086e14d159'},
+                "get",
+                true
+            ).then(res => {
+                let arr = res.data.data;
+                this.applicantPerson = arr.applicant_type2
+                this.applicantCompany = arr.applicant_type1   
+            });
+        },
+        selectedType(e, name) {
+            if (e.target.nodeName === "LABEL" || e.target.nodeName === "I") {
+                this[name] = e.target.dataset.type;
+            }
+            if (e.target.nodeName === "A") {
+                this[name] = e.target.dataset.type;
+            }
+        },
+        loadDomain() {
+            this.$Http(
+                "/industry/queryDomain",
+                { userId: this.$store.state.userInfo.userId },
+                "get",
+                true
+            ).then(res => {
+                this.doMain = res.data.data;
+            });
+        },
+        // 加载所有分类
+        loadType(index) {
+            this.$Http(
+                "/industry/queryTrademarkList",
+                { userId: this.$store.state.userInfo.userId },
+                "get"
+            ).then(res => {
+                this.trademarkList = res.data.data;
+                this.trademarkListAll = res.data.data;
+            });
+        },
+        // 搜索分类
+        searchType() {
+            if (this.searcKey == "") {
+                this.loadType();
+                this.trademarkSearchListAll = [];
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkSearchList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    searcKey: this.searcKey
+                },
+                "get"
+            ).then(res => {
+                //this.trademarkList = res.data.data
+                let arr = res.data.data;
+                if (arr.length == 0) {
+                    popup.created({
+                        content: "未找到相关类别",
+                        time: 2000
+                    });
+                    return false;
+                }
+                arr.map(item => {
+                    item.selected = true;
+                    this.trademarkListAll.map((childItem, childIndex) => {
+                        if (item.id === childItem.id) {
+                            this.trademarkListAll.splice(childIndex, 1);
+                        }
+                    });
+                    this.selectAutoList.map((childItem, childIndex) => {
+                        if (childItem && item.id === childItem.id) {
+                            childItem.sonArr.map(threeItem => {
+                                item.sonArr.map(fourItem => {
+                                    fourItem.sonArr.map(fiveItem => {
+                                        if (threeItem.id === fiveItem.id) {
+                                            fiveItem.checked = true;
+                                            console.log(fiveItem);
+                                        }
+                                    });
+                                });
+                            });
+                        }
+                    });
+                    item.sonArr.map(childItem => {
+                        childItem.selected = true;
+                    });
+                });
+                this.trademarkSearchListAll = arr;
+            });
+        },
+        changeIndex(e) {
+            if (e.target.value != "") {
+                this.doMainIndex = parseInt(e.target.value);
+            } else {
+                this.doMainIndex = "";
+            }
+        },
+
+        // 添加小类
+        addSamllType(number, index) {
+            if (this.sallTypes["_" + number]) {
+                this.$set(
+                    this.selectList[index],
+                    "isAdd",
+                    !this.selectList[index].isAdd
+                );
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: "two"
+                },
+                "get",
+                true
+            ).then(res => {
+                this.$set(this.sallTypes, "_" + number, res.data.data);
+                this.$set(
+                    this.selectList[index],
+                    "isAdd",
+                    !this.selectList[index].isAdd
+                );
+            });
+        },
+        // 获取三级分类
+        getTreeType(two, type, index, i) {
+            this.$set(this.samllTypeIndex, "_" + two, index);
+            if (this.sallTypes["_" + two][index].sonArr) {
+                return false;
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: type,
+                    numberType: "three"
+                },
+                "get",
+                true
+            ).then(res => {
+                let arr = res.data.data;
+                arr.map(item => {
+                    this.selectList[i].sonArr.map(childItem => {
+                        if (item.id === childItem.id) {
+                            item.checked = true;
+                        }
+                    });
+                });
+                this.$set(this.sallTypes["_" + two][index], "sonArr", arr);
+            });
+        },
+        // 获取推荐
+        getRecom(e) {
+            this.doMainchildIndex = e.target.value;
+            this.$Http(
+                "/industry/queryCommodity",
+                { id: e.target.value },
+                "get",
+                true
+            ).then(res => {
+                this.selectList = res.data.data;
+            });
+        },
+        toggelType() {
+            this.isAddType = !this.isAddType;
+        },
+        // 删除推荐
+        deleRecom(index) {
+            this.selectList.splice(index, 1);
+        },
+        // 删除小类
+        deleThreeType(index, childIndex, itemChild, item) {
+            if (this.sallTypes["_" + item.number]) {
+                let arr = this.sallTypes["_" + item.number][
+                    this.samllTypeIndex["_" + item.number]
+                ].sonArr;
+                arr.map(childItem => {
+                    if (itemChild.id == childItem.id) {
+                        childItem.checked = false;
+                    }
+                });
+            }
+            this.selectList[index].sonArr.splice(childIndex, 1);
+        },
+        // 添加大类
+        addType(index) {
+            if (this.trademarkList[index].checked) {
+                return false;
+            }
+            let obj = Object.assign({}, this.trademarkList[index]);
+            obj.sonArr = [];
+            this.selectList.push(obj);
+        },
+        // 添加小类
+        addTreeType(two, index, item) {
+            let arr = this.selectList[index].sonArr;
+            if (item.checked) {
+                return false;
+            }
+            item.checked = true;
+            arr.push(item);
+            this.$set(this.selectList[index], "sonArr", arr);
+        },
+        // 创建图片
+        createdImg() {
+            if (!this.name) {
+                popup.created({
+                    content: "请输入商标名称",
+                    time: 2000
+                });
+                return false;
+            }
+            this.$Http(
+                "/file/createTrademark",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    text: this.name,
+                    imgWidth: 150,
+                    imgHeight: 150
+                },
+                "get",
+                true
+            ).then(res => {
+                this.createdRes = res.data.data;
+                this.uploadRes = '';
+            });
+        },
+        // 上传图片
+        uploadAll(type) {
+            this.$refs[type].click();
+            this.$refs[type].onchange = e => {
+                let file = e.target.files[0];
+                if (!file) {
+                    return false;
+                }
+                if (type == 'proxyFile') {
+                    if (file.size > 10485760) {
+                        popup.created({
+                            content: "上传文件不能大于10M",
+                            time: 2000
+                        });
+                        return false;
+                    }
+                } else {
+                   if (file.size > 10485760/2) {
+                        popup.created({
+                            content: "上传文件不能大于5M",
+                            time: 2000
+                        });
+                        return false;
+                    } 
+                }
+                
+                if (
+                    file.type != "image/jpeg"
+                ) {
+                    popup.created({
+                        content: "只能上传.jpg",
+                        time: 2000
+                    });
+                    return false;
+                }
+                let param = new FormData(); // 创建form对象
+                param.append("file", file);
+                param.append("userId", this.$store.state.userInfo.userId);
+                param.append("type", "upload_file_type_04");
+                let loading = popup.created({
+                    type: "loading",
+                    icon: "&#xe61c",
+                    content: "上传中..."
+                });
+                axios
+                    .post(`${this.$baseUrl}/file/singleUpload`, param, {
+                        headers: { 
+                        "Content-Type": "multipart/form-data",
+                        'token':Cookies.get('token') }
+                    })
+                    .then(res => {
+                        loading.close();
+                        if (res.data.code == 0) {
+                            popup.created({
+                                content: "上传成功",
+                                time: 2000
+                            });
+                            if (type == 'proxyFile') {
+                                this.uploadFile = res.data.data
+                            }  else {
+                                this.$set(this.applyZt, type, res.data.data);
+                            }  
+                        } else {
+                            popup.created({
+                                content: "上传错误，稍后重试",
+                                time: 2000
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        loading.close();
+                        popup.created({
+                            content: "上传错误，稍后重试",
+                            time: 2000
+                        });
+                    });
+            };
+        },
+        loadTemplateUrl() {
+            this.$Http(
+                "/template/findTemplateUrl",
+                { userId: this.$store.state.userInfo.userId },
+                "get",
+                true
+            ).then(res => {
+                this.templateUrl = res.data.data;
+            });
+        },
+        // 上传图片
+        upload() {
+            this.$refs.uploadImg.click();
+            this.$refs.uploadImg.onchange = e => {
+                let file = e.target.files[0];
+                if (!file) {
+                    return false;
+                }
+                if (file.size > 10485760) {
+                    popup.created({
+                        content: "上传文件不能大于10M",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (file.type != "image/jpeg") {
+                    popup.created({
+                        content: "只能上传.jpg文件",
+                        time: 2000
+                    });
+                    return false;
+                }
+
+                let param = new FormData(); // 创建form对象
+                param.append("file", file);
+                param.append("userId", this.$store.state.userInfo.userId);
+                param.append("type", "upload_file_type_02");
+                let loading = popup.created({
+                    type: "loading",
+                    icon: "&#xe61c",
+                    content: "上传中..."
+                });
+                axios
+                    .post(`${this.$baseUrl}/file/singleUpload`, param, {
+                        headers: { "Content-Type": "multipart/form-data" ,
+                        'token':Cookies.get('token')}
+                    })
+                    .then(res => {
+                        loading.close();
+                        if (res.data.code == 0) {
+                            popup.created({
+                                content: "上传成功",
+                                time: 2000
+                            });
+                            this.uploadRes = res.data.data;
+                            this.createdRes = ''
+                        } else {
+                            popup.created({
+                                content: "上传错误，稍后重试",
+                                time: 2000
+                            });
+                        }
+                    })
+                    .catch(() => {
+                        loading.close();
+                        popup.created({
+                            content: "上传错误，稍后重试",
+                            time: 2000
+                        });
+                    });
+            };
+        },
+        // 自主选择
+        // 获取剩下的收缩项
+        getAllchild(e, type, number, index, childIndex, force) {
+            e.stopPropagation();
+            if (childIndex === false) {
+                if (this.trademarkSearchListAll[index].sonArr && !force) {
+                    this.trademarkSearchListAll[index].selected = !this
+                        .trademarkSearchListAll[index].selected;
+                    return false;
+                }
+            } else {
+                if (
+                    this.trademarkSearchListAll[index].sonArr[childIndex]
+                        .sonArr &&
+                    !force
+                ) {
+                    this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].selected = !this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].selected;
+                    return false;
+                }
+            }
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: type
+                },
+                "get",
+                true
+            ).then(res => {
+                if (type == "two") {
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "selected",
+                        true
+                    );
+                    // 保存之前的
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "oldsonArr",
+                        this.trademarkSearchListAll[index].sonArr
+                    );
+                    let arr = res.data.data;
+                    // this.trademarkSearchListAll[index].sonArr[childIndex].sonArr.map((item) => {
+                    //     arr.map((childItem) => {
+                    //         if (item.id == childItem.id && item.checked) {
+                    //             childItem.checked = true
+                    //         }
+                    //     })
+
+                    // })
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "sonArr",
+                        arr
+                    );
+                    this.$set(
+                        this.trademarkSearchListAll[index],
+                        "isAll",
+                        true
+                    );
+                }
+                if (type == "three") {
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "selected",
+                        true
+                    );
+                    // 保存之前的
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "oldsonArr",
+                        this.trademarkSearchListAll[index].sonArr[childIndex]
+                            .sonArr
+                    );
+                    let arr = res.data.data;
+                    this.trademarkSearchListAll[index].sonArr[
+                        childIndex
+                    ].sonArr.map(item => {
+                        arr.map(childItem => {
+                            if (item.id == childItem.id && item.checked) {
+                                childItem.checked = true;
+                            }
+                        });
+                    });
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "sonArr",
+                        arr
+                    );
+                    this.$set(
+                        this.trademarkSearchListAll[index].sonArr[childIndex],
+                        "isAll",
+                        true
+                    );
+                }
+            });
+        },
+        // 获取下级分类
+        getSonType(e, type, number, index, childIndex) {
+            e.stopPropagation();
+            if (isNaN(childIndex)) {
+                if (this.trademarkListAll[index].sonArr) {
+                    this.trademarkListAll[index].selected = !this
+                        .trademarkListAll[index].selected;
+                    return false;
+                }
+            } else {
+                if (this.trademarkListAll[index].sonArr[childIndex].sonArr) {
+                    this.trademarkListAll[index].sonArr[
+                        childIndex
+                    ].selected = !this.trademarkListAll[index].sonArr[
+                        childIndex
+                    ].selected;
+                    return false;
+                }
+            }
+
+            this.$Http(
+                "/industry/queryTrademarkParticularList",
+                {
+                    userId: this.$store.state.userInfo.userId,
+                    number: number,
+                    numberType: type
+                },
+                "get",
+                true
+            ).then(res => {
+                if (type == "two") {
+                    this.$set(this.trademarkListAll[index], "selected", true);
+                    this.$set(
+                        this.trademarkListAll[index],
+                        "sonArr",
+                        res.data.data
+                    );
+                }
+                if (type == "three") {
+                    this.$set(
+                        this.trademarkListAll[index].sonArr[childIndex],
+                        "selected",
+                        true
+                    );
+                    this.$set(
+                        this.trademarkListAll[index].sonArr[childIndex],
+                        "sonArr",
+                        res.data.data
+                    );
+                }
+            });
+        },
+        // 选择添加小项
+        addAutoType(item, childItem, e) {
+            e.stopPropagation();
+            if (childItem.checked) {
+                return false;
+            }
+            let arr = [];
+            if (this.selectAutoList[parseInt(item.number)]) {
+                arr = this.selectAutoList[parseInt(item.number)].sonArr;
+            }
+            childItem.checked = true;
+            arr.push(childItem);
+            this.$set(this.selectAutoList, parseInt(item.number), {
+                id: item.id,
+                isColour: item.isColour,
+                isRecommend: item.isRecommend,
+                isShow: item.isShow,
+                name: item.name,
+                number: item.number,
+                remark: item.remark,
+                sonArr: arr
+            });
+        },
+        goDown () {
+            this.templateUrl && window.open(this.templateUrl[3].fileUrl)
+        },
+        // 删除小类
+        deleteType(type, index, childIndex) {
+            if (type == "two") {
+                if (this.selectAutoList[index]) {
+                    this.selectAutoList[index].sonArr.map(childItem => {
+                        childItem.checked = false;
+                    });
+                }
+                this.selectAutoList.splice(index, 1);
+            }
+            if (type == "three") {
+                let arr = this.selectAutoList[index].sonArr;
+                arr[childIndex].checked = false;
+                arr.splice(childIndex, 1);
+                this.$set(this.selectAutoList[index], "sonArr", arr);
+            }
+        },
+        // 清空所有
+        clearAll() {
+            this.selectAutoList.map(item => {
+                if (item) {
+                    item.sonArr.map(childItem => {
+                        childItem.checked = false;
+                    });
+                }
+            });
+            this.selectAutoList = [];
+        },
+
+        //提交
+        submit(type, audit) {
+            
+            if (!this.applyZt.businessLicenceFile) {
+                popup.created({
+                    content: "请先上传营业执照",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.postalcode) {
+                popup.created({
+                    content: "请输入邮政编码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactName) {
+                popup.created({
+                    content: "请输入联系人",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactPhone) {
+                popup.created({
+                    content: "请输入联系电话",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.contactEmail) {
+                popup.created({
+                    content: "请输入邮箱",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.applicantName) {
+                popup.created({
+                    content: "请输入申请主体",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.businessLicenceAddress) {
+                popup.created({
+                    content: "请输入证件地址",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.applyZt.businessLicenceNo) {
+                popup.created({
+                    content: "请输入社会代码",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcode")) {
+                popup.created({
+                    content: "请输入正确邮编",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcontactTel")) {
+                popup.created({
+                    content: "请输入正确电话",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (this.errors.has("cfcontactMail")) {
+                popup.created({
+                    content: "请输入正确邮箱",
+                    time: 2000
+                });
+                return false;
+            }
+            if (this.errors.has("fidcardcode")) {
+                popup.created({
+                    content: "请输入正确身份证",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (parseInt(this.type) == 1) {
+                if (!this.name) {
+                    popup.created({
+                        content: "商标名称不能为空",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (!this.createdRes && !this.uploadRes) {
+                    popup.created({
+                        content: "请先上传或生成商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (parseInt(this.type == 2)) {
+                if (!this.uploadRes) {
+                    popup.created({
+                        content: "请先上传商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (parseInt(this.type == 3)) {
+                if (!this.name) {
+                    popup.created({
+                        content: "商标名称不能为空",
+                        time: 2000
+                    });
+                    return false;
+                }
+                if (!this.uploadRes) {
+                    popup.created({
+                        content: "请先上传商标图样",
+                        time: 2000
+                    });
+                    return false;
+                }
+            }
+
+            if (!this.explain) {
+                popup.created({
+                    content: "必须输入商标说明",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!parseInt(this.officeTotal)) {
+                popup.created({
+                    content: "请先选择商标类别",
+                    time: 2000
+                });
+                return false;
+            }
+
+            if (!this.isAgree) {
+                popup.created({
+                    content: "请阅读并勾选商标服务合同",
+                    time: 2000
+                });
+                return false;
+            }
+            
+            // 不足10个小项
+            this.noTens = [];
+            this.noZeros = [];
+            if (this.brandType) {
+                this.selectAutoList.map(item => {
+                    if (item) {
+                        if (item.sonArr.length < 10) {
+                            this.noTens.push(item);
+                            if (item.sonArr.length == 0) {
+                                this.noZeros.push(item);
+                            }
+                        }
+                    }
+                });
+            } else {
+                this.selectList.map(item => {
+                    if (item.sonArr.length < 10) {
+                        this.noTens.push(item);
+                        if (item.sonArr.length == 0) {
+                            this.noZeros.push(item);
+                        }
+                    }
+                });
+            }
+            if (!type && this.noZeros.length) {
+                this.isNoNumber = true;
+                return false;
+            }
+
+            if (!type && this.noTens.length) {
+                this.isNoTen = true;
+                return false;
+            }
+
+            if (this.brandType == 1) {
+                this.selectList = [];
+            } else {
+                this.selectAutoList = [];
+            }
+            if (this.type != 1) {
+                this.createdRes = "";
+            } else {
+                if (this.autoType == 1) {
+                    this.uploadRes = "";
+                } else {
+                    this.createdRes = "";
+                }
+            }
+            let auditType = ''
+            if (audit) {
+                this.audit = audit
+            }
+            if (this.audit == 0) {
+                auditType = 'oder_audit_type_01'
+            }
+            if (this.audit == 1) {
+                auditType = 'oder_audit_type_02'
+            }
+            if (this.audit == 2) {
+                auditType = 'oder_audit_type_03'
+            }
+            if (this.audit == 3) {
+                auditType = 'oder_audit_type_04'
+            }
+
+            let arr = [
+                "",
+                "trademark_type4",
+                "trademark_type5"
+            ];
+            let exampleType = ["", "example_type1", "example_type2"];
+            let classCreateWay = ["class_create_way1", "class_create_way2"];
+            let applicantType = ["applicant_type2", "applicant_type1"];
+            let codes = [];
+            this.selectList.map(item => {
+                item.sonArr.map(childItem => {
+                    codes.push({
+                        classLevel1Code: item.number,
+                        classLevel1Name: item.name,
+                        classLevel3Code: childItem.number,
+                        classLevel3Name: childItem.name
+                    });
+                });
+            });
+            this.selectAutoList.map(item => {
+                if (item) {
+                    item.sonArr.map(childItem => {
+                        codes.push({
+                            classLevel1Code: item.number,
+                            classLevel1Name: item.name,
+                            classLevel3Code: childItem.number,
+                            classLevel3Name: childItem.name
+                        });
+                    });
+                }
+            });
+            let obj = {
+                orderJson: JSON.stringify({
+                    invoiceFee: 0,
+                    userId: this.$store.state.userInfo.userId,
+                    serviceId: this.product.serviceId,
+                    serviceAttrId: this.product.serviceAttrId
+                        ? this.product.serviceAttrId
+                        : null,
+                    allPrice: this.officeTotal,
+                    allNum: this.product.num,
+                    auditType: auditType,
+                    contactName: this.applyZt.contactName,
+                    contactPhone: this.applyZt.contactPhone,
+                    contactEmail: this.applyZt.contactEmail,
+                    contactTelephone: this.applyZt.contactTelephone,
+                    remark: ''
+                }),
+                trademarkAndApplicantJson: JSON.stringify({
+                    type: arr[this.autoType],
+                    name: this.name,
+                    explain: this.explain,
+                    exampleType: exampleType[2],
+                    exampleAddress: this.createdRes
+                        ? this.createdRes.fsPath
+                        : this.uploadRes.fsPath,
+                    classCreateWay: classCreateWay[this.brandType],
+                    suggestedFirstLevel: this.doMainIndex
+                        ? this.doMain[parseInt(this.doMainIndex)].id
+                        : null,
+                    suggestedSecondLevel: this.doMainchildIndex,
+                    applicantType: applicantType[parseInt(this.applyType)],
+                    applicantName: this.applyZt.applicantName,
+                    applicantCardNo: this.applyZt.applicantCardNo,
+                    businessLicenceArea: this.applyZt.businessLicenceArea,
+                    postalcode: this.applyZt.postalcode,
+                    businessLicenceAddress: this.applyZt.businessLicenceAddress,
+                    applicantCardFile: this.applyZt.applicantCardFile,
+                    businessLicenceFile: this.applyZt.business,
+                    proxyFile: this.uploadFile.fsPath,
+                    priorityFile: ''
+                }),
+                trademarkClassListJson: JSON.stringify(codes)
+            };
+
+            sessionStorage.setItem("isFrom", true);
+            this.$Http("/order/saveAutoOrder2", obj, "post", true).then(res => {
+                sessionStorage.setItem("isFrom", false);
+                this.isNoTen = false
+                Cookies.remove("product");
+                this.$router.replace("/order/pay/" + res.data.data);
+            });
+        }
+    },
+    computed: {
+        officeTotal() {
+            let total = 0;
+            if (parseInt(this.brandType)) {
+                this.selectAutoList.map(item => {
+                    if (item) {
+                        if (item.sonArr.length <= 10) {
+                            total += 300;
+                        } else {
+                            total += item.sonArr.length * 30;
+                        }
+                    }
+                });
+                return total;
+            }
+            this.selectList.map(item => {
+                if (item.sonArr.length <= 10) {
+                    total += 300;
+                } else {
+                    total += item.sonArr.length * 30;
+                }
+            });
+            return total;
+        }
+    },
+    watch: {
+        selectList() {
+            this.trademarkList.map(item => {
+                item.checked = false;
+                this.selectList.map(childItem => {
+                    if (item.id === childItem.id) {
+                        item.checked = true;
+                    }
+                });
+            });
+        }
+    }
+};
+</script>
+
+<style scoped lang="stylus">
+.order
+    width: 1200px;
+    margin: 0 auto;
+    .status
+        margin: 30px 0;
+        overflow: hidden;
+        position: relative;
+        &:after
+            content '';
+            position: absolute;
+            width: 25px;
+            height: 40px;
+            left: 50%;
+            top: 0;
+            background transparent url('../../assets/images/order/bg_arr.png') left top no-repeat;
+        li
+            float: left;
+            width: 50%;
+            text-align: center;
+            font: normal 16px/40px 'microsoft yahei';
+            color: #fff;
+            background: #a2b8ce;
+            &.atthis
+                background: #fd7d22;
+    .content
+        background #fff;
+        border: 1px solid #e7e7e7;
+        padding: 30px 40px;
+        margin-bottom: 30px;
+        position: relative;
+        .auto
+            position: absolute;
+            width: 280px;
+            height: 477px;
+            background: #f7fbff;
+            right: 40px;
+            top: 160px;
+            box-sizing: border-box;
+            padding: 10px 20px 20px;
+            h2
+                font: normal 14px/40px 'microsoft yahei';
+                color: #0071e7;
+                border-bottom: 1px solid #c7dcf1;
+            >p
+                font: normal 12px/18px 'microsoft yahei';
+                color: #4f91d5;
+                padding: 10px 0;
+            ul
+                li
+                    margin-bottom: 5px;
+                    p
+                        font: normal 14px/40px 'microsoft yahei';
+                        color: #666;
+                    input
+                        width: 100%;
+                        height: 30px;
+                        line-height: 30px;
+                        box-sizing: border-box;
+                        padding: 0 10px;
+                        color: #666;
+                        font-size: 14px;
+                        border: 1px solid #c7dcf1;
+                    >span
+                        color: #ff3145;
+                        font: normal 12px/18px 'microsoft yahei';
+            .note
+                position: absolute;
+                left:25px;
+                right: 25px;
+                bottom: 20px;
+                font: normal 12px/20px 'microsoft yahei';
+                color: #666;
+                a
+                    color: #fd7d22;
+        .tips
+            font-size: 12px;
+            color: #666;
+            background transparent url('../../assets/images/order/icon_tx.png') left center no-repeat;
+            padding-left: 20px;
+            line-height: 16px;
+            margin-top: 10px;
+        .title
+            line-height: 50px;
+            margin-top: 30px;
+            height: 50px;
+            border-bottom: 1px solid #eee;
+            span
+                float: left
+                line-height: 48px;
+                color: #fd7d22;
+                font-size: 18px;
+                border-bottom: 2px solid #fd7d22;
+        >dl
+            overflow: hidden;
+            clear: both;
+            line-height: 30px;
+            margin-top: 30px;
+            font-size: 16px;
+            color: #333;
+            &.tuyang
+                dd
+                    line-height: 38px;
+                    input[type='radio']
+                        vertical-align: middle
+                        cursor: pointer;
+                    label
+                        margin-right: 15px;
+                        margin-left: 5px;
+                        cursor: pointer;
+                    .wh
+                        top: 10px;
+                    .tu
+                        display: inline-block;
+                        margin: 10px 0;
+                        text-align: center;
+                        width: 210px;
+                        height: 194px;
+                        border: 1px solid #d1d1d1;
+                        background: #f6f6f6;
+                        >p
+                            font-size: 14px;
+                            color: #666;
+                        img
+                            margin: 5px 0 5px 0;
+                        button
+                            border-radius: 30px;
+                            margin: 0 5px;
+                            font-size: 12px;
+                            &.zn
+                                background: #5094e6;
+                    .sltu
+                        display: inline-block;
+                        position: relative;
+                        margin-left: 10px;
+                        vertical-align: top;
+                        margin-top: 10px;
+            dt
+                float: left;
+                width: 172px;
+                line-height: 38px;
+                text-align: right;
+            dd
+                overflow: hidden;
+                padding-left: 20px;
+                select
+                    height: 36px;
+                    border: 1px solid #ccc;
+                    border-radius: 3px;
+                    font-size: 14px;
+                    width: 200px;
+                    padding: 6px;
+                    margin-right: 10px;
+                textarea
+                    background: #f6f6f6;
+                    line-height: 20px;
+                    border: 1px solid #d3d3d3;
+                    padding: 10px;
+                    width: 390px;
+                    height: 112px;
+                    box-sizing: border-box;
+                    resize: none;
+                input[type='text'],input[type='tel']
+                    background: #f6f6f6;
+                    line-height: 36px;
+                    border: 1px solid #d3d3d3;
+                    padding: 0 10px;
+                    width: 470px;
+                    vertical-align: middle;
+                    box-sizing: border-box;
+                    &.w140
+                        width: 140px;
+                        margin-right: 10px;
+                    &.w320
+                        width: 320px;
+                    &.sbname
+                        width: 390px;
+                        margin-right: 10px;
+                .wh
+                    vertical-align: top;
+                    font: normal 12px/20px 'microsoft yahei';
+                    color: #666;
+                    display: inline-block;
+                    padding-left: 20px;
+                    margin-left: 20px;
+                    position: relative;
+                    text-align: left;
+                    .wh
+                        left: -40px;
+                    img
+                        position: absolute;
+                        left: 0;
+                        top: 2px;
+                    a
+                        color: #fd7d22;
+                    b
+                        font-weight: normal;
+                        color: #ff3145;
+                .radio
+                    display: inline-block;
+                    padding: 0 15px;
+                    line-height: 32px;
+                    border: 1px solid #d1d1d1;
+                    color: #666;
+                    margin-right: 10px;
+                    border-radius: 3px;
+                    &.atthis
+                        border: 1px solid #fd7d22;
+                        color: #fd7d22;
+                button
+                    background: #fd7d22;
+                    padding: 0 20px;
+                    vertical-align: middle;
+                    line-height: 33px;
+                    color: #fff;
+                    border-radius: 3px;
+                    cursor: pointer;
+                input[type='file']
+                    display: none;
+                ol
+                    overflow: hidden;
+                    margin-top: 20px;
+                    li
+                        float: left;
+                        margin-right: 15px;
+                        border: 1px solid #d1d1d1;
+                        width: 144px;
+                        height: 194px;
+                        text-align: center;
+                        font-size: 14px;
+                        color: #666;
+                        line-height: 18px;
+                        position: relative;
+                        &.upload
+                            p
+                                line-height: 18px;
+                                padding-top: 5px;
+                            img
+                                margin: 10px 0 5px;
+                            button
+                                border-radius: 30px;
+                                font-size: 12px;
+                .sl
+                    position: absolute;
+                    display: block;
+                    left: 0;
+                    top: 0;
+                    width: 40px;
+                    height: 40px;
+                    background: transparent url('../../assets/images/order/icon_yl.png') left top no-repeat;
+                .fd
+                    position: absolute;
+                    line-height: 26px;
+                    height: 28px;
+                    left: 50%;
+                    margin-left: -44px;
+                    display: block;
+                    border-radius: 27px;
+                    bottom: 15px;
+                    width: 88px;
+                    font-size: 14px;
+                    background: rgba(0,0,0,.5) url('../../assets/images/order/icon_search.png') no-repeat 16px center;
+                    text-indent: 40px;
+                    color: #fff;
+                    text-align: left;
+                            
+/* ---------- 智能推荐 ---------- */
+span.header-right-secNum {
+  margin-top: 2px;
+  margin-right: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+span.header-right-secNum i {
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+span.header-right-secNum.red-color i {
+  color: #fc461e;
+}
+
+.brandInfo-wrap .section-recommend {
+  padding-top: 30px;
+}
+
+.brandInfo-wrap .section-recommend .section-header {
+  position: relative;
+  background-color: #f3f3f3;
+  height: 58px;
+}
+
+.brandInfo-wrap .section-recommend .section-header .s1 {
+  display: block;
+  float: left;
+  color: #999;
+  margin: 18px 0px 0 20px;
+  padding-left: 10px;
+  height: 20px;
+  line-height: 19px;
+  font-size: 18px;
+  border-left: solid 2px #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .section-header .btn-export {
+  display: block;
+  float: right;
+  width: 106px;
+  line-height: 32px;
+  color: #f08b2f;
+  border: solid 1px #f08b2f;
+  text-align: center;
+  border-radius: 3px;
+  margin: 12px 20px 0 0;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.brandInfo-wrap .section-recommend .section-bodyer {
+  padding: 0 32px;
+}
+
+.brandInfo-wrap .section-recommend .article {
+  border-bottom: solid 1px #eee;
+  padding-bottom: 15px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header {
+  font-weight: normal;
+  padding: 12px 0 6px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header span {
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-left {
+  float: left;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-left .col-1 {
+  color: #666;
+  font-size: 18px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-left .col-2 {
+  color: #888;
+  margin: 3px 0 0 25px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-left .col-3 {
+  color: #f08b2f;
+  margin: 3px 0 0 25px;
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-left .col-3 .iconfont {
+  margin: 3px 5px 0 0;
+  float: left;
+  font-size: 15px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-right {
+  float: right;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-right .col-1 {
+  display: block;
+  float: left;
+  margin-right: 15px;
+  font-size: 18px;
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-right .col-2 {
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-recommend .article .article-header .header-right .col-2 .iconfont {
+  font-size: 19px;
+  color: #999;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list {
+  display: block;
+  float: left;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 10px;
+  margin: 2px 0px 2px 20px;
+  border: solid 1px #fff;
+  cursor: default;
+  position: relative;
+  border-radius: 2px;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list .text {
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list .close {
+  display: none;
+  width: 12px;
+  height: 12px;
+  line-height: 10px;
+  cursor: pointer;
+  background-color: #f08b2f;
+  color: #fff;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list:hover {
+  border: solid 1px #f08b2f;
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list:hover .close {
+  display: block;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list-add {
+  color: #f08b2f;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer .list-box .list-add .iconfont {
+  float: left;
+  margin: 0 5px 0 -1px;
+}
+
+/* 群组 */
+.brandInfo-wrap .section-recommend .article .group {
+  height: 378px;
+  background-color: #f9f9f9;
+  font-size: 12px;
+  margin: 15px 0;
+  color: #666;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-left {
+  float: left;
+  width: 300px;
+  height: 100%;
+  padding: 12px 0;
+  position: relative;
+  z-index: 2;
+  overflow-y: auto;
+  border-right: solid 1px #eee;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-left .list {
+  padding: 8px 25px;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-left .list:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-left .list.active {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right {
+ overflow: hidden;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .item {
+  display: none;
+  padding: 15px 0;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .item.active {
+  display: block;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list {
+  float: left;
+  width: 250px;
+  padding-left: 18px;
+  margin: 6px 15px;
+  position: relative;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list .iconfont {
+  display: none;
+  position: absolute;
+  left: 0px;
+  top: 1px;
+  font-size: 14px;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list .text {
+  display: block;
+  float: left;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list:hover .iconfont {
+  display: block;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list.selected .text {
+  color: #999;
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list.selected:hover {
+  color: #999;
+}
+
+.brandInfo-wrap .section-recommend .article .group .group-right .list.selected:hover .iconfont {
+  display: none;
+}
+
+.brandInfo-wrap .section-recommend .article .article-bodyer.open .group {
+  display: block;
+}
+
+/* 添加群组 */
+.brandInfo-wrap .section-recommend .article .add-group {
+  padding: 10px 0 5px 25px;
+}
+
+.brandInfo-wrap .section-recommend .article .add-group .btn {
+  display: inline-block;
+  color: #f08b2f;
+  border: solid 1px #f08b2f;
+  border-radius: 3px;
+  padding: 5px 15px;
+}
+
+.brandInfo-wrap .section-recommend .article .add-group .btn .iconfont {
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.myInput{
+  height: 34px;
+  border: solid 1px #ccc;
+  border-radius: 2px;
+  font-size: 14px;
+  width: 370px;
+  padding: 6px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.myInput:focus {
+  border-color: #F08B2F;
+}
+/* 添加商标45类别 */
+.brandInfo-wrap .section-recommend .add-category {
+  padding: 25px 32px;
+}
+
+.brandInfo-wrap .section-recommend .add-category .btn-add {
+  display: inline-block;
+  padding: 0 20px;
+  height: 36px;
+  line-height: 36px;
+  background-color: #f7f8fb;
+  color: #f08b2f;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.brandInfo-wrap .section-recommend .add-category .btn-add i {
+  display: block;
+  float: left;
+  font-size: 27px;
+  margin: -1px 5px 0 0;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list-box {
+  background-color: #f7f8fb;
+  padding: 16px 0;
+  border-radius: 0 3px 3px 3px;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list {
+  display: block;
+  float: left;
+  height: 22px;
+  line-height: 22px;
+  margin: 7px 0px 7px 35px;
+  color: #666;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list .color {
+  color: inherit;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list.selected:hover {
+  color: #999;
+}
+
+.brandInfo-wrap .section-recommend .add-category .list.selected {
+  color: #999;
+  text-decoration: line-through;
+  cursor: default;
+}
+
+.brandInfo-wrap .section-recommend .add-category.open .list-box {
+  display: block;
+}
+
+.brandInfo-wrap .section-recommend .exportAll {
+  padding: 0px 32px;
+}
+
+.brandInfo-wrap .section-recommend .exportAll .btn-exportAll {
+  display: block;
+  width: 106px;
+  line-height: 32px;
+  color: #f08b2f;
+  border: solid 1px #f08b2f;
+  text-align: center;
+  border-radius: 3px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+/* ---------- 自助选择 ---------- */
+.brandInfo-wrap .section-selfchoice {
+  border: solid 1px #eee;
+  height: 500px;
+}
+
+/* 左群组 */
+.brandInfo-wrap .section-selfchoice .group-left {
+  float: left;
+  width: 330px;
+  height: 100%;
+  border-right: solid 1px #eee;
+  position: relative;
+  z-index: 2;
+  background-color: #f9f9f9;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .group-header {
+  margin-top: 15px;
+  margin-left: 20px;
+  color: #666;
+  font-size: 18px;
+  height: 18px;
+  line-height: 17px;
+  padding-left: 10px;
+  border-left: solid 2px #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .group {
+  margin-top: 15px;
+  height: 433px;
+  padding: 0px 25px 0 32px;
+  overflow: auto;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list {}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-first {
+  display: block;
+  padding: 6px 0;
+  color: #333;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-first .color {
+  color: inherit;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-first:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second {
+  padding: 3px 0;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-lg {
+  display: block;
+  height: 16px;
+  padding: 0 0 0 14px;
+  color: #666;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .get-all-second {
+  display: block;
+  height: 16px;
+  padding: 0 0 0 14px;
+  color: #666;
+  font-size: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-lg:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm {}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row {
+  line-height: 26px;
+  height: 26px;
+  padding: 5px 0;
+  padding: 0 0 0 45px;
+  font-size: 12px;
+  color: #666;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row i {
+  position: relative;
+  top: -2px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .get-all-small {
+  height: 16px;
+  padding: 0 0 0 45px;
+  font-size: 12px;
+  color: #888;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row .iconfont {
+  display: block;
+  float: left;
+  font-size: 14px;
+  color: #f08b2f;
+  margin-top: 1px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row .text {
+  box-sizing: border-box;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin-left: -16px;
+  padding-left: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row:hover {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row.selected .iconfont {
+  color: #888;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row.selected .text {
+  text-decoration: line-through;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second .second-sm .row.selected:hover {
+  color: #888;
+  cursor: default;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list.open .title-first {
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list.open .title-second {
+  display: block;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second.open .second-sm {
+  display: block;
+}
+
+.brandInfo-wrap .section-selfchoice .group-left .list .title-second.open .second-lg {
+  color: #f08b2f;
+}
+
+/* 右小项 */
+.brandInfo-wrap .section-selfchoice {
+  margin-top: 30px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right {
+  overflow: hidden
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .bgimg {
+  display: block;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .title {
+  position: relative;
+  height: 50px;
+  padding: 16px 0 0 20px;
+  background-color: #fafbfc;
+  margin: 0;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .title span {
+  display: block;
+  color: #666;
+  font-size: 14px;
+  height: 18px;
+  line-height: 17px;
+  margin-top: 10px;
+  padding-left: 10px;
+  border: 0;
+  border-left: solid 2px #f08b2f;
+  font-weight: normal;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .section {
+  height: 448px;
+  padding: 5px 0;
+  overflow: auto;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article {
+  padding: 10px 20px 5px 34px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header {
+  font-weight: normal;
+  padding: 0px 0 8px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header span {
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-left {
+  float: left;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-left .col-1 {
+  color: #666;
+  font-size: 16px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-left .col-2 {
+  color: #888;
+  margin: 3px 0 0 25px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-left .col-3 {
+  color: #f08b2f;
+  margin: 3px 0 0 25px;
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-left .col-3 .iconfont {
+  margin: 3px 5px 0 0;
+  float: left;
+  font-size: 15px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-right {
+  float: right;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-right .col-1 {
+  display: block;
+  float: left;
+  margin-right: 15px;
+  font-size: 18px;
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-right .col-2 {
+  display: block;
+  float: left;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-header .header-right .col-2 .iconfont {
+  font-size: 19px;
+  color: #999;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-bodyer .list-box .list {
+  display: block;
+  float: left;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 10px;
+  margin: 0px 0px 0px 20px;
+  border: solid 1px transparent;
+  cursor: default;
+  position: relative;
+  border-radius: 2px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-bodyer .list-box .list .text {
+  display: block;
+  float: left;
+  font-size: 13px;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-bodyer .list-box .list .close {
+  display: none;
+  width: 12px;
+  height: 12px;
+  line-height: 10px;
+  cursor: pointer;
+  background-color: #f08b2f;
+  color: #fff;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-bodyer .list-box .list:hover {
+  border: solid 1px #f08b2f;
+  color: #f08b2f;
+}
+
+.brandInfo-wrap .section-selfchoice .group-right .article .article-bodyer .list-box .list:hover .close {
+  display: block;
+}
+
+.row-way .btn-choice {
+  display: inline-block;
+  width: 106px;
+  height: 32px;
+  line-height: 29px;
+  border: solid 1px #ddd;
+  border-radius: 3px;
+  text-align: center;
+  margin-right: 12px;
+}
+
+.row-way .btn-choice.active {
+  color: #f08b2f;
+  border: solid 1px #f08b2f;
+}
+
+.row-way .btn-choice .iconfont {
+  display: none;
+  font-size: 10px;
+  margin-right: 5px;
+}
+
+.row-way .btn-choice.active .iconfont {
+  display: inline-block;
+}
+
+.c-row label {
+  display: inline-block;
+  padding-right: 15px;
+  width: 145px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.c-row-content {
+  display: inline-block;
+}
+
+.smartRegister-page .last-pay li.row-invoice .icon-img {
+  margin-right: 0px;
+}
+
+.ns-search-container {
+  padding: 15px;
+  padding-bottom: 0px;
+}
+
+.ns-search-container .myInputGroup {
+  width: 100%;
+}
+
+.ns-search-container .myInputGroup .myInput {
+  width: 100%;
+}
+
+.categoryInfo-wrap {
+  padding-left: 50px;
+}
+
+.categoryInfo-wrap .row-way {
+  margin-bottom: 15px;
+}
+
+.group-right-search {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  height: 40px;
+}
+
+.group-right-search .button {
+  display: inline-block;
+  padding: 5px 8px;
+  color: #fff;
+  background-color: #f08b2f;
+  border-radius: 2px;
+  border: 1px solid #f08b2f;
+  cursor: pointer;
+}
+
+.group-right-search .group-right-search-input {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.group-right-search .group-right-search-input input[type=text] {
+  padding: 5px;
+  height: 30px;
+  border-radius: 2px;
+  margin-right: 5px;
+  border: 1px solid #aaa;
+}
+
+.group-right-search .group-right-search-input .button {
+  font-size: 14px;
+}    
+
+
+.btn-prev {
+  display: inline-block;
+  margin-right: 30px;
+  line-height: 36px;
+  padding: 0 42px;
+  border: solid 1px #ff7200;
+  color: #ff7200;
+  border-radius: 2px;
+}
+
+.btn-next {
+  display: inline-block;
+  line-height: 36px;
+  padding: 0 42px;
+  background-color: #ff7200;
+  color: #fff;
+  border-radius: 2px;
+}
+
+.btn-next.disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+.myInputGroup {
+  position: relative;
+
+}
+
+.myInputGroup .myBtn {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 40px;
+  background-color: transparent;
+  border: 0;
+  border-left: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 0;
+  color: #888;
+}
+                
+.upbtn{text-align: center;}
+.upbtn dl{display: inline-block;padding: 10px;width: 230px;position: relative;line-height: 30px;border-radius: 5px; margin: 0 10px; cursor: pointer;}
+.upbtn dl dt{font-size: 22px;}
+.upbtn dl dd{font-size: 12px; color: #666;}
+.upbtn dl:hover dd{color:#fff;}
+.upbtn dl:hover{background-color: #ff6700!important;color: #fff!important;border: 1px solid #ff6700!important;}
+.upbtn dl:hover dt {color: #fff!important;}
+.upbtn dl dt:before{content: '';display: inline-block;width: 38px;height: 28px;vertical-align: middle;margin-right: 5px;}
+.upbtn dl.mian{border: 1px solid #e1e1e1;background-color: #fbfbfb;}
+.upbtn dl.mian dt{color: #444;}
+.upbtn dl.mian dt:before{background: url(../../assets/images/order/sbzc_24.png) no-repeat;}
+.upbtn dl.mian:hover dt:before{background: url(../../assets/images/order/sbzc1_24.png) no-repeat;}
+.upbtn dl.dai{border: 1px solid #ffd8bd;background-color: #fff7f1;}
+.upbtn dl.dai dt{color: #fd7d22;}
+.upbtn dl.dai dt:before{background: url(../../assets/images/order/sbzc_26.png) no-repeat;}
+.upbtn dl.dai:hover dt:before{background: url(../../assets/images/order/sbzc1_26.png) no-repeat;}
+.upbtn dl.kuai dt{color: #0071e3;}
+.upbtn dl.kuai{border: 1px solid #c5e2ff;background-color: #f4faff;  }
+.upbtn dl.kuai dt:before{background: url(../../assets/images/order/sbzc_21.png) no-repeat;}
+.upbtn dl.kuai:hover dt:before{background: url(../../assets/images/order/sbzc1_21.png) no-repeat;}
+.service_form2 .upbtn .tuiimg{position: absolute;top: 0;right: -1px;}
+
+.saveLoca
+    margin-top: 20px;
+    font-size: 16px;
+    color: #666;
+    a
+        color: #fd7d22;
+.agree-box
+    text-align: center;
+    padding: 30px 0;
+    color: #333;
+    font-size: 14px;
+    .iconfont
+        font-size: 15px;
+        color: #ccc;
+        cursor: pointer;
+        vertical-align: middle;
+        &.checked
+            color: #fd7d22;
+    a
+        color: #fd7d22;
+    span
+        cursor: pointer;
+
+.last-pay
+    text-align: right;
+    font-size: 14px;
+    color: #999;
+    line-height: 30px;
+    li
+        &.row-sense
+            font-size: 16px;
+            color: #fd7d22;
+.model {
+  position: fixed;
+  background: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.model .cont {
+  width: 450px;
+  margin: 20% auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.model .cont h1 {
+  color: #F08B2F;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.model .cont>i {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.color {
+  color: #F08B2F;
+  cursor: pointer;
+}
+
+.model .cont>p {
+  line-height: 26px;
+}
+.model 
+    .tab
+        line-height: 40px;
+        border-bottom: 1px solid #e5e5e5;
+        font-size: 16px;
+        height: 40px;
+        a
+            float: left;
+            padding: 0 15px;
+            &.atthis
+                color: #f08b2f;
+                font-weight: bold;
+                line-height: 38px;
+                border-bottom: 2px solid #f08b2f;
+    .list
+        li
+            margin-top: 10px;
+            a
+                display: block;
+                border: 1px solid #f08b2f;
+                background: #fff;
+                border-radius: 5px;
+                line-height: 35px;
+                font-size: 14px;
+                padding: 0 10px;
+                color: #666;
+                span
+                    float: right;
+    .test
+        text-align: center;
+        input,select
+            width: 320px;
+            height: 36px;
+            border: 1px solid #eee;
+            line-height: 36px;
+            font-size: 14px;
+            margin-top: 15px;
+            color: #666;
+            padding: 0 10px;
+        select
+            width: 340px;
+        .res
+            padding: 50px;
+            font-size: 18px;
+            color: #999;
+            text-align: left;
+            p
+                padding-left: 20px;
+                font: normal 14px/22px 'microsoft yahei';
+                color: #666;
+                a,samp
+                    color: #f08b2f;
+            
+        
+
+.model .cont .color {
+  cursor: text;
+}
+
+.model .cont .btn {
+  overflow: hidden;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.model .cont .btn a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  width: 120px;
+  height: 34px;
+  line-height: 32px;
+  text-align: center;
+  border: 1px solid #f08b2f;
+  color: #f08b2f;
+  margin: 0 10px;
+}
+
+.model .cont .btn a.active {
+  background: #f08b2f;
+  color: #fff;
+}
+
+.relative
+    position: relative;
+
+.mark_main
+    position: absolute;
+    left: 720px;
+    top: 900px;
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-top: 0;
+    z-index: 99;
+    .left
+        float: left;
+    .right
+        float: right;
+    &.branName
+        left: 800px;
+        top: 850px;
+        line-height: 22px;
+        .center
+            text-align: center;
+        
+    h3
+        font-size: 16px;
+        color: #f08b2f;
+        line-height: 45px;
+        padding: 0 15px;
+        border-top: 3px solid #f08b2f;
+        i
+            float: right;
+            color: #999;
+            font-size: 18px;
+            cursor: pointer;
+            &:hover
+                color: #666;
+    ul
+        padding: 0 15px 20px;
+        li
+            line-height: 30px;
+            color: #666;
+            strong
+                font-size: 16px;
+                padding-right: 10px;
+</style>
+

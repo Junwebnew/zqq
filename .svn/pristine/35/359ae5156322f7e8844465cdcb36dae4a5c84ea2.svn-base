@@ -1,0 +1,129 @@
+const {
+  Nuxt,
+  Builder
+} = require('nuxt')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const app = require('express')()
+const NuxtConfig = require('./nuxt.config')
+const request = require('request')
+const baseURI = NuxtConfig.env.baseUrl
+// const baseURI = 'http://10.2.1.178:8099/' //后台地址
+// const baseURI = 'http://192.168.254.166:8099/' //测试地址
+// Body parser，用来封装 req.body
+app.use(bodyParser.json())
+
+// Sessions 来创建 req.session
+app.use(session({
+  secret: 'super-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 2 * 60 * 60 * 1000
+  }
+}))
+
+// 获取网页的token
+app.post('/api/token', function (req, res) {
+  request({
+    url: baseURI + '/session/gettoken',
+    method: "POST",
+    json: true,
+    headers: req.headers,
+    body: req.body
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      if (body.code === 0) {
+        req.session.token = body.data
+      }
+      return res.json(body)
+    } else {
+      res.status(401).json({
+        error: '获取token错误'
+      })
+    }
+  })
+})
+
+// 密码登录
+app.post('/api/login', function (req, res) {
+  request({
+    url: baseURI + '/registuser/login',
+    method: "POST",
+    json: true,
+    headers: req.headers,
+    body: req.body
+  }, function (error, response, body) {
+    console.log(body)
+    if (!error && response.statusCode == 200) {
+      if (body.code === 0) {
+        if (req.body.time) {
+          req.session.cookie.originalMaxAge = 7 * 24 * 60 * 60 * 1000
+        }
+        req.session.authUser = {
+          nikename: body.data.nikename,
+          userId: body.data.userId,
+          phoneNo: body.data.phoneNo
+        }
+        console.log(req.session)
+      }
+      return res.json(body)
+    } else {
+      res.status(401).json({
+        error: 'Bad credentials'
+      })
+    }
+  })
+})
+
+// 短信登录
+app.post('/api/loginByCode', function (req, res) {
+  request({
+    url: baseURI + '/regist/loginByCode',
+    method: "POST",
+    json: true,
+    headers: req.headers,
+    body: req.body
+  }, function (error, response, body) {
+    console.log(body)
+    if (!error && response.statusCode == 200) {
+      if (body.code === 0) {
+        if (req.body.time) {
+          req.session.cookie.originalMaxAge = 7 * 24 * 60 * 60 * 1000
+        }
+        req.session.authUser = {
+          nikename: body.data.nikename,
+          userId: body.data.userId,
+          phoneNo: body.data.phoneNo
+        }
+        console.log(req.session)
+      }
+      return res.json(body)
+    } else {
+      res.status(401).json({
+        error: 'Bad credentials'
+      })
+    }
+  })
+})
+
+// 发起 POST /api/logout 请求注销当前用户，并从 req.session 中移除
+app.post('/api/logout', function (req, res) {
+  delete req.session.authUser
+  res.json({
+    ok: true
+  })
+})
+
+// 我们用这些选项初始化 Nuxt.js：
+const isProd = process.env.NODE_ENV === 'production'
+const nuxt = new Nuxt(NuxtConfig)
+// 生产模式不需要 build
+if (!isProd) {
+  const builder = new Builder(nuxt)
+  builder.build()
+}
+app.use(nuxt.render)
+app.listen(8088)
+console.log('Server is listening on http://172.16.3.59:8088')
+// console.log('Server is listening on http://10.2.1.178:8088')

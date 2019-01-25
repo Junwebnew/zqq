@@ -1,0 +1,315 @@
+<template>
+  <div class="manage">
+    <div class="spBar3">
+      <ul class="speedProgress">
+        <li class="step-1 finished">
+          <em class="icon-bar-circle"><a href="/brandmanage/addmanageview"></a></em>
+          <dl>
+            <dt class="txt"><a href="/brandmanage/addmanageview">导入商标数据</a></dt>
+          </dl>
+        </li>
+        <li class="step-2 finished">
+          <em class="icon-bar-circle"><a href="/brandmanage/index"></a></em>
+          <dl>
+            <dt class="txt"><a href="/brandmanage/index">数据显示</a></dt>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="brandManageWrap2">
+      <div class="content">
+        <div class="shuoming">权大师为您定制专属的商标管理库，简单1步，导入商标数据，您就可以管理您指定申请人下的商标数据</div>
+        <div class="c-header">
+          <div class="c-1">
+            <form method="get" action="/brandmanage/search">
+              <input type="text" name="key" value="" class="input-text" placeholder="查找已添加商标">
+              <input type="hidden" name="type" class="input-text" value="1" placeholder="查找已添加商标">
+              <input type="submit" class="btn" value="查找">
+            </form>
+          </div>
+          <div class="c-2">
+          </div>
+        </div>
+        <div class="c-body">
+          <div class="c-2">
+            <a class="add songti" href="/brandmanage/addmanageview"><i class="fa fa-plus songti">+</i>导入商标数据</a>
+            <a class="add songti" target="_blank" href="/brandmanage/export?type=all"><i class="fa fa-download icon-download">-</i>导出商标数据</a>
+          </div>
+          <table width="100%">
+            <caption>
+              <span class="text">共管理<em>8</em>条数据</span>
+              <a href="javascript:;" id="btn-selectAll"><i class="icon icon-check"></i><em class="t">全选</em></a>
+              <a href="javascript:;" id="btn-delete"><i class="icon icon-delete"></i><em class="t">删除</em></a>
+            </caption>
+            <thead>
+              <tr>
+                <td style="width:80px">序号</td>
+                <td>商标图样</td>
+                <td>商标名称<i class="fa icon-arrow-down iconfont icon-paixu" data="1">&#xe6b9;</i>
+                  <ul class="dropdown-menu">
+                    <li onclick="shaixuan(1,'全部')"><a href="javascript:;">全部</a></li>
+                    <li onclick="shaixuan(1,'HAPPY;QQ;快乐;QQ')"><a href="javascript:;">HAPPY;QQ;快乐;QQ</a></li>
+                    <li onclick="shaixuan(1,'QQ;WWW.QQ.COM')"><a href="javascript:;">QQ;WWW.QQ.COM</a></li>
+                    <li onclick="shaixuan(1,'施元哦哦哦哦')"><a href="javascript:;">施元哦哦哦哦</a></li>
+                    <li onclick="shaixuan(1,'权大师')"><a href="javascript:;">权大师</a></li>
+                    <li onclick="shaixuan(1,'谷歌')"><a href="javascript:;">谷歌</a></li>
+                    <li onclick="shaixuan(1,'顶呱呱')"><a href="javascript:;">顶呱呱</a></li>
+                  </ul>
+                </td>
+                <td>注册号<i class="icon icon-date icon-paixu" data="3" onclick="paixu(1)"></i></td>
+                <td style="width: 100px;">类别<i class="fa iconfont icon-arrow-down icon-paixu" data="2">&#xe6b9;</i>
+                  <ul class="dropdown-menu">
+                    <li onclick="shaixuan(2,'全部')"><a href="javascript:;">全部</a></li>
+                    <li onclick="shaixuan(2,'5')"><a href="javascript:;">5</a></li>
+                    <li onclick="shaixuan(2,'10')"><a href="javascript:;">10</a></li>
+                    <li onclick="shaixuan(2,'12')"><a href="javascript:;">12</a></li>
+                    <li onclick="shaixuan(2,'29')"><a href="javascript:;">29</a></li>
+                    <li onclick="shaixuan(2,'32')"><a href="javascript:;">32</a></li>
+                    <li onclick="shaixuan(2,'35')"><a href="javascript:;">35</a></li>
+                    <li onclick="shaixuan(2,'45')"><a href="javascript:;">45</a></li>
+                  </ul>
+                </td>
+                <td style="width: 130px;">申请日期<i class="icon icon-date  iconfont icon-paixu" data="3" onclick="paixu(2)">&#xe6b9;</i></td>
+                <td>状态<i class="fa iconfont icon-arrow-down icon-paixu">&#xe6b9;</i>
+                  <ul class="dropdown-menu">
+                    <li onclick="shaixuan(3,'全部')"><a href="javascript:;">全部</a></li>
+                    <li onclick="shaixuan(3,'100003')"><a href="javascript:;">已注册</a></li>
+                    <li onclick="shaixuan(3,'200000')"><a href="javascript:;">无效</a></li>
+                  </ul>
+                </td>
+                <td>申请人<i class="fa icon-arrow-down iconfont icon-paixu">&#xe6b9;</i>
+                  <ul class="dropdown-menu">
+                    <li onclick="shaixuan(4,'全部')"><a href="javascript:;">全部</a></li>
+                    <li onclick="shaixuan(4,'安徽顶呱呱食品有限公司')"><a href="javascript:;">安徽顶呱呱食品有限公司</a></li>
+                    <li onclick="shaixuan(4,'杜振辉')"><a href="javascript:;">杜振辉</a></li>
+                    <li onclick="shaixuan(4,'林永斌')"><a href="javascript:;">林永斌</a></li>
+                    <li onclick="shaixuan(4,'沈阳金杯三环离合器有限公司')"><a href="javascript:;">沈阳金杯三环离合器有限公司</a></li>
+                    <li onclick="shaixuan(4,'腾讯科技(深圳)有限公司')"><a href="javascript:;">腾讯科技(深圳)有限公司</a></li>
+                    <li onclick="shaixuan(4,'芒果商标管理有限公司')"><a href="javascript:;">芒果商标管理有限公司</a></li>
+                    <li onclick="shaixuan(4,'谷歌公司')"><a href="javascript:;">谷歌公司</a></li>
+                  </ul>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data="" class="Num1464537600">
+                <td align="center"><i class="icon icon-check" data="174226"></i><a href="javascript:;">1</a></td>
+                <td class="td-new"><em class="icon-new" style="display: none;"></em><a target="_blank" href="/brandmanage/detail?id=174226">
+
+                    <img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/0fcd1eda/57fa15ac/83915ba3/caf11203/logo_middle.jpg" width="135" height="62">
+
+                  </a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=174226">施元哦哦哦哦</a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=174226">20139019</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174226">10</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174226">2016-05-30</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174226">已注册</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174226">安徽顶呱呱食品有限公司</a></td>
+              </tr>
+              <tr data="" class="Num1461686400">
+                <td align="center"><i class="icon icon-check" data="174084"></i><a href="javascript:;">2</a></td>
+                <td class="td-new"><em class="icon-new" style="display: none;"></em><a target="_blank" href="/brandmanage/detail?id=174084">
+
+                    <img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/05d90d16/4b5d0def/3038ea5a/868b2dec/logo_middle.jpg" width="135" height="62">
+
+                  </a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=174084">顶呱呱</a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=174084">19777312</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174084">35</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174084">2016-04-27</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174084">已注册</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=174084">安徽顶呱呱食品有限公司</a></td>
+              </tr>
+              <tr data="" class="Num1137340800">
+                <td align="center"><i class="icon icon-check" data="170807"></i><a href="javascript:;">5</a></td>
+                <td class="td-new"><em class="icon-new" style="display: none;"></em><a target="_blank" href="/brandmanage/detail?id=170807">
+
+                    <img src="https://tm-images.oss-cn-beijing.aliyuncs.com/jpg/2fd04f23/6a5ffef0/eb69e381/00f036dd/logo_middle.jpg" width="135" height="62">
+
+                  </a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=170807">谷歌</a></td>
+                <td align="center"><a target="_blank" href="/brandmanage/detail?id=170807">5122682</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=170807">35</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=170807">2006-01-16</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=170807">已注册</a></td>
+                <td><a target="_blank" href="/brandmanage/detail?id=170807">谷歌公司</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- start 分页 -->
+          <div class="paging">
+          </div>
+          <!-- end 分页 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  head() {
+    return {
+      title: "商标管理-知千秋",
+      meta: [{
+          name: "keywords",
+          hid: "keywords",
+          content: "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+        },
+        {
+          name: "description",
+          hid: "description",
+          content: "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+        }
+      ]
+    };
+  },
+  data() {
+    return {}
+  },
+  components: {},
+  methods: {}
+};
+
+</script>
+<style scoped>
+/* ------------------ start 监控数据1进度条 ------------------ */
+
+.manage {
+  min-height: 500px;
+}
+
+.zoom {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 100;
+}
+
+.spBar3 {
+  width: 1200px;
+  margin: auto;
+  margin-top: 60px;
+  *zoom: 1;
+  border-bottom: solid 1px #dbdbdb;
+  padding-bottom: 50px;
+}
+
+.spBar3:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.spBar3 .speedProgress li {
+  float: left;
+  width: 600px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.spBar3 .speedProgress li .icon-bar-circle {
+  display: block;
+  width: 100%;
+  height: 66px;
+  background-image: url(../../assets/images/manage/spBar2-bg-1.png);
+  background-repeat: no-repeat;
+}
+
+.spBar3 .speedProgress li .icon-bar-circle a {
+  display: block;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+}
+
+.spBar3 .speedProgress li dl {
+  text-align: center;
+}
+
+.spBar3 .speedProgress li dl .txt {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.spBar3 .speedProgress .finished {
+  color: #008cd6;
+}
+
+.spBar3 .speedProgress .step-1 .icon-bar-circle {
+  background-position: -28px 0px;
+}
+
+.spBar3 .speedProgress .step-1.finished .icon-bar-circle {
+  background-position: -28px -66px;
+}
+
+.spBar3 .speedProgress .step-2 .icon-bar-circle {
+  background-position: -580px 0px;
+}
+
+.spBar3 .speedProgress .step-2.finished .icon-bar-circle {
+  background-position: -580px -66px;
+}
+
+.brandManageWrap2 .content{ margin-top:40px;}
+.brandManageWrap2 .content .shuoming{ margin:20px 0; font-size:14px; color:#999;}
+
+
+/* --------------- start 商标监控2 --------------- */
+.brandManageWrap2 .content{ width:1240px; margin:auto; margin-top:40px; }
+.brandManageWrap2 .content .c-header{ margin-bottom:20px; font-weight:normal; *zoom: 1;}
+.brandManageWrap2 .content .c-header:after{ content: ""; display: block; clear: both; height: 0; overflow: hidden; visibility: hidden;}
+.brandManageWrap2 .content .c-header .c-1 .input-text{ float:left; width:260px; height:34px; padding:0 10px; border:solid 1px #d2d2d2; box-sizing:border-box; font-size:13px; }
+.brandManageWrap2 .content .c-header .c-1 .btn{ float:left; width:70px; height:34px; border:0; font-size:14px; color:#fff; background-color:#ee8b3c; box-sizing:border-box; cursor:pointer; }
+.brandManageWrap2 .content .c-header .c-2{ float:right; margin-top: -64px; }
+.brandManageWrap2 .content .c-header .c-2 .add{ display:block; float:left; margin:0 0 0 20px; padding:0 15px; height:32px; line-height:32px; color:#ee8b3c; border-radius:3px; font-size:14px; }
+.brandManageWrap2 .content .c-header .c-2 .add .fa{ display:block; float:left; font-size:22px; margin:-1px 5px 0 0; font-weight:bold;}
+.brandManageWrap2 .content .c-header .c-2 .add .fa-download{ }
+
+.brandManageWrap2 .content .c-header .c-2 .add-manageuser .fa{ width: 16px; height: 16px; float: left; margin: 7px 6px 0px 0px; background: url("../../assets/images/manage/icon-add-manageuser.png") no-repeat 0px 0px;}
+
+.brandManageWrap2 .content .c-body{ margin-bottom:100px;}
+
+
+.brandManageWrap2 .content .c-body .c-2{ float:right; margin-bottom: -15px; position: relative; z-index: 2; }
+.brandManageWrap2 .content .c-body .c-2 .add{ display:block; float:left; margin:0 0 0 20px; padding:0 15px; height:32px; line-height:32px; border:solid 1px #ee8b3c; color:#ee8b3c; border-radius:3px; font-size:14px; }
+.brandManageWrap2 .content .c-body .c-2 .add .fa{ display:block; float:left; font-size:22px; margin:-1px 5px 0 0; font-weight:bold;}
+.brandManageWrap2 .content .c-body .c-2 .add .fa-download{ }
+
+
+
+
+.brandManageWrap2 .content .c-body table{ }
+.brandManageWrap2 .content .c-body table caption{ text-align:left; height:30px; position:relative; font-weight:normal; font-size:14px; }
+.brandManageWrap2 .content .c-body table caption .text{ display:block; float:left; }
+.brandManageWrap2 .content .c-body table caption .text em{ font-style:normal; color: #b70404; }
+.brandManageWrap2 .content .c-body table caption a{ display:block; float:left; margin:1px 0 0 20px; }
+.brandManageWrap2 .content .c-body table .icon{ display:block; width:16px; height:16px; margin:2px 2px 0 0; cursor:pointer; }
+.brandManageWrap2 .content .c-body table .icon-edit{ float:left; background-position:0px 0px; background-image: url(../../assets/images/manage/icon-form.png); }
+.brandManageWrap2 .content .c-body table .icon-check{ float:left; background-position:-33px 1px; background-image: url(../../assets/images/manage/icon-form.png);}
+.brandManageWrap2 .content .c-body table .icon-checked{ float:left; background-position:-16px 0px; background-image: url(../../assets/images/manage/icon-form.png);}
+.brandManageWrap2 .content .c-body table .icon-delete{ float:left; background-position:-50px 0px; background-image: url(../../assets/images/manage/icon-form.png);}
+
+.brandManageWrap2 .content .c-body table thead td .icon-date{ display:inline-block; width:9px; height: 11px; margin-left:5px; }
+.brandManageWrap2 .content .c-body table thead td .icon-arrow-down{ display:inline-block; width:11px;height:6px; margin-left:5px; background-position: 0px -7px; }
+.brandManageWrap2 .content .c-body table thead td .fa-edit{ float:left; margin:4px 0 0 -8px; font-size:18px; }
+.brandManageWrap2 .content .c-body table thead td{position:relative; background-color:#ee8b3c; color:#fff; text-align:center; font-size:16px; border-right:solid 1px #E6A467; }
+.brandManageWrap2 .content .c-body table td{ padding:10px 20px; border:solid 1px #eee; font-size:14px; }
+.brandManageWrap2 .content .c-body table td a:hover{ text-decoration:underline; }
+.brandManageWrap2 .content .c-body table tbody tr:hover{ background-color:#f1f5f8; }
+.brandManageWrap2 .content .c-body table tbody td .icon-check{ display:block; margin:2px 0 0 -10px; }
+/* --------------- end 商标监控2 --------------- */
+
+.td-new{ position:relative; }
+.td-new .icon-new{ display:block; position:absolute; top:5px; left:5px; width:22px; height:10px; background: #fff;}
+table .dropdown-menu{ display:none; width:100%; max-height:250px; overflow-y:auto; background-color:#f1f5f8; position:absolute; z-index:2; left:-1px; top:45px; border:solid 1px #f1f5f8; padding:0 0 15px; font-size:14px; }
+table .dropdown-menu.open{ display:block; }
+table .dropdown-menu li{ padding:6px 0; color:#000; }
+table .dropdown-menu li:hover{ background:#dde5e7; cursor:default; }
+.c-body table tbody tr td{ text-align:center;}
+</style>

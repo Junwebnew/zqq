@@ -1,0 +1,267 @@
+<template>
+    <div>
+        <mini :hasFloor="1" />
+        <div class="w zqq_b_center ">
+            <h1 class=" mb8"><img src="../../assets/images/search-main-title.png" alt="知千秋"></h1>
+            <small class="f16">以服务为基点，重新定义知识产权生态链</small>
+            <div class="main_search mb60 clear2">
+                <ul class="search_style clear2">
+                    <li v-for="(item,idx) in navArr" @click=" styleIdx = idx" :key='idx' :class="{'active': styleIdx == idx}">{{item}}</li>
+                </ul>
+                <div class="searchBox ">
+                    <input type="text" :placeholder="holderArr[styleIdx]" class="fl" v-model="keyWord" @keyup.enter='goList'>
+                    <span class="fl picImg">
+                        <el-upload v-show='styleIdx == 0' :action="$store.state.upLoadUrl" :show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+                            <span class="pic"></span>
+                        </el-upload>
+                    </span>
+                    <input type="button" value="搜索" class="fl" @click="goList">
+                </div>
+            </div>
+        </div>
+        <foot/>
+        <toTop :isShow="'1'" />
+    </div>
+</template>
+<script>
+import mini from "~/components/header/mini";
+import foot from "~/components/foot/searchFoot";
+import toTop from "~/components/toTop";
+import popup from "~/components/popup";
+import { uploadImg } from "~/assets/js/common.js";
+import Cookies from "js-cookie";
+export default {
+    layout: "empt",
+    head() {
+        return {
+            title: "专注于商标查询、专利查询-知千秋官",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "商标注册，商标免费查询，商标注册查询，商标注册流程及费用，中国商标网，专利申请，专利检索，发明专利"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "知千秋致力于知千秋致力于运营大数据技术、人工智能等技术重新定义知识产权生态链。提供商标查询,商标注册,专利申请,专利查询,版权登记全流程服务。提供免费商标查询Saas工具,智能商标注册0服务费省钱到底,商标查询,商标注册监控,专利申请等服务获得客户的高度认可"
+                }
+            ]
+        };
+    },
+    created() {},
+    components: {
+        mini,
+        foot,
+        toTop
+    },
+    data() {
+        return {
+            navArr: ["商标", "专利", "企业"],
+            holderArr: [
+                "请输入商标名称、申请号、申请人等信息",
+                "请输入专利名称",
+                "请输入企业名称"
+            ],
+            keyWord: "",
+            styleIdx: 0,
+            Loading: ""
+        };
+    },
+    methods: {
+        goList() {
+            this.keyWord = this.keyWord.replace(/ /g, "");
+            if (!this.keyWord) {
+                popup.created({
+                    content: "搜索关键字不能为空",
+                    time: 2000
+                });
+                this.showLogin = true;
+                return;
+            }
+
+            this.Loading = this.$Popup.created({
+                content: "搜索中...",
+                type: "loading",
+                icon: "&#xe61c"
+            });
+            if (
+                /[`~!@#$%^&*_\-+=<>?:"\/'\\[\]·~！@#￥%……&*——\-+=？：.]/im.test(
+                    this.keyWord
+                )
+            ) {
+                popup.created({
+                    content: "关键字不能包含特殊字符",
+                    time: 2000
+                });
+                return false;
+            }
+            if (this.styleIdx === 0)
+                this.$router.push({
+                    path: "/list/result_" + this.keyWord + ".html"
+                });
+            else if (this.styleIdx === 1)
+                this.$router.push({
+                    path: "/patentSearch/list_" + this.keyWord + ".html"
+                });
+            else if (this.styleIdx === 2) {
+                window.open(
+                    "https://dqc.dgg.net/#/Company?type=all&keyWord=" +
+                        this.keyWord,
+                    "_blank"
+                );
+                this.Loading.close();
+            }
+        },
+        //upload上传图片
+        handleAvatarSuccess(res, file) {
+            this.Loading.close();
+            uploadImg(this, res);
+        },
+        beforeAvatarUpload(file) {
+            const isJPG =
+                file.type === "image/jpeg" || file.type === "image/png";
+            const isLt2M = file.size / 1024 / 1024 < 5;
+
+            if (!isJPG) {
+                popup.created({
+                    content: "上传图片只能是JPG或PNG格式!",
+                    time: 2000
+                });
+            }
+            if (!isLt2M) {
+                popup.created({
+                    content: "上传图片大小不能超过 5MB!",
+                    time: 2000
+                });
+            }
+            if (isJPG && isLt2M) {
+                this.Loading = this.$Popup.created({
+                    content: "上传中...",
+                    type: "loading",
+                    icon: "&#xe61c"
+                });
+            }
+            return isJPG && isLt2M;
+        }
+    },
+    destroyed() {
+        if (this.Loading) this.Loading.close();
+    }
+};
+</script>
+<style scoped>
+.zqq_b_center {
+    margin: auto;
+    text-align: center;
+    color: #565656;
+    margin-top: 130px;
+}
+
+.zqq_b_center h1 {
+    font-size: 56px;
+    margin-bottom: 20px;
+}
+
+.searchBox {
+    width: 900px;
+    margin: auto;
+}
+
+.mb60 {
+    margin-top: 56px;
+}
+/* 种类 */
+.main_search {
+    margin-bottom: 120px;
+}
+.search_style {
+    width: 800px;
+    margin: auto;
+    padding-left: 16px;
+    margin-bottom: 14px;
+}
+
+.search_style > li {
+    float: left;
+    margin-right: 66px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 3px 12px;
+    border-radius: 3px;
+}
+
+.search_style > li.active {
+    background-color: #f08c2f;
+    color: #fff;
+    position: relative;
+}
+.search_style > li.active:before {
+    content: " ";
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    margin-left: -6px;
+    width: 0px;
+    border: 6px solid transparent;
+    border-top-color: #f08c2f;
+}
+/* 搜索盒子 */
+.searchBox input {
+    height: 46px;
+    line-height: 46px;
+    outline: none;
+    border: none;
+}
+
+.searchBox input:first-child {
+    width: 670px;
+    border-radius: 4px 0 0 4px;
+    color: #333;
+    padding: 0;
+    padding-left: 18px;
+    font-size: 16px;
+    border: 1px solid #999;
+    border-right: none;
+}
+
+.searchBox input:first-child::-webkit-input-placeholder {
+    color: #999;
+}
+.searchBox .picImg {
+    width: 60px;
+    height: 46px;
+    background: #fff;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+}
+.searchBox .pic {
+    display: block;
+    width: 60px;
+    height: 44px;
+    background: #fff url("../../assets/images/main/camera.png") center center
+        no-repeat;
+    cursor: pointer;
+}
+.searchBox .pic:hover {
+    background: #fff url("../../assets/images/icon_photo.png") center center
+        no-repeat;
+}
+
+.searchBox input:last-child {
+    width: 166px;
+    color: #fff;
+    background: #fd7d22;
+    border-radius: 0 4px 4px 0;
+    font-size: 18px;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</style>

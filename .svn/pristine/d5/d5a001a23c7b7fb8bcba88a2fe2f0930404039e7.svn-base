@@ -1,0 +1,456 @@
+<template>
+    <div>
+        <main-head/>
+        <fixNav/>
+        <section class="zqq_banner">
+            <!-- 头部导航 开始 -->
+            <div class="headNavBar mainHeadNav clear2 pos_re">
+                <div class="drop_nav fl" @mouseover="isShow=1" @mouseout="isShow=0">
+                    <h3 class="drop-title">
+                        <i class="icon icon-item"></i>
+                        <span class="text">全部导航</span>
+                    </h3>
+                </div>
+                <ul class="navbar fl clear2">
+                    <li class="menu">
+                        <a href="/show">商标注册
+                            <i class="icon icon-hot"></i>
+                        </a>
+                    </li>
+                    <li class="menu">
+                        <a href="javascript:void(0)" @click="$store.commit('isShowToolBox',1)">智能工具</a>
+                    </li>
+                    <li class="menu">
+                        <a href="/brand">业务咨询
+                            <i class="icon icon-hot"></i>
+                        </a>
+                    </li>
+                </ul>
+                <minNav @mouseFunc='showMinNav' :isShow='isShow' />
+            </div>
+            <!-- 头部导航 结束 -->
+            <div class="w zqq_b_center ">
+                <h1 class="weight mb8">数据赋能知产价值</h1>
+                <small class="f16">以服务为基点，重新定义知识产权生态链</small>
+                <div class="main_search mb60">
+                    <ul class="search_style clear2">
+                        <li v-for="(item,idx) in navArr" @click="switchStyle(idx)" :key='idx' :class="{'active': styleIdx == idx}">{{item}}</li>
+                    </ul>
+                    <div class="searchBox ">
+                        <input type="text" :placeholder="holderArr[styleIdx]" class="fl" v-model="keyword">
+                        <span class="fl pic"></span>
+                        <input type="button" value="搜索" class="fl" @click="goSearch">
+                    </div>
+                </div>
+            </div>
+            <div class="piao piao1">
+                <img src="../assets/images/main/piao1.png" class="piao-1" />
+            </div>
+            <img src="../assets/images/main/piao2.png" class="piao piao2" />
+            <img src="../assets/images/main/piao5.png" class="piao piao3" />
+            <img src="../assets/images/main/piao3.png" class="piao piao4" />
+            <img src="../assets/images/main/piao5.png" class="piao piao5" />
+        </section>
+        <!-- 三张banner图开始 -->
+        <section class="banner_three">
+            <div class="threeBox clear2">
+                <div class="fl  ">
+                    <router-link to='/'><img src="../assets/images/main/banner1.png" alt="查商标"></router-link>
+                </div>
+                <div class="fl midBanner">
+                    <div>
+                        <p class="mb10">数据搜索
+                            <span class="mar">445,445,511,233</span>次</p>
+                        <p>服务用户
+                            <span class="mar">5,456,125,155</span>人
+                        </p>
+                    </div>
+                </div>
+                <div class="fl">
+                    <router-link to='/'><img src="../assets/images/main/banner3.png" alt="查商标"></router-link>
+                </div>
+            </div>
+        </section>
+        <!-- 三张banner图结束 -->
+        <!-- 收费版块开始 -->
+        <section class="service" id="hot_service">
+            <div class="w">
+                <div class="service_title">
+                    <h1>大数据、更智能的知识产权服务平台</h1>
+                    <small>商标注册、专利申请、版权登记更便捷</small>
+                </div>
+                <section class="server_part">
+                    <div class="part_title clear2 ">
+                        <h2 class="fl">商标服务</h2>
+                        <span class="fl">Trademark Service</span>
+                        <a class="fr hoverCol">更多</a>
+                    </div>
+                    <div class="server_type flex-b">
+                        <section class="server_di brand clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/brand_03.png" alt="智能商标注册">
+                                <span class="col-b f24 server_di_ti">智能商标注册</span>
+                            </div>
+                            <div class="fr">
+                                <span class="col f24 server_di_ti">免费服务</span>
+                            </div>
+                        </section>
+                        <section class="server_di brand clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/brand_05.png" alt="商标快速注册">
+                                <span class="col-b f24 server_di_ti">商标快速注册</span>
+                            </div>
+                            <div class="fr ">
+                                <span class="col server_di_ti f24">200</span>
+                                <span class="col-h f24">/件</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section class="server_part">
+                    <div class="part_title clear2">
+                        <h2 class="fl">专利服务</h2>
+                        <span class="fl">Patent Service</span>
+                        <a class="fr hoverCol">更多</a>
+                    </div>
+                    <div class="server_type flex-b">
+                        <section class="server_di fming clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/faming.png" alt="发明专利">
+                                <span class="col-b f24 server_di_ti">发明专利</span>
+                            </div>
+                            <div class="fr">
+                                <span class="col server_di_ti f24">3999</span>
+                                <span class="col-h f24">/件</span>
+                                <span class="col-h f18">&nbsp;起</span>
+                            </div>
+                        </section>
+                        <section class="server_di fming clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/shiyong.png" alt="实用新型">
+                                <span class="col-b f24 server_di_ti">实用新型</span>
+                            </div>
+                            <div class="fr">
+                                <span class="col server_di_ti f24">2499</span>
+                                <span class="col-h f24">/件</span>
+                            </div>
+                        </section>
+                        <section class="server_di fming clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/waiguan.png" alt="外观专利">
+                                <span class="col-b f24 server_di_ti">外观专利</span>
+                            </div>
+                            <div class="fr">
+                                <span class="col server_di_ti f24">799</span>
+                                <span class="col-h f24">/件</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section class="server_part" id="server_part">
+                    <div class="part_title clear2">
+                        <h2 class="fl">版权服务</h2>
+                        <span class="fl">Copyright Service</span>
+                        <a class="fr hoverCol">更多</a>
+                    </div>
+                    <div class="server_type flex-b">
+                        <section class="server_di brand clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/ruanjian.png" alt="软件著作权">
+                                <span class="col-b f24 server_di_ti">软件著作权</span>
+                            </div>
+                            <div class="fr">
+                                <span class="col server_di_ti f24">799</span>
+                                <span class="col-h f24">/件</span>
+                            </div>
+                        </section>
+                        <section class="server_di brand clrear3 line-animate">
+                            <div class="fl flex-a">
+                                <img src="../assets/images/main/zuopin.png" alt="作品版权登记">
+                                <span class="col-b f24 server_di_ti">作品版权登记</span>
+                            </div>
+                            <div class="fr ">
+                                <span class="col server_di_ti f24">499</span>
+                                <span class="col-h f24">/件</span>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+        <!-- 收费版块结束 -->
+        <!-- AI重构 开始 -->
+        <section class="service ai" id="platform">
+            <div class="w">
+                <div class="service_title">
+                    <h1>AI重构知产产权生态链</h1>
+                    <small>大数据、人工智能知识产权更高效</small>
+                </div>
+                <ul class="flex-b aiTab">
+                    <li v-for="(item,idx) in aiTab" @mouseover=" aiTabIdx= idx" :key='idx' :class="{'active':idx == aiTabIdx}">{{item}}</li>
+                    <span class="taBoom" :class="{'boomL':0 == aiTabIdx, 'boomC':1 == aiTabIdx,'boomR':2 == aiTabIdx}"></span>
+                </ul>
+                <div class="switchAiBox junFadeIn" v-show='aiTabIdx == 0' key="0">
+                    <div class="aiReg clear">
+                        <div class="aibg bg1 fl"></div>
+                        <div class="aiInfo fr">
+                            <h1>智能商标注册流程</h1>
+                            <p>通过AI算法检索、智能类别推荐、通过率的科学分析，让商标注册脱离时间、空间和人的限制。4小时极速网申，办理状态与商标局注册进度同步更新，第一时间为你传达流程节点短信、微信和邮件通知，不仅服务费为0，服务也更优质。</p>
+                            <div class="aiUse">立即使用</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="switchAiBox junFadeIn" v-show='aiTabIdx == 1' key="1">
+                    <div class="aiReg clear">
+                        <div class="aibg bg2 fl"></div>
+                        <div class="aiInfo fr">
+                            <h1>商标快速报件系统</h1>
+                            <p>全球首个商标递交开放系统，经由30万+案件验证的高效智能化商标处理后台赋能。插入事务所Ukey，即启即用，支持事务所一键实现权大师智能高效的业务处理能力。</p>
+                            <div class="aiUse">立即使用</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="switchAiBox junFadeIn" v-show='aiTabIdx == 2' key="2">
+                    <div class="aiReg clear">
+                        <div class="aibg bg3 fl"></div>
+                        <div class="aiInfo fr">
+                            <h1>商标分类表</h1>
+                            <p>通过对历史所有的商品服务项进行分析，不仅提供标准尼斯商品的查询，更可以支持历史以来被官方认可的非标准商品查询，呈现更全面、更精准的商标分类信息，是你护品牌周全、保品牌无忧的最佳选择。</p>
+                            <div class="aiUse">立即使用</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- AI重构 结束 -->
+        <!-- 广告 开始-->
+        <section class="ad"></section>
+        <!-- 广告结束 -->
+        <!-- 开发平台 开始 -->
+        <section class="service platfrom" id="data">
+            <div class="w">
+                <div class="service_title">
+                    <h1>全面的数据开放平台</h1>
+                    <small>知产数据最全、更权威</small>
+                </div>
+                <ul class="platfrom_num clear2" id="count">
+                    <li class="fl">
+                        <h1 class="f28 col mb8">{{brandNum}}万+</h1>
+                        <small class="f16 v-align-m"><img src="../assets/images/main/plat_03.png" alt="知千秋"> 商标数据</small>
+                    </li>
+                    <li class="fl">
+                        <h1 class="f28 col mb5">{{dimension}}°</h1>
+                        <small class="f16 v-align-m"><img src="../assets/images/main/plat_05.png" alt="知千秋"> 企业维度数据</small>
+                    </li>
+                    <li class="fl">
+                        <h1 class="f28 col mb5">{{transactioNum}}万+</h1>
+                        <small class="f16 v-align-m"><img src="../assets/images/main/plat_07.png" alt="知千秋"> 商标交易数据</small>
+                    </li>
+                    <li class="fl">
+                        <h1 class="f28 col mb5">{{userNum}}万+</h1>
+                        <small class="f16 v-align-m"><img src="../assets/images/main/plat_09.png" alt="知千秋"> 用户数据</small>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- 开发平台 结束 -->
+        <!-- 咨询开始 -->
+        <section class="service" style="background:#fff;" id="news">
+            <div class="w">
+                <div class="service_title">
+                    <h1>大咖云集，知识产权权威资讯</h1>
+                    <small>学习，成长，分享，共建知识产权社区</small>
+                </div>
+                <ul class="consultation clear2">
+                    <li>
+                        <div>
+                            <img src="../assets/images/main/consultation1.png" alt="知识产权社区">
+                        </div>
+                        <ul class="consult_list mt10">
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                        </ul>
+                        <p class="text-right col cur">更多 》</p>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="../assets/images/main/consultation2.png" alt="知识产权社区">
+                        </div>
+                        <ul class="consult_list mt10">
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                        </ul>
+                        <p class="text-right col cur">更多 》</p>
+                    </li>
+                    <li>
+                        <div>
+                            <img src="../assets/images/main/consultation3.png" alt="知识产权社区">
+                        </div>
+                        <ul class="consult_list mt10">
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                            <li class="text-delic">
+                                【数据报告】2018年6月各类别商标申请量排名2018年6月各类别商标2018年6月各类别商标2018年6月各类别商标
+                            </li>
+                        </ul>
+                        <p class="text-right col cur">更多 》</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- 咨询 结束 -->
+        <!-- 新生态开始 -->
+        <section class="service" style="background:#f5f7f8">
+            <div class="w">
+                <div class="service_title">
+                    <h1>携手共赢，与全球合作伙伴共建知识产权新生态</h1>
+                    <small>加入知千秋，共同开创新业务、重建知识产权新生态</small>
+                </div>
+                <ul class="logoBanner clear2">
+                    <li>
+                        <a :href="'http://www.mcc5.com.cn/'" target="_blank"><img src="../assets/images/main/logo_03.jpg" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.cnpc.com.cn/cnpc/index.shtml" target="_blank"> <img src="../assets/images/main/logo_05.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.cas.cn/" target="_blank"><img src="../assets/images/main/logo_07.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.scu.edu.cn/" target="_blank"><img src="../assets/images/main/logo_09.jpg" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.sgcc.com.cn/" target="_blank"><img src="../assets/images/main/logo_11.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.crecg.com/" target="_blank"><img src="../assets/images/main/logo_18.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://xsc.cuit.edu.cn/Sys/WebSite/Web/Default.html" target="_blank"><img src="../assets/images/main/logo_19.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.swjtu.edu.cn/" target="_blank"><img src="../assets/images/main/logo_20.png" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.uestc.edu.cn/" target="_blank"> <img src="../assets/images/main/logo_21.jpg" alt="新生态"></a>
+                    </li>
+                    <li>
+                        <a href="http://www.028aidi.com" target="_blank"><img src="../assets/images/main/logo_22.png" alt="新生态"></a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- 新生态 结束 -->
+
+        <floor :floorAttr="[{name: '热门服务', type: '#hot_service'},{name: '智能平台', type: '#platform'},{name: '全面数据', type: '#data'},{name: '权威资讯', type: '#news'}]" />
+    </div>
+</template>
+<script>
+import mainHead from "~/components/head/mainHead";
+import fixNav from "~/components/fixNav";
+import minNav from "~/components/minNav";
+import floor from "~/components/floor/floor";
+import { openNewPage } from "~/assets/js/common.js";
+
+export default {
+    layout: "foot",
+    data() {
+        return {
+            navArr: ["商标", "专利", "企业"],
+            holderArr: [
+                "请输入商标名称、申请号、申请人等信息",
+                "请输入专利名称",
+                "请输入企业名称"
+            ],
+            keyword: "",
+            styleIdx: 0,
+            aiTab: ["商标智能注册系统", "商标快速报件系统", "商标分类表"],
+            aiTabIdx: 0,
+            isShow: 0,
+            brandNum: 1000, //商标数据
+            dimension: 0, //维度
+            transactioNum: 0, //商标交易数据
+            userNum: 0 //用户数据
+        };
+    },
+    components: {
+        mainHead,
+        minNav,
+        fixNav,
+        floor
+    },
+    mounted() {
+        //监听滚动条
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    methods: {
+        switchStyle(idx) {
+            this.styleIdx = idx;
+        },
+        showMinNav(num) {
+            this.isShow = num;
+        },
+        handleScroll() {
+            var scrollTop =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop;
+            var offsetTop =
+                document.getElementById("count").offsetTop -
+                document.documentElement.clientHeight;
+            if (scrollTop > offsetTop) {
+                window.removeEventListener("scroll", this.handleScroll);
+                let timer = setInterval(() => {
+                    if (this.dimension < 360)
+                        this.dimension = this.dimension + 2;
+                    if (this.transactioNum < 100)
+                        this.transactioNum = this.transactioNum + 1;
+                    if (this.userNum < 20) this.userNum = this.userNum + 1;
+                    if (this.brandNum < 3000) this.brandNum = this.brandNum + 8;
+                    if (
+                        this.dimension >= 360 &&
+                        this.transactioNum >= 100 &&
+                        this.userNum >= 20 &&
+                        this.brandNum >= 3000
+                    ) {
+                        clearInterval(timer);
+                    }
+                }, 20);
+            }
+        },
+        goSearch() {
+            //去搜索页面
+            openNewPage(this, "/search/searchPage");
+        }
+    }
+};
+</script>
+
+<style scoped>
+@import url("../assets/css/main.css");
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+</style>

@@ -1,0 +1,796 @@
+<template>
+    <div class="show-content">
+        <div class="w1200">
+            <div class="product">
+                <div class="photo">
+                    <img src="../assets/images/show/img_product.jpg" width="520" alt="" />
+                    <div>
+                        <b>{{typeArr[type].name}}</b>
+                    </div>
+                </div>
+                <div class="hidden">
+                    <h1>{{typeArr[type].name}}</h1>
+                    <p>代理人全程托管式服务，实时同步官方系统，24小时拿到官方申请号。</p>
+                    <div class="price">
+                        <table width="440" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td class="title">服务费：</td>
+                                    <td>
+                                        <b class="price-text">
+                                            <span>¥</span>300.00</b>
+                                    </td>
+                                    <td class="title">官费：</td>
+                                    <td>
+                                        <b class="price-text">
+                                            <span>¥</span>50.00</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">促销：</td>
+                                    <td class="descrip" colspan="3">
+                                        <i>消费满减</i>消费满1200元即可获返100优惠券
+                                        <a href="#">详情></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="type">
+                        <dl>
+                            <dt>服务项目：</dt>
+                            <dd @click="seletType">
+                                <span v-for="item in typeArr" :key="item.name" :data-type="item.type" class="type-item" :class="{'atthis': type==item.type}">{{item.name}}</span>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>大类数量：</dt>
+                            <dd>
+                                <b class="btn-num" @click="subNum">-</b><input v-model="num" type="number">
+                                <b class="btn-num" @click="addNum">+</b>
+                                <span class="type-tips">官方默认每类注册10个小项。</span>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>总 费 用：</dt>
+                            <dd>
+                                <b class="price-text">
+                                    <span>¥</span>350.00</b>
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <a href="#" class="btn">问题咨询</a>
+                    <a href="#" class="btn atthis">立即办理</a>
+                    <div class="tips">服务承诺： 按时按质 全程公开透明 平安保险提供保障</div>
+                </div>
+            </div>
+
+            <div id="introduce" class="border">
+                <div class="tagbar">
+                    <a class="atthis" href="#introduce">服务介绍</a>
+                    <a href="#evaluate">用户评价</a>
+                    <a href="#service">服务保障</a>
+                    <a href="#QA">热门问答</a>
+                    <a href="#about">关于知千秋</a>
+                </div>
+                <img src="../assets/images/show/temp_show.jpg" width="100%" alt="">
+            </div>
+
+            <div id="evaluate" class="border">
+                <div class="tagbar">
+                    <a href="#introduce">服务介绍</a>
+                    <a class="atthis" href="#evaluate">用户评价</a>
+                    <a href="#service">服务保障</a>
+                    <a href="#QA">热门问答</a>
+                    <a href="#about">关于知千秋</a>
+                </div>
+
+                <div class="pj">
+                    <div class="left">
+                        <b>94.5%</b>
+                        <p>与描述相符</p>
+                    </div>
+
+                    <div class="right">
+                        <p>好评（95%）
+                            <span>
+                                <i style="width: 95%;"></i>
+                            </span>
+                        </p>
+                        <p>中评（35%）
+                            <span>
+                                <i style="width: 35%;"></i>
+                            </span>
+                        </p>
+                        <p>差评（5%）
+                            <span>
+                                <i style="width: 5%;"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <ul class="pj-cont">
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="title"><img src="../assets/images/show/img_product.jpg" alt="">用户：188****4154</div>
+                        <div class="pj-info">
+                            <i class="full">1</i>
+                            <i class="full">2</i>
+                            <i class="full">3</i>
+                            <i class="full">4</i>
+                            <i class="half">5</i>
+                            <p>感觉时间是有点漫长不过也在规定时间内完成了，有点小瑕疵可以接受！不过非常满意.</p>
+                            <div class="note">
+                                <span>保姆快速注册</span>
+                                <b>2017-04-26 9：22 : 50</b>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="service" class="border">
+                <div class="tagbar">
+                    <a href="#introduce">服务介绍</a>
+                    <a href="#evaluate">用户评价</a>
+                    <a class="atthis" href="#service">服务保障</a>
+                    <a href="#QA">热门问答</a>
+                    <a href="#about">关于知千秋</a>
+                </div>
+                <ul class="service">
+                    <li>
+                        <img src="../assets/images/show/img_chengnuo.png" alt="">
+                        <h5>我们承诺</h5>
+                        <p>服务质量第一时间反馈<br>专人处理，保证及时解决问题</p>
+                    </li>
+                    <li>
+                        <img src="../assets/images/show/img_tousu.png" alt="">
+                        <h5>投诉渠道</h5>
+                        <p>拨打客服电话投诉<br>4000-962540</p>
+                    </li>
+                    <li>
+                        <img src="../assets/images/show/img_baozhang.png" alt="">
+                        <h5>平台保障</h5>
+                        <p>因过失行为导致用户直接损失<br>均可享受“平台责任保障”</p>
+                    </li>
+                    <li>
+                        <img src="../assets/images/show/img_fapiao.png" alt="">
+                        <h5>开具发票</h5>
+                        <p>所有产品均可开具发票<br>请在下单时选择填写</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="QA" class="border">
+                <div class="tagbar">
+                    <a href="#introduce">服务介绍</a>
+                    <a href="#evaluate">用户评价</a>
+                    <a href="#service">服务保障</a>
+                    <a class="atthis" href="#QA">热门问答</a>
+                    <a href="#about">关于知千秋</a>
+                </div>
+                <ul class="qa">
+                    <li>
+                        <dl class="title">
+                            <dt>Q：</dt>
+                            <dd>购买后你们如何提供服务？</dd>
+                        </dl>
+                        <dl>
+                            <dt>A：</dt>
+                            <dd>付款成功后，顶呱呱服务专员会在15分钟内与你联系，一对一的为你提供服务。</dd>
+                        </dl>
+                    </li>
+
+                    <li>
+                        <dl class="title">
+                            <dt>Q：</dt>
+                            <dd>我进入支付页面后，不小心返回了，在购物车里没有我的订单了，怎么办？</dd>
+                        </dl>
+                        <dl>
+                            <dt>A：</dt>
+                            <dd>两步即可找回未支付订单： 第一步，确定您是在登录状态，如果未登录，请先登录。 第二步，点击顶部通栏内的“我的订单”。</dd>
+                        </dl>
+                    </li>
+
+                    <li>
+                        <dl class="title">
+                            <dt>Q：</dt>
+                            <dd>我可不可以先下单，过几天再付款？</dd>
+                        </dl>
+                        <dl>
+                            <dt>A：</dt>
+                            <dd>可以的，但如果没有特殊情况不建议这么做。因为咱们的系统会自动的清理掉下单未付款的订单，如果您使用了优惠券下单后没有付款，优惠券也会被自动取消。这不利于您的优惠。</dd>
+                        </dl>
+                    </li>
+
+                    <li>
+                        <dl class="title">
+                            <dt>Q：</dt>
+                            <dd>发票是什么类型的？发票是如何开具的？</dd>
+                        </dl>
+                        <dl>
+                            <dt>A：</dt>
+                            <dd>发票是增值税普通发票。您在个人中心内的后台发票管理中，填写好发票抬头、邮寄电话、邮寄地址，系统直接推送到财务部，发出后由文秘部统一为您安排邮寄。</dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="about" class="border">
+                <div class="tagbar">
+                    <a href="#introduce">服务介绍</a>
+                    <a href="#evaluate">用户评价</a>
+                    <a href="#service">服务保障</a>
+                    <a href="#QA">热门问答</a>
+                    <a class="atthis" href="#about">关于知千秋</a>
+                </div>
+
+                <div class="about-me-block">
+                    <div class="text-intro">
+                        <p>顶呱呱一站式企业服务平台，隶属北京顶呱呱企业管理有限公司。公司立足一线城市（北京、广州、深圳、成都、重庆、武汉、杭州、郑州、佛山、宜昌等），布局四方。以“让老板经营企业更简单”为使命，历经十余年服务实践和专业积淀，成为企业服务领域前三强，营业额逾百亿，员工超6000人，设立了五大版块，十六大业态，六百多项商业服务内容，实现商业全生命周期服务闭环。2014年，在上海股权交易中心成功挂牌。2017年，全国首创“一门式”全生命政企服务中心，深入推进“互联网+政务服务”。 在顶呱呱您将会有最好的企业服务体验，找到您能想到的所有企业服务项目，选择到最专业的企业服务顾问，为您提供一对一咨询，24小时在线高效服务。
+                        </p>
+                    </div>
+                    <div class="down-img">
+                        <img src="../assets/images/show/temp_tupian.jpg" alt="关于知千秋" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <floor :floorAttr="[{name: '服务介绍', type: '#introduce'},{name: '用户评价', type: '#evaluate'},{name: '服务保障', type: '#service'},{name: '热门问答', type: '#QA'},{name: '关于我们', type: '#about'}]" />  
+        <to-top />
+    </div>
+</template>
+
+<script>
+import floor from '@/components/floor/floor'
+import toTop from '@/components/toTop'
+export default {
+    components: {
+        floor,
+        toTop
+    },
+    head() {
+        return {
+            title: "详情页面-知千秋",
+            meta: [
+                {
+                    name: "keywords",
+                    hid: "keywords",
+                    content:
+                        "注册商标查询，中国商标官网查询，商标搜索，商标检索,知千秋,权大师"
+                },
+                {
+                    name: "description",
+                    hid: "description",
+                    content:
+                        "免费精准的商标查询平台,中国更全的商标信息库,精准智能的商标相似查询结果,为商标申请人降低商标驳回风险,更快,更准的定位商标注册成功概率。知千秋"
+                }
+            ]
+        };
+    },
+    data() {
+        return {
+            num: 1,
+            typeArr: [
+                {
+                    type: 0,
+                    name: "商标快速注册"
+                },
+                {
+                    type: 1,
+                    name: "担保无忧注册"
+                },
+                {
+                    type: 2,
+                    name: "智能自助注册"
+                }
+            ],
+            type: 0 // 类型
+        };
+    },
+    methods: {
+        subNum() {
+            this.num > 1 && this.num--;
+        },
+        addNum() {
+            this.num < 99 && this.num++;
+        },
+        seletType(e) {
+            if (e.target.tagName === "SPAN") {
+                this.type = e.target.dataset.type;
+            }
+        }
+    },
+};
+</script>
+
+<style scoped lang="stylus">
+.show-content
+    background: transparent url('../assets/images/show/bg.jpg') repeat-x left top;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    .price-text
+        font-size: 26px;
+        color: #ff6000;
+        span
+            font-size: 20px;
+
+    .product
+        overflow: hidden;
+
+        .photo
+            float: left;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            position: relative;
+            width: 520px;
+
+            img
+                width: 100%;
+
+            div
+                display: block;
+                position: absolute;
+                z-index: 9;
+                left: 50%;
+                top: 50%;
+                user-select: none;
+
+                b
+                    display: block;
+                    border: 2px solid #fff;
+                    font-size: 40px;
+                    color: #fff;
+                    padding: 10px 20px;
+                    white-space: nowrap;
+                    position: relative;
+                    left: -50%;
+                    top: -38px;
+
+        .hidden
+            padding-left: 35px;
+
+            h1
+                font-size: 28px;
+                line-height: 32px;
+                color: #333;
+
+            p
+                font-size: 14px;
+                line-height: 26px;
+                color: #999;
+                margin-top: 3px;
+
+            .price
+                background: #f5f5f5;
+                margin: 10px 0;
+                padding: 10px;
+
+                table
+                    line-height: 30px;
+                    font-size: 12px;
+                    color: #999;
+
+                    .title
+                        width: 60px;
+
+                    .descrip
+                        color: #333;
+                        font-size: 12px;
+
+                        i
+                            display: inline-block;
+                            height: 18px;
+                            border: 1px solid #ff0000;
+                            color: #ff0000;
+                            line-height: 16px;
+                            padding: 0 10px;
+                            margin-right: 5px;
+
+                        a
+                            color: #999;
+                            margin-left: 5px;
+
+                            &:hover
+                                color: #ff6000;
+
+        .type
+            font-size: 12px;
+            user-select: none;
+
+            dl
+                overflow: hidden;
+                line-height: 40px;
+
+                dt
+                    float: left;
+                    width: 80px;
+                    padding-left: 10px;
+                    color: #999;
+
+                dd
+                    .type-item
+                        display: inline-block;
+                        height: 30px;
+                        line-height: 28px;
+                        border: 1px solid #999;
+                        color: #999;
+                        margin: 0 10px 10px 0;
+                        padding: 0 18px;
+                        cursor: pointer;
+
+                        &.atthis
+                            background: transparent url('../assets/images/show/icon_checked.png') no-repeat right top;
+                            border-color: #ff6000;
+                            color: #ff6000;
+
+                    .btn-num
+                        display: inline-block;
+                        vertical-align: top;
+                        height: 22px;
+                        border: 1px solid #999;
+                        color: #999;
+                        width: 28px;
+                        line-height: 20px;
+                        text-align: center;
+                        cursor: pointer;
+                        margin-top: 7px;
+
+                    >input
+                        width: 44px;
+                        vertical-align: top;
+                        text-align: center;
+                        color: #333;
+                        height: 22px;
+                        line-height: 20px;
+                        border: 1px solid #999;
+                        border-width: 1px 0;
+                        margin-top: 7px;
+
+                    .type-tips
+                        padding-left: 10px;
+                        color: #999;
+                        font-size: 12px;
+
+        .btn
+            display: inline-block;
+            height: 38px;
+            line-height: 36px;
+            text-align: center;
+            border: 1px solid #fd7d22;
+            padding: 0 24px;
+            color: #fd7d22;
+            margin-left: 10px;
+            margin-right: 20px;
+            margin-top: 5px;
+
+            &.atthis
+                background: #fd7d22;
+                color: #fff;
+
+        .tips
+            font-size: 12px;
+            color: #999;
+            padding-left: 10px;
+            margin-top: 15px;
+
+    .tagbar
+        font-size: 16px;
+        line-height: 60px;
+        margin-top: 35px;
+        border: 1px solid #ddd;
+        border-width: 1px 0;
+        overflow: hidden;
+        padding-left: 24px;
+
+        a
+            float: left;
+            margin-right: 85px;
+
+            &.atthis
+                font-weight: bold;
+                border-bottom: 3px solid #ff6000;
+
+    .border
+        border: 1px solid #ddd;
+        border-top: 0;
+
+    .pj
+        overflow: hidden;
+        padding: 35px 0 40px 40px;
+
+        .left
+            float: left;
+            border: 1px solid #ff6000;
+            border-radius: 50%;
+            text-align: center;
+            height: 100px;
+            font-size: 0;
+            width: 100px;
+
+            b
+                display: block;
+                font: bold 22px / 20px 'microsoft yahei';
+                color: #ff6000;
+                margin-top: 33px;
+
+            p
+                font: normal 12px / 14px 'microsoft yahei';
+                margin-top: 8px;
+                color: #999;
+
+            i
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                font-size: 0;
+                background: transparent url('../assets/images/show/icon_star_0.jpg') no-repeat left center;
+
+            i.full
+                background-image: url('../assets/images/show/icon_star_full.jpg');
+
+            i.half
+                background-image: url('../assets/images/show/icon_star_half_0.jpg');
+
+        .right
+            float: left;
+            overflow: hidden;
+            width: 650px;
+            text-align: left;
+
+            p
+                position: relative;
+                font: normal 16px / 16px 'microsoft yahei';
+                color: #656565;
+                padding: 12px 0 12px 35px;
+                margin-top: -9px;
+
+                span
+                    position: absolute;
+                    left: 147px;
+                    top: 16px;
+                    background: #f1f1f1;
+                    display: block;
+                    width: 500px;
+                    height: 10px;
+                    border-radius: 10px;
+
+                    i
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background: #fd7d22;
+                        display: block;
+                        height: 10px;
+                        border-radius: 10px;
+
+    .pj-cont
+        overflow: hidden;
+        padding: 0 40px 0 40px;
+
+        li
+            overflow: hidden;
+            padding: 18px 0;
+            border-top: 1px solid #ececec;
+
+            .title
+                float: left;
+                width: 190px;
+                text-align: left;
+                font: normal 12px / 20px 'microsoft yahei';
+                color: #999;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                img
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+
+            .pj-info
+                text-align: left;
+                overflow: hidden;
+
+                i
+                    padding: 7px;
+                    font-size: 0;
+                    background: transparent url('../assets/images/show/icon_star.jpg') no-repeat left center;
+
+                i.full
+                    background-image: url('../assets/images/show/icon_star_full.jpg');
+
+                i.half
+                    background-image: url('../assets/images/show/icon_star_half.jpg');
+
+                p
+                    font: normal 14px / 24px 'microsoft yahei';
+                    color: #000;
+                    margin: 12px 0;
+
+                .note
+                    font: normal 12px / 20px 'microsoft yahei';
+                    color: #999;
+
+                    span
+                        display: inline-block;
+                        margin-right: 40px;
+                        color: #999;
+
+                    b
+                        margin-right: 10px;
+                        font-weight: normal;
+
+    .service
+        overflow: hidden;
+
+        li
+            float: left;
+            width: 25%;
+            text-align: center;
+            padding: 60px 0;
+
+            h5
+                font-size: 16px;
+                color: #fd7d22;
+                font-weight: normal;
+                margin: 10px 0;
+
+            p
+                color: #999;
+                font-size: 12px;
+
+    .qa
+        overflow: hidden;
+        text-align: left;
+        padding: 20px 40px;
+
+        li
+            padding: 20px 0;
+            border-bottom: 1px solid #ececec;
+            font: normal 14px / 24px 'microsoft yahei';
+            color: #999;
+
+            dl
+                color: #999;
+                padding-bottom: 10px;
+
+                dt
+                    float: left;
+
+                dd
+                    overflow: hidden;
+
+            dl.title
+                font-weight: normal;
+                color: #ff6000;
+
+    .about-me-block
+        padding-bottom: 40px;
+
+        .text-intro
+            text-align: left;
+            font-size: 14px;
+            color: #666;
+            line-height: 40px;
+            margin: 40px 0 30px;
+            padding: 0 45px;
+            text-align: justify;
+
+        .down-img
+            text-align: center;
+</style>
+
